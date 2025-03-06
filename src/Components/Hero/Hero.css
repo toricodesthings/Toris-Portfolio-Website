@@ -1,0 +1,252 @@
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5vh;
+    margin: 0% 10%;
+    position: relative;
+}
+
+.hero.blurred {
+    filter: blur(16px);
+    pointer-events: none;
+}
+  
+/* Profile Image Styles */
+.hero .image-container {
+    position: relative;
+    width: 22.5%;
+    max-width: 250px;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease-in-out;
+}
+
+.hero .image-glow {
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    background: linear-gradient(270deg, 
+        rgb(197, 95, 244), 
+        rgb(234, 59, 59)
+    );
+    background-size: 400% 400%;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
+    animation: 
+        bubble-effect 5s ease infinite alternate,
+        gradient-shift 10s ease infinite;
+    z-index: 1;
+    filter: blur(50px);
+}
+
+.hero .image-container:hover .image-glow {
+    opacity: 0.75;
+}
+  
+/* Text Styles */
+.hero h1 {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 50px);
+    width: 100%;
+    color: white;
+    position: relative;
+}
+
+.hero p {
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 18px);
+    width: 75%;
+    line-height: 1.8;
+    color: white;
+    position: relative;
+}
+
+.hero h1 span.gradient {
+    background: linear-gradient(270deg, rgb(197, 95, 244), rgb(234, 59, 59));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1em;
+    background-color: white;
+    animation: blink 0.25s step-start infinite;
+}
+
+/* Button Styles */
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    font-size: clamp(1rem, 2vw, 18px);
+    font-weight: 600;
+}
+
+.hero-viewbtn,
+.hero-connectbtn {
+    position: relative;
+    display: inline-block;
+    padding: 18px 36px;
+    text-align: center;
+    border-radius: 50px;
+    font-weight: 600;
+    border: 2px solid white;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.hero-viewbtn:hover,
+.hero-connectbtn:hover {
+    background-color: rgb(164, 45, 204);
+    border-color: transparent;
+}
+
+/* Work Options Overlay */
+.work-options-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.work-options-container {
+    display: flex;
+    gap: 40px;
+    padding: 20px;
+}
+
+.work-option-box {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.584);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-option-box:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        0 0 15px rgba(223, 112, 243, 0.6),
+        0 0 25px rgba(231, 77, 71, 0.75);
+}
+
+.option-image-container {
+    width: 100%;
+    height: 75%;
+    overflow: hidden;
+}
+
+.option-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.work-option-box:hover .option-image-container img {
+    transform: scale(1.1);
+}
+
+.option-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(270deg, 
+        rgba(197, 95, 244, 0.3), 
+        rgba(234, 59, 59, 0.3)
+    );
+    background-size: 400% 400%;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: gradient-shift 10s ease infinite;
+    z-index: 1;
+}
+
+.work-option-box:hover .option-glow {
+    opacity: 1;
+}
+
+.work-option-box h2 {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Animation Classes */
+.pop-in {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: popIn 0.3s ease forwards;
+}
+
+.work-option-box.pop-in:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.work-option-box.pop-in:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+/* Keyframe Animations */
+@keyframes bubble-effect {
+    0% { transform: scale(0.8) rotate(0deg); }
+    50% { transform: scale(0.9) rotate(180deg); }
+    100% { transform: scale(0.85) rotate(360deg); }
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+

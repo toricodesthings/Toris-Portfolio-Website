@@ -1,0 +1,133 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2vh 10%;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 80px;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    position: relative;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.nav-menu li::after {
+    content: "";
+    position: absolute;
+    bottom: -4px; /* Distance from text */
+    left: 50%; /* Start from the center */
+    width: 0;
+    height: 2px; /* Slim underline */
+    background: white;
+    transform: translateX(-50%); /* Center the line */
+    transition: 0.25s ease; /* Smooth underline growth */
+}
+
+.nav-menu li:hover {
+    transform: scale(1.05); /* Scale up */
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9); /* White glow effect */
+}
+
+.nav-menu li:hover::after {
+    width: 100%; /* Expand underline outward to full width */
+}
+
+.nav-menu li a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit the text color from the parent */
+    transition: color 0.25s ease; /* Optional: Smooth color transition */
+  }
+
+.nav-connect{
+    padding: 20px 40px;
+    font-size: 20px;
+    background: linear-gradient(270deg, rgb(181, 70, 232), rgb(229, 48, 48));
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.nav-connect:hover{
+    transform: scale(1.05);
+}
+
+.avatar {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+    position: relative; /* Sits above everything else */
+    z-index: 2; /* Ensures it's on top */
+    cursor: pointer;
+}
+
+.avatar-wrapper {
+    display: inline-block;
+    position: relative;
+    width: 86px; /* Avatar size (80px) + border (2px x 2) */
+    height: 86px; /* Avatar size (80px) + border (2px x 2) */
+    border-radius: 50%; /* Circular shape */
+    background: linear-gradient(45deg, #ff6b6b, #573dd9); /* Gradient border */
+    display: flex; /* Ensures centering */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensures the rotating element doesn't overflow */
+}
+
+.avatar-wrapper::after {
+    content: "";
+    position: absolute;
+    width: 100%; /* Slightly smaller than the wrapper */
+    height: 100%; /* Slightly smaller than the wrapper */
+    border-radius: 50%;
+    background: conic-gradient(
+        rgba(255, 255, 255, 0) 0%,
+        rgb(255, 255, 255) 10%,
+        rgba(255, 255, 255, 0) 25%
+    ); /* Narrow band of lighter gradient */
+    animation: rotate360 1.5s linear infinite; /* Infinite rotation */
+    z-index: 0; /* Ensures it stays beneath the avatar */
+    pointer-events: none; /* Makes it non-interactive */
+    opacity: 0; /* Hidden initially */
+    transition: opacity 0.25s ease; /* Smooth fade-in transition */
+}
+
+.avatar-wrapper:hover::after {
+    opacity: 1;
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.avatar-wrapper::before {
+    content: "";
+    position: absolute;
+    width: 80px; /* Match avatar size */
+    height: 80px; /* Match avatar size */
+    background: black; /* Or transparent */
+    border-radius: 50%; /* Circular center */
+    z-index: 1; /* Sits above the gradient border */
+}
+
+.avatar-hovanimate{
+    transition: 0.25s ease;
+}
+.avatar-hovanimate:hover{
+    transform: scale(1.05);
+}

@@ -1,0 +1,451 @@
+/* Base styling for the about page */
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10vh;
+    margin: 0% 10%;
+    position: relative;
+  }
+  
+/* Title Section with text-wrapping gradient glow */
+.about-title {
+    text-align: center;
+}
+  
+.about-title h1 {
+    display: inline-block;
+    font-size: clamp(2rem, 4vw, 50px);
+    color: white;
+    position: relative;
+    text-shadow: 0 0 15px rgba(197, 72, 255, 0.4), 
+                0 0 25px rgba(234, 59, 59, 0.5);
+    background: none;
+}
+  
+  /* Section Styling */
+section {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    padding: 50px;
+    box-shadow: 
+        0 0 15px rgba(197, 95, 244, 0.5),
+        0 0 25px rgba(234, 59, 59, 0.4);
+    overflow: hidden;
+}
+  
+/* Background image for each section */
+section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/api/placeholder/800/600');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: -1;
+    filter: blur(3px);
+}
+  
+/* Intro Section Layout */
+.intro-section {
+    display: flex;
+    flex-direction: row;
+    gap: 75px;
+    align-items: center;
+    width: 100%;
+
+}
+
+  /* Profile Image Container */
+.about-intro-left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+}
+  
+.aboutprofileimg {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 
+        0 0 15px rgba(197, 95, 244, 0.5),
+        0 0 25px rgba(234, 59, 59, 0.4);
+}
+  
+/* About Content Container */
+.about-intro-right {
+    flex: 2;
+    position: relative;
+}
+
+.about-para h2 {
+    font-size: clamp(1.5rem, 3vw, 36px);
+    margin-bottom: 20px;
+    color: white;
+    position: relative;
+    display: inline-block;
+}
+  
+.about-para h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(218, 139, 255, 0.6), 
+                                rgba(255, 91, 91, 0.6));
+}
+  
+.about-para p {
+    font-size: clamp(1rem, 2vw, 18px);
+    line-height: 1.8;
+    color: white;
+    position: relative;
+}
+
+/* CS Section Layout */
+.cs-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+.cs-skills-panel {
+    flex: 1 1 100%;
+
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.cs-skills-panel h2 {
+    font-size: clamp(1.5rem, 3vw, 36px);
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+}
+  
+/* Skills Grid */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* This creates the alignment to edges */
+    width: 100%;
+    gap: 20px;
+}
+
+.skills-grid span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.skill-icon {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.skill-text {
+    font-size: clamp(1rem, 2vw, 18px);
+    color: rgba(255, 255, 255, 0.95);
+    position: relative;
+    text-align: center;
+}
+
+/* Education Section */
+.cs-education {
+    flex: 1 1 100%;
+    flex-direction: row;
+    position: relative;
+    z-index: 1;
+}
+
+.cs-education h2 {
+    font-size: clamp(1.5rem, 3vw, 36px);
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.cs-education p {
+    font-size: clamp(1rem, 2vw, 18px);
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.8;
+}
+
+/* Education Panel Layout */
+.education-panel {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: stretch; /* Changed from center to stretch to match heights */
+    height: 100%;
+    gap: 80px; 
+    margin-bottom: 20px;
+}
+
+/* Education Panel Layout */
+.education-panel {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: stretch; 
+    height: 100%;
+    gap: 40px; 
+    max-height: 100%; /* Prevent panel from expanding indefinitely */
+}
+
+/* Set child elements to have equal height */
+.education-panel p, .live-feed-element {
+    flex: 1; 
+    max-width: 50%;
+    max-height: 100%; /* Prevent overflow */
+    overflow: hidden; /* Hide overflow */
+}
+
+/* Whole Terminal Container */
+.terminal-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(200, 200, 200, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 18px;
+    line-height: 1.8em;
+    color: white;
+    overflow: hidden; /* Hide overflow */
+    box-sizing: border-box; /* Include padding in width/height */
+}
+
+/* Terminal Text Container */
+.terminal-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%; /* Ensure full width */
+    overflow-y: auto; /* Allow vertical scrolling if needed */
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box; /* Include padding in width/height */
+}
+
+/* Terminal Header with Buttons */
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 8px;
+}
+
+/* Combined buttons group */
+.terminal-buttons {
+    display: flex;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.terminal-btn {
+    padding: 8px 8px;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: rgba(255, 255, 255, 0.8);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'lexend', sans-serif;
+}
+
+
+.terminal-btn:hover {
+    background-color: rgba(255, 255, 255, 0.595);
+}
+
+.terminal-btn.active {
+    background: linear-gradient(270deg, 
+                                rgba(197, 95, 244, 0.77), 
+                                rgba(234, 59, 59, 0.751));
+    background-size: 250% 250%; /* Allows animation effect */
+    color: white;
+    padding: 8px 25px;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
+    animation: gradientMove 1s infinite alternate;
+}
+
+.dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.red {
+    background: rgba(240, 72, 72, 0.885);
+}
+
+.yellow {
+    background: #cd2b7ce6;
+}
+
+.green {
+    background: #ac42cce9;
+}
+
+/* Typing Cursor */
+.blinking-cursor {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    animation: blink 0.5s infinite;
+    display: inline-block; /* Ensure it's inline with text */
+}
+
+/* Animation for gradient shift */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+/* Music Section */
+.music-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.music-para h2 {
+    font-size: clamp(1.5rem, 3vw, 36px);
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+}
+  
+.music-para p {
+    font-size: clamp(1rem, 2vw, 18px);
+    line-height: 1.8;
+    color: white;
+    position: relative;
+}
+
+.music-stat-box {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 127, 179, 0.7) transparent;
+    padding-bottom: 10px;
+    position: relative;
+    scroll-behavior: smooth;
+  }
+  
+  /* Sleek scrollbar styling */
+  .music-stat-box::-webkit-scrollbar {
+    height: 8px;
+    margin-top: 10px;
+  }
+  
+  .music-stat-box::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 0 20px;
+  }
+  
+  .music-stat-box::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #ff7eb3, #ff758c);
+    border-radius: 10px;
+  }
+  
+  /* Ensure items do not shrink and can overflow */
+  .music-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 0 0 auto;
+    min-width: 200px;
+  }
+
+  .music-stat-item p {
+    font-size: clamp(1rem, 2vw, 18px);
+  }
+
+
+  .music-stat-item h3 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+  
+  .music-stat-item h3::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #ff7eb3, #ff758c);
+    margin-top: 0.5rem;
+  }
+  
+  /* Responsive behavior */
+  @media (max-width: 768px) {
+    .music-stat-box {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      overflow-x: hidden;
+    }
+  }
+  
+
+.pop-in {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: popIn 0.3s ease forwards;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

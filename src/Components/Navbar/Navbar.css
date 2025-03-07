@@ -95,7 +95,7 @@
         rgb(255, 255, 255) 10%,
         rgba(255, 255, 255, 0) 25%
     ); /* Narrow band of lighter gradient */
-    animation: rotate360 1.5s linear infinite; /* Infinite rotation */
+    animation: rotate360 1s cubic-bezier(0.2, 0.7, 1.0, 0.4) infinite; /* Infinite rotation */
     z-index: 0; /* Ensures it stays beneath the avatar */
     pointer-events: none; /* Makes it non-interactive */
     opacity: 0; /* Hidden initially */

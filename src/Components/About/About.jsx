@@ -11,6 +11,8 @@ import reactImg from "../../assets/skills/react.svg";
 import nodejsImg from "../../assets/skills/nodejs.svg";
 import gitImg from "../../assets/skills/git.svg";
 import mysqlImg from "../../assets/skills/mysql.svg";
+import wrapped2023 from "../../assets/Wrapped2023.jpg";
+import wrapped2024 from "../../assets/Wrapped2024.jpg";
 
 const skills = [
   { name: "Python", img: pythonImg },
@@ -31,6 +33,8 @@ const About = () => {
   const [isDragging, setIsDragging] = useState(false);
   const dragStartX = useRef(0);
   const scrollLeftStart = useRef(0);
+
+  const [activeImage, setActiveImage] = useState(1);
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -110,7 +114,7 @@ const About = () => {
             <h2>Who am I?</h2>
             <p>
               Many may know me as Tori. I am a passionate first-year Computer
-              Science student at Carleton University dedicated to learning and
+              Science student in Ottawa dedicated to learning and
               growing in the field of technology. I also dedicate a ton of my
               free time into my side project in Music Production and Audio
               Engineering.
@@ -155,15 +159,76 @@ const About = () => {
       <section className="music-section pop-in">
         <div className="music-para">
           <h2>My Music Career</h2>
-          <p>
-            Aside from coding, I am a professional musician. I play the drums,
-            the bass guitar, and the piano. I also produce music and regularly
-            do audio-engineering work for both covers and originals.
-          </p>
+          <div className = "music-panel">
+            <p>
+            Aside from coding, I am a passionate and professional musician with a deep 
+            love for rhythm, melody, and sound design. Music has always been my escape, my therapy, and my way of understanding the world. My journey into music started 
+            over 7 years ago when I was first discovered Ableton and EDM Production. Now, I play many instruments, including the drums, bass guitar, and piano. I have worked on numerous projects as a producer, produced in all genres from Lofi to EDM to Pop to Metal, pushing creative boundaries to craft unique sounds. Additionally, I specialize in audio-engineering, mixing, and mastering, helping other artists bring their visions to life with polished and professional audio quality.
+            </p>
+            {/* Vertical Timeline */}
+            <div className="music-timeline">
+              <div className="timeline-container">
+                <div className="timeline-item">
+                  <div className="circle"></div>
+                  <div className="timeline-text">
+                    <span className="timeline-year">2017</span>
+                    <span className="timeline-description">Discovered EDM Music Production for the first time</span>
+                  </div>
+                </div>
+                
+                <div className="timeline-item">
+                  <div className="circle"></div>
+                  <div className="timeline-text">
+                    <span className="timeline-year">2020</span>
+                    <span className="timeline-description">Released first track to the public</span>
+                  </div>
+                </div>
+                
+                <div className="timeline-item">
+                  <div className="circle"></div>
+                  <div className="timeline-text">
+                    <span className="timeline-year">2021</span>
+                    <span className="timeline-description">Made a series of Cover Songs</span>
+                  </div>
+                </div>
+                
+                <div className="timeline-item">
+                  <div className="circle"></div>
+                  <div className="timeline-text">
+                    <span className="timeline-year">2022</span>
+                    <span className="timeline-description">Started merging genres and got into metal</span>
+                  </div>
+                </div>
+                
+                <div className="timeline-item">
+                  <div className="circle"></div>
+                  <div className="timeline-text">
+                    <span className="timeline-year">2024</span>
+                    <span className="timeline-description">Hit peak 50K monthly listeners and 2M+ streams</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="music-image">
-          <img src="" alt="Music" />
+        <h2 className="stats-current">Current Stats</h2>
+        {/* Music Image Flip Section */}
+        <div className="music-flip">
+          <div 
+            className={`flip-image left ${activeImage === 1 ? "active" : ""}`} 
+            onClick={() => setActiveImage(1)}
+          >
+            <img src={wrapped2023} alt="Music Image 1" />
+          </div>
+
+          <div 
+            className={`flip-image right ${activeImage === 2 ? "active" : ""}`} 
+            onClick={() => setActiveImage(2)}
+          >
+            <img src={wrapped2024} alt="Music Image 2" />
+          </div>
         </div>
+    
         <div className="music-stat-box" ref={scrollRef}>
           <div className="music-stat-item">
             <h3>7+</h3>

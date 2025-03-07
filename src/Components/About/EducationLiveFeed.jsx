@@ -12,12 +12,13 @@ const learningTopics = [
 ];
 
 const coursesList = [
-  "📚 COMP 1405: Introduction to Computer Science I",
-  "📚 COMP 1406: Introduction to Computer Science II",
+  "📚 COMP 1405: Intro to Computer Science I",
+  "📚 COMP 1406: Intro to Computer Science II",
   "📚 COMP 1805: Discrete Mathematics I",
   "📚 MATH 1007: Elementary Calculus I",
-  "📚 MATH 1104: Linear Algebra for Engineering",
+  "📚 MATH 1104: Linear Algebra I",
   "📚 CGSC 1001: Mysteries of the Mind",
+  "📚 BIOL 1902: Natural History",
 ];
 
 export default function LiveFeed() {

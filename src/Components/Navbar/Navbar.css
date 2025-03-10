@@ -223,10 +223,25 @@
 }
 
 /* Responsive Navbar */
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     .navbar {
         flex-direction: column;
         align-items: center;
+    }
+
+    /* Hide nav items by default */
+    .nav-menu,
+    .nav-connect-wrapper {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* When active, show nav items */
+    .nav-menu.active,
+    .nav-connect-wrapper.active {
+        display: flex;
     }
 
     .nav-menu {

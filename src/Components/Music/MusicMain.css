@@ -344,7 +344,7 @@ section::before {
     height: 100%;
     display: flex;
     position: relative;
-    
+
     border: 2px solid rgba(255, 255, 255, 0.81);
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
@@ -561,7 +561,8 @@ section::before {
 }
 
 .stats-graphs h2 {
-    font-size: clamp(2rem, 4vw, 36px);;
+    font-size: clamp(2rem, 4vw, 36px);
+    ;
     color: white;
     margin-bottom: 20px;
     text-align: center;
@@ -705,7 +706,8 @@ section::before {
 
 /* Live Count Panel */
 .live-count-panel h2 {
-    font-size: clamp(2rem, 4vw, 36px);;
+    font-size: clamp(2rem, 4vw, 36px);
+    ;
     color: white;
     margin-bottom: 40px;
     text-align: center;
@@ -902,9 +904,9 @@ section::before {
 
     @media (max-width: 768px) {
         section::before {
-          background-attachment: scroll;
+            background-attachment: scroll;
         }
-      }
+    }
 
     /* Shep Section: vertical layout, image on top, text at bottom, centered */
     .bio-panel {
@@ -913,15 +915,18 @@ section::before {
         text-align: center;
         gap: 20px;
     }
+
     .shep-pfp-left,
     .shep-description-right {
         width: 100%;
     }
+
     /* Ensure image appears before text if needed */
     .shep-pfp-left {
         max-width: 200px;
         order: 1;
     }
+
     .shep-description-right {
         order: 2;
     }
@@ -930,22 +935,29 @@ section::before {
     .social-links-grid {
         flex-direction: column;
     }
+
     .social-link {
         display: flex;
         flex-direction: row;
-        justify-content: center; /* Centers the icon+text block horizontally */
-        align-items: center;  /* vertically centers the children */
+        justify-content: center;
+        /* Centers the icon+text block horizontally */
+        align-items: center;
+        /* vertically centers the children */
         width: 100%;
-        min-height: auto; /* or set a specific value like 100px */
+        min-height: auto;
+        /* or set a specific value like 100px */
     }
 
-    .social-link::after, .social-link::before {
+    .social-link::after,
+    .social-link::before {
         border-radius: 60px;
     }
 
     .social-link .arrow-indicator {
-        content: ""; /* Remove the arrow text */
-        font-size: 0; /* Ensure no text shows up */
+        content: "";
+        /* Remove the arrow text */
+        font-size: 0;
+        /* Ensure no text shows up */
         position: absolute;
         left: 15px;
         top: 50%;
@@ -956,20 +968,22 @@ section::before {
         opacity: 0;
         transition: opacity 0.3s ease, transform 0.3s ease;
     }
-    
+
     .social-link:hover .arrow-indicator {
         opacity: 1;
         transform: translateY(-50%) scale(1.1);
     }
-    
+
 
     .social-icon {
-        margin: 0;        /* Remove any default margin */
+        margin: 0;
+        /* Remove any default margin */
         flex: 1;
         max-width: 50%;
         max-height: 100px;
-    
+
     }
+
     .social-text {
         display: flex;
         text-align: center;
@@ -982,10 +996,11 @@ section::before {
     .music-extra-panel {
         flex-direction: column;
         gap: 20px;
-        
+
     }
 
-    .music-stack, .music-terminal {
+    .music-stack,
+    .music-terminal {
         max-width: 100%;
     }
 
@@ -1003,7 +1018,8 @@ section::before {
 
     /* Collaborators: stack on top of each other */
     .collab-grid {
-        grid-template-columns: 1fr;  /* Single column for vertical stacking */
+        grid-template-columns: 1fr;
+        /* Single column for vertical stacking */
         gap: 40px;
     }
 
@@ -1012,9 +1028,11 @@ section::before {
         flex-direction: column;
         text-align: center;
     }
+
     .collab-expanded img {
         margin: 0 auto 20px;
     }
+
     .collab-nav-arrow {
         display: none;
     }

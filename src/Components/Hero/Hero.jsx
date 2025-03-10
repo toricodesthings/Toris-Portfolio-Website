@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
 import profile_img from "../../assets/temp_profileimg.png";
+
+import music_img from "../../assets/mainpage/music.png";
+import cs_img from "../../assets/mainpage/cs.webp";
+
 import { useAnimationStore } from "../../store/animationStore";
 
 const Hero = () => {
@@ -43,10 +47,9 @@ const Hero = () => {
   return (
     <div className="hero-container">
       <div className={`hero ${showWorkOptions ? "blurred" : ""}`}>
-        {/* Profile Image */}
-        <div className="image-container">
+        <div className="image-container pop-in">
           <div className="image-glow"></div>
-          <img src={profile_img} alt="Profile" className="pop-in" />
+          <img src={profile_img} alt="Profile" />
         </div>
 
         {/* Typing Effect */}
@@ -81,7 +84,7 @@ const Hero = () => {
           <div className="work-options-container" onClick={(e) => e.stopPropagation()}>
             <Link to="/projects" className="work-option-box pop-in">
               <div className="option-image-container">
-                <img src="/api/placeholder/400/300" alt="Coding Projects" />
+                <img src={cs_img} alt="Coding Projects" />
               </div>
               <div className="option-glow"></div>
               <h2>Computer Science</h2>
@@ -89,10 +92,10 @@ const Hero = () => {
 
             <Link to="/music" className="work-option-box pop-in">
               <div className="option-image-container">
-                <img src="/api/placeholder/400/300" alt="Music" />
+                <img src={music_img} alt="Music" />
               </div>
               <div className="option-glow"></div>
-              <h2>Music</h2>
+                <h2>Music</h2>
             </Link>
           </div>
         </div>

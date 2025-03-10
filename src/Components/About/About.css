@@ -290,13 +290,10 @@ section::before {
     flex-direction: column;
     flex-grow: 1;
     width: 100%;
-    /* Ensure full width */
-    overflow-y: auto;
-    /* Allow vertical scrolling if needed */
     align-items: flex-start;
     justify-content: flex-start;
     box-sizing: border-box;
-    /* Include padding in width/height */
+
 }
 
 /* Terminal Header with Buttons */
@@ -540,7 +537,7 @@ section::before {
     position: relative;
     width: 100%;
     margin: 20px 0;
-    height: calc(clamp(300px, 35vw, 350px) + 80px);
+    height: calc(clamp(300px, 35vw, 350px) + 40px);
     box-sizing: border-box;
     /* Responsive height */
     display: flex;
@@ -574,20 +571,20 @@ section::before {
 
 /* Left & Right Image Positioning */
 .flip-image.left {
-    transform: translateX(-50%) scale(0.85);
+    transform: translateX(-40%) scale(0.85);
     opacity: 0.75;
     z-index: 1;
 }
 
 .flip-image.right {
-    transform: translateX(50%) scale(0.85);
+    transform: translateX(40%) scale(0.80);
     opacity: 0.75;
     z-index: 1;
 }
 
 /* Active Image */
 .flip-image.active {
-    transform: translateX(0) scale(1.1);
+    transform: translateX(0) scale(1);
     opacity: 1;
     z-index: 2;
     box-shadow:
@@ -680,7 +677,7 @@ section::before {
     }
 
     .terminal-container {
-        min-height: 300px; /* Adjust this value as needed */
+        min-height: 350px; /* Adjust this value as needed */
       }
 
     .about-intro-left {

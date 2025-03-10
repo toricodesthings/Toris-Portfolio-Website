@@ -1,12 +1,12 @@
 import React from 'react';
-import MusicPage from '../Components/Music/MusicMain';
+import Music from '../Components/Music/MusicMain';
 
-const Home = () => {
+const MusicPage = () => {
   return (
     <div>
-      <MusicPage />
+      <Music />
     </div>
   );
 };
 
-export default Home;
+export default MusicPage;

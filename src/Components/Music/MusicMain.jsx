@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import "./MusicMain.css";
 import { useLocation } from 'react-router-dom';
 import AudienceTimelineChart from './AudienceTimelineChart';
+
 import Collaborators from './Collaborators'
 import avatar from "../../assets/artwork_me.png";
+
 import spotifyImg from "../../assets/social/spotify.svg";
 import youtubeImg from "../../assets/social/youtube.svg";
 import tidalImg from "../../assets/social/tidal.svg";
@@ -147,7 +149,7 @@ const FunFactTerminal = () => {
     );
 };
 
-const MusicPage = () => {
+const Music = () => {
     const location = useLocation();
 
     useEffect(() => {
@@ -251,4 +253,4 @@ const MusicPage = () => {
     );
 };
 
-export default MusicPage;
+export default Music;

@@ -163,7 +163,7 @@
 .work-option-box {
     width: min(40vw, 500px);
     height: min(50vh, 400px);
-    border-radius: 20px;
+    border-radius: 24px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -173,6 +173,7 @@
     border: 2px solid rgba(255, 255, 255, 0.8);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     background: rgba(255, 255, 255, 0.05);
+    position: relative;
 }
 
 
@@ -186,19 +187,27 @@
 
 .option-image-container {
     width: 100%;
-    height: 75%;
-    overflow: hidden;
+    height: 100%;
+    
 }
 
 .option-image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    filter: brightness(0.7);
+    transition: all 0.3s ease;
 }
 
+/* On hover, dim and blur the image */
 .work-option-box:hover .option-image-container img {
     transform: scale(1.1);
+    filter: brightness(0.25) blur(2px);
+}
+
+.work-option-box:hover h2 {
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 2px white;
 }
 
 .option-glow {
@@ -219,11 +228,19 @@
 }
 
 .work-option-box h2 {
-    color: white;
+    color: rgba(255, 255, 255, 0.75);
     font-size: 28px;
     font-weight: 700;
-    position: relative;
+    bottom: 0;
+    width: 100%;
+    left: 50%;
+    margin: 0;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    position: absolute;
     z-index: 2;
+    pointer-events: none;
+    transition: all 0.3s ease;
 }
 
 /* Animation Classes */

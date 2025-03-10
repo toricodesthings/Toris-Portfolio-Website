@@ -271,6 +271,7 @@
 @media (max-width: 768px) {
     .hero {
         margin: 0 5%;
+        gap: 6vh;
     }
 
     .work-options-container {

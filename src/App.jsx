@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Analytics } from "@vercel/analytics/react"
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Pages/Home';
 import MusicPage from './Pages/Music'; // renamed import to reflect its use as MusicPage
@@ -12,6 +13,7 @@ const App = () => {
   return (
     <Router>
       <div>
+        <Analytics />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

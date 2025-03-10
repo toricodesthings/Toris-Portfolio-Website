@@ -135,7 +135,7 @@ section::before {
     position: absolute;
     left: 0;
     bottom: -12px;
-    width: 140px;
+    width: 100%;
     height: 4px;
     background: linear-gradient(90deg, rgba(218, 139, 255, 0.6),
             rgba(255, 91, 91, 0.6));
@@ -209,7 +209,6 @@ section::before {
     z-index: -1;
     transition: opacity 0.3s ease;
     animation: gradient-shift 2s ease infinite;
-    border-radius: 12px;
 }
 
 /* Animated Border */
@@ -319,8 +318,6 @@ section::before {
     align-items: stretch;
     width: 100%;
     gap: 40px;
-    height: 100%;
-    max-height: 100vh;
     box-sizing: border-box;
 }
 
@@ -340,7 +337,6 @@ section::before {
     align-items: center;
     position: relative;
     text-align: center;
-    border-radius: 12px;
 }
 
 .music-stack-container {
@@ -348,6 +344,7 @@ section::before {
     height: 100%;
     display: flex;
     position: relative;
+    
     border: 2px solid rgba(255, 255, 255, 0.81);
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
@@ -361,6 +358,7 @@ section::before {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    min-height: 225px;
     overflow: hidden;
     position: relative;
 }
@@ -376,6 +374,7 @@ section::before {
 
 /* Music Tool */
 .music-tool {
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -429,10 +428,14 @@ section::before {
 /* Right Panel: Fun Fact Terminal */
 .music-terminal {
     flex: 1;
+    max-width: 50%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
     text-align: center;
+    border-radius: 12px;
 }
 
 .fun-fact-terminal {
@@ -440,6 +443,7 @@ section::before {
     flex-direction: column;
     align-items: center;
     color: white;
+    width: 100%;
     padding: 25px;
     border: 2px solid rgba(255, 255, 255, 0.81);
     border-radius: 12px;
@@ -788,7 +792,7 @@ section::before {
     z-index: -1;
 }
 
-.collab-section h2{
+.collab-section h2 {
     font-size: clamp(1.5rem, 3vw, 36px);
     color: white;
     margin-bottom: 40px;
@@ -804,44 +808,44 @@ section::before {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-  }
-  
-  /* Each collaborator item */
-  .collab-item {
+}
+
+/* Each collaborator item */
+.collab-item {
     text-align: center;
     cursor: pointer;
     justify-content: center;
 
-  }
-  
-  .collab-item img {
+}
+
+.collab-item img {
     width: 225px;
     height: 225px;
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid #ffffff79;
     transition: transform 0.3s ease;
-  }
-  
-  .collab-item:hover img {
+}
+
+.collab-item:hover img {
     transform: scale(1.1);
-  }
-  
-  .collab-item-name {
+}
+
+.collab-item-name {
     margin-top: 10px;
     margin-bottom: 5px;
     font-weight: bold;
     font-size: 1.5rem;
-  }
-  
-  .collab-item-role {
+}
+
+.collab-item-role {
     font-size: 1rem;
     color: #a3a3a3;
     font-weight: 500;
-  }
-  
-  /* Expanded collaborator section styling */
-  .collab-expanded {
+}
+
+/* Expanded collaborator section styling */
+.collab-expanded {
     margin-top: 20px;
     border: 2px solid #ffffff8f;
     padding: 20px;
@@ -849,26 +853,26 @@ section::before {
     display: flex;
     align-items: center;
     position: relative;
-  }
-  
-  /* Image in expanded section */
-  .collab-expanded img {
+}
+
+/* Image in expanded section */
+.collab-expanded img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 12px;
     margin-right: 20px;
-  }
-  
-  /* Text area in expanded section */
-  .collab-expanded-text {
+}
+
+/* Text area in expanded section */
+.collab-expanded-text {
     flex: 1;
     font-size: 1rem;
     line-height: 1.8;
-  }
-  
-  /* Navigation arrows for scrolling through collaborations */
-  .collab-nav-arrow {
+}
+
+/* Navigation arrows for scrolling through collaborations */
+.collab-nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -881,33 +885,109 @@ section::before {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-  }
-  
-  .collab-nav-arrow.left {
+}
+
+.collab-nav-arrow.left {
     left: -20px;
-  }
-  
-  .collab-nav-arrow.right {
+}
+
+.collab-nav-arrow.right {
     right: -20px;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
+
+    /* Shep Section: vertical layout, image on top, text at bottom, centered */
+    .bio-panel {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+    .shep-pfp-left,
+    .shep-description-right {
+        width: 100%;
+    }
+    /* Ensure image appears before text if needed */
+    .shep-pfp-left {
+        order: 1;
+    }
+    .shep-description-right {
+        order: 2;
+    }
+
+    /* Social Media Panel: full width vertical layout, image left and text right */
+    .social-links-grid {
+        flex-direction: column;
+    }
+    .social-link {
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* Centers the icon+text block horizontally */
+        align-items: center;  /* vertically centers the children */
+        width: 100%;
+        
+
+    }
+
+    .social-link::after, .social-link::before {
+        border-radius: 72px;
+    }
+
+    .social-icon {
+        height: auto;
+        margin: 0;        /* Remove any default margin */
+        flex: 1;
+        max-width: 50%;
+        max-height: 125px;
+    
+    }
+    .social-text {
+        display: flex;
+        text-align: center;
+        flex: 1;
+        max-width: 50%;
+        font-size: 28px;
+    }
+
+    /* Production Stack and Fun Fact Terminal: stack vertically */
+    .music-extra-panel {
+        flex-direction: column;
+        gap: 20px; /* Optional: adjust gap for vertical stacking */
+        
+    }
+
+    .music-stack, .music-terminal {
+        max-width: 100%;
+    }
+
+    /* Chart Scaling: make chart fit the screen */
+    .chart-wrapper {
+        min-width: 100px;
+        width: 100%;
+    }
+
+    /* Live Counters: stack vertically */
+    .counter-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* Collaborators: stack on top of each other */
     .collab-grid {
-      grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;  /* Single column for vertical stacking */
+        gap: 40px;
     }
-  
+
+    /* Preserve existing collaborator section adjustments */
     .collab-expanded {
-      flex-direction: column;
-      text-align: center;
+        flex-direction: column;
+        text-align: center;
     }
-  
     .collab-expanded img {
-      margin: 0 auto 20px;
+        margin: 0 auto 20px;
     }
-  
     .collab-nav-arrow {
-      display: none;
+        display: none;
     }
-  }
-  
+}

@@ -1,61 +1,60 @@
 import React, { useState } from 'react';
 import './MusicMain.css';
-import placeholderImg from "../../assets/artwork_me.png";
 
 const collaboratorsData = [
     {
         id: 1,
         name: 'Jamesteria',
         role: 'Singer, Songwriter, Artist',
-        img: placeholderImg,
-        detailImg: placeholderImg,
+        img: "https://i.scdn.co/image/ab67616100005174fd060d136f18a6037705fa48",
+        detailImg: "https://i.scdn.co/image/ab67616100005174fd060d136f18a6037705fa48",
         description:
-            'Alice is a talented singer who has collaborated on many projects and brings emotion to every performance.',
+            'Jamesteria (James) is a talented songwriter and singer whom I have collaborated with produce multiple songs and covers including Cadilac Ivory Bone and Taylor Swift covers.',
     },
     {
         id: 2,
         name: 'Pavel Lipski',
         role: 'Producer, Songwriter, Musician, Mentor',
-        img: placeholderImg,
-        detailImg: placeholderImg,
+        img: "https://i.scdn.co/image/ab676161000051746ae12ca63d1d307f25d5ec97",
+        detailImg: "https://i.scdn.co/image/ab676161000051746ae12ca63d1d307f25d5ec97",
         description:
-            'Bob is an innovative artist who creates visual masterpieces for our music videos and album covers.',
+            'Pavel is a talented Orchestral producer, songwriter and musician who has mentored me in the past in music production and audio engineering. Pavel and I have made a song together called Midnight.',
     },
     {
         id: 3,
         name: 'Chamele Listens',
         role: 'Producer, Songwriter, Musician',
-        img: placeholderImg,
-        detailImg: placeholderImg,
+        img: "https://i.scdn.co/image/ab676161000051748ce5b1c47b72beb46f2f8126",
+        detailImg: "https://i.scdn.co/image/ab676161000051748ce5b1c47b72beb46f2f8126",
         description:
-            'Carol is an expert producer with a keen ear for sound, ensuring every track is mixed to perfection.',
+            'Chamele Listens is a multi-genre producer whom I have closely collaborated with and mentored in all things music and audio engineering. Most of his wonderful tracks are mastered by me and we have made a couple of tracks together including Bad Apple! Vocaloid Cover, and Calydon.',
     },
     {
         id: 4,
         name: 'TraceCo',
         role: 'Singer',
-        img: placeholderImg,
-        detailImg: placeholderImg,
+        img: "https://i.scdn.co/image/ab67616100005174af72ed227f829a1aee837fe8",
+        detailImg: "https://i.scdn.co/image/ab67616100005174af72ed227f829a1aee837fe8",
         description:
-            'Dave composes captivating scores that perfectly complement our musical storytelling.',
+            'TraceCo is a wonderful singer who collaborated with me on the Interstellar Journey Rock Cover',
     },
     {
         id: 5,
         name: 'Rueyon',
         role: 'Artist',
-        img: placeholderImg,
-        detailImg: placeholderImg,
+        img: "https://pbs.twimg.com/profile_images/1771417910076137472/vrTnEXtz_400x400.jpg",
+        detailImg: "https://pbs.twimg.com/profile_images/1771417910076137472/vrTnEXtz_400x400.jpg",
         description:
-            'Eve is a dynamic DJ known for electrifying live performances and unique remix skills.',
+            'Rueyon is the artist that drew almost all album covers and assisted me with songwriting, major credits to them',
     },
     {
         id: 6,
         name: 'Cypress',
         role: 'Upcoming Collaborator',
-        img: placeholderImg,
-        detailImg: placeholderImg,
+        img: "https://i.scdn.co/image/ab67616100005174f7e4d34680625e27ecba51b9",
+        detailImg: "https://i.scdn.co/image/ab67616100005174f7e4d34680625e27ecba51b9",
         description:
-            'Eve is a dynamic DJ known for electrifying live performances and unique remix skills.',
+            'To Be Announced!',
     },
 ];
 

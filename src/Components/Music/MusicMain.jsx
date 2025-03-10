@@ -52,6 +52,10 @@ const funFacts = {
     "Clear": "Click any option to reveal a fact"
 };
 
+const isMonthlyUpdatedToday = true;
+const isFollowersUpdatedToday = true;
+const isPopIUpdatedToday = true;
+
 const MusicProductionStack = React.memo(() => {
     return (
       <div className="music-stack-container">
@@ -156,9 +160,7 @@ const MusicPage = () => {
         }
       }
     }, [location]);
-    const isMonthlyUpdatedToday = true;
-    const isFollowersUpdatedToday = true;
-    const isPopIUpdatedToday = true;
+
 
     return (
         <div className="music">

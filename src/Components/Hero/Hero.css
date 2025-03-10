@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 5vh;
+    gap: 4vh;
     margin: 0% 10%;
     position: relative;
 }
@@ -12,12 +12,13 @@
     filter: blur(16px);
     pointer-events: none;
 }
+
   
 /* Profile Image Styles */
 .hero .image-container {
     position: relative;
-    width: 22.5%;
-    max-width: 250px;
+    width: min(25vw, 260px);
+    aspect-ratio: 1;
 }
 
 .hero img {
@@ -27,64 +28,62 @@
     position: relative;
     z-index: 2;
     transition: transform 0.3s ease-in-out;
+    border:1px solid rgba(255, 154, 243, 0.339);
+    box-shadow: 0 0 4px rgba(255, 154, 243, 0.5);
 }
 
 .hero .image-glow {
     position: absolute;
-    top: -5%;
-    left: -5%;
+    top: -6%;
+    left: -6%;
     width: 110%;
     height: 110%;
-    background: linear-gradient(270deg, 
-        rgb(197, 95, 244), 
-        rgb(234, 59, 59)
-    );
-    background-size: 400% 400%;
+    background: linear-gradient(270deg, rgba(197, 95, 244, 0.8), rgba(234, 59, 59, 0.8));
     border-radius: 50%;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
-    animation: 
-        bubble-effect 5s ease infinite alternate,
-        gradient-shift 10s ease infinite;
+    opacity: 0.5;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    animation: bubble-effect 3s ease infinite alternate;
     z-index: 1;
-    filter: blur(50px);
+    filter: blur(40px);
 }
 
 .hero .image-container:hover .image-glow {
     opacity: 0.75;
 }
   
+
 /* Text Styles */
 .hero h1 {
     text-align: center;
-    font-size: clamp(2rem, 4vw, 50px);
-    width: 100%;
+    font-size: clamp(1.8rem, 4vw, 52px);
     color: white;
     position: relative;
+    font-weight: 700;
+    text-transform: capitalize;
 }
 
 .hero p {
     text-align: center;
-    font-size: clamp(1rem, 2vw, 18px);
-    width: 75%;
+    font-size: clamp(0.9rem, 1.5vw, 20px);
+    width: min(90%, 1000px);
     line-height: 1.8;
-    color: white;
+    color: #f3f3f3;
     position: relative;
 }
 
 .hero h1 span.gradient {
-    background: linear-gradient(270deg, rgb(197, 95, 244), rgb(234, 59, 59));
+    background: linear-gradient(90deg, rgba(197, 95, 244, 1), rgba(234, 59, 59, 1));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: 800;
 }
 
-.cursor {
+.typing::after {
+    content: "|";
     display: inline-block;
-    width: 10px;
-    height: 1em;
-    background-color: white;
-    animation: blink 0.25s step-start infinite;
+    animation: blink 0.3s step-start infinite;
+    margin-left: 2px;
 }
 
 /* Button Styles */
@@ -97,7 +96,6 @@
     font-weight: 600;
 }
 
-.hero-viewbtn,
 .hero-connectbtn {
     position: relative;
     display: inline-block;
@@ -111,10 +109,31 @@
     transition: 0.25s ease;
 }
 
-.hero-viewbtn:hover,
-.hero-connectbtn:hover {
-    background-color: rgb(164, 45, 204);
+.hero-viewbtn {
+    all: unset; /* Reset default button styles */
+    position: relative;
+    display: inline-block;
+    padding: 18px 36px;
+    text-align: center;
+    border-radius: 50px;
+    font-weight: 600;
+    border: 2px solid white;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.hero-connectbtn {
+    text-decoration: none;  /* Removes underline */
+    color: inherit; /* Keeps the text color the same */
+    display: inline-block; /* Ensures it behaves like a button */
+}
+
+.hero-connectbtn:hover, .hero-viewbtn:hover {
+    background: linear-gradient(270deg, rgba(164, 45, 204, 0.9), rgba(231, 77, 71, 0.9));
     border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 20px rgba(231, 77, 71, 0.5);
 }
 
 /* Work Options Overlay */
@@ -124,33 +143,39 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.75);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 100;
+    backdrop-filter: blur(10px);
 }
 
+/* Responsive Work Options Overlay */
 .work-options-container {
     display: flex;
-    gap: 80px;
-    padding: 20px;
+    gap: min(6vw, 60px);
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 25px;
 }
 
 .work-option-box {
-    position: relative;
-    width: 22.5vw;
-    height: 40vh;
-    border-radius: 25px;
+    width: min(40vw, 500px);
+    height: min(50vh, 400px);
+    border-radius: 20px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    border: 2px solid rgba(255, 255, 255, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.8);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
 }
+
+
 
 .work-option-box:hover {
     transform: scale(1.1);
@@ -182,12 +207,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(270deg, 
-        rgba(188, 78, 238, 0.597), 
-        rgba(234, 59, 59, 0.3)
-    );
-    background-size: 500% 500%;
-    border-radius: 20px;
+    background: linear-gradient(270deg, rgba(188, 78, 238, 0.5), rgba(234, 59, 59, 0.4));
     opacity: 0;
     transition: opacity 0.3s ease;
     animation: gradient-shift 10s ease infinite;
@@ -200,7 +220,7 @@
 
 .work-option-box h2 {
     color: white;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 700;
     position: relative;
     z-index: 2;
@@ -223,9 +243,9 @@
 
 /* Keyframe Animations */
 @keyframes bubble-effect {
-    0% { transform: scale(0.85) rotate(0deg); }
-    50% { transform: scale(0.925) rotate(180deg); }
-    100% { transform: scale(0.875) rotate(360deg); }
+    0% { transform: scale(0.9) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(180deg); }
+    100% { transform: scale(0.95) rotate(360deg); }
 }
 
 @keyframes gradient-shift {
@@ -233,6 +253,7 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
 
 @keyframes popIn {
     from {
@@ -249,3 +270,14 @@
     50% { opacity: 0; }
 }
 
+@media (max-width: 768px) {
+    .work-options-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .work-option-box {
+        width: 90%;
+        height: auto;
+        padding: 25px;
+    }
+}

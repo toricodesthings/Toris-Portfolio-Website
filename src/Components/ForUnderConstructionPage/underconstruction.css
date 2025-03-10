@@ -1,0 +1,46 @@
+/* Full-screen Centered Layout */
+.home-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    width: 100%;
+    text-align: center;
+    background: black;
+    color: white;
+}
+
+/* Large and Bold Text */
+.under-construction {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    background: linear-gradient(90deg, #bb8effd8, #ff8fec);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeIn 1s ease-in-out, glow 1s infinite alternate;
+}
+
+/* Simple fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Glowing Text Effect */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 15px rgba(255, 107, 107, 0.5), 0 0 20px rgba(87, 61, 217, 0.5);
+    }
+    to {
+        text-shadow: 0 0 25px rgba(255, 107, 107, 0.8), 0 0 30px rgba(87, 61, 217, 0.8);
+    }
+}

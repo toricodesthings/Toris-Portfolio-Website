@@ -1,9 +1,13 @@
-.navbar{
+/* Navbar Styles */
+.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 2vh 10%;
+    flex-wrap: wrap;
+    padding: 10px 0;
 }
+
 
 .nav-menu {
     display: flex;
@@ -13,30 +17,58 @@
     font-size: 20px;
     margin: 0;
     padding: 0;
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: fadeInTop 0.6s ease-in-out forwards;
+}
+
+.avatar-wrapper { animation: fadeInTop 0.3s ease-in-out forwards 0.6s; }
+.nav-menu li:nth-child(1) { animation: fadeInTop 0.4s ease-in-out forwards 0.1s; }
+.nav-menu li:nth-child(2) { animation: fadeInTop 0.4s ease-in-out forwards 0.2s; }
+.nav-menu li:nth-child(3) { animation: fadeInTop 0.4s ease-in-out forwards 0.3s; }
+.nav-menu li:nth-child(4) { animation: fadeInTop 0.4s ease-in-out forwards 0.4s; }
+.nav-menu li:nth-child(5) { animation: fadeInTop 0.4s ease-in-out forwards 0.5s; }
+.nav-connect-wrapper { animation: fadeInTop 0.4s ease-in-out forwards 0.6s; }
+
+
+@keyframes fadeInTop {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .nav-menu li {
     position: relative;
     cursor: pointer;
     transition: 0.25s ease;
+    opacity: 0;
+    transform: translateX(-20px);
 }
 
 .nav-menu li::after {
     content: "";
     position: absolute;
-    bottom: -4px; /* Distance from text */
-    left: 50%; /* Start from the center */
+    bottom: -4px;
+    left: 50%;
     width: 0;
-    height: 2px; /* Slim underline */
+    height: 2px;
     background: white;
-    transform: translateX(-50%); /* Center the line */
-    transition: 0.25s ease; /* Smooth underline growth */
+    transform: translateX(-50%);
+    transition: 0.3s ease;
 }
 
+
+
 .nav-menu li:hover {
-    transform: scale(1.05); /* Scale up */
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9); /* White glow effect */
+    transform: scale(1.05);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
+
 
 .nav-menu li:hover::after {
     width: 100%; /* Expand underline outward to full width */
@@ -48,58 +80,116 @@
     transition: color 0.25s ease; /* Optional: Smooth color transition */
   }
 
-.nav-connect{
-    padding: 20px 40px;
+
+.nav-connect-wrapper {
+    opacity: 0;
+}
+
+.nav-connect {
+    padding: 20px 36px;
     font-size: 20px;
     background: linear-gradient(270deg, rgb(181, 70, 232), rgb(229, 48, 48));
     border-radius: 25px;
     cursor: pointer;
-    transition: 0.25s ease;
-}
-
-.nav-connect:hover{
-    transform: scale(1.05);
-}
-
-.avatar {
-    width: 74px;
-    height: 74px;
-    border-radius: 50%; /* Circular image */
-    object-fit: cover;
-    position: relative; /* Sits above everything else */
-    z-index: 2; /* Ensures it's on top */
-    cursor: pointer;
-}
-
-.avatar-wrapper {
-    display: inline-block;
+    transition: 0.3s ease;
     position: relative;
-    width: 86px; /* Avatar size (80px) + border (2px x 2) */
-    height: 86px; /* Avatar size (80px) + border (2px x 2) */
-    border-radius: 50%; /* Circular shape */
-    background: linear-gradient(45deg, #ff6b6b, #573dd9); /* Gradient border */
-    display: flex; /* Ensures centering */
+}
+
+/* Left side border */
+.nav-connect::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 0;
+    bottom: -1px;
+    border-radius: 25px 0 0 25px;
+    pointer-events: none;
+    border: 2px solid transparent;
+    border-right: none;
+    transition: width 0.3s ease, border-color 0.08s ease;
+}
+
+/* Right side border */
+.nav-connect::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 0;
+    bottom: -1px;
+    border-radius: 0 25px 25px 0;
+    pointer-events: none;
+    border: 2px solid transparent;
+    border-left: none;
+    transition: width 0.3s ease, border-color 0.08s ease;
+}
+
+.nav-connect:hover::before,
+.nav-connect:hover::after {
+    width: 50%;
+    border-color: rgba(255, 182, 221, 0.936);
+}
+
+.nav-connect:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    
+}
+
+.nav-connect-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Avatar Image */
+.avatar {
+    width: 100%; /* Ensures it fills the wrapper */
+    height: 120%; /* Stretch slightly downward */
+    padding: 8px;
+    margin-top: 2px;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Avatar Wrapper */
+.avatar-wrapper {
+    opacity: 1; /* Set to 1 to ensure visibility */
+    display: flex; /* Flexbox for proper centering */
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Ensures the rotating element doesn't overflow */
+    position: relative;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff6b6b, #573dd9);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Animated Glow Effect */
 .avatar-wrapper::after {
     content: "";
     position: absolute;
-    width: 100%; /* Slightly smaller than the wrapper */
-    height: 100%; /* Slightly smaller than the wrapper */
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     background: conic-gradient(
         rgba(255, 255, 255, 0) 0%,
         rgb(255, 255, 255) 10%,
         rgba(255, 255, 255, 0) 25%
-    ); /* Narrow band of lighter gradient */
-    animation: rotate360 1s cubic-bezier(0.2, 0.7, 1.0, 0.4) infinite; /* Infinite rotation */
-    z-index: 0; /* Ensures it stays beneath the avatar */
-    pointer-events: none; /* Makes it non-interactive */
-    opacity: 0; /* Hidden initially */
-    transition: opacity 0.25s ease; /* Smooth fade-in transition */
+    );
+    animation: rotate360 2s cubic-bezier(0.2, 0.8, 1.0, 0.1) infinite;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+    backface-visibility: hidden;
 }
 
 .avatar-wrapper:hover::after {
@@ -129,5 +219,26 @@
     transition: 0.25s ease;
 }
 .avatar-hovanimate:hover{
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
+
+/* Responsive Navbar */
+@media (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-menu {
+        margin-top: 25px;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .nav-connect {
+        margin-top: 25px;
+        padding: 15px 30px;
+        font-size: 18px;
+    }
+}
+

@@ -28,43 +28,51 @@ const skills = [
 
 const About = () => {
   const scrollRef = useRef(null);
-  const [scrollDirection, setScrollDirection] = useState(1); // 1 for right, -1 for left
+  const [scrollDirection, setScrollDirection] = useState(1);
   const [isUserScrolling, setIsUserScrolling] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const dragStartX = useRef(0);
   const scrollLeftStart = useRef(0);
-
   const [activeImage, setActiveImage] = useState(1);
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     let scrollInterval;
 
+    // Auto-scroll music stats
     const startAutoScroll = () => {
       if (scrollContainer.scrollWidth > scrollContainer.clientWidth) {
         scrollInterval = setInterval(() => {
           if (!isUserScrolling && !isDragging) {
-            scrollContainer.scrollLeft += scrollDirection * 4; // Adjust speed
+            scrollContainer.scrollLeft += scrollDirection * 4;
 
-            // Reverse direction at edges
             if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 5) {
-              setScrollDirection(-1); // Scroll left
+              setScrollDirection(-1);
             } else if (scrollContainer.scrollLeft <= 0) {
-              setScrollDirection(1); // Scroll right
+              setScrollDirection(1);
             }
           }
         }, 35);
       }
     };
 
-    // Detect manual scroll and stop auto-scroll
+    // Scroll-to-flip only inside `.music-flip`
+    const handleMusicFlipScroll = (event) => {
+      const musicFlipContainer = document.querySelector(".music-flip");
+      if (musicFlipContainer && musicFlipContainer.contains(event.target)) {
+        event.preventDefault(); // Prevent page scrolling
+        setActiveImage(event.deltaY > 0 ? 2 : 1);
+      }
+    };
+
+    // Detect user scroll and stop auto-scrolling temporarily
     const handleUserScroll = () => {
       setIsUserScrolling(true);
       clearInterval(scrollInterval);
-      setTimeout(() => setIsUserScrolling(false), 3000); // Resume after 3s
+      setTimeout(() => setIsUserScrolling(false), 3000);
     };
 
-    // Drag-based scrolling
+    // Drag-based scrolling for stats section
     const handleMouseDown = (e) => {
       setIsDragging(true);
       dragStartX.current = e.pageX;
@@ -81,11 +89,13 @@ const About = () => {
       setIsDragging(false);
     };
 
+    // Attach event listeners
     scrollContainer.addEventListener("wheel", handleUserScroll);
     scrollContainer.addEventListener("touchstart", handleUserScroll);
     scrollContainer.addEventListener("mousedown", handleMouseDown);
     scrollContainer.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
+    document.querySelector(".music-flip")?.addEventListener("wheel", handleMusicFlipScroll, { passive: false });
 
     startAutoScroll();
 
@@ -96,6 +106,7 @@ const About = () => {
       scrollContainer.removeEventListener("mousedown", handleMouseDown);
       scrollContainer.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      document.querySelector(".music-flip")?.removeEventListener("wheel", handleMusicFlipScroll);
     };
   }, [isUserScrolling, scrollDirection, isDragging]);
 
@@ -105,7 +116,7 @@ const About = () => {
         <h1 className="pop-in">About me</h1>
       </div>
 
-      <section className="intro-section pop-in">
+      <section className="intro-section">
         <div className="about-intro-left">
           <img src={profile_img} alt="Profile" className="aboutprofileimg" />
         </div>
@@ -123,7 +134,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="cs-section pop-in">
+      <section className="cs-section">
         <div className="cs-education">
           <h2>Current Education</h2>
           <div className="education-panel">
@@ -156,7 +167,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="music-section pop-in">
+      <section className="music-section">
         <div className="music-para">
           <h2>My Music Career</h2>
           <div className = "music-panel">
@@ -258,6 +269,7 @@ const About = () => {
       </section>
     </div>
   );
-};
+}
+
 
 export default About;

@@ -22,7 +22,7 @@ import neuralImg from "../../assets/tools/Neural.png";
 import vitalImg from "../../assets/tools/Vital.png";
 
 const socialLinks = [
-    { name: "Spotify", url: "https://youtube.com/c/yourchannelherehttps://open.spotify.com/artist/48ds3BHWCPZVfAzFB2At2L", img: spotifyImg },
+    { name: "Spotify", url: "https://open.spotify.com/artist/48ds3BHWCPZVfAzFB2At2L", img: spotifyImg },
     { name: "Youtube", url: "https://music.youtube.com/channel/UCtPf_UBTj152Hxi4g1FxC5g", img: youtubeImg },
     { name: "Tidal", url: "https://listen.tidal.com/artist/47932768", img: tidalImg, invert: true },
     { name: "Apple Music", url: "https://music.apple.com/us/artist/shep/1747760245", img: amImg },

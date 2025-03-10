@@ -17,7 +17,7 @@
 /* Profile Image Styles */
 .hero .image-container {
     position: relative;
-    width: min(25vw, 260px);
+    width: min(40vw, 260px);
     aspect-ratio: 1;
 }
 
@@ -91,7 +91,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 20px;
     font-size: clamp(1rem, 2vw, 18px);
     font-weight: 600;
 }
@@ -99,10 +99,9 @@
 .hero-connectbtn {
     position: relative;
     display: inline-block;
-    padding: 18px 36px;
+    padding: 16px 36px;
     text-align: center;
-    border-radius: 50px;
-    font-weight: 600;
+    border-radius: 48px;
     border: 2px solid white;
     overflow: hidden;
     cursor: pointer;
@@ -115,8 +114,7 @@
     display: inline-block;
     padding: 18px 36px;
     text-align: center;
-    border-radius: 50px;
-    font-weight: 600;
+    border-radius: 48px;
     border: 2px solid white;
     overflow: hidden;
     cursor: pointer;
@@ -271,6 +269,10 @@
 }
 
 @media (max-width: 768px) {
+    .hero {
+        margin: 0 5%;
+    }
+
     .work-options-container {
         flex-direction: column;
         align-items: center;

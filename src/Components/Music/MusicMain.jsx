@@ -8,7 +8,6 @@ import spotifyImg from "../../assets/social/spotify.svg";
 import youtubeImg from "../../assets/social/youtube.svg";
 import tidalImg from "../../assets/social/tidal.svg";
 import amImg from "../../assets/social/am.svg";
-import iTunesImg from "../../assets/social/itunes.svg";
 import soundcloudImg from "../../assets/social/soundcloud.svg";
 
 import abletonImg from "../../assets/tools/ableton.png";
@@ -26,7 +25,6 @@ const socialLinks = [
     { name: "Youtube", url: "https://music.youtube.com/channel/UCtPf_UBTj152Hxi4g1FxC5g", img: youtubeImg },
     { name: "Tidal", url: "https://listen.tidal.com/artist/47932768", img: tidalImg, invert: true },
     { name: "Apple Music", url: "https://music.apple.com/us/artist/shep/1747760245", img: amImg },
-    { name: "iTunes", url: "https://music.apple.com/us/artist/shep/1747760245", img: iTunesImg },
     { name: "Soundcloud", url: "https://soundcloud.com/shepy2", img: soundcloudImg },
 ];
 
@@ -164,8 +162,8 @@ const MusicPage = () => {
 
     return (
         <div className="music">
-            <div className="music-title">
-                <h1>Music Career & Projects</h1>
+            <div className="music-title pop-in">
+                <h1>Music Projects</h1>
             </div>
 
             <section className="shep-section">

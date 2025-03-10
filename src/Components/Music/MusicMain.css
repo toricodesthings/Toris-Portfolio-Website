@@ -103,7 +103,7 @@ section::before {
 
 /* Profile Image Container */
 .shep-pfp-left {
-    flex: 1;
+    width: min(30vw, 300px);
     display: flex;
     justify-content: flex-start;
     position: relative;
@@ -896,6 +896,9 @@ section::before {
 }
 
 @media (max-width: 768px) {
+    .music {
+        margin: 0 5%;
+    }
 
     /* Shep Section: vertical layout, image on top, text at bottom, centered */
     .bio-panel {
@@ -910,6 +913,7 @@ section::before {
     }
     /* Ensure image appears before text if needed */
     .shep-pfp-left {
+        max-width: 200px;
         order: 1;
     }
     .shep-description-right {
@@ -926,8 +930,6 @@ section::before {
         justify-content: center; /* Centers the icon+text block horizontally */
         align-items: center;  /* vertically centers the children */
         width: 100%;
-        
-
     }
 
     .social-link::after, .social-link::before {
@@ -935,11 +937,10 @@ section::before {
     }
 
     .social-icon {
-        height: auto;
         margin: 0;        /* Remove any default margin */
         flex: 1;
         max-width: 50%;
-        max-height: 125px;
+        max-height: 100px;
     
     }
     .social-text {
@@ -947,13 +948,13 @@ section::before {
         text-align: center;
         flex: 1;
         max-width: 50%;
-        font-size: 28px;
+        font-size: 1.3rem;
     }
 
     /* Production Stack and Fun Fact Terminal: stack vertically */
     .music-extra-panel {
         flex-direction: column;
-        gap: 20px; /* Optional: adjust gap for vertical stacking */
+        gap: 20px;
         
     }
 

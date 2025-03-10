@@ -119,7 +119,7 @@ export default function LiveFeed() {
   // Typing effect when in learning mode
   useEffect(() => {
     if (displayMode !== "learning") return;
-    
+  
     if (index < learningTopics.length) {
       let charIndex = 0;
       const typingInterval = setInterval(() => {
@@ -130,18 +130,29 @@ export default function LiveFeed() {
           clearInterval(typingInterval);
           setTimeout(() => {
             setDisplayedTopics(prev => {
+              // Only remove the top line if we've exceeded the max lines.
               const newTopics = [...prev, learningTopics[index]];
-              return newTopics.slice(-Math.min(maxLines, newTopics.length));
+              return newTopics.length > maxLines
+                ? newTopics.slice(1)
+                : newTopics;
             });
             setCurrentText("");
-            setIndex((prevIndex) => (prevIndex + 1) % learningTopics.length);
+            setIndex(prevIndex => (prevIndex + 1) % learningTopics.length);
           }, 500);
         }
       }, 40);
-
+  
       return () => clearInterval(typingInterval);
     }
-  }, [index, maxLines, displayMode]);
+  }, [index, displayMode]); // Removed maxLines here
+
+  useEffect(() => {
+    if (displayMode === "learning") {
+      setDisplayedTopics([]);
+      setCurrentText("");
+      setIndex(0);
+    }
+  }, [maxLines, displayMode]);
 
   return (
     <div ref={containerRef} className="terminal-container">

@@ -118,7 +118,7 @@ section::before {
 }
 
 .about-para h2 {
-    font-size: clamp(1.5rem, 3vw, 40px);
+    font-size: clamp(2rem, 4vw, 36px);;
     margin-bottom: 20px;
     color: white;
     position: relative;
@@ -130,7 +130,7 @@ section::before {
     position: absolute;
     left: 0;
     bottom: -5px;
-    width: 80px;
+    width: 40%;
     height: 2px;
     background: linear-gradient(90deg, rgba(218, 139, 255, 0.6),
             rgba(255, 91, 91, 0.6));
@@ -173,7 +173,7 @@ section::before {
 }
 
 .cs-skills-panel h2 {
-    font-size: clamp(1.5rem, 3vw, 36px);
+    font-size: clamp(2rem, 4vw, 36px);;
     color: white;
     margin-bottom: 40px;
     text-align: center;
@@ -184,17 +184,26 @@ section::before {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     /* This creates the alignment to edges */
     width: 100%;
     gap: 20px;
 }
 
+.skills-grid span:hover img,
+.skills-grid span:hover .skill-label {
+  filter: drop-shadow(0 0 10px rgba(222, 95, 244, 0.764));
+  text-shadow: 0 0 10px rgba(197, 95, 244, 0.5),
+                0 0 20px rgba(234, 59, 59, 0.4);
+  transition: filter 0.25s ease, text-shadow 0.25s ease;
+}
+
 .skills-grid span {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    text-align: center;
     justify-content: center;
-    color: white;
+    align-items: center;
 }
 
 .skill-icon {
@@ -220,7 +229,7 @@ section::before {
 }
 
 .cs-education h2 {
-    font-size: clamp(1.5rem, 3vw, 36px);
+    font-size: clamp(2rem, 4vw, 36px);;
     color: white;
     margin-bottom: 40px;
     text-align: center;
@@ -417,16 +426,13 @@ section::before {
     gap: 40px;
     height: 100%;
     max-height: 100%;
-    /* Prevent panel from expanding indefinitely */
     overflow: hidden;
-    /* Hide overflow */
     box-sizing: border-box;
-    /* Include padding in width/height */
     margin-bottom: 40px;
 }
 
 .music-para h2 {
-    font-size: clamp(1.5rem, 3vw, 36px);
+    font-size: clamp(2rem, 4vw, 36px);;
     margin-bottom: 40px;
     color: white;
     text-align: center;
@@ -529,25 +535,16 @@ section::before {
     text-align: center;
 }
 
-/* Music Image Flip Section */
-.music-flip {
-    position: relative;
-    width: 100%;
-    height: 450px;
-    /* Increased height to better fit square images */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
-    /* Adds depth perception for the flip effect */
-}
 
 .music-flip {
     position: relative;
     width: 100%;
-    height: clamp(300px, 40vw, 500px);
+    margin: 20px 0;
+    height: calc(clamp(300px, 35vw, 350px) + 80px);
+    box-sizing: border-box;
     /* Responsive height */
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     perspective: 500px;
@@ -556,10 +553,8 @@ section::before {
 /* Flipping Images */
 .flip-image {
     position: absolute;
-    width: clamp(300px, 30vw, 350px);
-    /* Responsive width */
-    height: clamp(300px, 30vw, 350px);
-    /* Responsive height */
+    width: clamp(300px, 35vw, 350px);
+    height: clamp(300px, 35vw, 350px);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border-radius: 12px;
@@ -669,6 +664,59 @@ section::before {
 
 /* Responsive behavior */
 @media (max-width: 768px) {
+    .about {
+        margin: 0% 5%;
+    }
+
+    .intro-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .live-feed-element {
+        width: 100%;
+    }
+
+    .terminal-container {
+        min-height: 300px; /* Adjust this value as needed */
+      }
+
+    .about-intro-left {
+        max-width: 200px;
+    }
+    
+    .education-panel p,
+    .education-panel .live-feed-element {
+      max-width: 100%;
+    }
+
+    .education-panel p{
+        text-align: center;
+    }
+
+    /* CS Section Layout */
+    .education-panel {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .music-panel {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .music-para p, .music-timeline {
+        max-width:  100%;
+    }
+
+    .music-para p {
+        text-align: center;
+    }
+
     .music-stat-box {
         flex-direction: column;
         align-items: center;

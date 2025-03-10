@@ -162,7 +162,7 @@ section::before {
 }
 
 .social-links-panel h2 {
-    font-size: clamp(1.5rem, 3vw, 36px);
+    font-size: clamp(2rem, 4vw, 36px);
     color: white;
     margin-bottom: 20px;
     text-align: center;
@@ -561,7 +561,7 @@ section::before {
 }
 
 .stats-graphs h2 {
-    font-size: clamp(1.5rem, 3vw, 36px);
+    font-size: clamp(2rem, 4vw, 36px);;
     color: white;
     margin-bottom: 20px;
     text-align: center;
@@ -705,7 +705,7 @@ section::before {
 
 /* Live Count Panel */
 .live-count-panel h2 {
-    font-size: clamp(1.5rem, 3vw, 36px);
+    font-size: clamp(2rem, 4vw, 36px);;
     color: white;
     margin-bottom: 40px;
     text-align: center;
@@ -900,6 +900,12 @@ section::before {
         margin: 0 5%;
     }
 
+    @media (max-width: 768px) {
+        section::before {
+          background-attachment: scroll;
+        }
+      }
+
     /* Shep Section: vertical layout, image on top, text at bottom, centered */
     .bio-panel {
         flex-direction: column;
@@ -930,11 +936,32 @@ section::before {
         justify-content: center; /* Centers the icon+text block horizontally */
         align-items: center;  /* vertically centers the children */
         width: 100%;
+        min-height: auto; /* or set a specific value like 100px */
     }
 
     .social-link::after, .social-link::before {
-        border-radius: 72px;
+        border-radius: 60px;
     }
+
+    .social-link .arrow-indicator {
+        content: ""; /* Remove the arrow text */
+        font-size: 0; /* Ensure no text shows up */
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    .social-link:hover .arrow-indicator {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.1);
+    }
+    
 
     .social-icon {
         margin: 0;        /* Remove any default margin */

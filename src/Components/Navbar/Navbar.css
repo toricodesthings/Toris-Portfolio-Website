@@ -145,9 +145,8 @@
 /* Avatar Image */
 .avatar {
     width: 100%; /* Ensures it fills the wrapper */
-    height: 120%; /* Stretch slightly downward */
     padding: 8px;
-    margin-top: 2px;
+    margin-top: 4px;
     object-fit: cover;
     display: block;
     position: relative;

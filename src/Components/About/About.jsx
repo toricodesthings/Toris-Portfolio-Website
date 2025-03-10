@@ -160,7 +160,7 @@ const About = () => {
             {skills.map((skill) => (
               <span key={skill.name} className="skill-text">
                 <img src={skill.img} alt={skill.name} className="skill-icon" />
-                {skill.name}
+                <span className="skill-label">{skill.name}</span>
               </span>
             ))}
           </div>

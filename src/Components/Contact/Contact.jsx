@@ -10,7 +10,7 @@ const contactLinks = [
     { name: "X/Twitter", url: "https://x.com/shepysmusic", img: xImg },
     { name: "Github", url: "https://github.com/toricodesthings", img: githubImg },
     { name: "LinkedIn", url: "https://www.linkedin.com/in/tori-sirak/", img: linkedinImg },
-    { name: "Email", url: "mailto:pitoursirak@example.com", img: mailImg },
+    { name: "Email", url: "mailto:pitoursirak@gmail.com", img: mailImg },
 ];
 
 const Contact = () => {

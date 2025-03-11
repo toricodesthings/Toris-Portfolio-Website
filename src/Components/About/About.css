@@ -161,7 +161,7 @@ section::before {
     background-image: url('/background/about-section/sectioncs.webp');
     background-size: cover;
     background-position: center;
-    opacity: 0.5;
+    opacity: 0.75;
     z-index: -1;
 }
 
@@ -185,17 +185,17 @@ section::before {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    /* This creates the alignment to edges */
     width: 100%;
     gap: 20px;
 }
 
 .skills-grid span:hover img,
 .skills-grid span:hover .skill-label {
-  filter: drop-shadow(0 0 10px rgba(222, 95, 244, 0.764));
+  filter: drop-shadow(0 2px 5px rgba(244, 181, 255, 0.764));
+  ;
   text-shadow: 0 0 10px rgba(197, 95, 244, 0.5),
                 0 0 20px rgba(234, 59, 59, 0.4);
-  transition: filter 0.25s ease, text-shadow 0.25s ease;
+  transition: all 0.3s ease;
 }
 
 .skills-grid span {
@@ -204,6 +204,11 @@ section::before {
     text-align: center;
     justify-content: center;
     align-items: center;
+    transition: all 0.25s ease;
+}
+
+.skills-grid span:hover {
+    transform: translateY(-3px)
 }
 
 .skill-icon {
@@ -247,7 +252,6 @@ section::before {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
-    /* Changed from center to stretch to match heights */
     height: 100%;
     gap: 40px;
     margin-bottom: 40px;
@@ -259,9 +263,7 @@ section::before {
     flex: 1;
     max-width: 50%;
     max-height: 100%;
-    /* Prevent overflow */
     overflow: hidden;
-    /* Hide overflow */
 }
 
 /* Whole Terminal Container */
@@ -271,7 +273,7 @@ section::before {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(200, 200, 200, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.8);
     border-radius: 12px;
     padding: 15px;
     font-family: "Courier New", Courier, monospace;
@@ -279,9 +281,7 @@ section::before {
     line-height: 1.8em;
     color: white;
     overflow: hidden;
-    /* Hide overflow */
     box-sizing: border-box;
-    /* Include padding in width/height */
 }
 
 /* Terminal Text Container */
@@ -301,7 +301,9 @@ section::before {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+    gap: 20px;
     align-items: center;
+    width: 100%;
 }
 
 .terminal-dots {
@@ -312,14 +314,13 @@ section::before {
 /* Combined buttons group */
 .terminal-buttons {
     display: flex;
-    overflow: hidden;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .terminal-btn {
-    padding: 8px 8px;
-    font-size: 16px;
+    padding: 8px 12px;
+    font-size: clamp(0.8rem, 1vw, 16px);
     background-color: rgba(0, 0, 0, 0.4);
     color: rgba(255, 255, 255, 0.8);
     border: none;
@@ -330,7 +331,8 @@ section::before {
 
 
 .terminal-btn:hover {
-    background-color: rgba(255, 255, 255, 0.595);
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 0;
 }
 
 .terminal-btn.active {
@@ -340,8 +342,8 @@ section::before {
     background-size: 250% 250%;
     /* Allows animation effect */
     color: white;
-    padding: 8px 25px;
-    border-radius: 8px;
+    padding: 8px 28px;
+    border-radius: 12px;
     transition: background 0.3s ease-in-out;
     animation: gradientMove 1s infinite alternate;
 }

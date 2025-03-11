@@ -200,8 +200,8 @@ const AudienceTimelineChart = () => {
                 strokeWidth={2}
                 dot={CustomDot}
                 isAnimationActive={true}
-                animationDuration={1500}
-                animationBegin={800 + index * 200}
+                animationDuration={1200}
+                animationBegin={600 + index * 200}
               />
             ))}
           </LineChart>

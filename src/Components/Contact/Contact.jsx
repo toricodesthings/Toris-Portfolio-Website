@@ -27,19 +27,18 @@ const Contact = () => {
               const index = links.indexOf(entry.target);
               setTimeout(() => {
                 entry.target.classList.add("visible");
-              }, index * 250); 
+              }, index * 200); 
             } else {
               entry.target.classList.add("visible");
             }
             obs.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.75 });
+      }, { threshold: 0.6 });
       
       animatedElements.forEach(el => observer.observe(el));
     };
 
-    // Wait until window load so the animations don't fire immediately
     if (document.readyState === "complete") {
       initObserver();
     } else {
@@ -90,7 +89,7 @@ const Contact = () => {
               <input type="email" name="email" placeholder="Your Email" required />
             </div>
             <div className="form-group">
-              <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+              <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
             </div>
             <div className="contact-form-buttons">
               <button type="submit">Send Message</button>

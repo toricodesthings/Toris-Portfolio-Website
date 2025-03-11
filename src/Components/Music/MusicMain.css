@@ -817,7 +817,8 @@ section::before {
     text-align: center;
     cursor: pointer;
     justify-content: center;
-
+    position: relative;
+    margin-bottom: 20px;
 }
 
 .collab-item img {
@@ -827,7 +828,7 @@ section::before {
     border-radius: 50%;
     border: 2px solid #ffffff79;
     transition: transform 0.3s ease;
-}
+  }
 
 .collab-item:hover img {
     transform: scale(1.1);
@@ -846,7 +847,12 @@ section::before {
     font-weight: 500;
 }
 
-/* Expanded collaborator section styling */
+/* Container for the expanded section that appears below a row */
+.collab-expanded-row {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
 .collab-expanded {
     margin-top: 20px;
     border: 2px solid #ffffff8f;
@@ -854,30 +860,40 @@ section::before {
     border-radius: 12px;
     display: flex;
     align-items: center;
-    position: relative;
-}
+    background: rgba(0, 0, 0, 0.8); /* improves readability */
+    animation: slideDown 0.3s ease-out;
+  }
 
-/* Image in expanded section */
-.collab-expanded img {
-    width: 150px;
-    height: 150px;
+  /* Keyframe animation for a sleek slide down effect */
+@keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+
+  .collab-expanded img {
+    width: 25%;
     object-fit: cover;
     border-radius: 12px;
-    margin-right: 20px;
-}
+    margin-right: 40px;
+  }
+  
 
 /* Text area in expanded section */
 .collab-expanded-text {
     flex: 1;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.8;
 }
 
 /* Navigation arrows for scrolling through collaborations */
 .collab-nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid #ccc;
     border-radius: 50%;
@@ -887,15 +903,15 @@ section::before {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-}
-
-.collab-nav-arrow.left {
-    left: -20px;
-}
-
-.collab-nav-arrow.right {
-    right: -20px;
-}
+  }
+  
+  .collab-nav-arrow.left {
+    margin-right: 10px;
+  }
+  
+  .collab-nav-arrow.right {
+    margin-left: 10px;
+  }
 
 @media (max-width: 768px) {
     .music {
@@ -905,7 +921,7 @@ section::before {
     section::before {
         background-attachment: scroll;
     }
-    
+
     /* Shep Section: vertical layout, image on top, text at bottom, centered */
     .bio-panel {
         flex-direction: column;
@@ -1031,7 +1047,23 @@ section::before {
         margin: 0 auto 20px;
     }
 
-    .collab-nav-arrow {
-        display: none;
-    }
+  /* Hide the desktop arrows if any */
+  .collab-nav-arrow {
+    /* For mobile, we control display via the mobile arrows container */
+  }
+
+  /* Mobile arrow container: display both arrows at the bottom */
+  .collab-nav-arrows-mobile {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  /* Show the arrows in mobile view */
+  .collab-nav-arrows-mobile .collab-nav-arrow {
+    display: flex;
+  }
+
+
 }

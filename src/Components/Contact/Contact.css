@@ -14,6 +14,27 @@
     text-align: center;
 }
 
+.quick-links-panel h2{
+    transition: opacity 0.3s ease;
+  }
+  .quick-links-panel h2.visible {
+    opacity: 1;
+  }
+  
+@keyframes typewriter {
+    from {
+        max-width: 0;
+        opacity: 0;
+    }
+
+    to {
+        max-width: 50ch;
+        /* Adjust "50ch" to match your longest h2 text */
+        opacity: 1;
+    }
+}
+
+
 .contact-title h1 {
     display: inline-block;
     font-size: clamp(2rem, 4vw, 50px);
@@ -42,18 +63,22 @@ section {
         box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
             0 0 25px rgba(234, 59, 59, 0.4);
     }
+
     25% {
         box-shadow: 2px -2px 20px rgba(210, 100, 250, 0.6),
             -2px 2px 30px rgba(245, 70, 70, 0.5);
     }
+
     50% {
         box-shadow: -4px 3px 25px rgba(197, 95, 244, 0.7),
             3px -4px 35px rgba(234, 59, 59, 0.6);
     }
+
     75% {
         box-shadow: 2px 2px 20px rgba(190, 90, 240, 0.6),
             -2px -2px 30px rgba(225, 50, 50, 0.5);
     }
+
     100% {
         box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
             0 0 25px rgba(234, 59, 59, 0.4);
@@ -66,7 +91,8 @@ section::before {
 
 .quicklinks-section {
     display: flex;
-    flex-direction: column; /* Ensures vertical stacking */
+    flex-direction: column;
+    /* Ensures vertical stacking */
     align-items: center;
     width: 100%;
     gap: 2em;
@@ -102,6 +128,7 @@ section::before {
     margin-bottom: 40px;
     text-align: center;
     position: relative;
+    opacity: 0;
 }
 
 /* Quick Links Grid */
@@ -113,6 +140,19 @@ section::before {
     width: 100%;
     gap: 20px;
 }
+
+.link-container {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* When the "visible" class is added, animate to the final state */
+.link-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 /* Link Container Styling */
 .link-container {
@@ -132,6 +172,7 @@ section::before {
     overflow: visible;
     margin-bottom: 20px;
 }
+
 
 .link-container::before {
     content: "";
@@ -211,6 +252,7 @@ section::before {
     filter: drop-shadow(0 0 10px rgba(225, 62, 211, 0.4));
     z-index: 1;
 }
+
 /* Text Styling */
 .link-text {
     font-size: clamp(1rem, 2vw, 24px);
@@ -225,7 +267,14 @@ section::before {
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease
 }
+
+.contact-form.visible {
+    opacity: 1;
+}
+
 
 .contact-form input,
 .contact-form textarea {
@@ -240,7 +289,7 @@ section::before {
     outline: none;
     transition: all 0.3s ease;
     /* Fade in the input on load */
-    animation: adeIn 0.3s ease forwards;
+    animation: fadeIn 0.3s ease forwards;
 }
 
 .contact-form input:focus {
@@ -266,7 +315,8 @@ section::before {
 
 /* Style the submit button to be inline and not full width */
 .contact-form button {
-    all: unset; /* Reset default button styles */
+    all: unset;
+    /* Reset default button styles */
     position: relative;
     padding: 18px 36px;
     text-align: center;
@@ -276,7 +326,7 @@ section::before {
     cursor: pointer;
     transition: 0.25s ease;
     width: 50%;
-    margin: 0 auto; 
+    margin: 0 auto;
     animation: fadeIn 0.3s ease forwards;
 }
 
@@ -287,10 +337,15 @@ section::before {
     transform: translateY(-3px);
 }
 
-/* Fade In Animation for form elements */
+
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @media (max-width: 768px) {

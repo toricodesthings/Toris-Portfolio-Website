@@ -43,8 +43,8 @@
     background: linear-gradient(270deg, rgba(197, 95, 244, 0.8), rgba(234, 59, 59, 0.8));
     border-radius: 50%;
     opacity: 0.5;
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-    animation: bubble-effect 3s ease infinite alternate;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    animation: bubble-effect 5s ease-in-out infinite alternate;
     z-index: 1;
     filter: blur(40px);
 }
@@ -98,6 +98,8 @@
     font-weight: 600;
 }
 
+
+
 .hero-connectbtn {
     position: relative;
     display: inline-block;
@@ -107,7 +109,6 @@
     border: 2px solid white;
     overflow: hidden;
     cursor: pointer;
-    transition: 0.25s ease;
 }
 
 .hero-viewbtn {
@@ -120,7 +121,6 @@
     border: 2px solid white;
     overflow: hidden;
     cursor: pointer;
-    transition: 0.25s ease;
 }
 
 .hero-connectbtn {

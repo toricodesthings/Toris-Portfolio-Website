@@ -11,7 +11,6 @@ const Navbar = () => {
     const handleResize = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
-      // When switching to desktop, always show the nav
       mobile ? setNavVisible(false) : setNavVisible(true);
     };
 
@@ -28,14 +27,12 @@ const Navbar = () => {
   return (
     <div className="navbar">
       {isMobile ? (
-        // On mobile, clicking the avatar toggles the navbar visibility
         <div className="avatar-hovanimate" onClick={toggleNav}>
           <div className="avatar-wrapper">
             <img src={avatar} alt="Avatar" className="avatar" />
           </div>
         </div>
       ) : (
-        // On desktop, avatar links to home
         <div className="avatar-hovanimate">
           <div className="avatar-wrapper">
             <Link to="/">

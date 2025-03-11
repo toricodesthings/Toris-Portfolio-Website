@@ -87,7 +87,7 @@ section::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/background/about-section/sectionsummary.png');
+    background-image: url('/background/about-section/sectionsummary.webp');
     background-size: cover;
     background-position: center;
     opacity: 0.75;
@@ -158,7 +158,7 @@ section::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/background/about-section/sectioncs.png');
+    background-image: url('/background/about-section/sectioncs.webp');
     background-size: cover;
     background-position: center;
     opacity: 0.5;
@@ -407,7 +407,7 @@ section::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/background/about-section/sectionmusic.png');
+    background-image: url('/background/about-section/sectionmusic.webp');
     background-size: cover;
     background-position: center;
     opacity: 0.5;
@@ -663,6 +663,10 @@ section::before {
 @media (max-width: 768px) {
     .about {
         margin: 0% 5%;
+    }
+
+    section::before {
+        background-attachment: scroll;
     }
 
     .intro-section {

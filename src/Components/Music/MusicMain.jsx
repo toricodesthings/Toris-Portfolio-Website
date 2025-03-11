@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import AudienceTimelineChart from './AudienceTimelineChart';
 
 import Collaborators from './Collaborators'
-import avatar from "../../assets/artwork_me.png";
+import avatar from "../../assets/artwork_me.webp";
 
 import spotifyImg from "../../assets/social/spotify.svg";
 import youtubeImg from "../../assets/social/youtube.svg";

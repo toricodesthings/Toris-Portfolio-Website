@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
-import profile_img from "../../assets/temp_profileimg.png";
+import profile_img from "../../assets/temp_profileimg.webp";
 
-import music_img from "../../assets/mainpage/music.png";
+import music_img from "../../assets/mainpage/music.webp";
 import cs_img from "../../assets/mainpage/cs.webp";
 
 import { useAnimationStore } from "../../store/animationStore";
@@ -39,7 +39,7 @@ const Hero = () => {
           setHasTypingAnimationPlayed();
         }, 50);
       }
-    }, 45);
+    }, 40);
 
     return () => clearInterval(typingInterval);
   }, [fullString, hasTypingAnimationPlayed, setHasTypingAnimationPlayed]);

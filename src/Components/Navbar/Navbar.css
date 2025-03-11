@@ -50,6 +50,14 @@
     transform: translateX(-20px);
 }
 
+.pop-up {
+    transition: all 0.1s ease-out;
+}
+
+.pop-up:hover{
+    transform: scale(1.05) translateY(-3px);
+}
+
 .nav-menu li::after {
     content: "";
     position: absolute;
@@ -63,9 +71,7 @@
 }
 
 
-
 .nav-menu li:hover {
-    transform: scale(1.05);
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 

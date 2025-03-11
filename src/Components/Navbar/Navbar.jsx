@@ -43,13 +43,23 @@ const Navbar = () => {
       )}
 
       <ul className={`nav-menu ${isMobile && navVisible ? "active" : ""}`}>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/music">Music</Link></li>
-        <li><Link to="/projects">Coding Projects</Link></li>
-        <li><Link to="/about">About Me</Link></li>
-        <li><Link to="/misc">Misc</Link></li>
+        <div className='pop-up'>
+          <li><Link to="/">Home</Link></li>
+        </div>
+        <div className='pop-up'>
+          <li><Link to="/music">Music</Link></li>
+        </div>
+        <div className='pop-up'>
+          <li><Link to="/projects">Coding Projects</Link></li>
+        </div>
+        <div className='pop-up'>
+          <li><Link to="/about">About Me</Link></li>
+        </div>
+        <div className='pop-up'>
+          <li><Link to="/misc">Misc</Link></li>
+        </div>
       </ul>
-      
+
       <div className={`nav-connect-wrapper ${isMobile && navVisible ? "active" : ""}`}>
         <Link to="/contact" className="nav-connect-link">
           <div className="nav-connect">Connect with Me!</div>
@@ -59,4 +69,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default React.memo(Navbar);

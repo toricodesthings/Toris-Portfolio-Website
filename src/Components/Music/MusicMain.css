@@ -773,7 +773,7 @@ section::before {
     align-items: center;
     width: 100%;
     position: relative;
-    
+
 }
 
 .collab-section::before {
@@ -1059,12 +1059,9 @@ section::before {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        /* Centers the icon+text block horizontally */
         align-items: center;
-        /* vertically centers the children */
         width: 100%;
         min-height: auto;
-        /* or set a specific value like 100px */
     }
 
     .social-link::after,
@@ -1074,9 +1071,7 @@ section::before {
 
     .social-link .arrow-indicator {
         content: "";
-        /* Remove the arrow text */
         font-size: 0;
-        /* Ensure no text shows up */
         position: absolute;
         left: 15px;
         top: 50%;
@@ -1147,12 +1142,32 @@ section::before {
         text-align: center;
     }
 
+    .collab-header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .collab-expanded-text {
+        text-align: center;
+    }
+
+    .collab-social-links {
+        justify-content: center;
+    }
+
+    .slide-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
     .collab-expanded img {
+        width: min(40vw, 250px);
         margin: 0 auto 20px;
     }
 
-
-    /* Mobile arrow container: display both arrows at the bottom */
     .collab-nav-arrows-mobile {
         display: flex;
         justify-content: center;
@@ -1160,10 +1175,7 @@ section::before {
         margin-top: 20px;
     }
 
-    /* Show the arrows in mobile view */
     .collab-nav-arrows-mobile .collab-nav-arrow {
         display: flex;
     }
-
-
 }

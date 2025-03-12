@@ -2,19 +2,23 @@
 .navbar {
     display: flex;
     align-items: center;
+    gap: 20px;
     justify-content: space-between;
-    margin: 2vh 10%;
-    flex-wrap: wrap;
+    margin: 1.5vh 10%;
+    flex-wrap: nowrap;
     padding: 10px 0;
 }
 
 
+/* Scale the gap and text size in the nav menu */
 .nav-menu {
     display: flex;
+    text-align: center;
     align-items: center;
     list-style: none;
-    gap: 80px;
-    font-size: 20px;
+    gap: clamp(40px, 5vw, 80px); 
+      /* Gap scales between 10px and 80px */
+    font-size: clamp(16px, 2vw, 20px); /* Font size scales between 16px and 20px */
     margin: 0;
     padding: 0;
     opacity: 0;
@@ -23,11 +27,23 @@
 }
 
 .avatar-wrapper { animation: fadeInTop 0.3s ease-in-out forwards 0.1s; }
-.nav-menu li:nth-child(1) { animation: fadeInTop 0.4s ease-in-out forwards 0.1s; }
-.nav-menu li:nth-child(2) { animation: fadeInTop 0.4s ease-in-out forwards 0.2s; }
-.nav-menu li:nth-child(3) { animation: fadeInTop 0.4s ease-in-out forwards 0.3s; }
-.nav-menu li:nth-child(4) { animation: fadeInTop 0.4s ease-in-out forwards 0.4s; }
-.nav-menu li:nth-child(5) { animation: fadeInTop 0.4s ease-in-out forwards 0.5s; }
+
+.nav-menu .pop-up:nth-child(1) li {
+    animation: fadeInTop 0.4s ease-in-out forwards 0.1s;
+}
+.nav-menu .pop-up:nth-child(2) li {
+    animation: fadeInTop 0.4s ease-in-out forwards 0.2s;
+}
+.nav-menu .pop-up:nth-child(3) li {
+    animation: fadeInTop 0.4s ease-in-out forwards 0.3s;
+}
+.nav-menu .pop-up:nth-child(4) li {
+    animation: fadeInTop 0.4s ease-in-out forwards 0.4s;
+}
+.nav-menu .pop-up:nth-child(5) li {
+    animation: fadeInTop 0.4s ease-in-out forwards 0.5s;
+}
+
 .nav-connect-wrapper { animation: fadeInTop 0.4s ease-in-out forwards 0.6s; }
 
 
@@ -91,15 +107,18 @@
     opacity: 0;
 }
 
+/* Scalable button styling for nav-connect */
 .nav-connect {
-    padding: 20px 36px;
-    font-size: 20px;
+    padding: clamp(10px, 2vw, 20px) clamp(18px, 3vw, 36px);
+    font-size: clamp(16px, 1.5vw, 20px);
+    text-align: center;
     background: linear-gradient(270deg, rgb(181, 70, 232), rgb(229, 48, 48));
     border-radius: 25px;
     cursor: pointer;
     transition: 0.3s ease;
     position: relative;
 }
+
 
 /* Left side border */
 .nav-connect::before {
@@ -131,6 +150,7 @@
     transition: width 0.3s ease, border-color 0.08s ease;
 }
 
+
 .nav-connect:hover::before,
 .nav-connect:hover::after {
     width: 50%;
@@ -151,7 +171,7 @@
 /* Avatar Image */
 .avatar {
     width: 100%; /* Ensures it fills the wrapper */
-    padding: 8px;
+    padding: 12px;
     margin-top: 4px;
     object-fit: cover;
     display: block;
@@ -162,22 +182,19 @@
     image-rendering: crisp-edges;
 }
 
-/* Avatar Wrapper */
+/* Scalable avatar wrapper */
 .avatar-wrapper {
-    opacity: 0; /* Set to 1 to ensure visibility */
-    display: flex; /* Flexbox for proper centering */
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 86px;
-    height: 86px;
+    width: clamp(60px, 9vw, 86px);  /* Adjust min, preferred, and max sizes */
+    height: clamp(60px, 9vw, 86px);
     border-radius: 50%;
     background: linear-gradient(45deg, #ff6b6b, #573dd9);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Animated Glow Effect */
 .avatar-wrapper::after {
     content: "";
     position: absolute;
@@ -213,11 +230,11 @@
 .avatar-wrapper::before {
     content: "";
     position: absolute;
-    width: 80px; /* Match avatar size */
-    height: 80px; /* Match avatar size */
-    background: black; /* Or transparent */
-    border-radius: 50%; /* Circular center */
-    z-index: 1; /* Sits above the gradient border */
+    width: 92%;      /* Scales relative to .avatar-wrapper */
+    height: 92%;
+    background: black;
+    border-radius: 50%;
+    z-index: 1;
 }
 
 .avatar-hovanimate{

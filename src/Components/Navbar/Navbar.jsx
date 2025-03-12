@@ -62,7 +62,7 @@ const Navbar = () => {
 
       <div className={`nav-connect-wrapper ${isMobile && navVisible ? "active" : ""}`}>
         <Link to="/contact" className="nav-connect-link">
-          <div className="nav-connect">Connect with Me!</div>
+          <div className="nav-connect">Let's Connect!</div>
         </Link>
       </div>
     </div>

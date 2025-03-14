@@ -37,17 +37,15 @@ export default async function handler(req, res) {
         const accessToken = await getSpotifyAccessToken();
         const artistData = await getArtistData(accessToken);
         const { followers, popularity } = artistData;
-
-        console.log(followers.total)
-        console.log(popularity)
-
+        
         const { data, error } = await supabase
-            .from('shep-stats')
+            .from('shep_stats')
             .insert([
                 {
                     fetched_at: new Date().toISOString(),
                     followers: followers.total,
-                    popularity: popularity
+                    popularity: popularity, 
+                    monthly_listeners: 19374 
                 }
             ]);
 

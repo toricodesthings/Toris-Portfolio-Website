@@ -176,24 +176,26 @@ const Music = () => {
 
         async function fetchStats() {
             try {
-              const res = await fetch('/api/getshepartiststat');
-              if (!res.ok) throw new Error('Failed to fetch stats');
-              const result = res.json();
-              const data = result.data;
-
-              // Update the stats using the correct keys
-              setFollowers(data.followers);
-              setMonthlyListeners(data.monthly_listeners);
-              setPopularityIndex(data.popularity);
-          
-              // Check if fetched_at is today and update indicator states
-              const updatedToday = isDateToday(data.fetched_at);
-              setIsFollowersUpdatedToday(updatedToday);
-              setIsMonthlyUpdatedToday(updatedToday);
-              setIsPopIUpdatedToday(updatedToday);
-            } catch (err) {
-              console.error(err.message);
-            }
+                const res = await fetch('/api/getshepartiststat');
+                if (!res.ok) throw new Error('Failed to fetch stats');
+                
+                const result = await res.json();
+                const stats = result.data; // Extract the nested stats object
+                console.log(stats)
+            
+                // Update the stats using the correct keys
+                setFollowers(stats.followers);
+                setMonthlyListeners(stats.monthly_listeners);
+                setPopularityIndex(stats.popularity);
+            
+                // Check if fetched_at is today and update indicator states
+                const updatedToday = isDateToday(stats.fetched_at);
+                setIsFollowersUpdatedToday(updatedToday);
+                setIsMonthlyUpdatedToday(updatedToday);
+                setIsPopIUpdatedToday(updatedToday);
+              } catch (err) {
+                console.error(err.message);
+              }
 
         }
 

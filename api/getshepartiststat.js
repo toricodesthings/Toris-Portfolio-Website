@@ -10,17 +10,22 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export async function handler(req, res) {
-  const { data, error } = await supabase
-    .from('shep-stats')
-    .select('*')
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from('shep-stats')
+      .select('*')
+      .single();
 
-  console.log("Data returned from Supabase:", data);
+    console.log("Data returned from Supabase:", data);
 
-  if (error) {
-    console.error("Error:", error.message);
-    return res.status(500).json({ error: error.message });
+    if (error) {
+      console.error('Supabase insert error:', JSON.stringify(error, null, 2));
+      return res.status(500).json({ message: 'Error inserting data', error });
+    }
+
+    return res.status(200).json({ message: 'Data inserted successfully' });
+  } catch (err) {
+  console.error('Unhandled error occured:', err);
+  return res.status(500).json({ message: 'Unhandled error', error: err });
   }
-
-  res.status(200).json(data);
 }

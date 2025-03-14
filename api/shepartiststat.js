@@ -62,7 +62,7 @@ export default async function handler(req, res) {
         
             return res.status(200).json({ message: 'Data inserted successfully' });
     } catch (err) {
-    console.error('Unhandled error:', err);
-    return res.status(500).json({ message: 'Unhandled error', error: err });
+        console.error('Unhandled error occured:', err);
+        return res.status(500).json({ message: 'Unhandled error', error: err });
     }
 };

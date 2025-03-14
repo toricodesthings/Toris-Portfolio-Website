@@ -10,7 +10,7 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 // Initialize Supabase client
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-export default async function handler(req, res) { ... }
+export default async function handler(req, res) {
   try {
     const { data, error } = await supabase
       .from('shep-stats')

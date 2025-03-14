@@ -56,7 +56,7 @@ const isMonthlyUpdatedToday = true;
 const isFollowersUpdatedToday = true;
 const isPopIUpdatedToday = true;
 
-const MusicProductionStack = React.memo(() => {
+const MusicProductionStack = () => {
     return (
       <div className="music-stack-container">
         <div className='music-production-stack'>
@@ -75,7 +75,7 @@ const MusicProductionStack = React.memo(() => {
         </div>
       </div>
     );
-  });
+  };
 
 const FunFactTerminal = () => {
     const [displayedText, setDisplayedText] = useState("Click an option to reveal a fact");
@@ -217,7 +217,7 @@ const Music = () => {
                     <div className='counter-wrapper'>
                         <div className="live-card">
                             <div className="stat-title">Followers</div>
-                            <div className="stat-value">4,738</div>
+                            <div className="stat-value">4,732</div>
                             <div className="stat-updated">
                                 <span className="update-dot green-dot"></span>
                                 Last Updated: Today
@@ -225,7 +225,7 @@ const Music = () => {
                         </div>
                         <div className="live-card">
                             <div className="stat-title">Monthly Listeners</div>
-                            <div className="stat-value">18,673</div>
+                            <div className="stat-value">19,190</div>
                             <div className="stat-updated">
                                 <span className="update-dot green-dot"></span>
                                 Last Updated: Today

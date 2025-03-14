@@ -40,7 +40,7 @@ export default function LiveFeed() {
       if (!contentRef.current || !containerRef.current) return;
       const lineHeight = 50;
       const containerHeight = containerRef.current.clientHeight - lineHeight;
-      const availableLines = Math.floor(containerHeight / lineHeight) - 1;
+      const availableLines = Math.floor(containerHeight / lineHeight); 
       setMaxLines(Math.max(1, availableLines));
       
       // Check if we have more courses than can fit
@@ -71,11 +71,10 @@ export default function LiveFeed() {
         // Calculate how many sets we need
         const totalSets = Math.ceil(coursesList.length / maxLines);
         // Calculate which courses to show in the current set
-        const startIdx = coursesSet % totalSets * maxLines;
+        const startIdx = (coursesSet % totalSets) * maxLines;
         const endIdx = Math.min(startIdx + maxLines, coursesList.length);
         return coursesList.slice(startIdx, endIdx);
       } else {
-        // If all courses fit, just show them all
         return coursesList.slice(0, maxLines);
       }
     };
@@ -94,7 +93,7 @@ export default function LiveFeed() {
     
     const rotationTimer = setInterval(() => {
       setCoursesSet(prev => prev + 1);
-    }, 2000); // Rotate every 2 seconds
+    }, 4000); // Rotate every 4 seconds
     
     return () => clearInterval(rotationTimer);
   }, [displayMode, hasMoreCourses]);
@@ -144,15 +143,16 @@ export default function LiveFeed() {
   
       return () => clearInterval(typingInterval);
     }
-  }, [index, displayMode]); // Removed maxLines here
+  }, [index, displayMode]);
 
+  // Reset learning mode state only when display mode changes (removed maxLines from dependency)
   useEffect(() => {
     if (displayMode === "learning") {
       setDisplayedTopics([]);
       setCurrentText("");
       setIndex(0);
     }
-  }, [maxLines, displayMode]);
+  }, [displayMode]);
 
   return (
     <div ref={containerRef} className="terminal-container">
@@ -184,7 +184,7 @@ export default function LiveFeed() {
             {displayedTopics.map((topic, i) => (
               <motion.div
                 key={`learning-${topic}-${i}`}
-                initial={{ opacity: 0, y: 5 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
                 className="terminal-line"
@@ -202,7 +202,7 @@ export default function LiveFeed() {
             {displayedTopics.map((course, i) => (
               <motion.div
                 key={`course-${course}-${coursesSet}-${i}`}
-                initial={{ opacity: 0, y: 5 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}

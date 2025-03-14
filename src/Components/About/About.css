@@ -557,9 +557,6 @@ section::before {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border-radius: 12px;
-    box-shadow:
-        0 0 8px rgba(170, 75, 214, 0.5),
-        0 0 18px rgba(158, 27, 27, 0.4);
     overflow: hidden;
 }
 
@@ -590,8 +587,9 @@ section::before {
     opacity: 1;
     z-index: 2;
     box-shadow:
-        0 0 10px rgba(197, 95, 244, 0.9),
-        0 0 20px rgba(234, 59, 59, 0.8);
+        0 0 10px rgba(185, 55, 245, 0.7),
+        0 0 20px rgba(173, 14, 14, 0.8),
+        0 0 5px rgb(255, 255, 255, 0.5);
 }
 
 .flip-image.active:hover {
@@ -612,6 +610,9 @@ section::before {
     scrollbar-color: rgba(255, 127, 179, 0.7) transparent;
     padding-bottom: 20px;
     position: relative;
+    will-change: scroll-position;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     scroll-behavior: smooth;
 }
 

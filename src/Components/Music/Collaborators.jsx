@@ -2,6 +2,24 @@ import React, { useState, useEffect } from 'react';
 import './MusicMain.css';
 import collaboratorsData from './collaborators.json';
 
+import spotifyImg from "../../assets/social/spotify.svg";
+import youtubeImg from "../../assets/social/youtube.svg";
+import xImg from "../../assets/social/x.svg";
+import amImg from "../../assets/social/am.svg";
+import instagramImg from "../../assets/social/instagram.svg";
+import facebookImg from "../../assets/social/facebook.svg";
+
+// Mapping social platform keys to their corresponding images.
+const socialIcons = {
+  spotify: spotifyImg,
+  youtube: youtubeImg,
+  "apple music": amImg,
+  "youtube music": youtubeImg,
+  twitter: xImg,
+  instagram: instagramImg,
+  facebook: facebookImg,
+};
+
 const Collaborators = () => {
     const [selectedIndex, setSelectedIndex] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
@@ -85,7 +103,7 @@ const Collaborators = () => {
                                     {columns > 1 ? (
                                         <>
                                             <div className="collab-nav-arrow left" onClick={handlePrev}>
-                                                &#9664;
+                                            ◂
                                             </div>
                                             <div className={`slide-container ${slideDirection ? "slide-" + slideDirection : ""}`}>
                                                 {(() => {
@@ -108,11 +126,16 @@ const Collaborators = () => {
                                                                 {currentPageData.socialLinks && (
                                                                     <div className="collab-social-links">
                                                                         {Object.keys(currentPageData.socialLinks).map(platform => (
-                                                                            <a key={platform}
-                                                                               href={currentPageData.socialLinks[platform]}
-                                                                               target="_blank"
-                                                                               rel="noopener noreferrer">
-                                                                                {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                                                                            <a
+                                                                              key={platform}
+                                                                              href={currentPageData.socialLinks[platform]}
+                                                                              target="_blank"
+                                                                              rel="noopener noreferrer"
+                                                                            >
+                                                                                <img
+                                                                                  src={socialIcons[platform.toLowerCase()]}
+                                                                                  alt={platform}
+                                                                                />
                                                                             </a>
                                                                         ))}
                                                                     </div>
@@ -126,7 +149,7 @@ const Collaborators = () => {
                                                 })()}
                                             </div>
                                             <div className="collab-nav-arrow right" onClick={handleNext}>
-                                                &#9654;
+                                            ▸
                                             </div>
                                         </>
                                     ) : (
@@ -152,11 +175,16 @@ const Collaborators = () => {
                                                                 {currentPageData.socialLinks && (
                                                                     <div className="collab-social-links">
                                                                         {Object.keys(currentPageData.socialLinks).map(platform => (
-                                                                            <a key={platform}
-                                                                               href={currentPageData.socialLinks[platform]}
-                                                                               target="_blank"
-                                                                               rel="noopener noreferrer">
-                                                                                {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                                                                            <a
+                                                                              key={platform}
+                                                                              href={currentPageData.socialLinks[platform]}
+                                                                              target="_blank"
+                                                                              rel="noopener noreferrer"
+                                                                            >
+                                                                                <img
+                                                                                  src={socialIcons[platform.toLowerCase()]}
+                                                                                  alt={platform}
+                                                                                />
                                                                             </a>
                                                                         ))}
                                                                     </div>
@@ -171,10 +199,10 @@ const Collaborators = () => {
                                             </div>
                                             <div className="collab-nav-arrows-mobile">
                                                 <div className="collab-nav-arrow" onClick={handlePrev}>
-                                                    &#9664;
+                                                ◂
                                                 </div>
                                                 <div className="collab-nav-arrow" onClick={handleNext}>
-                                                    &#9654;
+                                                ▸
                                                 </div>
                                             </div>
                                         </>

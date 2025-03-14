@@ -8,7 +8,7 @@
     "pages": [
       {
         "title": "Jamesteria",
-        "content": "Jamesteria (James) is a talented songwriter and singer who has collaborated with me on multiple songs including Cadillac Ivory Bone and Taylor Swift covers.",
+        "content": "Jamesteria (James) is a talented songwriter and singer who I produce and engineer for. We've made quite a collaborations so far including Cadillac Ivory Bone and Taylor Swift covers. A lot more to come soon.",
         "socialLinks": {
           "facebook": "https://facebook.com/jamesteria1",
           "instagram": "https://instagram.com/jamesteria1"
@@ -35,15 +35,16 @@
     "detailImg": "https://i.scdn.co/image/ab676161000051746ae12ca63d1d307f25d5ec97",
     "pages": [
       {
-        "title": "Pavel's Production Journey",
-        "content": "Pavel is a talented orchestral producer, songwriter and musician who has mentored me in music production and audio engineering. We made a song together called Midnight.",
+        "title": "Pavel Lipski",
+        "content": "Pavel is a talented orchestral producer, songwriter and musician who has mentored me in music production and audio engineering. We made a song together called Midnight and currently working on an upcoming Album.",
         "socialLinks": {
-          "twitter": "https://twitter.com/pavelprod",
-          "instagram": "https://instagram.com/pavelprod"
+          "spotify": "https://open.spotify.com/artist/6xNTpN3XhiJLg8uVkRyIrz",
+          "youtube": "https://www.youtube.com/channel/UC_GPSeuE-JN8rUrXq9VQ9yQ",
+          "instagram": "https://www.instagram.com/lipski.music"
         }
       }
     ],
-    "description": "Pavel is a talented orchestral producer and musician who mentored me in music production and audio engineering."
+    "description": "Pavel is a talented orchestral producer, songwriter and musician who has mentored me in music production and audio engineering. We made a song together called Midnight and currently working on an upcoming Album."
   },
   {
     "id": 3,
@@ -53,15 +54,14 @@
     "detailImg": "https://i.scdn.co/image/ab676161000051748ce5b1c47b72beb46f2f8126",
     "pages": [
       {
-        "title": "Chamele's Creative Corner",
-        "content": "Chamele Listens is a multi-genre producer with whom I have collaborated on multiple projects, including the track Bad Apple! Vocaloid Cover.",
+        "title": "Chamele Listens",
+        "content": "Chamele Listens is a multi-genre producer with whom I have collaborated on multiple projects, including the track Bad Apple! Vocaloid Cover, Calydon, as well as mastered their new Memory Album.",
         "socialLinks": {
-          "facebook": "https://facebook.com/chamele",
-          "instagram": "https://instagram.com/chamele"
+          "spotify": "https://open.spotify.com/artist/18ocMOJJqUDvl0lu9zCD6f"
         }
       }
     ],
-    "description": "Chamele Listens is a multi-genre producer and songwriter I have collaborated with on various tracks."
+    "description": "Chamele Listens is a multi-genre producer with whom I have collaborated on multiple projects, including the track Bad Apple! Vocaloid Cover, Calydon, as well as mastered their new Memory Album."
   },
   {
     "id": 4,
@@ -71,11 +71,11 @@
     "detailImg": "https://i.scdn.co/image/ab67616100005174af72ed227f829a1aee837fe8",
     "pages": [
       {
-        "title": "TraceCo Spotlight",
+        "title": "TraceCo",
         "content": "TraceCo is a wonderful singer who collaborated with me on the Interstellar Journey Rock Cover.",
         "socialLinks": {
-          "twitter": "https://twitter.com/traceco",
-          "facebook": "https://facebook.com/traceco"
+          "twitter": "https://twitter.com/traceco_",
+          "spotify": "https://open.spotify.com/artist/7nkjRbzaCjfeD1I5OWVgrf"
         }
       }
     ],
@@ -89,14 +89,15 @@
     "detailImg": "https://pbs.twimg.com/profile_images/1771417910076137472/vrTnEXtz_400x400.jpg",
     "pages": [
       {
-        "title": "Rueyon Artistry",
-        "content": "Rueyon is the artist that drew almost all album covers and assisted me with songwriting, making a significant impact on our collaborations.",
+        "title": "Rueyon",
+        "content": "Rueyon is the artist that drew almost all album covers and assisted me with songwriting.",
         "socialLinks": {
-          "instagram": "https://instagram.com/rueyonart"
+          "twitter": "https://x.com/rueyonn",
+          "instagram": "https://instagram.com/rueyonn"
         }
       }
     ],
-    "description": "Rueyon is the artist behind most album covers and has greatly assisted in songwriting."
+    "description": "Rueyon is the artist that drew almost all album covers and assisted me with songwriting."
   },
   {
     "id": 6,
@@ -109,7 +110,8 @@
         "title": "Cypress Teaser",
         "content": "Details coming soon!",
         "socialLinks": {
-          "twitter": "https://twitter.com/cypresstease"
+          "spotify": "https://open.spotify.com/artist/2kX5Wxc471tGkx3vc7UQ0m",
+          "twitter": "https://twitter.com/cypress"
         }
       }
     ],

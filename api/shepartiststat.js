@@ -1,6 +1,10 @@
 import fetch from 'node-fetch';
 import { createClient } from '@supabase/supabase-js';
+/*
+import dotenv from 'dotenv';
 
+dotenv.config();
+*/
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -33,26 +37,32 @@ async function getArtistData(accessToken) {
 }
 
 export default async function handler(req, res) {
-    const accessToken = await getSpotifyAccessToken();
-    const artistData = await getArtistData(accessToken);
-    const { followers, popularity } = artistData;
+    try {
+        const accessToken = await getSpotifyAccessToken();
+        const artistData = await getArtistData(accessToken);
+        const { followers, popularity } = artistData;
 
-    console.log(followers.total)
-    console.log(popularity)
+        console.log(followers.total)
+        console.log(popularity)
 
-    const { data, error } = await supabase
-        .from('shep-stats')
-        .insert([
-            {
-                fetched_at: new Date().toISOString(),
-                followers: followers.total,
-                popularity: popularity
+        const { data, error } = await supabase
+            .from('shep-stats')
+            .insert([
+                {
+                    fetched_at: new Date().toISOString(),
+                    followers: followers.total,
+                    popularity: popularity
+                }
+            ]);
+
+            if (error) {
+                console.error('Supabase insert error:', JSON.stringify(error, null, 2));
+                return res.status(500).json({ message: 'Error inserting data', error });
             }
-        ]);
-
-    if (error) {
-        console.error('Supabase insert error:', JSON.stringify(error, null, 2));
-        res.status(500).json({ message: 'Error inserting data', error });
-        return;
-        }
+        
+            return res.status(200).json({ message: 'Data inserted successfully' });
+    } catch (err) {
+    console.error('Unhandled error:', err);
+    return res.status(500).json({ message: 'Unhandled error', error: err });
+    }
 };

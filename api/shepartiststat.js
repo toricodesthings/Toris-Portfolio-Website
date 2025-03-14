@@ -1,10 +1,6 @@
 import fetch from 'node-fetch';
 import { createClient } from '@supabase/supabase-js';
-/*
-import dotenv from 'dotenv';
 
-dotenv.config();
-*/
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const SUPABASE_URL = process.env.SUPABASE_URL;

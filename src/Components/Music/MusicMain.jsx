@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./MusicMain.css";
 import { useLocation } from 'react-router-dom';
+
 import AudienceTimelineChart from './AudienceTimelineChart';
 
 import Collaborators from './Collaborators'
@@ -21,6 +22,7 @@ import uadImg from "../../assets/tools/UAD.png";
 import wavesImg from "../../assets/tools/waves.png";
 import neuralImg from "../../assets/tools/Neural.png";
 import vitalImg from "../../assets/tools/Vital.png";
+
 
 const socialLinks = [
     { name: "Spotify", url: "https://open.spotify.com/artist/48ds3BHWCPZVfAzFB2At2L", img: spotifyImg },
@@ -52,30 +54,26 @@ const funFacts = {
     "Clear": "Click any option to reveal a fact"
 };
 
-const isMonthlyUpdatedToday = true;
-const isFollowersUpdatedToday = true;
-const isPopIUpdatedToday = true;
-
 const MusicProductionStack = () => {
     return (
-      <div className="music-stack-container">
-        <div className='music-production-stack'>
-          <div className="scrolling-icons">
-            {[...musicTools, ...musicTools].map((tool, index) => (
-              <div key={index} className="music-tool">
-                <img 
-                  src={tool.img} 
-                  alt={tool.name} 
-                  className={`music-tool-icon ${tool.invert ? 'invert' : ''}`} 
-                />
-                <span className="music-tool-text">{tool.name}</span>
-              </div>
-            ))}
-          </div>
+        <div className="music-stack-container">
+            <div className='music-production-stack'>
+                <div className="scrolling-icons">
+                    {[...musicTools, ...musicTools].map((tool, index) => (
+                        <div key={index} className="music-tool">
+                            <img
+                                src={tool.img}
+                                alt={tool.name}
+                                className={`music-tool-icon ${tool.invert ? 'invert' : ''}`}
+                            />
+                            <span className="music-tool-text">{tool.name}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
-      </div>
     );
-  };
+};
 
 const FunFactTerminal = () => {
     const [displayedText, setDisplayedText] = useState("Click an option to reveal a fact");
@@ -100,18 +98,18 @@ const FunFactTerminal = () => {
 
         let i = displayedText.length;
         const erasingInterval = setInterval(() => {
-            setDisplayedText((prev) => prev.slice(0, -1)); 
+            setDisplayedText((prev) => prev.slice(0, -1));
             i--;
             if (i <= 0) {
                 clearInterval(erasingInterval);
-                callback(); 
+                callback();
             }
         }, eraseSpeed);
     };
 
     const typeText = (text) => {
-        let i = -1; 
-        setDisplayedText(""); 
+        let i = -1;
+        setDisplayedText("");
 
         const typingInterval = setInterval(() => {
             if (i < text.length - 1) {
@@ -119,8 +117,8 @@ const FunFactTerminal = () => {
                 setDisplayedText((prev) => prev + text[i]);
             } else {
                 clearInterval(typingInterval);
-                setIsTyping(false); 
-                setShowCursor(true); 
+                setIsTyping(false);
+                setShowCursor(true);
             }
         }, typingSpeed);
     };
@@ -130,7 +128,7 @@ const FunFactTerminal = () => {
 
         const newText = funFacts[factKey] || "Click an option to reveal a fact";
 
-        eraseText(() => typeText(newText)); 
+        eraseText(() => typeText(newText));
     };
 
     return (
@@ -150,17 +148,57 @@ const FunFactTerminal = () => {
 };
 
 const Music = () => {
+    const [followers, setFollowers] = useState("N/A");
+    const [monthlyListeners, setMonthlyListeners] = useState("N/A");
+    const [popularityIndex, setPopularityIndex] = useState("N/A");
+
+    // State for the update indicators
+    const [isFollowersUpdatedToday, setIsFollowersUpdatedToday] = useState(false);
+    const [isMonthlyUpdatedToday, setIsMonthlyUpdatedToday] = useState(false);
+    const [isPopIUpdatedToday, setIsPopIUpdatedToday] = useState(false);
+
+    // Utility function to check if a timestamp is "today"
+    const isDateToday = (dateString) => {
+        const fetchedDate = new Date(dateString);
+        const today = new Date();
+        return fetchedDate.toDateString() === today.toDateString();
+    };
+
     const location = useLocation();
 
     useEffect(() => {
-      if (location.pathname === '/musiclinks') {
-        const shepSection = document.querySelector('.shep-section');
-        if (shepSection) {
-          shepSection.scrollIntoView({ behavior: 'smooth' });
+        if (location.pathname === '/musiclinks') {
+            const shepSection = document.querySelector('.shep-section');
+            if (shepSection) {
+                shepSection.scrollIntoView({ behavior: 'smooth' });
+            }
         }
-      }
-    }, [location]);
 
+        async function fetchStats() {
+            try {
+              const res = await fetch('/api/getshepartiststat');
+              const raw = await res.text();
+              console.log("Raw response:", raw);
+              if (!res.ok) throw new Error('Failed to fetch stats');
+                
+              // Update the stats using the correct keys
+              setFollowers(res.followers);
+              setMonthlyListeners(res.monthly_listeners);
+              setPopularityIndex(res.popularity);
+          
+              // Check if fetched_at is today and update indicator states
+              const updatedToday = isDateToday(res.fetched_at);
+              setIsFollowersUpdatedToday(updatedToday);
+              setIsMonthlyUpdatedToday(updatedToday);
+              setIsPopIUpdatedToday(updatedToday);
+            } catch (err) {
+              console.error(err.message);
+            }
+
+        }
+
+        fetchStats();
+    }, [location]);
 
     return (
         <div className="music">
@@ -214,29 +252,29 @@ const Music = () => {
                     <div className='chart-wrapper'>
                         <AudienceTimelineChart />
                     </div>
-                    <div className='counter-wrapper'>
+                    <div className="counter-wrapper">
                         <div className="live-card">
                             <div className="stat-title">Followers</div>
-                            <div className="stat-value">4,732</div>
+                            <div className="stat-value">{followers}</div>
                             <div className="stat-updated">
-                                <span className="update-dot green-dot"></span>
-                                Last Updated: Today
+                                <span className={`update-dot ${isFollowersUpdatedToday ? 'green-dot' : 'gray-dot'}`}></span>
+                                Last Updated: {isFollowersUpdatedToday ? "Today" : "Earlier"}
                             </div>
                         </div>
                         <div className="live-card">
                             <div className="stat-title">Monthly Listeners</div>
-                            <div className="stat-value">19,190</div>
+                            <div className="stat-value">{monthlyListeners}</div>
                             <div className="stat-updated">
-                                <span className="update-dot green-dot"></span>
-                                Last Updated: Today
+                                <span className={`update-dot ${isMonthlyUpdatedToday ? 'green-dot' : 'gray-dot'}`}></span>
+                                Last Updated: {isMonthlyUpdatedToday ? "Today" : "Earlier"}
                             </div>
                         </div>
                         <div className="live-card">
                             <div className="stat-title">Popularity Index</div>
-                            <div className="stat-value">26</div>
+                            <div className="stat-value">{popularityIndex}</div>
                             <div className="stat-updated">
-                                <span className="update-dot green-dot"></span>
-                                Last Updated: Today
+                                <span className={`update-dot ${isPopIUpdatedToday ? 'green-dot' : 'gray-dot'}`}></span>
+                                Last Updated: {isPopIUpdatedToday ? "Today" : "Earlier"}
                             </div>
                         </div>
                     </div>

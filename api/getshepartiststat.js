@@ -15,6 +15,8 @@ export default async function handler(req, res) {
     const { data, error } = await supabase
       .from('shep-stats')
       .select('*')
+      .order('fetched_at', { ascending: false })
+      .limit(1)
       .single();
 
     console.log("Data returned from Supabase:", data);

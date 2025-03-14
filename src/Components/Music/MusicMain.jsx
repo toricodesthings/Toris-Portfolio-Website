@@ -177,17 +177,17 @@ const Music = () => {
         async function fetchStats() {
             try {
               const res = await fetch('/api/getshepartiststat');
-              const raw = await res.text();
-              console.log("Raw response:", raw);
+              
               if (!res.ok) throw new Error('Failed to fetch stats');
-                
+              const data = await res.json();
+              
               // Update the stats using the correct keys
-              setFollowers(res.followers);
-              setMonthlyListeners(res.monthly_listeners);
-              setPopularityIndex(res.popularity);
+              setFollowers(data.followers);
+              setMonthlyListeners(data.monthly_listeners);
+              setPopularityIndex(data.popularity);
           
               // Check if fetched_at is today and update indicator states
-              const updatedToday = isDateToday(res.fetched_at);
+              const updatedToday = isDateToday(data.fetched_at);
               setIsFollowersUpdatedToday(updatedToday);
               setIsMonthlyUpdatedToday(updatedToday);
               setIsPopIUpdatedToday(updatedToday);

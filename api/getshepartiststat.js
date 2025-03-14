@@ -1,11 +1,20 @@
-/*
+
 import dotenv from 'dotenv';
 dotenv.config();
-*/
+
+
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const getEnvVar = (key) => {
+  // Check if we're on the server (Node.js) or the client (browser)
+  if (typeof window === 'undefined') {
+    return process.env[key];
+  }
+  return import.meta.env[key];
+};
+
+const SUPABASE_URL = getEnvVar('VITE_SUPABASE_URL');
+const SUPABASE_ANON_KEY = getEnvVar('VITE_SUPABASE_ANON_KEY');
 
 // Initialize Supabase client
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);

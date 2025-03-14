@@ -177,10 +177,10 @@ const Music = () => {
         async function fetchStats() {
             try {
               const res = await fetch('/api/getshepartiststat');
-              
               if (!res.ok) throw new Error('Failed to fetch stats');
-              const data = await res.json();
-              
+              const result = res.json();
+              const data = result.data;
+
               // Update the stats using the correct keys
               setFollowers(data.followers);
               setMonthlyListeners(data.monthly_listeners);

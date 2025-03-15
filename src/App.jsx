@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Pages/Home';
-import MusicPage from './Pages/Music'; // renamed import to reflect its use as MusicPage
+import MusicPage from './Pages/Music';
 import Projects from './Pages/Projects';
 import About from './Pages/About';
 import Misc from './Pages/Misc';

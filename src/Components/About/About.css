@@ -139,6 +139,10 @@ section::before {
         0 0 15px rgba(234, 59, 59, 0.4);
 }
 
+.about-intro-left img {
+    filter: brightness(95%);
+}
+
 /* About Content Container */
 .about-intro-right {
     flex: 2;
@@ -219,7 +223,7 @@ section::before {
 
 .skills-grid span:hover img,
 .skills-grid span:hover .skill-label {
-  filter: drop-shadow(0 2px 5px rgba(244, 181, 255, 0.764));
+  filter: drop-shadow(0 3px 2px rgba(249, 215, 255, 0.764));
   ;
   text-shadow: 0 0 10px rgba(197, 95, 244, 0.5),
                 0 0 20px rgba(234, 59, 59, 0.4);
@@ -316,11 +320,11 @@ section::before {
 .terminal-content {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     width: 100%;
+    height: 100%;
     align-items: flex-start;
     justify-content: flex-start;
-    box-sizing: border-box;
+    box-sizing: content-box;
 
 }
 
@@ -343,20 +347,19 @@ section::before {
 .terminal-buttons {
     display: flex;
     border-radius: 12px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .terminal-btn {
-    padding: 8px 12px;
+    padding: 8px 10px;
     font-size: clamp(0.8rem, 1vw, 16px);
     background-color: rgba(0, 0, 0, 0.4);
     color: rgba(255, 255, 255, 0.8);
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'lexend', sans-serif;
+    font-family: 'lexend';
 }
-
 
 .terminal-btn:hover {
     background-color: rgba(255, 255, 255, 0.75);
@@ -401,7 +404,6 @@ section::before {
     color: white;
     animation: blink 0.5s infinite;
     display: inline-block;
-    /* Ensure it's inline with text */
 }
 
 /* Animation for gradient shift */
@@ -513,8 +515,7 @@ section::before {
     position: relative;
     padding-right: 35px;
     margin-bottom: 20px;
-    text-align: right;
-
+    box-sizing: border-box;
 }
 
 
@@ -533,33 +534,36 @@ section::before {
     transition: all 0.3s ease-in;
 }
 
-.circle:hover {
-    box-shadow: 0 0 5px white;
-    transform: translateX(-3px) scale(1.05) rotate(360deg);
-}
-
 /* Timeline Text */
 .timeline-text {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    /* Right-align content */
+    text-align: right;
+
 }
 
 .timeline-item span {
     transition: all 0.3s ease;
 }
 
-.timeline-item:hover span{
-    text-shadow: 0 0 10px rgba(197, 95, 244, 0.5),
-                0 0 10px rgba(234, 59, 59, 0.5),
-                0 0 5px rgba(255, 255, 255, 1);
+.timeline-item:hover .circle {
+    box-shadow: 0 0 5px white;
+    transform: translateX(-3px) scale(1.05) rotate(360deg);
 }
+
+.timeline-item:hover .timeline-text span {
+    text-shadow: 0 0 10px rgba(197, 95, 244, 0.5),
+                 0 0 10px rgba(234, 59, 59, 0.5),
+                 0 0 5px rgba(255, 255, 255, 1);
+    transform: translateX(-10px) scale(1.1);
+}
+
 
 /* Year Text */
 .timeline-year {
     font-weight: bold;
-    font-size: 1.3em;
+    font-size: 1.4em;
     margin-bottom: 5px;
     color: rgb(255, 255, 255);
 }
@@ -575,7 +579,6 @@ section::before {
     color: white;
     text-align: center;
 }
-
 
 .music-flip {
     position: relative;
@@ -635,7 +638,7 @@ section::before {
 }
 
 .flip-image.active:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -772,7 +775,6 @@ section::before {
 
     .timeline-item {
         margin-bottom: 20px;
-        /* Slightly less space on mobile */
     }
 
     .timeline-item::after {

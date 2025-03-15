@@ -162,8 +162,7 @@ section::before {
     bottom: -12px;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, rgba(218, 139, 255, 0.6),
-            rgba(255, 91, 91, 0.6));
+    background: linear-gradient(90deg, rgba(185, 66, 240, 0.6), rgba(235, 45, 124, 0.7));
 }
 
 .bio-para p {
@@ -945,7 +944,7 @@ section::before {
     display: block;
     width: 100%;
     height: 3px;
-    background: linear-gradient(90deg, rgba(185, 66, 240, 0.756), rgba(235, 45, 124, 0.756));
+    background: linear-gradient(90deg, rgba(185, 66, 240, 0.6), rgba(235, 45, 124, 0.7));
     border-radius: 12px;
 }
 

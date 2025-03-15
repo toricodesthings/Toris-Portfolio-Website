@@ -26,25 +26,31 @@
     animation: fadeInTop 0.6s ease-in-out forwards;
 }
 
-.avatar-wrapper { animation: fadeInTop 0.3s ease-in-out forwards 0.1s; }
+.avatar-wrapper { animation: fadeInTop 0.3s ease-in-out forwards 0.2s; }
+
+.avatar {
+    animation: rotater 0.3s ease-out forwards 0.2s;
+}
 
 .nav-menu .pop-up:nth-child(1) li {
-    animation: fadeInTop 0.4s ease-in-out forwards 0.1s;
-}
-.nav-menu .pop-up:nth-child(2) li {
-    animation: fadeInTop 0.4s ease-in-out forwards 0.2s;
-}
-.nav-menu .pop-up:nth-child(3) li {
     animation: fadeInTop 0.4s ease-in-out forwards 0.3s;
 }
-.nav-menu .pop-up:nth-child(4) li {
+.nav-menu .pop-up:nth-child(2) li {
     animation: fadeInTop 0.4s ease-in-out forwards 0.4s;
 }
-.nav-menu .pop-up:nth-child(5) li {
+.nav-menu .pop-up:nth-child(3) li {
     animation: fadeInTop 0.4s ease-in-out forwards 0.5s;
 }
+.nav-menu .pop-up:nth-child(4) li {
+    animation: fadeInTop 0.4s ease-in-out forwards 0.6s;
+}
+.nav-menu .pop-up:nth-child(5) li {
+    animation: fadeInTop 0.4s ease-in-out forwards 0.7s;
+}
 
-.nav-connect-wrapper { animation: fadeInTop 0.4s ease-in-out forwards 0.6s; }
+.nav-connect-wrapper { 
+    animation: fadeInTop 0.4s ease-in-out forwards 0.8s; 
+}
 
 
 @keyframes fadeInTop {
@@ -55,6 +61,15 @@
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@keyframes rotater {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(40deg);
     }
 }
 
@@ -179,8 +194,7 @@
 /* Avatar Image */
 .avatar {
     width: 100%; /* Ensures it fills the wrapper */
-    padding: 12px;
-    margin-top: 4px;
+    padding: 16px;
     object-fit: cover;
     display: block;
     position: relative;
@@ -192,6 +206,7 @@
 
 /* Scalable avatar wrapper */
 .avatar-wrapper {
+    opacity: 0;
     width: clamp(60px, 9vw, 86px);  /* Adjust min, preferred, and max sizes */
     height: clamp(60px, 9vw, 86px);
     border-radius: 50%;

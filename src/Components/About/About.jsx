@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./About.css";
 import LiveFeed from "./EducationLiveFeed";
-import profile_img from "../../assets/temp_profileimg.webp";
+
+import profile_img from "../../assets/profile_img.jpg";
+
 import pythonImg from "../../assets/skills/python.svg";
 import javaImg from "../../assets/skills/java.svg";
 import htmlImg from "../../assets/skills/html.svg";

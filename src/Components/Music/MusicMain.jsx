@@ -53,10 +53,12 @@ const musicTools = [
 //Fun fact list
 const funFacts = {
     "Favorite Key": "D# Minor",
+    "Favorite Tempo": "140 BPM",
     "First Release": "Eclipse (2021)",
-    "Favorite DAW": "Ableton Live",
-    "Go-to Synth": "Vital & Serum",
-    "Favorite Genres": "Metalcore & EDM",
+    "Favorite Release": "Calydon (2024)",
+    "Favorite DAW": "Ableton Live Suite",
+    "Favorite Synths": "Vital & Serum",
+    "Favorite Genres": "Metalcore & Trap",
     "Clear": "Click any option to reveal a fact"
 };
 
@@ -215,8 +217,8 @@ const Music = () => {
 
     return (
         <div className="music">
-            <div className="music-title pop-in">
-                <h1>Music Projects</h1>
+            <div className="music-title">
+                <h1 className="pop-in">Music Projects</h1>
             </div>
 
             <section className="shep-section">
@@ -227,15 +229,22 @@ const Music = () => {
                     <div className="shep-description-right">
                         <div className="bio-para">
                             <h2>Shep</h2>
+                            <div className="genre-row">
+                                <div className="genre-mini">EDM</div>
+                                <div className="genre-mini">VGM</div>
+                                <div className="genre-mini">Pop</div>
+                                <div className="genre-mini">Orchestral</div>
+                                <div className="genre-mini">Metalcore</div>
+                            </div>
                             <p>
-                                I launched this project in 2021 making EDM songs. My first piece was Eclipse, an electrohouse track inspired by the channel NCS. Since then I've been producing any genre that comes to mind from Lofi to EDM to Metal to Pop.
+                                I launched this project in 2021 making EDM songs. My first piece was Eclipse, an electrohouse track inspired by the channel NCS. Since then I've been producing any genre that comes to mind from Lofi to EDM to Metal to Pop. I've collaborated with many other artists and musicians with a ton of tracks pending release in the near future.
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <div className="social-links-panel">
-                    <h2>Follow me on</h2>
+                    <h2>Follow my Journey on</h2>
                     <div className="social-links-grid">
                         {socialLinks.map((link) => (
                             <a key={link.name} href={link.url} className="social-link" target="_blank" rel="noopener noreferrer">
@@ -249,11 +258,11 @@ const Music = () => {
 
                 <div className="music-extra-panel">
                     <div className="music-stack">
-                        <h3>Production Stack</h3>
+                        <h3>Core Production Stack</h3>
                         <MusicProductionStack />
                     </div>
                     <div className="music-terminal">
-                        <h3>Fun Facts</h3>
+                        <h3>Music Fun Facts</h3>
                         <FunFactTerminal />
                     </div>
                 </div>

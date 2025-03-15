@@ -74,6 +74,10 @@
     transform: scale(1.05) translateY(-3px);
 }
 
+.pop-up:active {
+    transform: scale(0.98) translateY(0px)
+}
+
 .nav-menu li::after {
     content: "";
     position: absolute;
@@ -168,6 +172,10 @@
     color: inherit;
 }
 
+.nav-connect:active {
+    transform: scale(1);
+}
+
 /* Avatar Image */
 .avatar {
     width: 100%; /* Ensures it fills the wrapper */
@@ -242,6 +250,10 @@
 }
 .avatar-hovanimate:hover{
     transform: scale(1.1);
+}
+
+.avatar-hovanimate:active {
+    transform: scale(1);
 }
 
 /* Responsive Navbar */

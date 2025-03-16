@@ -29,6 +29,7 @@ export async function fetchShepArtistStat() {
   if (error) {
     console.error('Supabase fetch error:', JSON.stringify(error, null, 2));
     throw new Error('Failed to fetch stats');
+
   }
 
   return {

@@ -19,7 +19,6 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* Both /music and /musiclinks will render MusicPage */}
           <Route path="/music" element={<MusicPage />} />
           <Route path="/musiclinks" element={<MusicPage />} />
           <Route path="/projects" element={<Projects />} />

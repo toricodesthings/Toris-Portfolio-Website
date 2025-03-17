@@ -1,17 +1,14 @@
 import { Octokit } from "@octokit/core";
 
 const getEnvVar = (key) => {
-  // On the server use process.env; in the browser, use import.meta.env
   if (typeof window === 'undefined') {
     return process.env[key];
   }
+  return import.meta.env[`VITE_${key}`]; //Solely for test .env needs to stay on local machine
 };
 
 const token = getEnvVar('GITHUB_PAT_KEY');
 
-if (token.length > 0) {
-  console.log("Loaded PAT Key Securely")
-}
 
 const octokit = new Octokit({ auth: token });
 

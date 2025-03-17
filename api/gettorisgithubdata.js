@@ -1,5 +1,4 @@
 import { Octokit } from "@octokit/core";
-
 import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -41,7 +40,7 @@ function extractIntroduction(readmeText) {
   return match ? match[1].trim() : null;
 }
 
-export default async function fetchGitHubData() {
+export default async function handler(req, res) {
   try {
     const result = await octokit.graphql(query);
 
@@ -63,13 +62,16 @@ export default async function fetchGitHubData() {
       };
     });
 
-    return {
-      totalCommitContributions:
-        result.viewer.contributionsCollection.totalCommitContributions,
+    return res.status(200).json({
+      totalCommitContributions: result.viewer.contributionsCollection.totalCommitContributions,
       repositories: repos
-    };
+    });
   } catch (error) {
-    console.error("Error fetching GitHub data:", error);
-    throw new Error("Failed to fetch GitHub data");
+    console.error("Error fetching GitHub data:", error.message);
+    if (error.response) {
+      console.error("Status:", error.response.status);
+      console.error("Response:", error.response.data);
+    }
+    return res.status(500).json({ message: "Failed to fetch GitHub data", error: error.message });
   }
-}
+};

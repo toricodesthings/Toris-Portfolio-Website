@@ -50,7 +50,7 @@ export default async function handler(req, res) {
                     fetched_at: new Date().toISOString(),
                     followers: followers.total,
                     popularity: popularity, 
-                    monthly_listeners: 19409
+                    monthly_listeners: 19507
                 }
             ]);
 

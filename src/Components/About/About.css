@@ -98,6 +98,14 @@ section::before {
     background-attachment: fixed;
 }
 
+section h2 {
+    font-size: clamp(2rem, 4vw, 36px);
+    margin-bottom: 40px;
+    color: white;
+    position: relative;
+    text-align: center;
+}
+
 
 /* Intro Section Layout */
 .intro-section {
@@ -150,7 +158,7 @@ section::before {
 }
 
 .about-para h2 {
-    font-size: clamp(2rem, 4vw, 36px);;
+    font-size: clamp(2rem, 4vw, 36px);
     margin-bottom: 20px;
     color: white;
     position: relative;
@@ -202,13 +210,6 @@ section::before {
     position: relative;
     z-index: 1;
     width: 100%;
-}
-
-.cs-skills-panel h2 {
-    font-size: clamp(2rem, 4vw, 36px);
-    color: white;
-    margin-bottom: 40px;
-    text-align: center;
 }
 
 /* Skills Grid */
@@ -264,13 +265,6 @@ section::before {
     flex-direction: row;
     position: relative;
     z-index: 1;
-}
-
-.cs-education h2 {
-    font-size: clamp(2rem, 4vw, 36px);;
-    color: white;
-    margin-bottom: 40px;
-    text-align: center;
 }
 
 .cs-education p {
@@ -460,13 +454,6 @@ section::before {
     margin-bottom: 40px;
 }
 
-.music-para h2 {
-    font-size: clamp(2rem, 4vw, 36px);;
-    margin-bottom: 40px;
-    color: white;
-    text-align: center;
-}
-
 .music-para p {
     font-size: clamp(1rem, 2vw, 18px);
     line-height: 1.8;
@@ -584,8 +571,8 @@ section::before {
 .music-flip {
     position: relative;
     width: 100%;
-    margin: 20px 0;
-    height: calc(clamp(300px, 35vw, 350px) + 40px);
+    margin-bottom: 40px;
+    height: calc(clamp(300px, 35vw, 350px));
     box-sizing: border-box;
     /* Responsive height */
     display: flex;

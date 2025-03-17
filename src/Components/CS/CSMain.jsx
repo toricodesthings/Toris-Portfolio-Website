@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
+import CSTechStack from "./TechStack";
 import "./CSMain.css";
 
 // Import language logos
@@ -7,8 +9,8 @@ import pythonImg from "../../assets/skills/python.svg";
 import htmlImg from "../../assets/skills/html.svg";
 import cssImg from "../../assets/skills/css.svg";
 import jsImg from "../../assets/skills/javascript.svg";
-
 import terminalImg from "../../assets/cspage/terminallogo.svg";
+
 
 // Mapping for language logos and colors.
 const languageData = {
@@ -25,9 +27,7 @@ const renderLanguageLogos = (languages) => {
             {languages.map((lang, index) => {
                 const data = languageData[lang];
                 return (
-                    <span key={index} style={{
-                        color: data ? data.color : "white"
-                    }}>
+                    <span key={index} style={{ color: data ? data.color : "white" }}>
                         {data && (
                             <img
                                 src={data.logo}
@@ -48,6 +48,8 @@ const CS = () => {
     const [terminalOpen, setTerminalOpen] = useState(false);
     const [selectedRepo, setSelectedRepo] = useState(null);
     const [transformOrigin, setTransformOrigin] = useState({ x: "50%", y: "50%" });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     // Open terminal overlay, calculate transform origin, and scroll section into view.
     const openTerminal = (repo, event) => {
@@ -122,6 +124,8 @@ const CS = () => {
     useEffect(() => {
         async function fetchRepos() {
             try {
+                setLoading(true);
+                setError(null);
                 // Call your API route hosted at /api/gettorisgithubdata
                 const response = await fetch('/api/gettorisgithubdata');
                 if (!response.ok) {
@@ -130,12 +134,15 @@ const CS = () => {
                 const data = await response.json();
                 // Assuming your API returns { repositories: [...] }
                 setRepos(data.repositories);
+                setLoading(false);
             } catch (err) {
                 console.error(err.message);
+                setError("Live github data could not be loaded");
+                setLoading(false);
             }
         }
         fetchRepos();
-    }, []); // Empty dependency array so this runs only once on mount
+    }, []);
 
     useEffect(() => {
         if (!selectedRepo) return;
@@ -197,23 +204,30 @@ const CS = () => {
             <section className="githubproj-section">
                 <div className="githubproj-panel">
                     <h2>Published Projects</h2>
-                    <div className="repo-grid">
-                        {repos.map((repo, index) => (
-                            <div
-                                key={index}
-                                className="repo-item"
-                                onClick={(e) => openTerminal(repo, e)}
-                            >
-                                <div className="repologo">
-                                    <img src={terminalImg} alt="terminaldefaultlogo" />
+                    {loading && <div className="grid-loading"><HamsterLoadingUI /></div>}
+                    {error && <p className="grid-error-text">{error}</p>}
+                    {!loading && !error && (
+                        <div className="repo-grid">
+                            {repos.map((repo, index) => (
+                                <div className = "repo-grid-item">
+                                    <div
+                                        key={index}
+                                        className="repo-item"
+                                        style={{ animationDelay: `${index * 150}ms` }}
+                                        onClick={(e) => openTerminal(repo, e)}
+                                    >
+                                        <div className="repologo">
+                                            <img src={terminalImg} alt="terminaldefaultlogo" />
+                                        </div>
+                                        <div className="repo-info">
+                                            <h3>{repo.title}</h3>
+                                            <p>{repo.languages[0]}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="repo-info">
-                                    <h3>{repo.title}</h3>
-                                    <p>{repo.languages[0]}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 <AnimatePresence>
@@ -289,7 +303,7 @@ const CS = () => {
                                         <Element key={index} className={piece.className || ""}>
                                             {piece.displayed}
                                             {!piece.isComplete && (
-                                                <span className="cs-blinking-cursor">|</span>
+                                                <span className="cs-blinking-cursor">_</span>
                                             )}
                                         </Element>
                                     );
@@ -298,6 +312,11 @@ const CS = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
+            </section>
+                
+            <section className = "techstack-section">
+                <h2>My Tech Stack</h2>
+                <CSTechStack />
             </section>
         </div>
     );

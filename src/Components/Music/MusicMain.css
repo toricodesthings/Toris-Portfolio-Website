@@ -62,6 +62,14 @@ section {
     animation: glowShift 5s ease-in-out infinite;
 }
 
+section h2 {
+    font-size: clamp(2rem, 4vw, 36px);
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+}
+
 @keyframes glowShift {
     0% {
         box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
@@ -153,6 +161,7 @@ section::before {
     position: relative;
     font-size: clamp(2rem, 5vw, 56px);
     color: white;
+    margin-bottom: 0px;
 }
 
 .bio-para h2::after {
@@ -200,13 +209,6 @@ section::before {
     margin-bottom: 20px;
 }
 
-.social-links-panel h2 {
-    font-size: clamp(2rem, 4vw, 36px);
-    color: white;
-    margin-bottom: 20px;
-    text-align: center;
-    position: relative;
-}
 
 /* Social Links Grid */
 .social-links-grid {
@@ -612,14 +614,6 @@ section::before {
     width: 100%;
 }
 
-.stats-graphs h2 {
-    font-size: clamp(2rem, 4vw, 36px);
-    ;
-    color: white;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
 .main-container {
     overflow: visible;
 }
@@ -836,14 +830,6 @@ section::before {
     background-position: center;
     opacity: 0.5;
     z-index: -1;
-}
-
-.collab-section h2 {
-    font-size: clamp(2rem, 4vw, 36px);
-    color: white;
-    margin-bottom: 40px;
-    text-align: center;
-    position: relative;
 }
 
 .collaborator-wrapper {

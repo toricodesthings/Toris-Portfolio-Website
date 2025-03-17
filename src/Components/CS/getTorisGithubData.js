@@ -1,11 +1,18 @@
 import { Octokit } from "@octokit/core";
 
-import dotenv from 'dotenv';
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
+const getEnvVar = (key) => {
+  // On the server use process.env; in the browser, use import.meta.env
+  if (typeof window === 'undefined') {
+    return process.env[key];
+  }
+};
+
+const token = getEnvVar('GITHUB_PAT_KEY');
+
+if (token.length > 0) {
+  console.log("Loaded PAT Key Securely")
 }
 
-const token = process.env.GITHUB_PAT_KEY;
 const octokit = new Octokit({ auth: token });
 
 const query = `

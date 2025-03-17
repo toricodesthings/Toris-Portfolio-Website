@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Pages/Home';
 import MusicPage from './Pages/Music';
-import Projects from './Pages/Projects';
+import Projects from './Pages/CSProjects';
 import About from './Pages/About';
 import Misc from './Pages/Misc';
 import Contact from './Pages/Contact';

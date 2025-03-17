@@ -51,16 +51,10 @@ const Hero = () => {
           <div className="image-glow"></div>
           <img src={profile_img} alt="Profile" />
         </div>
-
-        {/* Typing Effect */}
         <h1 className={`pop-in ${displayedText.length < fullString.length ? "typing" : ""}`}>
           <span className="gradient">{displayedText.substring(0, gradientText.length)}</span>
           <span>{displayedText.substring(gradientText.length)}</span>
         </h1>
-
-
-
-        {/* Content appears after typing animation */}
         {showContent && (
           <>
             <p className="pop-in">

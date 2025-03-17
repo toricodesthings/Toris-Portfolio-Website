@@ -1,0 +1,431 @@
+/* Base styling for the contact page */
+.programming {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6vh;
+    margin: 0% 10%;
+    position: relative;
+}
+
+/* Title Section with text-wrapping gradient glow */
+.programming-title {
+    text-align: center;
+}
+
+.programming-title h1 {
+    display: inline-block;
+    font-size: clamp(2rem, 4vw, 50px);
+    color: white;
+    position: relative;
+    text-shadow: 0 0 20px rgba(197, 72, 255, 0.4),
+        0 0 30px rgba(234, 59, 59, 0.5);
+    background: none;
+}
+
+.githubproj-panel h2 {
+    font-size: clamp(2rem, 4vw, 36px);
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.githubproj-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* All Section Styling */
+section {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    padding: 3vw;
+    box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
+        0 0 25px rgba(234, 59, 59, 0.4);
+    overflow: hidden;
+    animation: glowShift 5s ease-in-out infinite;
+}
+
+@keyframes glowShift {
+    0% {
+        box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
+            0 0 25px rgba(234, 59, 59, 0.4);
+    }
+
+    25% {
+        box-shadow: 2px -2px 20px rgba(210, 100, 250, 0.6),
+            -2px 2px 30px rgba(245, 70, 70, 0.5);
+    }
+
+    50% {
+        box-shadow: -4px 3px 25px rgba(197, 95, 244, 0.7),
+            3px -4px 35px rgba(234, 59, 59, 0.6);
+    }
+
+    75% {
+        box-shadow: 2px 2px 20px rgba(190, 90, 240, 0.6),
+            -2px -2px 30px rgba(225, 50, 50, 0.5);
+    }
+
+    100% {
+        box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
+            0 0 25px rgba(234, 59, 59, 0.4);
+    }
+}
+
+section::before {
+    background-attachment: fixed;
+}
+
+.githubproj-panel {
+    width: 100%;
+    position: relative;
+}
+
+.repo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 100%;
+}
+
+.repo-item {
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+}
+
+.repo-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0px 20px rgba(197, 95, 244, 0.6),
+        0 5px 15px rgba(234, 59, 59, 0.4);
+}
+
+.repo-item:active {
+    transform: translateY(0px) scale(0.95);
+    border: 2px solid rgb(255, 146, 213);
+}
+
+.repo-item:active.repo-item::after {
+    border: 2px solid rgb(255, 146, 213);
+}
+
+.repo-item::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    z-index: 2;
+    transition: border 0.2s ease;
+}
+
+/* On hover, draw the border */
+.repo-item:hover::after {
+    animation: borderDraw 0.2s ease-in forwards;
+    border-color: white;
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.652);
+}
+
+.repo-item:not(:hover)::after {
+    animation: borderDrawReverse 0.2s ease-out forwards;
+}
+
+@keyframes borderDraw {
+    0% {
+        clip-path: inset(0 0 100% 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes borderDrawReverse {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 100% 0);
+    }
+}
+
+.repologo {
+    width: 100%;
+    padding: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.652);
+    box-sizing: border-box;
+    transition: 0.3s ease-in-out;
+}
+
+.repo-item:active .repologo {
+    border-bottom: 2px solid rgb(255, 146, 213);
+}
+
+.repo-item:hover .repologo img {
+    transform: scale(1.02);
+}
+
+.repologo img {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    width: 100%;    
+    box-shadow: 0 0 3px rgba(255, 255, 255, 1),
+    0 0 5px rgba(247, 193, 255, 0.5);
+    transition: 0.3s ease-in-out;
+}
+
+.repo-info {
+    padding: 20px;
+    line-height: 1.5;
+}
+
+/* Repo Info Styling */
+.repo-info h3 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.repo-info p {
+    font-size: 1.2rem;
+    color: #ffffffb9;
+}
+
+/* Terminal Overlay Styles */
+.csterminal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(8px) brightness(95%);
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.csterminal-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #383838;
+    border-bottom: 2px solid #ffffff9a;
+}
+
+.csterminal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.csterminal-buttons button {
+    outline: none;
+    width: clamp(16px, 3vw, 24px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: buttonPop 0.3s ease forwards;
+    opacity: 0;
+}
+
+.csterminal-buttons button:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.csterminal-buttons button:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.csterminal-buttons button:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+
+.redbtn {
+    background-color: #dc4242;
+    cursor: pointer;
+}
+
+.yellowbtn {
+    background-color: #ff6549;
+    cursor: pointer;
+}
+
+.purplebtn {
+    background-color: #ad55ff;
+    cursor: pointer;
+}
+
+.redbtn::after {
+    content: "";
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: white;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.redbtn:hover::after {
+    content: "X";
+    opacity: 1;
+}
+
+.yellowbtn::after {
+    content: "";
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: white;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.purplebtn:hover::after {
+    content: ">";
+    opacity: 1;
+}
+
+.purplebtn::after {
+    content: "";
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: white;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.yellowbtn:hover::after {
+    content: "<";
+    opacity: 1;
+}
+
+/* Terminal Content */
+.csterminal-content {
+    max-width: 60%;
+    flex: 1;
+    padding: 20px;
+    font-family: inherit;
+    height: auto;
+    overflow-y: show;
+}
+
+.csterminal-content h3 {
+    font-size: clamp(28px, 5vw, 40px);
+    display: inline-block;
+    position: relative;
+}
+
+.csterminal-content h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px; 
+    width: 100%;
+    height: 4px;
+    background-color: #ccc;
+  }
+
+.csterminal-content .p-languages {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 20px;
+    font-size: clamp(18px, 4vw, 28px);
+}
+
+.p-languages img {
+    vertical-align: middle;
+    position: relative;
+    top: -2.5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: clamp(18px, 4vw, 32px);
+    aspect-ratio: 1;
+}
+
+.csterminal-content .p-description {
+    color: rgba(255, 255, 255, 1);
+    margin-top: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+    font-size: clamp(18px, 2vw, 22px);
+}
+
+.csterminal-content .p-intro {
+    color: rgba(255, 255, 255, 1);
+    margin-top: 20px;
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 1.5;
+}
+
+.terminal-url {
+    margin-top: 20px;
+    color: white;
+    font-weight: 400;
+    font-size: clamp(14px, 2vw, 20px);
+}
+
+.terminal-url a{
+    font-size: clamp(14px, 2vw, 20px);
+    background: linear-gradient(90deg, rgba(197, 95, 244, 1), rgba(234, 59, 59, 1));
+    background-clip: text;
+    text-decoration: none;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in;
+}
+
+
+.terminal-url a:hover {
+    text-shadow: 0 0 1px white;
+
+}
+
+.csterminal-content .p-updated {
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.80);
+    font-weight: 400;
+    font-size: clamp(14px, 1.5vw, 18px);
+}
+
+
+@keyframes buttonPop {
+    0% {
+        transform: scale(0) translateY(25px);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.02) translateY(-2px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.cs-blinking-cursor {
+    display: inline-block;
+    margin-left: 10px;
+    animation: blink 0.5s infinite;
+  }
+  
+@keyframes blink {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}

@@ -13,6 +13,12 @@ import reactImg from "../../assets/skills/react.svg";
 import nodejsImg from "../../assets/skills/nodejs.svg";
 import gitImg from "../../assets/skills/git.svg";
 import mysqlImg from "../../assets/skills/mysql.svg";
+import viteImg from "../../assets/skills/vite.svg";
+import csharpImg from "../../assets/skills/csharp.svg";
+import gqlImg from "../../assets/skills/gql.svg";
+import supabaseImg from "../../assets/skills/supabase.svg";
+import tensorflowImg from "../../assets/skills/tensorflow.svg";
+
 import wrapped2023 from "../../assets/Wrapped2023.jpg";
 import wrapped2024 from "../../assets/Wrapped2024.jpg";
 
@@ -26,6 +32,11 @@ const skills = [
   { name: "Node.js", img: nodejsImg },
   { name: "Git/GitHub", img: gitImg },
   { name: "MySQL", img: mysqlImg },
+  { name: "C#", img: csharpImg },
+  { name: "Vite", img: viteImg },
+  { name: "Supabase", img: supabaseImg },
+  { name: "Tensorflow", img: tensorflowImg },
+  { name: "GraphQL", img: gqlImg },
 ];
 
 const About = () => {

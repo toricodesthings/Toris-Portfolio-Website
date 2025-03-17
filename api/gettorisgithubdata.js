@@ -1,15 +1,11 @@
 import { Octokit } from "@octokit/core";
 
-const getEnvVar = (key) => {
-  if (typeof window === 'undefined') {
-    return process.env[key];
-  }
-  return import.meta.env[`VITE_${key}`]; //Solely for test .env needs to stay on local machine
-};
+import dotenv from 'dotenv';
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
-const token = getEnvVar('GITHUB_PAT_KEY');
-
-
+const token = process.env.GITHUB_PAT_KEY;
 const octokit = new Octokit({ auth: token });
 
 const query = `

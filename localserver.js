@@ -3,6 +3,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import shepartiststatHandler from './api/shepartiststat.js';
+import torigithubdataHandler from './api/gettorisgithubdata.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Route for your API endpoint using the shepartiststat handler
 app.get('/api/shepartiststat', shepartiststatHandler);
+app.get('/api/gettorisgithubdata', torigithubdataHandler);
 
 // For all other routes, serve index.html (BrowserRouter fallback)
 app.get('*', (req, res) => {

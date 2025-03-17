@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./CSMain.css";
-import { fetchGitHubData } from './getTorisGithubData'; // adjust the import path as needed
 
 // Import language logos
 import pythonImg from "../../assets/skills/python.svg";
@@ -10,45 +9,6 @@ import cssImg from "../../assets/skills/css.svg";
 import jsImg from "../../assets/skills/javascript.svg";
 
 import terminalImg from "../../assets/cspage/terminallogo.svg";
-
-// Sample response data (normally coming from an API)
-const repos = [
-    {
-        title: "Discord Chatbot Koboldai",
-        description: "WIP Discord Chatbot Based on Kobold AI",
-        url: "https://github.com/toricodesthings/Discord-Chatbot-Koboldai",
-        updatedAt: "2025-03-17T00:20:07Z",
-        languages: ["Python"],
-        introduction:
-            "A WIP Discord Chatbot Based on Kobold's AI. It uses Kobolds API to process users' chat and respond in an intelligent way, either in story form or chat form. It is currently extremely barebones in terms of features as only the base code is laid out. However, it is functional to an extent."
-    },
-    {
-        title: "Discord Yeelight",
-        description: "Discord Bot Utilizing Yeelight Python Library (Local Only)",
-        url: "https://github.com/toricodesthings/Discord-Yeelight",
-        updatedAt: "2025-03-17T00:18:13Z",
-        languages: ["Python"],
-        introduction:
-            "This is an extremely simple WIP bot that utilizes the Yeelight Python Lib. The bot can be added to any server of your choosing but preferably your own private server. However, you'll need to host this bot instance on a server/computer with LAN Access to the Yeelight Devices."
-    },
-    {
-        title: "Discord Bot Statistify",
-        description:
-            "Spotify Web API wrapped to a Discord Bot with ability to Scrape for Monthly Listener & Track Playcount (Web Application version coming soon)",
-        url: "https://github.com/toricodesthings/Discord-Bot-Statistify",
-        updatedAt: "2025-03-16T18:32:11Z",
-        languages: ["Python"],
-        introduction: null
-    },
-    {
-        title: "Toris Portfolio Website",
-        description: null,
-        url: "https://github.com/toricodesthings/Toris-Portfolio-Website",
-        updatedAt: "2025-03-17T00:23:33Z",
-        languages: ["JavaScript", "HTML", "CSS"],
-        introduction: null
-    }
-];
 
 // Mapping for language logos and colors.
 const languageData = {
@@ -162,15 +122,20 @@ const CS = () => {
     useEffect(() => {
         async function fetchRepos() {
             try {
-                const data = await fetchGitHubData();
-                // Assuming your fetchGitHubData returns an object with a "repositories" field:
+                // Call your API route hosted at /api/getTorisGithubData
+                const response = await fetch('/api/getTorisGithubData');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch repos');
+                }
+                const data = await response.json();
+                // Assuming your API returns { repositories: [...] }
                 setRepos(data.repositories);
             } catch (err) {
                 console.error(err.message);
             }
         }
         fetchRepos();
-    });
+    }, []); // Empty dependency array so this runs only once on mount
 
     useEffect(() => {
         if (!selectedRepo) return;
@@ -194,19 +159,6 @@ const CS = () => {
 
         return () => clearInterval(interval);
     }, [selectedRepo]);
-
-        useEffect(() => {
-        async function fetchRepos() {
-            try {
-                const data = await fetchGitHubData();
-                // Assuming your fetchGitHubData returns an object with a "repositories" field:
-                setRepos(data.repositories);
-            } catch (err) {
-                console.error(err.message);
-            }
-        }
-        fetchRepos();
-    });
 
     // Reconstruct the rendered pieces based on typedText.
     const getRenderedPieces = () => {
@@ -337,7 +289,7 @@ const CS = () => {
                                         <Element key={index} className={piece.className || ""}>
                                             {piece.displayed}
                                             {!piece.isComplete && (
-                                                <span className="cs-blinking-cursor">█</span>
+                                                <span className="cs-blinking-cursor">|</span>
                                             )}
                                         </Element>
                                     );

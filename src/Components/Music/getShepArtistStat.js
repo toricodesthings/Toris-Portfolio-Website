@@ -1,14 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
-const getEnvVar = (key) => {
-  if (typeof window === 'undefined') {
-    return process.env[key];
-  }
-  return import.meta.env[`VITE_${key}`];
-};
-
-const SUPABASE_URL = getEnvVar('SUPABASE_URL');
-const SUPABASE_ANON_KEY = getEnvVar('SUPABASE_ANON_KEY');
+const SUPABASE_URL = import.meta.env[`VITE_SUPABASE_URL`];
+const SUPABASE_ANON_KEY = import.meta.env[`VITE_SUPABASE_ANON_KEY`];
 
 // Initialize Supabase client
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);

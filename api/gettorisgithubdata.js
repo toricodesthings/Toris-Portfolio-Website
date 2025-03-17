@@ -41,7 +41,7 @@ function extractIntroduction(readmeText) {
   return match ? match[1].trim() : null;
 }
 
-export async function fetchGitHubData() {
+export default async function fetchGitHubData() {
   try {
     const result = await octokit.graphql(query);
 

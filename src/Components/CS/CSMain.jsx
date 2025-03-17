@@ -122,8 +122,8 @@ const CS = () => {
     useEffect(() => {
         async function fetchRepos() {
             try {
-                // Call your API route hosted at /api/getTorisGithubData
-                const response = await fetch('/api/getTorisGithubData');
+                // Call your API route hosted at /api/gettorisgithubdata
+                const response = await fetch('/api/gettorisgithubdata');
                 if (!response.ok) {
                     throw new Error('Failed to fetch repos');
                 }

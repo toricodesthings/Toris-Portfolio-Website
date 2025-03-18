@@ -43,7 +43,7 @@ const filterDataEverySixMonths = (data) => {
   }
 
   if (filteredData[filteredData.length - 1].date !== data[data.length - 1].date) {
-    filteredData.push(data[data.length - 1]); // Ensure last entry is included
+    filteredData.push(data[data.length - 1]);
   }
 
   return filteredData;
@@ -153,7 +153,7 @@ const AudienceTimelineChart = () => {
     if (isVisible && data.length > 0) {
       setTimeout(() => {
         setChartVisible(true);
-      }, 200);
+      }, 100);
     }
   }, [isVisible, data]);
 
@@ -200,7 +200,7 @@ const AudienceTimelineChart = () => {
                 strokeWidth={2}
                 dot={CustomDot}
                 isAnimationActive={true}
-                animationDuration={1200}
+                animationDuration={1000}
                 animationBegin={600 + index * 200}
               />
             ))}

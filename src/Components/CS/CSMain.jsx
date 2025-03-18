@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 import CSTechStack from "./TechStack";
+import CSEduTree from "./EducationTree";
 import "./CSMain.css";
 
 // Import language logos
@@ -10,7 +11,6 @@ import htmlImg from "../../assets/skills/html.svg";
 import cssImg from "../../assets/skills/css.svg";
 import jsImg from "../../assets/skills/javascript.svg";
 import terminalImg from "../../assets/cspage/terminallogo.svg";
-
 
 // Mapping for language logos and colors.
 const languageData = {
@@ -198,20 +198,19 @@ const CS = () => {
     return (
         <div className="programming">
             <div className="programming-title">
-                <h1 className="pop-in">My CS Journey</h1>
+                <h1 className="pop-in">Computer Science Journey</h1>
             </div>
 
             <section className="githubproj-section">
+                <h2>Published Projects</h2>
                 <div className="githubproj-panel">
-                    <h2>Published Projects</h2>
                     {loading && <div className="grid-loading"><HamsterLoadingUI /></div>}
                     {error && <p className="grid-error-text">{error}</p>}
                     {!loading && !error && (
                         <div className="repo-grid">
                             {repos.map((repo, index) => (
-                                <div className = "repo-grid-item">
+                                <div className="repo-grid-item" key={index}>
                                     <div
-                                        key={index}
                                         className="repo-item"
                                         style={{ animationDelay: `${index * 150}ms` }}
                                         onClick={(e) => openTerminal(repo, e)}
@@ -313,10 +312,20 @@ const CS = () => {
                     )}
                 </AnimatePresence>
             </section>
-                
-            <section className = "techstack-section">
+
+            <section className="techstack-section">
                 <h2>My Tech Stack</h2>
                 <CSTechStack />
+                <h2>Learning & Upcoming Projects</h2>
+            </section>
+
+            {/* New Education Section with animated growth tree */}
+            <section className="education-tree">
+                <h2>My Education</h2>
+                <div className="tree-wrapper">
+                    <h3>Year 1</h3>
+                    <CSEduTree />
+                </div>
             </section>
         </div>
     );

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./Contact.css";
+import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 
 import xImg from "../../assets/contact/xlogo.svg";
 import githubImg from "../../assets/contact/githublogo.svg";

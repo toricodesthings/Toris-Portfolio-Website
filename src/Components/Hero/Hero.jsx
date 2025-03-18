@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
 import profile_img from "../../assets/temp_profileimg.webp";
-
 import music_img from "../../assets/mainpage/music.webp";
 import cs_img from "../../assets/mainpage/cs.webp";
-
 import { useAnimationStore } from "../../store/animationStore";
 
 const Hero = () => {
@@ -13,36 +11,59 @@ const Hero = () => {
   const [displayedText, setDisplayedText] = useState("");
   const [showContent, setShowContent] = useState(false);
   const [showWorkOptions, setShowWorkOptions] = useState(false);
-  const [applyPopIn, setApplyPopIn] = useState(hasTypingAnimationPlayed); // Ensures pop-in on navigation
+  const [pageLoaded, setPageLoaded] = useState(false);
 
   const gradientText = "Hey there! I'm Tori, ";
   const remainingText = "Developer and Artist based in Ottawa.";
   const fullString = `${gradientText}${remainingText}`;
 
-  // Typing animation effect (Only on refresh)
+  // Listen for full page load
   useEffect(() => {
+    const handleLoad = () => setPageLoaded(true);
+    if (document.readyState === "complete") {
+      setPageLoaded(true);
+    } else {
+      window.addEventListener("load", handleLoad);
+    }
+    return () => window.removeEventListener("load", handleLoad);
+  }, []);
+
+  // Delay the start of the typing animation until after the navbar animates
+  useEffect(() => {
+    if (!pageLoaded) return;
     if (hasTypingAnimationPlayed) {
       setDisplayedText(fullString);
       setShowContent(true);
       return;
     }
 
-    let index = 0;
-    const typingInterval = setInterval(() => {
-      setDisplayedText(fullString.substring(0, index + 1));
-      index++;
+    // Delay hero animation start to allow navbar to finish (adjust delay as needed)
+    const animationStartDelay = 300; // Delay in milliseconds
+    const timeoutId = setTimeout(() => {
+      let startTime = null;
+      const durationPerChar = 30; // milliseconds per character
 
-      if (index > fullString.length) {
-        clearInterval(typingInterval);
-        setTimeout(() => {
-          setShowContent(true);
-          setHasTypingAnimationPlayed();
-        }, 50);
-      }
-    }, 40);
+      const animate = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const index = Math.floor(elapsed / durationPerChar);
+        if (index < fullString.length) {
+          setDisplayedText(fullString.substring(0, index + 1));
+          requestAnimationFrame(animate);
+        } else {
+          setDisplayedText(fullString);
+          setTimeout(() => {
+            setShowContent(true);
+            setHasTypingAnimationPlayed();
+          }, 50);
+        }
+      };
 
-    return () => clearInterval(typingInterval);
-  }, [fullString, hasTypingAnimationPlayed, setHasTypingAnimationPlayed]);
+      requestAnimationFrame(animate);
+    }, animationStartDelay);
+
+    return () => clearTimeout(timeoutId);
+  }, [pageLoaded, fullString, hasTypingAnimationPlayed, setHasTypingAnimationPlayed]);
 
   return (
     <div className="hero-container">
@@ -72,7 +93,6 @@ const Hero = () => {
         )}
       </div>
 
-      {/* Work Options Overlay */}
       {showWorkOptions && (
         <div className="work-options-overlay" onClick={() => setShowWorkOptions(false)}>
           <div className="work-options-container" onClick={(e) => e.stopPropagation()}>
@@ -89,7 +109,7 @@ const Hero = () => {
                 <img src={music_img} alt="Music" />
               </div>
               <div className="option-glow"></div>
-                <h2>Music</h2>
+              <h2>Music</h2>
             </Link>
           </div>
         </div>

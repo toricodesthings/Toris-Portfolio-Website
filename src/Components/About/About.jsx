@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./About.css";
 import LiveFeed from "./EducationLiveFeed";
 
-import profile_img from "../../assets/profile_img.jpg";
+import profile_img from "../../assets/profile_img.webp";
 
 import pythonImg from "../../assets/skills/python.svg";
 import javaImg from "../../assets/skills/java.svg";

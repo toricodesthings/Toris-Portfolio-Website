@@ -7,8 +7,10 @@
     margin: 1.5vh 10%;
     flex-wrap: nowrap;
     padding: 10px 0;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
 }
-
 
 /* Scale the gap and text size in the nav menu */
 .nav-menu {
@@ -23,13 +25,13 @@
     padding: 0;
     opacity: 0;
     transform: translateY(-30px);
-    animation: fadeInTop 0.6s ease-in-out forwards;
+    animation: fadeInTop 0.4s ease-in-out forwards;
 }
 
 .avatar-wrapper { animation: fadeInTop 0.3s ease-in-out forwards 0.2s; }
 
 .avatar {
-    animation: rotater 0.3s ease-out forwards 0.2s;
+    animation: rotater 0.3s ease-out forwards 1.2s;
 }
 
 .nav-menu .pop-up:nth-child(1) li {

@@ -19,15 +19,15 @@ import amImg from "../../assets/social/am.svg";
 import soundcloudImg from "../../assets/social/soundcloud.svg";
 
 //MProd Stack
-import abletonImg from "../../assets/tools/ableton.png";
-import reaperImg from "../../assets/tools/reaper.png";
-import iZotopeOImg from "../../assets/tools/iZotopeOzone.png";
-import iZotopeRXImg from "../../assets/tools/iZotopeRX.png";
-import NIImg from "../../assets/tools/NI.png";
-import uadImg from "../../assets/tools/UAD.png";
-import wavesImg from "../../assets/tools/waves.png";
-import neuralImg from "../../assets/tools/Neural.png";
-import vitalImg from "../../assets/tools/Vital.png";
+import abletonImg from "../../assets/tools/ableton.webp";
+import reaperImg from "../../assets/tools/reaper.webp";
+import iZotopeOImg from "../../assets/tools/iZotopeOzone.webp";
+import iZotopeRXImg from "../../assets/tools/iZotopeRX.webp";
+import NIImg from "../../assets/tools/NI.webp";
+import uadImg from "../../assets/tools/UAD.webp";
+import wavesImg from "../../assets/tools/waves.webp";
+import neuralImg from "../../assets/tools/Neural.webp";
+import vitalImg from "../../assets/tools/Vital.webp";
 
 //Social link map
 const socialLinks = [
@@ -308,6 +308,10 @@ const Music = () => {
                 <div className='collaborator-wrapper'>
                     <Collaborators />
                 </div>
+            </section>
+
+            <section className="release-section">
+                <h2>Releases (Under Construction)</h2>
             </section>
         </div>
     );

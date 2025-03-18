@@ -6,6 +6,7 @@
     gap: 4vh;
     margin: 0% 10%;
     position: relative;
+    transform: translateZ(0);
 }
 
 .hero.blurred {
@@ -20,6 +21,7 @@
     position: relative;
     width: min(40vw, 250px);
     aspect-ratio: 1;
+    will-change: transform, opacity;
 }
 
 .hero img {
@@ -80,7 +82,8 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
-    transition: background-position 3s ease; /* Animate position change */
+    transition: background-position 3s ease; 
+    will-change: background-position;
 }
 
 .hero h1 span.gradient:hover {

@@ -537,6 +537,7 @@ section::before {
     cursor: pointer;
 }
 
+
 .bubbles {
     transition: all 0.3s ease;
 }
@@ -573,4 +574,41 @@ section::before {
     100% {
         transform: translate(0, 0);
     }
+}
+
+.education-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.education-tree-container {
+    width: 100%;
+    padding: 20px;
+}
+
+.tree-wrapper {
+    text-align: center;
+    width: 100%;
+}
+
+.tree-wrapper h3{
+    position: relative;
+    display: inline-flex; /* makes the h3 shrink to its content */
+    font-weight: 500;
+    font-size: clamp(24px, 3vw, 32px);
+}
+
+.tree-wrapper h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(218, 139, 255, 0.6),
+            rgba(255, 91, 91, 0.6));
 }

@@ -39,7 +39,7 @@ async function getArtistData(accessToken) {
 
 // New function to get monthly listeners from the API
 async function getMonthlyListeners() {
-  const response = await fetch('http://utility.toridoesthings.xyz:10000/get/monthly-listeners/48ds3BHWCPZVfAzFB2At2L');
+  const response = await fetch('https://utility.toridoesthings.xyz/get/monthly-listeners/48ds3BHWCPZVfAzFB2At2L');
   const data = await response.json();
   return Number(data.monthlyListeners);
 }

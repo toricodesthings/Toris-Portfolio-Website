@@ -155,19 +155,32 @@ const CS = () => {
             ...piece,
             fullText: i < pieces.length - 1 ? piece.text + "\n" : piece.text
         }));
-
-        const fullCombined = piecesWithNL.map((piece) => piece.fullText).join("");
-
+    
+        const fullCombined = piecesWithNL.map(piece => piece.fullText).join("");
+    
         setTypedText("");
         let currentIndex = 0;
+        
+        // Define total duration and update interval (in milliseconds)
+        const totalDuration = 2000; // 1 second for the entire text to appear
+        const updateInterval = 10; // ~60 fps
+        
+        // Calculate how many updates will occur over the total duration
+        const totalTicks = totalDuration / updateInterval;
+        // Determine how many characters to add per tick
+        const charsPerTick = Math.ceil(fullCombined.length / totalTicks);
+    
         const interval = setInterval(() => {
-            setTypedText(fullCombined.slice(0, currentIndex));
-            currentIndex++;
-            if (currentIndex > fullCombined.length) {
+            currentIndex += charsPerTick;
+            if (currentIndex >= fullCombined.length) {
+                currentIndex = fullCombined.length;
+                setTypedText(fullCombined.slice(0, currentIndex));
                 clearInterval(interval);
+            } else {
+                setTypedText(fullCombined.slice(0, currentIndex));
             }
-        }, 5); // Adjust typing speed as desired
-
+        }, updateInterval);
+    
         return () => clearInterval(interval);
     }, [selectedRepo]);
 

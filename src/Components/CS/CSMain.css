@@ -385,6 +385,7 @@ section::before {
 
 .csterminal-content .p-languages {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
     color: rgba(255, 255, 255, 0.9);
     margin-top: 20px;
@@ -490,6 +491,10 @@ section::before {
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+.stack-bubble-container {
+    margin-bottom: 40px;
 }
 
 .techstack-section::before {

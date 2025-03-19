@@ -36,9 +36,10 @@ const query = `
 `;
 
 function extractIntroduction(readmeText) {
-  const match = readmeText.match(/## Introduction([\s\S]*?)(\n#+\s|\n$)/);
+  const match = readmeText.match(/## Introduction([\s\S]*?)(?=\n#+\s|$)/);
   return match ? match[1].trim() : null;
 }
+
 
 export default async function handler(req, res) {
   try {

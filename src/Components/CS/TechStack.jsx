@@ -86,8 +86,7 @@ const TechStack = () => {
                     ((containerSize.width - padding * 2) * (i + 1)) / (techItems.length + 1)
                 ).strength(0.01)
             )
-            .force('y', forceY(containerSize.height / 2).strength(0.15))
-            // Collision force using the bubble's bounding circle radius.
+            .force('y', forceY(containerSize.height / 2).strength(0.175))
             .force('collide', forceCollide().radius(d => d.radius + 25).iterations(25))
             .stop();
 

@@ -9,12 +9,14 @@ import "./CSMain.css";
 import pythonImg from "../../assets/skills/python.svg";
 import htmlImg from "../../assets/skills/html.svg";
 import cssImg from "../../assets/skills/css.svg";
+import dockerImg from "../../assets/skills/docker.svg";
 import jsImg from "../../assets/skills/javascript.svg";
 import terminalImg from "../../assets/cspage/terminallogo.svg";
 
 // Mapping for language logos and colors.
 const languageData = {
     Python: { logo: pythonImg, color: "#61DAFB" },
+    Dockerfile: { logo: dockerImg, color: "#61DAFB" },
     JavaScript: { logo: jsImg, color: "#F0DB4F" },
     HTML: { logo: htmlImg, color: "#E34C26" },
     CSS: { logo: cssImg, color: "#264de4" }

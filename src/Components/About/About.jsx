@@ -18,6 +18,7 @@ import csharpImg from "../../assets/skills/csharp.svg";
 import gqlImg from "../../assets/skills/gql.svg";
 import supabaseImg from "../../assets/skills/supabase.svg";
 import tensorflowImg from "../../assets/skills/tensorflow.svg";
+import dockerImg from "../../assets/skills/docker.svg";
 
 import wrapped2023 from "../../assets/Wrapped2023.jpg";
 import wrapped2024 from "../../assets/Wrapped2024.jpg";
@@ -37,6 +38,7 @@ const skills = [
   { name: "Supabase", img: supabaseImg },
   { name: "Tensorflow", img: tensorflowImg },
   { name: "GraphQL", img: gqlImg },
+  { name: "Docker", img: dockerImg },
 ];
 
 const About = () => {

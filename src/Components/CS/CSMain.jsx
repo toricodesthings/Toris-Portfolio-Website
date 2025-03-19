@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 import CSTechStack from "./TechStack";
 import CSEduTree from "./EducationTree";
+import UpcomingProjectsAndLearningStack from "./LnU";
 import "./CSMain.css";
 
 // Import language logos
@@ -334,6 +335,7 @@ const CS = () => {
                 <h2>My Tech Stack</h2>
                 <CSTechStack />
                 <h2>Learning & Upcoming Projects</h2>
+                <UpcomingProjectsAndLearningStack />
             </section>
 
             {/* New Education Section with animated growth tree */}

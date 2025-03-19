@@ -105,7 +105,7 @@ const EducationTree = () => {
             const distance = 200 + Math.random() * 50; // Increased distance for wider spread
             const size = 35 + Math.random() * 25; // Increased size for a more robust appearance
             const offsetX = centerX + Math.cos(angle) * distance;
-            const offsetY = centerY + Math.sin(angle) * (distance * 0.6); // Adjusted for taller fluff
+            const offsetY = centerY + Math.sin(angle) * (distance * 0.55); // Adjusted for taller fluff
     
             segments.push({
                 pathData: `
@@ -213,7 +213,7 @@ const EducationTree = () => {
     return (
         <div className="education-tree-container">
             {/* Expanded viewBox to fit the wider tree */}
-            <svg width="100%" height="600" viewBox="-300 -150 700 700">
+            <svg width="100%" height="700" viewBox="-300 -150 700 700">
                 {/* Tree trunk */}
                 <motion.path
                     d={trunkPoints.path}

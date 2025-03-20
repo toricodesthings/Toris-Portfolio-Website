@@ -187,6 +187,7 @@ section::before {
     display: flex;
     gap: 5px;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .genre-mini {
@@ -405,12 +406,12 @@ section::before {
 .scrolling-icons {
     display: flex;
     will-change: transform;
-    gap: 60px;
+    gap: 80px;
     align-items: center;
     height: 100%;
     padding: 25px 0;
-    -webkit-animation: scrollIcons 25s linear infinite;
-    animation: scrollIcons 25s linear infinite;
+    -webkit-animation: scrollIcons 20s linear infinite;
+    animation: scrollIcons 20s linear infinite;
 }
 
 /* Music Tool */
@@ -424,11 +425,11 @@ section::before {
 
 .music-tool-text {
     position: absolute;
-    top: -25px;
+    top: -20%;
     left: 50%;
     transform: translateX(-50%);
     color: white;
-    font-size: 18px;
+    font-size: clamp(18px, 1.5vw, 24px);
     text-shadow: 0px 0px 15px rgb(236, 134, 230);
     white-space: nowrap;
     opacity: 0;
@@ -729,7 +730,6 @@ section::before {
     filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.75));
 }
 
-/* Axis Line Drawing Animation */
 .recharts-cartesian-axis-line {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
@@ -781,7 +781,7 @@ section::before {
 }
 
 .stat-updated {
-    font-size: clamp(0.9px, 1vw, 16px);
+    font-size: clamp(12px, 1vw, 16px);
     text-align: center;
     opacity: 0.9;
     display: flex;
@@ -1088,6 +1088,11 @@ section::before {
         align-items: center;
         text-align: center;
         gap: 20px;
+    }
+
+    .genre-row {
+        align-items: center;
+        justify-content: center;
     }
 
     .shep-pfp-left,

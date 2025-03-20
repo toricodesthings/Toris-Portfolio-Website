@@ -13,8 +13,8 @@ const Hero = () => {
   const [showWorkOptions, setShowWorkOptions] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
 
-  const gradientText = "Hey there! I'm Tori, ";
-  const remainingText = "Developer and Artist based in Ottawa.";
+  const gradientText = "Hi there! I'm Tori," ;
+  const remainingText = " a Developer and Artist based in Ottawa.";
   const fullString = `${gradientText}${remainingText}`;
 
   // Listen for full page load
@@ -79,7 +79,7 @@ const Hero = () => {
         {showContent && (
           <>
             <p className="pop-in">
-              I do many things. Developing software, designing websites, and producing music are the main ones.
+              I do many things from developing software, designing websites, to producing music.
             </p>
             <div className="hero-buttons">
               <button className="hero-viewbtn pop-in" onClick={() => setShowWorkOptions(true)}>

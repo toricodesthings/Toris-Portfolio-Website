@@ -70,14 +70,14 @@
     font-size: clamp(0.9rem, 1.5vw, 20px);
     width: min(90%, 1000px);
     line-height: 1.8;
-    color: #f3f3f3;
+    color: #d1d1d1;
     position: relative;
 }
 
 .hero h1 span.gradient {
     background: linear-gradient(90deg, rgba(197, 95, 244, 1), rgba(234, 59, 59, 1));
-    background-size: 150% auto; /* Make the background wider */
-    background-position: 0 0;
+    background-size: 175% auto; /* Make the background wider */
+    background-position: -200px 0;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -107,8 +107,6 @@
     font-weight: 600;
 
 }
-
-
 
 .hero-connectbtn {
     position: relative;

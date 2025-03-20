@@ -409,8 +409,11 @@ section h2 {
 
     100% {
         background-position: 100% 50%;
+        
+          
     }
 }
+
 
 @keyframes blink {
     50% {
@@ -715,6 +718,11 @@ section h2 {
     .live-feed-element {
         width: 100%;
     }
+
+    .skills-grid {
+        justify-content: center;
+        column-gap: 20px; 
+      }
 
     .terminal-container {
         min-height: 350px; /* Adjust this value as needed */

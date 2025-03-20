@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import { forceSimulation, forceCollide, forceX, forceY } from 'd3-force';
 import './CSMain.css';
 
-// Import your SVG logos as file paths
 import pythonImg from "../../assets/skills/python.svg";
 import javaImg from "../../assets/skills/java.svg";
 import htmlImg from "../../assets/skills/html.svg";
@@ -40,12 +39,13 @@ const TechStack = () => {
     const [containerSize, setContainerSize] = useState({ width: 800, height: 500 });
     const [nodes, setNodes] = useState([]);
 
-    // Update container dimensions on mount and window resize.
     useEffect(() => {
         const updateSize = () => {
             if (containerRef.current) {
-                const { clientWidth, clientHeight } = containerRef.current;
-                setContainerSize({ width: clientWidth, height: clientHeight });
+                const clientWidth = containerRef.current.clientWidth;
+                // When the width is less than 768, increase the container's height (e.g., to 800px)
+                const newHeight = clientWidth < 768 ? 800 : 500;
+                setContainerSize({ width: clientWidth, height: newHeight });
             }
         };
         updateSize();
@@ -54,23 +54,22 @@ const TechStack = () => {
     }, []);
 
     useEffect(() => {
-        const padding = 20; // enforce at least 20px from the edge
+        const padding = 20;
         const initialNodes = techItems.map((item, i) => {
             const imageSize = Math.max(40 + item.proficiency * 5, 70);
             const textSizePx = 16 + item.proficiency * 2.4;
             const textWidth = item.name.length * textSizePx * 0.6;
             const bubbleWidth = imageSize + textWidth;
             const bubbleHeight = imageSize;
-            // Compute bounding circle radius for collision detection
+            // Compute a circular radius for potential use.
             const radius = Math.sqrt((bubbleWidth / 2) ** 2 + (bubbleHeight / 2) ** 2);
             return {
                 ...item,
-                imageSize,      // width (and height) for the image
-                textSizePx,     // text size in pixels
-                bubbleWidth,    // overall bubble width
-                bubbleHeight,   // overall bubble height
-                radius,         // for collision (bounding circle)
-                // Start with random positions ensuring the entire bubble is within the container.
+                imageSize,
+                textSizePx,
+                bubbleWidth,
+                bubbleHeight,
+                radius,
                 x: padding + Math.random() * (containerSize.width - bubbleWidth - padding),
                 y: padding + Math.random() * (containerSize.height - bubbleHeight - padding),
                 animDelay: Math.random() * 5,
@@ -87,7 +86,7 @@ const TechStack = () => {
                 ).strength(0.01)
             )
             .force('y', forceY(containerSize.height / 2).strength(0.175))
-            .force('collide', forceCollide().radius(d => d.radius + 25).iterations(25))
+            .force('collide', forceCollide().radius(d => Math.max(d.bubbleWidth, d.bubbleHeight) / 2 + 10).iterations(25))
             .stop();
 
         const applyBoundary = (nodes, width, height, padding) => {
@@ -97,7 +96,6 @@ const TechStack = () => {
             });
         };
 
-        // Run simulation ticks and apply boundary clamp after each tick.
         for (let i = 0; i < 300; i++) {
             simulation.tick();
             applyBoundary(initialNodes, containerSize.width, containerSize.height, padding);
@@ -107,11 +105,15 @@ const TechStack = () => {
     }, [containerSize]);
 
     return (
-        <div className="stack-bubble-container" ref={containerRef}>
+        <div 
+            className="stack-bubble-container" 
+            ref={containerRef} 
+            // Apply the computed height dynamically
+            style={{ height: containerSize.height }}
+        >
             {nodes.map((node, index) => (
-                <div className='bubbles'>
+                <div className='bubbles' key={index}>
                     <div
-                        key={index}
                         className="tech-bubble"
                         style={{
                             top: node.y - node.bubbleHeight / 2,
@@ -126,12 +128,12 @@ const TechStack = () => {
                             <img
                                 src={node.Logo}
                                 alt={`${node.name} logo`}
-
                                 style={{ width: 40 + node.proficiency * 3 + "px" }}
-                            /></div>
+                            />
+                        </div>
                         <span
                             className="tech-name"
-                            style={{ fontSize: 1 + node.proficiency * 0.15 + "rem" }}
+                            style={{ fontSize: 1 + node.proficiency * 0.1 + "rem" }}
                         >
                             {node.name}
                         </span>

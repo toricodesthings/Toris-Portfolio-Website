@@ -1,5 +1,6 @@
 import React from "react";
 
+import pythonImg from "../../assets/skills/python.svg";
 import jsImg from "../../assets/skills/javascript.svg";
 import nodejsImg from "../../assets/skills/nodejs.svg";
 import csharpImg from "../../assets/skills/csharp.svg";
@@ -11,7 +12,8 @@ const projectLearningItems = [
   { img: jsImg, name: "Cryptocurrency Analyzers" },
   { img: tensorflowImg, name: "AI Models" },
   { img: jsImg, name: "Typing Test" },
-  { img: nodejsImg, name: "Useful APIs" },
+  { img: nodejsImg, name: "Utility APIs" },
+  { img: pythonImg, name: "Loudness Analyzer" },
   { img: csharpImg, name: "Unity & C#" }
   // Add more items as needed
 ];

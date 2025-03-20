@@ -339,10 +339,9 @@ const CS = () => {
             </section>
 
             {/* New Education Section with animated growth tree */}
-            <section className="education-tree">
-                <h2>My Education</h2>
+            <section className="education-treesection">
+                <h2>Education Progress</h2>
                 <div className="tree-wrapper">
-                    <h3>Year 1</h3>
                     <CSEduTree />
                 </div>
             </section>

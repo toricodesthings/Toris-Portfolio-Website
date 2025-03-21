@@ -4,6 +4,7 @@
     align-items: center;
     gap: 20px;
     justify-content: space-between;
+    height: auto;
     margin: 1.5vh 10%;
     flex-wrap: nowrap;
     padding: 10px 0;
@@ -18,8 +19,8 @@
     text-align: center;
     align-items: center;
     list-style: none;
-    gap: clamp(40px, 5vw, 80px); 
-    font-size: clamp(18px, 2vw, 20px); 
+    gap: clamp(20px, 5vw, 120px); 
+    font-size: clamp(1rem, calc(0.9rem + 1vh), 2rem); 
     margin: 0;
     padding: 0;
     opacity: 0;
@@ -129,8 +130,8 @@
 
 /* Scalable button styling for nav-connect */
 .nav-connect {
-    padding: clamp(10px, 2vw, 20px) clamp(18px, 3vw, 36px);
-    font-size: clamp(16px, 1.5vw, 20px);
+    padding: clamp(10px, 3vh, 20px) clamp(18px, 4vw, 36px);
+    font-size: clamp(1rem, calc(0.9rem + 1vh), 2rem); 
     text-align: center;
     background: linear-gradient(270deg, rgb(181, 70, 232), rgb(229, 48, 48));
     border-radius: 25px;
@@ -208,8 +209,8 @@
 /* Scalable avatar wrapper */
 .avatar-wrapper {
     opacity: 0;
-    width: clamp(60px, 9vw, 86px);  /* Adjust min, preferred, and max sizes */
-    height: clamp(60px, 9vw, 86px);
+    width: clamp(60px, 10vw, 90px);  /* Adjust min, preferred, and max sizes */
+    aspect-ratio: 1;
     border-radius: 50%;
     background: linear-gradient(45deg, #ff6b6b, #573dd9);
     overflow: hidden;
@@ -273,11 +274,11 @@
 }
 
 /* Responsive Navbar */
-@media (max-width: 768px) {
+@media (max-width: 768px), (orientation: portrait) {
 
     .avatar-wrapper {
-        width: clamp(80px, 10vw, 92px);  /* Adjust min, preferred, and max sizes */
-        height: clamp(80px, 10vw, 92px);
+        width: clamp(86px, 12.5vh, 100px);  /* Adjust min, preferred, and max sizes */
+        height: clamp(86px, 12.5vh, 100px);
     }
 
     .navbar {

@@ -6,7 +6,6 @@
 }
 
 body{
-    height: 100vh;
     --color: rgba(225, 225, 225, 0.04);
     background-color: #000000;
     /*background: linear-gradient(90deg, rgb(7, 0, 10),
@@ -20,5 +19,12 @@ body{
 
 body, html {
     overflow-x: hidden;
-    height: 100%;
   }
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+  

@@ -13,19 +13,19 @@ import Contact from './Pages/Contact';
 const App = () => {
   return (
     <Router>
-      <div>
-        <Analytics />
-        <SpeedInsights />
+      <Analytics />
+      <SpeedInsights />
+      <div className = "app">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/music" element={<MusicPage />} />
-          <Route path="/musiclinks" element={<MusicPage />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/misc" element={<Misc />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/music" element={<MusicPage />} />
+            <Route path="/musiclinks" element={<MusicPage />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/misc" element={<Misc />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
       </div>
     </Router>
   );

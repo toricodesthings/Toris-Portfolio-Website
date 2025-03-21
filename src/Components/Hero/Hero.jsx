@@ -14,7 +14,7 @@ const Hero = () => {
   const [pageLoaded, setPageLoaded] = useState(false);
 
   const gradientText = "Hi there! I'm Tori," ;
-  const remainingText = " a Developer and Artist based in Ottawa.";
+  const remainingText = " Developer and Artist based in Ottawa.";
   const fullString = `${gradientText}${remainingText}`;
 
   // Listen for full page load

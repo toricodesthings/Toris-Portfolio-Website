@@ -10,9 +10,12 @@ const Navbar = () => {
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth <= 768;
-      setIsMobile(mobile);
-      mobile ? setNavVisible(false) : setNavVisible(true);
+      const portrait = window.matchMedia('(orientation: portrait)').matches;
+      const isMobileOrPortrait = mobile || portrait;
+      setIsMobile(isMobileOrPortrait);
+      setNavVisible(!isMobileOrPortrait);
     };
+    
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);

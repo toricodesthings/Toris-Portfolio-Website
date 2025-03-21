@@ -35,7 +35,7 @@ const Contact = () => {
             obs.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.6 });
+      }, { threshold: 0.4 });
       
       animatedElements.forEach(el => observer.observe(el));
     };

@@ -224,6 +224,30 @@ section::before {
     animation: borderDraw 0.25s ease-in-out forwards;
 }
 
+.link-container:not(:hover)::after {
+    animation: borderDrawReverse 0.05s ease-out forwards;
+}
+
+@keyframes borderDraw {
+    0% {
+        clip-path: inset(0 0 100% 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes borderDrawReverse {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 100% 0);
+    }
+}
+
 .link-container:hover {
     transform: translateY(-5px);
 }
@@ -299,7 +323,7 @@ section::before {
     font-size: clamp(1rem, 2vw, 18px);
     border: 2px solid white;
     border-radius: 12px;
-    background-color: rgba(0, 0, 0, 0.555);
+    background-color: rgba(0, 0, 0, 0.4);
     font-family: inherit;
     color: white;
     outline: none;
@@ -323,32 +347,32 @@ section::before {
 .contact-form-buttons {
     flex-direction: row;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     width: 100%;
     gap: 20px;
+
 }
 
-/* Style the submit button to be inline and not full width */
 .contact-form button {
     all: unset;
-
     position: relative;
-    padding: 18px 36px;
+    padding: clamp(16px, 1vh, 20px) clamp(24px, 3vw, 36px);
     text-align: center;
+    font-size: 1.2rem;
     border-radius: 12px;
     border: 2px solid white;
     overflow: hidden;
     cursor: pointer;
     transition: 0.25s ease;
     width: 50%;
-    margin: 0 auto;
     animation: all 0.3s ease forwards;
+    box-sizing: border-box;
 }
 
 .contact-form button:hover {
     background: linear-gradient(270deg, rgba(164, 45, 204, 0.9), rgba(231, 77, 71, 0.9));
-    border: 2px solid rgba(255, 255, 255, 0);
+    border: 2px transparent;
     box-shadow: 2px 5px 20px rgba(231, 77, 71, 0.7);
     
 }
@@ -356,7 +380,6 @@ section::before {
 .contact-form button:active {
     transform: translateY(-3px) scale(0.95);
 }
-
 
 @keyframes fadeIn {
     from {
@@ -395,17 +418,14 @@ section::before {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        /* Centers the icon+text block horizontally */
         align-items: center;
-        /* vertically centers the children */
         width: 100%;
         min-height: auto;
-        /* or set a specific value like 100px */
     }
 
     .link-container::after,
     .link-container::before {
-        border-radius: 60px;
+        border-radius: 48px;
     }
 
     .link-container .arrow-indicator {
@@ -435,8 +455,7 @@ section::before {
         /* Remove any default margin */
         flex: 1;
         max-width: 50%;
-        max-height: 100px;
-
+        max-height: 64px;
     }
 
     .link-text {
@@ -447,7 +466,17 @@ section::before {
         font-size: 1.3rem;
     }
 
+    .contact-form input{
+        border-radius: 36px;
+    }
+
+    .contact-form textarea{
+        border-radius: 36px;
+    }
+
+
     .contact-form button {
         max-width: 100%;
+        border-radius: 36px;
     }
 }

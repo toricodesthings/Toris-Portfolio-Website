@@ -76,21 +76,17 @@ const Hero = () => {
           <span className="gradient">{displayedText.substring(0, gradientText.length)}</span>
           <span>{displayedText.substring(gradientText.length)}</span>
         </h1>
-        {showContent && (
-          <>
-            <p className="pop-in">
-              I do many things from developing software, designing websites, to producing music.
-            </p>
-            <div className="hero-buttons">
-              <button className="hero-viewbtn pop-in" onClick={() => setShowWorkOptions(true)}>
-                View my work
-              </button>
-              <Link to="/contact" className="hero-connectbtn pop-in">
-                Contact me
-              </Link>
-            </div>
-          </>
-        )}
+        <p className={`${showContent ? "pop-in" : "hidden-content"}`}>
+          I do many things from developing software, designing websites, to producing music.
+        </p>
+        <div className={`hero-buttons ${showContent ? "pop-in" : "hidden-content"}`}>
+          <button className="hero-viewbtn" onClick={() => setShowWorkOptions(true)}>
+            View my work
+          </button>
+          <Link to="/contact" className="hero-connectbtn">
+            Contact me
+          </Link>
+        </div>
       </div>
 
       {showWorkOptions && (

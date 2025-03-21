@@ -516,7 +516,7 @@ section::before {
 
 .stack-bubble-container {
     background-color: rgba(0, 0, 0, 0.5);
-    background-image: radial-gradient(rgba(206, 87, 243, 0.5) 2px, transparent 0);
+    background-image: radial-gradient(rgba(163, 0, 46, 0.5) 2px, transparent 0);
     background-size: 40px 40px;
     background-position: -5px -5px;
     position: relative;
@@ -604,7 +604,9 @@ section::before {
 
 .scrolling-items {
     display: flex;
-    animation: scrollItems 20s linear infinite;
+    backface-visibility: hidden;
+    flex-direction: row;
+    animation: scrollItems 35s linear infinite;
 }
 
 .project-learning-item {
@@ -617,7 +619,7 @@ section::before {
     height: 120px;
     width: auto;
     filter: drop-shadow(0 0 15px rgb(40, 40, 40));
-    transition: transform 0.25s ease;
+    transition: all 0.3s ease;
 }
 
 .project-learning-text {
@@ -625,8 +627,17 @@ section::before {
     color: white;
     font-weight: 600;
     font-size: clamp(28px, 3vw, 32px);
-    text-shadow: 0 0 15px rgb(234, 163, 255);
+    transition: all 0.3s ease;
     white-space: nowrap;
+}
+
+.project-learning-item:hover .project-learning-text {
+    text-shadow: 0 0 15px rgb(234, 163, 255);
+    transform: scale(1.05);
+}
+
+.project-learning-item:hover .project-learning-icon {
+    filter: drop-shadow(0 0 10px rgb(140, 140, 140));
 }
 
 @keyframes scrollItems {
@@ -729,8 +740,8 @@ section::before {
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.7);
     border-radius: 50%;
-    width: 1em;
-    height: 1em;
+    width: max(0.9em);
+    height: max(0.9em);
     display: flex;
     align-items: center;
     justify-content: center;

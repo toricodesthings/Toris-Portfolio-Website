@@ -214,7 +214,7 @@ const EducationTree = () => {
         <div className="education-tree-container">
             <h3>Year {currentTreeIndex + 1}</h3>
 
-            <svg className="sakura" key={currentTreeIndex} width="80%" height="750" viewBox="-300 -150 700 725">
+            <svg className="sakura" key={currentTreeIndex} width="60%" height="750" viewBox="-300 -175 700 750">
                 {/* Tree trunk */}
                 <defs>
                     <filter id="dropShadow" x="0" y="-10%" width="120%" height="120%">
@@ -318,4 +318,4 @@ const EducationTree = () => {
     );
 };
 
-export default EducationTree;
+export default React.memo(EducationTree);

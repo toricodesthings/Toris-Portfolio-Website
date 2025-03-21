@@ -20,10 +20,14 @@
     justify-content: space-between;
     flex-direction: column;
     margin-bottom: 20px;
-    border: 2px white solid;
     position: relative;
     transform: translateZ(0);
 }
+  
+.hidden-content {
+    opacity: 0;
+    animation: none;
+ }
 
 .hero.blurred {
     filter: blur(16px);

@@ -9,6 +9,8 @@ import AudienceTimelineChart from './AudienceTimelineChart';
 //Collaborators Data
 import Collaborators from './Collaborators'
 
+import Player from './Player'
+
 import avatar from "../../assets/artwork_me.webp";
 
 //Social Logos
@@ -60,6 +62,12 @@ const funFacts = {
     "Favorite Synths": "Vital & Serum",
     "Favorite Genres": "Metalcore & Trap",
     "Clear": "Click any option to reveal a fact"
+};
+
+const song = {
+    src: "https://your-audio-file-url.mp3",
+    title: "Song Name",
+    artist: "Artist Name"
 };
 
 const MusicProductionStack = () => {
@@ -159,60 +167,60 @@ const Music = () => {
     const [followers, setFollowers] = useState("N/A");
     const [monthlyListeners, setMonthlyListeners] = useState("N/A");
     const [popularityIndex, setPopularityIndex] = useState("N/A");
-  
+
     // States for update timestamps (relative strings)
     const [followersUpdate, setFollowersUpdate] = useState("Long ago");
     const [monthlyUpdate, setMonthlyUpdate] = useState("Long ago");
     const [popularityUpdate, setPopularityUpdate] = useState("Long ago");
-  
+
     const location = useLocation();
-  
+
     // Utility function to convert a date string into a relative date string.
     const getRelativeDateString = (dateString) => {
-      const fetchedDate = new Date(dateString);
-      const today = new Date();
-      // Reset times so we compare only dates.
-      const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      const startOfFetched = new Date(fetchedDate.getFullYear(), fetchedDate.getMonth(), fetchedDate.getDate());
-      const diffTime = startOfToday - startOfFetched;
-      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-      
-      if (diffDays === 0) return "Today";
-      if (diffDays === 1) return "Yesterday";
-      return `${diffDays} days ago`;
+        const fetchedDate = new Date(dateString);
+        const today = new Date();
+        // Reset times so we compare only dates.
+        const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const startOfFetched = new Date(fetchedDate.getFullYear(), fetchedDate.getMonth(), fetchedDate.getDate());
+        const diffTime = startOfToday - startOfFetched;
+        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 0) return "Today";
+        if (diffDays === 1) return "Yesterday";
+        return `${diffDays} days ago`;
     };
-  
+
     useEffect(() => {
-      // If the URL is /musiclinks, scroll the .shep-section into view
-      if (location.pathname === '/musiclinks') {
-        const shepSection = document.querySelector('.shep-section');
-        if (shepSection) {
-          shepSection.scrollIntoView({ behavior: 'smooth' });
+        // If the URL is /musiclinks, scroll the .shep-section into view
+        if (location.pathname === '/musiclinks') {
+            const shepSection = document.querySelector('.shep-section');
+            if (shepSection) {
+                shepSection.scrollIntoView({ behavior: 'smooth' });
+            }
         }
-      }
-  
-      async function fetchStats() {
-        try {
-          const data = await fetchShepArtistStat();
-  
-          // Update stats values
-          setFollowers(data.followers);
-          setMonthlyListeners(data.monthly_listeners);
-          setPopularityIndex(data.popularity);
-  
-          // Compute relative date string from fetched_at and update state for all stats
-          if (data.fetched_at) {
-            const relativeDate = getRelativeDateString(data.fetched_at);
-            setFollowersUpdate(relativeDate);
-            setMonthlyUpdate(relativeDate);
-            setPopularityUpdate(relativeDate);
-          }
-        } catch (err) {
-          console.error(err.message);
+
+        async function fetchStats() {
+            try {
+                const data = await fetchShepArtistStat();
+
+                // Update stats values
+                setFollowers(data.followers);
+                setMonthlyListeners(data.monthly_listeners);
+                setPopularityIndex(data.popularity);
+
+                // Compute relative date string from fetched_at and update state for all stats
+                if (data.fetched_at) {
+                    const relativeDate = getRelativeDateString(data.fetched_at);
+                    setFollowersUpdate(relativeDate);
+                    setMonthlyUpdate(relativeDate);
+                    setPopularityUpdate(relativeDate);
+                }
+            } catch (err) {
+                console.error(err.message);
+            }
         }
-      }
-  
-      fetchStats();
+
+        fetchStats();
     }, [location]);
 
     return (
@@ -287,7 +295,7 @@ const Music = () => {
                             <div className="stat-title">Monthly Listeners</div>
                             <div className="stat-value">{monthlyListeners}</div>
                             <div className="stat-updated">
-                            <span className={`update-dot ${monthlyUpdate === "Today" ? 'green-dot' : 'gray-dot'}`}></span>
+                                <span className={`update-dot ${monthlyUpdate === "Today" ? 'green-dot' : 'gray-dot'}`}></span>
                                 Last Updated: {monthlyUpdate}
                             </div>
                         </div>
@@ -295,8 +303,8 @@ const Music = () => {
                             <div className="stat-title">Popularity Index</div>
                             <div className="stat-value">{popularityIndex}</div>
                             <div className="stat-updated">
-                            <span className={`update-dot ${popularityUpdate === "Today" ? 'green-dot' : 'gray-dot'}`}></span>
-                            Last Updated: {popularityUpdate}
+                                <span className={`update-dot ${popularityUpdate === "Today" ? 'green-dot' : 'gray-dot'}`}></span>
+                                Last Updated: {popularityUpdate}
                             </div>
                         </div>
                     </div>
@@ -312,6 +320,9 @@ const Music = () => {
 
             <section className="release-section">
                 <h2>Releases (Under Construction)</h2>
+                <div className='release-panel'>
+                    <Player src={song.src} title={song.title} artist={song.artist} />
+                </div>
             </section>
         </div>
     );

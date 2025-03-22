@@ -1087,6 +1087,127 @@ section::before {
 
 }
 
+.release-panel {
+    width: 100%;
+}
+
+.player {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 2vw;
+}
+
+.playerinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 24px;
+    width:100%;
+    text-align: center;
+}
+
+.disc {
+    padding: 20px;
+    height: auto;
+    max-width: 50%;
+    animation: play 3s linear infinite;
+    
+}
+
+.disc.paused {
+    animation-play-state: paused;
+}
+
+.disc.spinning {
+    animation-play-state: running;
+}
+
+.playerinfo h3 {
+    font-size: clamp(2rem, 3vw, 4rem);
+    font-weight: bold;
+}
+
+.playerinfo h4 {
+    font-size: clamp(1rem, 2vw, 3rem);
+    font-weight: 600;
+    color:#bababa;
+    margin-top:10px;
+}
+
+.playerinfo p {
+    font-size: clamp(0.9rem, 1vw, 2rem);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    width: 100%;
+    cursor: pointer;
+    height: 8px;
+    background: #555;
+    border-radius: 12 px;
+}
+
+.player-buttons {
+    flex: row;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-buttons button {
+    outline: none;
+    all: unset;
+    background: black;
+    border: 2px solid rgba(255, 255, 255, 0.392);
+    color: white;
+    width: 50px;
+    height: 45px;
+    text-align: center;
+    padding: 10px;
+    padding-bottom: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.player-buttons button:active {
+    background: white;
+    color: black;
+}
+
+@keyframes play {
+    0% {
+      transform: rotate(0deg) translate(0px, 0px);
+    }
+    25% {
+      transform: rotate(90deg) translate(2px, -1px);
+    }
+    50% {
+      transform: rotate(180deg) translate(-0.5px, 0.5px);
+    }
+    75% {
+      transform: rotate(270deg) translate(0.8px, -0.3px);
+    }
+    100% {
+      transform: rotate(360deg) translate(0px, 0.5px);
+    }
+  }
+  
+
 @media (max-width: 768px) {
     .music {
         margin: 0 5%;

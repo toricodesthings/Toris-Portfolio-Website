@@ -16,8 +16,7 @@ const contactLinks = [
 
 const Contact = () => {
   useEffect(() => {
-    const initObserver = () => {
-      // Select all elements that should animate:
+    const initFadeInObserver = () => {
       const animatedElements = document.querySelectorAll('h2, .link-container, .contact-form');
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -40,6 +39,10 @@ const Contact = () => {
       animatedElements.forEach(el => observer.observe(el));
     };
 
+    const initObserver = () => {
+      setTimeout(initFadeInObserver, 100);
+    };
+  
     if (document.readyState === "complete") {
       initObserver();
     } else {

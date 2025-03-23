@@ -216,4 +216,4 @@ const Collaborators = () => {
     );
 };
 
-export default Collaborators;
+export default React.memo(Collaborators);

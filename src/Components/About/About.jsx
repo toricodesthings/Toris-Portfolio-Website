@@ -43,7 +43,7 @@ const skills = [
 
 const About = () => {
   const scrollRef = useRef(null);
-  // Use refs for values that control scrolling to avoid re-renders in the animation loop.
+  // Refs and state for auto-scroll and other interactions:
   const scrollDirectionRef = useRef(1);
   const isUserScrollingRef = useRef(false);
   const isDraggingRef = useRef(false);
@@ -74,11 +74,13 @@ const About = () => {
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
-    if (scrollContainer && scrollContainer.scrollWidth > scrollContainer.clientWidth) {
+    if (
+      scrollContainer &&
+      scrollContainer.scrollWidth > scrollContainer.clientWidth
+    ) {
       animationFrameId.current = requestAnimationFrame(autoScroll);
     }
 
-    // When the user scrolls manually, pause auto-scrolling temporarily.
     const handleUserScroll = () => {
       isUserScrollingRef.current = true;
       setTimeout(() => {
@@ -86,16 +88,14 @@ const About = () => {
       }, 3000);
     };
 
-    // Handle flipping music images inside the .music-flip container.
     const handleMusicFlipScroll = (event) => {
       const musicFlipContainer = document.querySelector(".music-flip");
       if (musicFlipContainer && musicFlipContainer.contains(event.target)) {
-        event.preventDefault(); // Prevent page scrolling.
+        event.preventDefault();
         setActiveImage(event.deltaY > 0 ? 2 : 1);
       }
     };
 
-    // Drag-based scrolling for the stats section.
     const handleMouseDown = (e) => {
       isDraggingRef.current = true;
       dragStartX.current = e.pageX;
@@ -112,7 +112,6 @@ const About = () => {
       isDraggingRef.current = false;
     };
 
-    // Touch event handlers for mobile and iPad support.
     const handleTouchStart = (e) => {
       isDraggingRef.current = true;
       dragStartX.current = e.touches[0].pageX;
@@ -129,14 +128,21 @@ const About = () => {
       isDraggingRef.current = false;
     };
 
-    // Attach event listeners.
-    scrollContainer.addEventListener("wheel", handleUserScroll, { passive: true });
-    scrollContainer.addEventListener("touchstart", handleUserScroll, { passive: true });
+    scrollContainer.addEventListener("wheel", handleUserScroll, {
+      passive: true,
+    });
+    scrollContainer.addEventListener("touchstart", handleUserScroll, {
+      passive: true,
+    });
     scrollContainer.addEventListener("mousedown", handleMouseDown);
     scrollContainer.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
-    scrollContainer.addEventListener("touchstart", handleTouchStart, { passive: true });
-    scrollContainer.addEventListener("touchmove", handleTouchMove, { passive: true });
+    scrollContainer.addEventListener("touchstart", handleTouchStart, {
+      passive: true,
+    });
+    scrollContainer.addEventListener("touchmove", handleTouchMove, {
+      passive: true,
+    });
     window.addEventListener("touchend", handleTouchEnd);
     document
       .querySelector(".music-flip")
@@ -158,6 +164,75 @@ const About = () => {
     };
   }, [autoScroll]);
 
+  useEffect(() => {
+    const initFadeInObserver = () => {
+      const animatedElements = document.querySelectorAll(
+        '.about-intro-left, .about-intro-right, ' +
+        '.cs-education, .cs-skills-panel, .education-panel, .skills-grid, ' +
+        '.music-para, .music-panel, .music-timeline, .music-flip, .music-stat-box'
+      );
+      
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          // Handle special sequential cases
+          if (entry.isIntersecting) {
+            if (entry.target.classList.contains("skills-grid")) {
+              // Handle skill items sequentially
+              const skillItems = Array.from(entry.target.querySelectorAll(".skill-text"));
+              skillItems.forEach((item, index) => {
+                setTimeout(() => {
+                  item.classList.add("visible");
+                }, index * 50);
+              });
+              entry.target.classList.add("container-visible");
+            } 
+            else if (entry.target.classList.contains("music-timeline")) {
+              // Handle timeline items sequentially and draw line
+              entry.target.classList.add("line-visible"); // Start line drawing
+              const timelineItems = Array.from(entry.target.querySelectorAll(".timeline-item"));
+              timelineItems.forEach((item, index) => {
+                setTimeout(() => {
+                  item.classList.add("visible");
+                }, 300 + index * 200); // Delay start to let line begin drawing
+              });
+              entry.target.classList.add("container-visible");
+            }
+            else if (entry.target.classList.contains("music-stat-box")) {
+              // Handle stat items sequentially
+              const statItems = Array.from(entry.target.querySelectorAll(".music-stat-item"));
+              statItems.forEach((item, index) => {
+                setTimeout(() => {
+                  item.classList.add("visible");
+                }, index * 100);
+              });
+              entry.target.classList.add("container-visible");
+            }
+            else {
+              // Handle regular elements
+              setTimeout(() => {
+                entry.target.classList.add("visible");
+              }, 100);
+            }
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      
+      animatedElements.forEach((el) => observer.observe(el));
+    };
+  
+    const initObserver = () => {
+      setTimeout(initFadeInObserver, 100);
+    };
+  
+    if (document.readyState === "complete") {
+      initObserver();
+    } else {
+      window.addEventListener("load", initObserver);
+      return () => window.removeEventListener("load", initObserver);
+    }
+  }, []);
+
   return (
     <div className="about">
       <div className="about-title">
@@ -173,7 +248,9 @@ const About = () => {
             <h2>Who am I?</h2>
             <p>
               Many may know me as Tori. I am a passionate first-year Computer
-              Science student in Ottawa dedicated to learning and growing in the field of technology. I also dedicate a ton of my free time into my side project in Music Production and Audio Engineering.
+              Science student in Ottawa dedicated to learning and growing in
+              the field of technology. I also dedicate a ton of my free time
+              into my side project in Music Production and Audio Engineering.
             </p>
           </div>
         </div>
@@ -184,7 +261,14 @@ const About = () => {
           <h2>Current Education</h2>
           <div className="education-panel">
             <p>
-              Since I was young, I enjoyed experimenting and pushing tech to its limit. Currently, I am pursuing my first-year Bachelor’s in Computer Science at Carleton University in the software engineering stream, but my focus is quite general involving AI, programming, web development, and software development. One of my first projects started out as multi-purpose Discord bots built for specific servers. I am now branching it out to create general purpose programs, web API wrappers, and AI wrappers.
+              Since I was young, I enjoyed experimenting and pushing tech to
+              its limit. Currently, I am pursuing my first-year Bachelor’s in
+              Computer Science at Carleton University in the software engineering
+              stream, but my focus is quite general involving AI, programming,
+              web development, and software development. One of my first projects
+              started out as multi-purpose Discord bots built for specific servers.
+              I am now branching it out to create general purpose programs, web API
+              wrappers, and AI wrappers.
             </p>
             <div className="live-feed-element">
               <LiveFeed />
@@ -210,9 +294,18 @@ const About = () => {
           <h2>My Music Career</h2>
           <div className="music-panel">
             <p>
-              Aside from coding, I am a passionate and professional musician with a deep love for rhythm, melody, and sound design. Music has always been my escape, my therapy, and my way of understanding the world. My journey into music started over 7 years ago when I was first discovered Ableton and EDM Production. Now, I play many instruments, including the drums, bass guitar, and piano. I have worked on numerous projects as a producer, produced in all genres from Lofi to EDM to Pop to Metal, pushing creative boundaries to craft unique sounds. Additionally, I specialize in audio-engineering, mixing, and mastering, helping other artists bring their visions to life with polished and professional audio quality.
+              Aside from coding, I am a passionate and professional musician with
+              a deep love for rhythm, melody, and sound design. Music has always
+              been my escape, my therapy, and my way of understanding the world.
+              My journey into music started over 7 years ago when I was first
+              discovered Ableton and EDM Production. Now, I play many instruments,
+              including the drums, bass guitar, and piano. I have worked on numerous
+              projects as a producer, produced in all genres from Lofi to EDM to Pop
+              to Metal, pushing creative boundaries to craft unique sounds.
+              Additionally, I specialize in audio-engineering, mixing, and mastering,
+              helping other artists bring their visions to life with polished and
+              professional audio quality.
             </p>
-            {/* Vertical Timeline */}
             <div className="music-timeline">
               <div className="timeline-container">
                 <div className="timeline-item">
@@ -224,7 +317,6 @@ const About = () => {
                     </span>
                   </div>
                 </div>
-
                 <div className="timeline-item">
                   <div className="circle"></div>
                   <div className="timeline-text">
@@ -234,7 +326,6 @@ const About = () => {
                     </span>
                   </div>
                 </div>
-
                 <div className="timeline-item">
                   <div className="circle"></div>
                   <div className="timeline-text">
@@ -244,7 +335,6 @@ const About = () => {
                     </span>
                   </div>
                 </div>
-
                 <div className="timeline-item">
                   <div className="circle"></div>
                   <div className="timeline-text">
@@ -254,7 +344,6 @@ const About = () => {
                     </span>
                   </div>
                 </div>
-
                 <div className="timeline-item">
                   <div className="circle"></div>
                   <div className="timeline-text">
@@ -269,7 +358,6 @@ const About = () => {
           </div>
         </div>
         <h2 className="stats-current">Current Stats</h2>
-        {/* Music Image Flip Section */}
         <div className="music-flip">
           <div
             className={`flip-image left ${activeImage === 1 ? "active" : ""}`}
@@ -277,7 +365,6 @@ const About = () => {
           >
             <img src={wrapped2023} alt="Music Image 1" />
           </div>
-
           <div
             className={`flip-image right ${activeImage === 2 ? "active" : ""}`}
             onClick={() => setActiveImage(2)}
@@ -285,7 +372,6 @@ const About = () => {
             <img src={wrapped2024} alt="Music Image 2" />
           </div>
         </div>
-
         <div
           className="music-stat-box"
           ref={scrollRef}

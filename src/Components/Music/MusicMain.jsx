@@ -9,18 +9,17 @@ import AudienceTimelineChart from './AudienceTimelineChart';
 //Collaborators Data
 import Collaborators from './Collaborators'
 
+//Release Player
 import Player from './Player'
 
 import avatar from "../../assets/artwork_me.webp";
-
-//Social Logos
 import spotifyImg from "../../assets/social/spotify.svg";
 import youtubeImg from "../../assets/social/youtube.svg";
 import tidalImg from "../../assets/social/tidal.svg";
 import amImg from "../../assets/social/am.svg";
 import soundcloudImg from "../../assets/social/soundcloud.svg";
 
-//MProd Stack
+//MProd Stack Logos
 import abletonImg from "../../assets/tools/ableton.webp";
 import reaperImg from "../../assets/tools/reaper.webp";
 import iZotopeOImg from "../../assets/tools/iZotopeOzone.webp";
@@ -168,14 +167,12 @@ const Music = () => {
     const [monthlyListeners, setMonthlyListeners] = useState("N/A");
     const [popularityIndex, setPopularityIndex] = useState("N/A");
 
-    // States for update timestamps (relative strings)
     const [followersUpdate, setFollowersUpdate] = useState("Long ago");
     const [monthlyUpdate, setMonthlyUpdate] = useState("Long ago");
     const [popularityUpdate, setPopularityUpdate] = useState("Long ago");
 
     const location = useLocation();
 
-    // Utility function to convert a date string into a relative date string.
     const getRelativeDateString = (dateString) => {
         const fetchedDate = new Date(dateString);
         const today = new Date();

@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import "./MusicMain.css";
 import avatar from "../../assets/artwork_me.webp";
-import { fetchArtistReleases } from './getShepArtistRelease'; // Your API file
+import { fetchArtistReleases } from './getShepArtistRelease';
 
-// Updated MusicPlayer accepts additional props for artwork and releaseType.
 const MusicPlayer = ({ src, title, artist, artwork_link, releaseType }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -167,7 +166,6 @@ const MusicPlayer = ({ src, title, artist, artwork_link, releaseType }) => {
   );
 };
 
-// Container component that fetches all releases and preloads the latest one.
 const PlayerContainer = () => {
   const [latestRelease, setLatestRelease] = useState(null);
   const [releases, setReleases] = useState([])
@@ -177,7 +175,6 @@ const PlayerContainer = () => {
       try {
         const data = await fetchArtistReleases();
         setReleases(data);
-        // Find the release marked as latest
         const latest = data.find(release => release.latest_release);
         if (latest) {
           setLatestRelease(latest);

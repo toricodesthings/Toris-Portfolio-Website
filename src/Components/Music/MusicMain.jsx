@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./MusicMain.css";
-import { fetchShepArtistStat } from './getShepArtistStat';
+import { fetchShepArtistStat } from './getShepArtistStat.js';
 import { useLocation } from 'react-router-dom';
 
 //Chart Module
@@ -321,7 +321,7 @@ const Music = () => {
             <section className="release-section">
                 <h2>Releases (Under Construction)</h2>
                 <div className='release-panel'>
-                    <Player src={song.src} title={song.title} artist={song.artist} />
+                    <Player />
                 </div>
             </section>
         </div>

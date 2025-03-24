@@ -40,7 +40,7 @@ const EducationTree = () => {
 
 
 
-      
+
 
     // Define a cubic Bézier for an S‑shaped trunk.
     const trunkPoints = useMemo(() => {
@@ -227,86 +227,86 @@ const EducationTree = () => {
                     </filter>
                 </defs>
                 <g filter="url(#dropShadow)">
-                <motion.path
-                    d={trunkPoints.path}
-                    fill="none"
-                    stroke="#954535"
-                    strokeWidth="60"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0, opacity: 0.1 }}
-                    animate={{ pathLength: 1, opacity: 1 }}
-                    transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
-                />
-
-                {/* Curved branches */}
-                {branches.map((branch, index) => (
                     <motion.path
-                        key={`branch-${index}`}
-                        d={branch.pathData}
+                        d={trunkPoints.path}
                         fill="none"
                         stroke="#954535"
-                        strokeWidth="20"
+                        strokeWidth="60"
                         strokeLinecap="round"
-                        initial={{ opacity: 0, pathLength: 0 }}
-                        animate={{ opacity: 1, pathLength: 1 }}
-                        transition={{ duration: 1, delay: 1 + index * 0.2, ease: "easeOut" }}
+                        initial={{ pathLength: 0, opacity: 0.1 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
                     />
-                ))}
 
-                {/* Tree foliage */}
-                {foliage.map((segment, i) => (
-                    <motion.path
-                        key={`foliage-${i}`}
-                        d={segment.pathData}
-                        fill={segment.fill}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: segment.delay, ease: "backOut" }}
-                    />
-                ))}
-
-                {/* Course labels */}
-                {branches.map((branch, index) => (
-                    <motion.g key={`label-${index}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3, delay: 2 + index * 0.2 }}
-                    >
-                        <rect
-                            x={branch.textX - 45}
-                            y={branch.textY - 15}
-                            width="100"
-                            height="20"
-                            rx="10"
-                            ry="10"
+                    {/* Curved branches */}
+                    {branches.map((branch, index) => (
+                        <motion.path
+                            key={`branch-${index}`}
+                            d={branch.pathData}
+                            fill="none"
+                            stroke="#954535"
+                            strokeWidth="20"
+                            strokeLinecap="round"
+                            initial={{ opacity: 0, pathLength: 0 }}
+                            animate={{ opacity: 1, pathLength: 1 }}
+                            transition={{ duration: 1, delay: 1 + index * 0.2, ease: "easeOut" }}
                         />
-                        <text
-                            className="course-label-text"
-                            x={branch.textX}
-                            y={branch.textY + 5}
-                            textAnchor="middle"
+                    ))}
+
+                    {/* Tree foliage */}
+                    {foliage.map((segment, i) => (
+                        <motion.path
+                            key={`foliage-${i}`}
+                            d={segment.pathData}
+                            fill={segment.fill}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5, delay: segment.delay, ease: "backOut" }}
+                        />
+                    ))}
+
+                    {/* Course labels */}
+                    {branches.map((branch, index) => (
+                        <motion.g key={`label-${index}`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3, delay: 2 + index * 0.2 }}
                         >
-                            {branch.course}
-                        </text>
+                            <rect
+                                x={branch.textX - 45}
+                                y={branch.textY - 15}
+                                width="100"
+                                height="20"
+                                rx="10"
+                                ry="10"
+                            />
+                            <text
+                                className="course-label-text"
+                                x={branch.textX}
+                                y={branch.textY + 5}
+                                textAnchor="middle"
+                            >
+                                {branch.course}
+                            </text>
+                        </motion.g>
+                    ))}
+
+                    {/* Soil at the base */}
+                    <motion.g
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: "easeIn" }}
+                    >
+                        <ellipse cx="50" cy="520" rx="250" ry="30" fill="rgb(90, 30, 20)" />   {/* Deep red-brown base */}
+                        <ellipse cx="50" cy="510" rx="180" ry="25" fill="rgb(140, 60, 30)" />  {/* Warmer, brighter red-brown */}
+                        <ellipse cx="50" cy="505" rx="150" ry="20" fill="rgb(130, 70, 40)" />  {/* Balanced red-brown for transition */}
+                        <ellipse cx="0" cy="500" rx="15" ry="4" fill="rgb(155, 80, 95)" />   {/* Soft magenta accent */}
+                        <ellipse cx="100" cy="495" rx="20" ry="5" fill="rgb(135, 65, 140)" />  {/* Rich purple to tie in with trunk hues */}
+                        <ellipse cx="50" cy="492" rx="18" ry="4" fill="rgb(125, 55, 100)" />  {/* Dark magenta for subtle depth */}
+                        <ellipse cx="-80" cy="499" rx="12" ry="3" fill="rgb(115, 45, 80)" />  {/* Deep purple-brown detail */}
+                        <ellipse cx="160" cy="498" rx="18" ry="4" fill="rgb(115, 20, 70)" />  {/* Bold, deep burgundy accent */}
+
                     </motion.g>
-                ))}
-
-                {/* Soil at the base */}
-                <motion.g
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: "easeIn" }}
-                >
-                    <ellipse cx="50" cy="520" rx="250" ry="30" fill="rgb(90, 30, 20)" />   {/* Deep red-brown base */}
-                    <ellipse cx="50" cy="510" rx="180" ry="25" fill="rgb(140, 60, 30)" />  {/* Warmer, brighter red-brown */}
-                    <ellipse cx="50" cy="505" rx="150" ry="20" fill="rgb(130, 70, 40)" />  {/* Balanced red-brown for transition */}
-                    <ellipse cx="0" cy="500" rx="15" ry="4" fill="rgb(155, 80, 95)" />   {/* Soft magenta accent */}
-                    <ellipse cx="100" cy="495" rx="20" ry="5" fill="rgb(135, 65, 140)" />  {/* Rich purple to tie in with trunk hues */}
-                    <ellipse cx="50" cy="492" rx="18" ry="4" fill="rgb(125, 55, 100)" />  {/* Dark magenta for subtle depth */}
-                    <ellipse cx="-80" cy="499" rx="12" ry="3" fill="rgb(115, 45, 80)" />  {/* Deep purple-brown detail */}
-                    <ellipse cx="160" cy="498" rx="18" ry="4" fill="rgb(115, 20, 70)" />  {/* Bold, deep burgundy accent */}
-
-                </motion.g>
                 </g>
             </svg>
             <div className="arrow-button-container">

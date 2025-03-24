@@ -40,7 +40,6 @@ function extractIntroduction(readmeText) {
   return match ? match[1].trim() : null;
 }
 
-
 export default async function handler(req, res) {
   try {
     const result = await octokit.graphql(query);

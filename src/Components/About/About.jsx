@@ -43,7 +43,6 @@ const skills = [
 
 const About = () => {
   const scrollRef = useRef(null);
-  // Refs and state for auto-scroll and other interactions:
   const scrollDirectionRef = useRef(1);
   const isUserScrollingRef = useRef(false);
   const isDraggingRef = useRef(false);
@@ -52,13 +51,11 @@ const About = () => {
   const [activeImage, setActiveImage] = useState(1);
   const animationFrameId = useRef(null);
 
-  // Auto-scroll function using requestAnimationFrame for smoother scrolling.
   const autoScroll = useCallback(() => {
     const scrollContainer = scrollRef.current;
     if (scrollContainer) {
       if (!isUserScrollingRef.current && !isDraggingRef.current) {
         scrollContainer.scrollLeft += scrollDirectionRef.current * 5;
-        // Reverse direction when reaching the ends.
         if (
           scrollContainer.scrollLeft + scrollContainer.clientWidth >=
           scrollContainer.scrollWidth - 5
@@ -85,7 +82,7 @@ const About = () => {
       isUserScrollingRef.current = true;
       setTimeout(() => {
         isUserScrollingRef.current = false;
-      }, 3000);
+      }, 1000);
     };
 
     const handleMusicFlipScroll = (event) => {
@@ -171,13 +168,11 @@ const About = () => {
         '.cs-education, .cs-skills-panel, .education-panel, .skills-grid, ' +
         '.music-para, .music-panel, .music-timeline, .music-flip, .music-stat-box'
       );
-      
+
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach((entry) => {
-          // Handle special sequential cases
           if (entry.isIntersecting) {
             if (entry.target.classList.contains("skills-grid")) {
-              // Handle skill items sequentially
               const skillItems = Array.from(entry.target.querySelectorAll(".skill-text"));
               skillItems.forEach((item, index) => {
                 setTimeout(() => {
@@ -185,7 +180,7 @@ const About = () => {
                 }, index * 50);
               });
               entry.target.classList.add("container-visible");
-            } 
+            }
             else if (entry.target.classList.contains("music-timeline")) {
               // Handle timeline items sequentially and draw line
               entry.target.classList.add("line-visible"); // Start line drawing
@@ -217,14 +212,14 @@ const About = () => {
           }
         });
       }, { threshold: 0.2 });
-      
+
       animatedElements.forEach((el) => observer.observe(el));
     };
-  
+
     const initObserver = () => {
       setTimeout(initFadeInObserver, 100);
     };
-  
+
     if (document.readyState === "complete") {
       initObserver();
     } else {
@@ -357,7 +352,7 @@ const About = () => {
             </div>
           </div>
         </div>
-        <h2 className="stats-current">Current Stats</h2>
+        <h2 className="stats-current">Current Progress</h2>
         <div className="music-flip">
           <div
             className={`flip-image left ${activeImage === 1 ? "active" : ""}`}
@@ -375,13 +370,6 @@ const About = () => {
         <div
           className="music-stat-box"
           ref={scrollRef}
-          style={{
-            overflowX: "auto",
-            display: "flex",
-            willChange: "scroll-position",
-            WebkitTransform: "translateZ(0)",
-            transform: "translateZ(0)",
-          }}
         >
           <div className="music-stat-item">
             <h3>7+</h3>

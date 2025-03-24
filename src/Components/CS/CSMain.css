@@ -1,4 +1,3 @@
-/* Base styling for the contact page */
 .programming {
     display: flex;
     align-items: center;
@@ -9,7 +8,6 @@
     position: relative;
 }
 
-/* Title Section with text-wrapping gradient glow */
 .programming-title {
     text-align: center;
 }
@@ -166,7 +164,6 @@ section::before {
     transition: border 0.2s ease;
 }
 
-/* On hover, draw the border */
 .repo-item:hover::after {
     animation: borderDraw 0.2s ease-in forwards;
     border-color: white;
@@ -668,7 +665,8 @@ section::before {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: auto; /* Match the SVG height */
+    height: auto;
+    /* Match the SVG height */
     position: relative;
 }
 
@@ -703,7 +701,7 @@ section::before {
 
 .tree-wrapper svg {
     height: auto;
-    
+
 }
 
 .tree-wrapper h3 {
@@ -732,8 +730,8 @@ section::before {
     justify-content: center;
     width: 100%;
 }
-  
-.arrow-button{
+
+.arrow-button {
     position: absolute;
     top: 50%;
     background: rgba(0, 0, 0, 0.75);
@@ -780,12 +778,12 @@ section::before {
 .arrow-button.right:active {
     transform: scale(1) translateX(2px);
 }
-  
-  .course-label-text {
+
+.course-label-text {
     font-size: 24px;
     fill: white;
-  }
-  
+}
+
 
 @media (max-width: 768px) {
     .programming {
@@ -834,7 +832,7 @@ section::before {
         text-align: center;
         left: 0;
     }
-    
+
     .arrow-button.right {
         text-align: center;
         right: 0;

@@ -17,7 +17,6 @@ const Hero = () => {
   const remainingText = " Developer and Artist based in Ottawa.";
   const fullString = `${gradientText}${remainingText}`;
 
-  // Listen for full page load
   useEffect(() => {
     const handleLoad = () => setPageLoaded(true);
     if (document.readyState === "complete") {
@@ -28,7 +27,6 @@ const Hero = () => {
     return () => window.removeEventListener("load", handleLoad);
   }, []);
 
-  // Delay the start of the typing animation until after the navbar animates
   useEffect(() => {
     if (!pageLoaded) return;
     if (hasTypingAnimationPlayed) {
@@ -37,11 +35,10 @@ const Hero = () => {
       return;
     }
 
-    // Delay hero animation start to allow navbar to finish (adjust delay as needed)
-    const animationStartDelay = 300; // Delay in milliseconds
+    const animationStartDelay = 100;
     const timeoutId = setTimeout(() => {
       let startTime = null;
-      const durationPerChar = 30; // milliseconds per character
+      const durationPerChar = 30;
 
       const animate = (timestamp) => {
         if (!startTime) startTime = timestamp;

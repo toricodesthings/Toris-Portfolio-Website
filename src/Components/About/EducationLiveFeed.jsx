@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import "./About.css";
 
 const learningTopics = [
-  "🚀 Building AI-powered APIs...",
-  "⚛️ Mastering React & Next.js...",
-  "🧠 Diving into Neural Networks with Music...",
+  "🚀 Building useful APIs...",
+  "⚛️ Learning React & Vite...",
+  "🧠 Diving into AI Neural Networks with Music...",
   "🌐 Exploring Web3 & Blockchain...",
-  "🎨 Learning to build Stunning UI/UX...",
-  "🤖 Creating more Discord Bots...",
+  "🎨 Learning frontend and optimizing UI/UX...",
+  "🤖 Creating Discord Bots...",
 ];
 
 const coursesList = [
@@ -30,11 +30,9 @@ export default function LiveFeed() {
   const containerRef = useRef(null);
   const [maxLines, setMaxLines] = useState(4);
   
-  // State for courses rotation
   const [coursesSet, setCoursesSet] = useState(0);
   const [hasMoreCourses, setHasMoreCourses] = useState(false);
 
-  // Calculate available lines based on container height
   useEffect(() => {
     const calculateVisibleLines = () => {
       if (!contentRef.current || !containerRef.current) return;
@@ -42,11 +40,8 @@ export default function LiveFeed() {
       const containerHeight = containerRef.current.clientHeight - lineHeight;
       const availableLines = Math.floor(containerHeight / lineHeight); 
       setMaxLines(Math.max(1, availableLines));
-      
-      // Check if we have more courses than can fit
       setHasMoreCourses(coursesList.length > availableLines);
     };
-
     calculateVisibleLines();
     
     const resizeObserver = new ResizeObserver(calculateVisibleLines);
@@ -62,15 +57,12 @@ export default function LiveFeed() {
     };
   }, []);
 
-  // Update displayed courses when maxLines or coursesSet changes
   useEffect(() => {
     if (displayMode !== "courses") return;
     
     const updateCourses = () => {
       if (hasMoreCourses) {
-        // Calculate how many sets we need
         const totalSets = Math.ceil(coursesList.length / maxLines);
-        // Calculate which courses to show in the current set
         const startIdx = (coursesSet % totalSets) * maxLines;
         const endIdx = Math.min(startIdx + maxLines, coursesList.length);
         return coursesList.slice(startIdx, endIdx);
@@ -78,31 +70,27 @@ export default function LiveFeed() {
         return coursesList.slice(0, maxLines);
       }
     };
-    
-    // Apply the new courses with a small animation delay
+
     const newCourses = updateCourses();
-    setDisplayedTopics([]); // Clear first to trigger animation
+    setDisplayedTopics([]); 
     setTimeout(() => {
       setDisplayedTopics(newCourses);
     }, 300);
   }, [maxLines, coursesSet, hasMoreCourses, displayMode]);
 
-  // Rotation timer for courses
   useEffect(() => {
     if (displayMode !== "courses" || !hasMoreCourses) return;
     
     const rotationTimer = setInterval(() => {
       setCoursesSet(prev => prev + 1);
-    }, 4000); // Rotate every 4 seconds
+    }, 4000); 
     
     return () => clearInterval(rotationTimer);
   }, [displayMode, hasMoreCourses]);
 
-  // Mode Toggle Function Handle
   const toggleMode = (mode) => {
     if (mode === displayMode) return;
     
-    // Reset states when toggling
     setDisplayMode(mode);
     setCurrentText("");
     
@@ -110,12 +98,10 @@ export default function LiveFeed() {
       setDisplayedTopics([]);
       setIndex(0);
     } else {
-      // For courses, reset to first set
       setCoursesSet(0);
     }
   };
 
-  // Typing effect when in learning mode
   useEffect(() => {
     if (displayMode !== "learning") return;
   
@@ -145,7 +131,6 @@ export default function LiveFeed() {
     }
   }, [index, displayMode]);
 
-  // Reset learning mode state only when display mode changes (removed maxLines from dependency)
   useEffect(() => {
     if (displayMode === "learning") {
       setDisplayedTopics([]);

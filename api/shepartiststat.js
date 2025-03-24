@@ -6,15 +6,14 @@ if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
 
+//Secure env
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-// Initialize Supabase client
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-// Function to get Spotify access token using client credentials flow
 async function getSpotifyAccessToken() {
   const credentials = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
   const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -37,7 +36,6 @@ async function getArtistData(accessToken) {
   return await response.json();
 }
 
-// New function to get monthly listeners from the API
 async function getMonthlyListeners() {
   const response = await fetch('https://utility.toridoesthings.xyz/get/monthly-listeners/48ds3BHWCPZVfAzFB2At2L');
   const data = await response.json();
@@ -67,7 +65,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ message: 'Error inserting data', error });
     }
     
-    return res.status(200).json({ message: 'Spotify Web API data has been inserted successfully' });
+    return res.status(200).json({ message: 'Yay, spotify Web API data has been inserted without errors.' });
   } catch (err) {
     console.error('Unhandled error occurred:', err);
     return res.status(500).json({ message: 'Unhandled error', error: err });

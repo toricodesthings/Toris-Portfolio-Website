@@ -6,7 +6,7 @@ import CSEduTree from "./EducationTree";
 import UpcomingProjectsAndLearningStack from "./LnU";
 import "./CSMain.css";
 
-// Import language logos
+//language logos
 import pythonImg from "../../assets/skills/python.svg";
 import htmlImg from "../../assets/skills/html.svg";
 import cssImg from "../../assets/skills/css.svg";
@@ -25,7 +25,6 @@ const languageData = {
     CSS: { logo: cssImg, color: "#264de4" }
 };
 
-// Helper to render language logos with custom colors.
 const renderLanguageLogos = (languages) => {
     return (
         <div>
@@ -156,21 +155,21 @@ const CS = () => {
             ...piece,
             fullText: i < pieces.length - 1 ? piece.text + "\n" : piece.text
         }));
-    
+
         const fullCombined = piecesWithNL.map(piece => piece.fullText).join("");
-    
+
         setTypedText("");
         let currentIndex = 0;
-        
+
         // Define total duration and update interval (in milliseconds)
         const totalDuration = 2000; // 1 second for the entire text to appear
         const updateInterval = 10; // ~60 fps
-        
+
         // Calculate how many updates will occur over the total duration
         const totalTicks = totalDuration / updateInterval;
         // Determine how many characters to add per tick
         const charsPerTick = Math.ceil(fullCombined.length / totalTicks);
-    
+
         const interval = setInterval(() => {
             currentIndex += charsPerTick;
             if (currentIndex >= fullCombined.length) {
@@ -181,7 +180,7 @@ const CS = () => {
                 setTypedText(fullCombined.slice(0, currentIndex));
             }
         }, updateInterval);
-    
+
         return () => clearInterval(interval);
     }, [selectedRepo]);
 

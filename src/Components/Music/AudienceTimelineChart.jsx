@@ -211,4 +211,4 @@ const AudienceTimelineChart = () => {
   );
 };
 
-export default AudienceTimelineChart;
+export default React.memo(AudienceTimelineChart);

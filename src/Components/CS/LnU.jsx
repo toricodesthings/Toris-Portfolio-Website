@@ -39,4 +39,4 @@ const UpcomingProjectsAndLearningStack = () => {
   );
 };
 
-export default UpcomingProjectsAndLearningStack;
+export default React.memo(UpcomingProjectsAndLearningStack);

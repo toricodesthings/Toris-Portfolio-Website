@@ -84,4 +84,4 @@ const FunFactTerminal = () => {
     );
 };
 
-export default FunFactTerminal;
+export default React.memo(FunFactTerminal);

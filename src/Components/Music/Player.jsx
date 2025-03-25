@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./MusicMain.css";
 import avatar from "../../assets/artwork_me.webp";
 import { fetchArtistReleases } from './getShepArtistRelease';
@@ -96,19 +96,19 @@ const MusicPlayer = ({
             className={`disc ${notPlaying ? 'paused' : 'spinning'} ${discAnimationClass}`}
           >
             <defs>
-              <radialGradient id="vinylLight" cx="10%" cy="10%" r="100%">
+              <radialGradient id="vinylLight" cx="50%" cy="0%" r="70%">
                 <stop offset="0%" stopColor="#333" stopOpacity="0.3" />
                 <stop offset="25%" stopColor="#555" stopOpacity="0.05" />
                 <stop offset="100%" stopColor="#000" stopOpacity="0" />
               </radialGradient>
-              <radialGradient id="vinylLight2" cx="70%" cy="70%" r="80%">
-                <stop offset="0%" stopColor="#333" stopOpacity="0.3" />
-                <stop offset="25%" stopColor="#222" stopOpacity="0.04" />
+              <radialGradient id="vinylLight2" cx="50%" cy="70%" r="90%">
+                <stop offset="0%" stopColor="#333" stopOpacity="0.4" />
+                <stop offset="25%" stopColor="#222" stopOpacity="0.0" />
                 <stop offset="100%" stopColor="#000" stopOpacity="0" />
               </radialGradient>
             </defs>
             <circle cx="250" cy="250" r="240" fill="url(#vinylLight)" stroke="#111" strokeWidth="5" />
-            <circle cx="250" cy="250" r="240" fill="url(#vinylLight2)" />
+            <circle cx="250" cy="250" r="245" fill="url(#vinylLight2)" stroke="#ccc" strokeWidth="1"/>
             {[...Array(20)].map((_, i) => (
               <circle
                 key={i}
@@ -296,4 +296,4 @@ const PlayerContainer = () => {
   );
 };
 
-export default PlayerContainer;
+export default React.memo(PlayerContainer);

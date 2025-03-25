@@ -1089,7 +1089,6 @@ section::before {
 
 }
 
-/* Container */
 .player-wrapper {
     width: 100%;
 }
@@ -1098,7 +1097,6 @@ section::before {
     display: flex;
     gap: 2vw;
     width: 100%;
-    /* Overall height is half the width (since the disc is 50% and square) */
     aspect-ratio: 2 / 1;
     box-sizing: border-box;
 }
@@ -1107,11 +1105,11 @@ section::before {
 .disc-wrapper {
     flex: 1;
     aspect-ratio: 1;
-    /* Forces a square */
     padding: 20px;
     border-radius: 24px;
     border: 2px solid rgb(143, 143, 143);
-    background: rgba(24, 24, 24, 0.55);
+    background-image: repeating-radial-gradient(  #000000 80%,#1d1d1d 90%,#232323 90%);
+    background-size: 60px 60px;
     position: relative;
 }
 
@@ -1122,7 +1120,6 @@ section::before {
     
 }
 .disc-container {
-    filter: drop-shadow(0px 5px 5px rgba(255, 255, 255, 0.548));
     transition: transform 0.5s ease-out;
 }
 
@@ -1144,7 +1141,6 @@ section::before {
 }
 
 .vinylplayer {
-    filter: drop-shadow(0px 2px 3px rgba(255, 255, 255, 0.548));
     position: absolute;
     top: 0;
     left: 0;
@@ -1220,7 +1216,7 @@ section::before {
     appearance: none;
     -webkit-appearance: none;
     width: 100%;
-    height: 10px;
+    height: 8px;
     border-radius: 12px;
     outline: none;
     box-sizing: border-box;
@@ -1228,16 +1224,16 @@ section::before {
 
 .progress-bar::-webkit-slider-runnable-track {
     width: 100%;
-    height: 10px;
+    height: 8px;
     background: transparent;
     border-radius: 12px;
 }
 
 .progress-bar::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    margin-top: -5px;
+    height: 16px;
+    width: 16px;
+    margin-top: -4px;
     background: rgb(255, 255, 255);
     border: 2px solid rgb(252, 107, 254);
     border-radius: 50%;
@@ -1359,7 +1355,7 @@ section::before {
     display: grid;
     margin-top: 10px;
     padding-left: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
     justify-content: end;
     gap: 10px;
     grid-auto-rows: auto;
@@ -1369,11 +1365,12 @@ section::before {
 .release-row {
     display: flex;
     justify-content: space-between;
-    padding: 5px 2.5px;
+    padding: 8px 4px;
     border-bottom: 2px solid #ccc;
     cursor: pointer;
     background: none;
     margin-right: 5px;
+    font-size: clamp(0.9rem, 1vw, 1.5rem);
 }
 
 .release-filter button {

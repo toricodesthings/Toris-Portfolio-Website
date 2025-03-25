@@ -1086,55 +1086,31 @@ section::before {
     width: 100%;
     position: relative;
 
+
 }
 
-.release-panel {
+/* Container */
+.player-wrapper {
     width: 100%;
 }
 
 .player {
     display: flex;
-    flex-direction: row;
-    width: 100%;
     gap: 2vw;
-}
-
-.playercpanel {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    border-radius: 24px;
-    border: 2px solid gray;
-    min-height: 500px;
-}
-
-.playerinfo {
-    flex: 0.6;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    border-radius: 24px;
     width: 100%;
-    text-align: center;
+    /* Overall height is half the width (since the disc is 50% and square) */
+    aspect-ratio: 2 / 1;
+    box-sizing: border-box;
 }
 
-.playerbrowser {
-    border-radius: 24px;
-    flex: 0.4;
-    height: 300px;
-    display: flex;
-    width: 100%;
-    background: rgba(72, 72, 72, 0.274);
-}
-
+/* Left Panel: Disc Wrapper */
 .disc-wrapper {
     flex: 1;
-    width: 100%;
+    aspect-ratio: 1;
+    /* Forces a square */
     padding: 20px;
     border-radius: 24px;
-    border: 2px solid rgb(194, 194, 194);
+    border: 2px solid rgb(143, 143, 143);
     background: rgba(24, 24, 24, 0.55);
     position: relative;
 }
@@ -1142,21 +1118,21 @@ section::before {
 .disc {
     height: auto;
     animation: play 2.5s linear infinite;
+    
+    
+}
+.disc-container {
+    filter: drop-shadow(0px 5px 5px rgba(255, 255, 255, 0.548));
+    transition: transform 0.5s ease-out;
 }
 
-.vinylplayer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    /* on top */
-    pointer-events: none;
-    /* optional: allow clicks through it */
-    height: auto;
+.disc-container.slide-out {
+    transform: translateX(-150%) translateY(-35%) rotate(90deg);
 }
 
-.disc {
-    filter: drop-shadow(0px 0px 5px rgba(174, 174, 174, 0.83));
+.disc-container.slide-in {
+    transform: translateX(0) translateY(0) rotate(0deg);
+
 }
 
 .disc.paused {
@@ -1167,20 +1143,59 @@ section::before {
     animation-play-state: running;
 }
 
+.vinylplayer {
+    filter: drop-shadow(0px 2px 3px rgba(255, 255, 255, 0.548));
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: auto;
+}
+
+.playercpanel {
+    width: 100%;
+    max-height: 100%;
+    border-radius: 24px;
+    border: 2px solid rgb(143, 143, 143);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Player Info Section */
+.playerinfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 24px;
+    width: 100%;
+    text-align: center;
+}
+
+
+.playerinfo .np-text {
+    width: 100%;
+    text-align: left;
+    font-weight: 400;
+    font-size: clamp(0.5rem, 2vw, 1rem);
+}
+
 .playerinfo h3 {
-    font-size: clamp(2rem, 3vw, 4rem);
+    margin-top: 10px;
+    font-size: clamp(1rem, calc(1rem + 1.5vw), 3rem);
     font-weight: bold;
 }
 
 .playerinfo .release-type {
-    font-size: clamp(0.9rem, 2vw, 2rem);
+    font-size: clamp(1rem, calc(0.4rem + 1vw), 1.5rem);
     font-weight: 300;
     color: #ffffff;
 }
 
 .playerinfo .release-artists {
-    font-size: clamp(1rem, 2vw, 3rem);
-    font-weight: 800;
+    font-size: clamp(1rem, calc(0.4rem + 1vw), 2rem);
+    font-weight: 600;
     color: #bababa;
     margin-top: 10px;
 }
@@ -1192,12 +1207,12 @@ section::before {
     color: rgba(255, 255, 255, 0.878);
 }
 
+/* Progress Bar */
 .progress-container {
     display: flex;
     align-items: center;
-    flex-direction: row;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 10px;
     gap: 20px;
 }
 
@@ -1215,7 +1230,6 @@ section::before {
     width: 100%;
     height: 10px;
     background: transparent;
-    border: 1px solid rgb(255, 255, 255);
     border-radius: 12px;
 }
 
@@ -1229,7 +1243,6 @@ section::before {
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
-
 }
 
 .progress-bar::-webkit-slider-thumb:hover {
@@ -1257,8 +1270,8 @@ section::before {
     cursor: pointer;
 }
 
+/* Player Buttons */
 .player-buttons {
-    flex: row;
     width: 100%;
     margin-top: 20px;
     display: flex;
@@ -1273,19 +1286,123 @@ section::before {
     background: black;
     border: 2px solid rgba(255, 255, 255, 0.392);
     color: white;
-    width: 50px;
-    height: 45px;
+    width: 20%;
+    height: 40px;
+    aspect-ratio: 1;
+    padding-bottom: 5px;
     text-align: center;
-    padding: 10px;
-    padding-bottom: 16px;
-    border-radius: 50%;
+    border-radius: 24px;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.player-buttons button:hover {
+    box-shadow: 0 0 4px white;
+    border: solid;
 }
 
 .player-buttons button:active {
     background: white;
     color: black;
+    transform: scale(0.95) translateY(5px);
+}
+
+/* Player Browser Section */
+.playerbrowser {
+    padding: 20px;
+    border-radius: 24px;
+    flex: 1;
+    display: flex;
+    width: 100%;
+    background: rgba(27, 27, 27, 0.5);
+    border-top: 2px solid rgba(255, 255, 255, 0.595);
+    overflow: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 127, 179, 0.7) transparent;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+.playerbrowser::-webkit-scrollbar {
+    height: 8px;
+}
+
+.playerbrowser::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.playerbrowser::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #a837e9, #d33d56);
+    border-radius: 10px;
+}
+
+.playerbrowser h3 {
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    margin-bottom: 10px;
+}
+
+/* Release Explorer */
+.release-explorer {
+    flex: 0.75;
+    overflow-y: auto;
+}
+
+.release-filter {
+    flex: 0.25;
+    align-items: right;
+    overflow-y: auto;
+    text-align: right;
+}
+
+.sort-container {
+    display: grid;
+    margin-top: 10px;
+    padding-left: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    justify-content: end;
+    gap: 10px;
+    grid-auto-rows: auto;
+    width: 100%;
+}
+
+.release-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 2.5px;
+    border-bottom: 2px solid #ccc;
+    cursor: pointer;
+    background: none;
+    margin-right: 5px;
+}
+
+.release-filter button {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.486);
+    color: white;
+    font-weight: 500;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    background: none;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.release-filter button:hover {
+    border-color: white;
+}
+
+.release-filter button:active {
+    color: black;
+    background: white;
+    transform: scale(0.85) translateY(2px);
 }
 
 @keyframes play {
@@ -1294,7 +1411,7 @@ section::before {
     }
 
     25% {
-        transform: rotate(90deg) translate(2px, -1px);
+        transform: rotate(90deg) translate(0.5px, -0.5px);
     }
 
     50% {
@@ -1302,11 +1419,11 @@ section::before {
     }
 
     75% {
-        transform: rotate(270deg) translate(0.8px, -0.3px);
+        transform: rotate(270deg) translate(0.3px, -0.3px);
     }
 
     100% {
-        transform: rotate(360deg) translate(0px, 0.5px);
+        transform: rotate(360deg) translate(0.5px, 0.5px);
     }
 }
 
@@ -1483,5 +1600,9 @@ section::before {
 
     .player {
         flex-direction: column;
+    }
+
+    .playercpanel {
+        min-height: 500px;
     }
 }

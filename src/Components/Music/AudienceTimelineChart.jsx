@@ -53,17 +53,17 @@ const lineConfig = [
   { 
     dataKey: "listeners", 
     name: "Listeners", 
-    color: "rgb(201, 114, 241)" 
+    color: "#c972f1" 
   },
   { 
     dataKey: "streams", 
     name: "Total Streams", 
-    color: "rgb(179, 33, 145)" 
+    color: "#b32191" 
   },
   { 
     dataKey: "followers", 
     name: "Followers", 
-    color: "rgb(234, 59, 59)" 
+    color: "#ea3b3b" 
   }
 ];
 

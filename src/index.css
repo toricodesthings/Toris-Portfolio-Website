@@ -6,7 +6,7 @@
 }
 
 body{
-    --color: rgba(225, 225, 225, 0.04);
+    --color: rgba(225, 225, 225, 0.06);
     background-color: #000000;
     /*background: linear-gradient(90deg, rgb(7, 0, 10),
     rgb(16, 0, 0));*/

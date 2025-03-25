@@ -22,7 +22,7 @@ export async function fetchArtistReleases() {
     const seconds = totalSeconds % 60;
     return {
       title: release.title,
-      featured_artists: release.featured_artist ?? [],
+      featured_artists: release.featured_artists,
       release_date: release.release_date,
       key: release.key,
       length: {
@@ -36,7 +36,7 @@ export async function fetchArtistReleases() {
       cover_song: release.is_cover,
     };
   });
-
+  console.log(releases)
   return releases;
 }
 

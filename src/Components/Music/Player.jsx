@@ -2,12 +2,27 @@ import { useState, useRef, useEffect } from "react";
 import "./MusicMain.css";
 import avatar from "../../assets/artwork_me.webp";
 import { fetchArtistReleases } from './getShepArtistRelease';
+import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 
-const MusicPlayer = ({ src, title, artist, artwork_link, releaseType }) => {
+const MusicPlayer = ({
+  src,
+  title,
+  artist,
+  artwork_link,
+  releaseType,
+  releases,
+  onSortChange,
+  onTrackSelect,
+  selectedTrack
+}) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
   const [notPlaying, setNotPlaying] = useState(true);
+
+  const [displayedArtwork, setDisplayedArtwork] = useState(artwork_link);
+  const [discAnimationClass, setDiscAnimationClass] = useState("");
+  const animationDuration = 600;
 
   const playAudio = () => {
     if (audioRef.current.paused) {
@@ -38,6 +53,26 @@ const MusicPlayer = ({ src, title, artist, artwork_link, releaseType }) => {
     };
   }, []);
 
+  // Trigger disc animation when selectedTrack changes
+  useEffect(() => {
+    if (selectedTrack && selectedTrack.artwork_link !== displayedArtwork) {
+      setDiscAnimationClass("slide-out");
+      setTimeout(() => {
+        setDisplayedArtwork(selectedTrack.artwork_link || avatar);
+        setDiscAnimationClass("slide-in");
+
+        if (audioRef.current) {
+          audioRef.current.play();
+          setNotPlaying(false);
+        }
+
+        setTimeout(() => {
+          setDiscAnimationClass("");
+        }, animationDuration);
+      }, animationDuration);
+    }
+  }, [selectedTrack, displayedArtwork]);
+
   const formatTime = (seconds) => {
     if (isNaN(seconds) || seconds < 0) return "0:00";
     const min = Math.floor(seconds / 60);
@@ -46,92 +81,73 @@ const MusicPlayer = ({ src, title, artist, artwork_link, releaseType }) => {
   };
 
   const percentage = duration > 0 ? (currentTime / duration) * 100 : 0;
-  const handleChange = (e) => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = e.target.value;
-    }
-  };
 
   return (
     <div className="player">
       <audio ref={audioRef} src={src} />
       <div className="disc-wrapper">
-        <svg
-          viewBox="0 0 500 500"
-          width="100%"
-          height="400"
-          xmlns="http://www.w3.org/2000/svg"
-          className={`disc ${notPlaying ? 'paused' : 'spinning'}`}
-        >
-          <defs>
-            <radialGradient id="vinylLight" cx="20%" cy="2.0%" r="70%">
-              <stop offset="0%" stopColor="#555" stopOpacity="0.4" />
-              <stop offset="30%" stopColor="#222" stopOpacity="0.07" />
-              <stop offset="100%" stopColor="#000" stopOpacity="0" />
-            </radialGradient>
-            <radialGradient id="vinylLight2" cx="75%" cy="70%" r="80%">
-              <stop offset="0%" stopColor="#555" stopOpacity="0.3" />
-              <stop offset="40%" stopColor="#222" stopOpacity="0.05" />
-              <stop offset="100%" stopColor="#000" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          {/* Outer Disc */}
-          <circle cx="250" cy="250" r="240" fill="url(#vinylLight)" stroke="gray" strokeWidth="4" />
-          <circle cx="250" cy="250" r="240" fill="url(#vinylLight2)" />
+        <div className={`disc-container ${discAnimationClass}`}>
+          <svg
+            key={displayedArtwork}
+            viewBox="0 0 500 500"
+            width="100%"
+            height="400"
+            xmlns="http://www.w3.org/2000/svg"
+            className={`disc ${notPlaying ? 'paused' : 'spinning'} ${discAnimationClass}`}
+          >
+            <defs>
+              <radialGradient id="vinylLight" cx="10%" cy="10%" r="100%">
+                <stop offset="0%" stopColor="#333" stopOpacity="0.3" />
+                <stop offset="25%" stopColor="#555" stopOpacity="0.05" />
+                <stop offset="100%" stopColor="#000" stopOpacity="0" />
+              </radialGradient>
+              <radialGradient id="vinylLight2" cx="70%" cy="70%" r="80%">
+                <stop offset="0%" stopColor="#333" stopOpacity="0.3" />
+                <stop offset="25%" stopColor="#222" stopOpacity="0.04" />
+                <stop offset="100%" stopColor="#000" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+            <circle cx="250" cy="250" r="240" fill="url(#vinylLight)" stroke="#111" strokeWidth="5" />
+            <circle cx="250" cy="250" r="240" fill="url(#vinylLight2)" />
+            {[...Array(20)].map((_, i) => (
+              <circle
+                key={i}
+                cx="250"
+                cy="250"
+                r={235 - i * 6}
+                fill="url(#vinylLight)"
+                stroke="gray"
+                strokeWidth="0.9"
+                opacity="0.6"
+              />
+            ))}
 
-          {/* Grooves */}
-          {[...Array(20)].map((_, i) => (
-            <circle
-              key={i}
-              cx="250"
-              cy="250"
-              r={235 - i * 6}
-              fill="url(#vinylLight)"
-              stroke="lightgray"
-              strokeWidth="0.9"
-              opacity="0.6"
-            />
-          ))}
+            {/* Center Label */}
+            <clipPath id="labelClip">
+              <circle cx="250" cy="250" r="100" fill="none" />
+            </clipPath>
+            <image href={displayedArtwork} x="135" y="135" width="225" height="225" clipPath="url(#labelClip)" />
 
-          {/* Center Label */}
-          <clipPath id="labelClip">
-            <circle cx="250" cy="250" r="100" fill="none" />
-          </clipPath>
-          <image href={artwork_link || avatar} x="150" y="150" width="200" height="200" clipPath="url(#labelClip)" />
-
-          {/* Center Hole */}
-          <circle cx="250" cy="250" r="8" fill="white" />
-          <circle cx="250" cy="250" r="4" fill="black" />
-        </svg>
-
+            {/* Center Hole */}
+            <circle cx="250" cy="250" r="8" fill="lightgray" />
+            <circle cx="250" cy="250" r="4" fill="black" />
+          </svg>
+        </div>
         <svg viewBox="0 0 500 500" width="100%" height="400" xmlns="http://www.w3.org/2000/svg" className="vinylplayer">
-          {/* Transparent background — just remove the <rect /> */}
-          
-
-
-          {/* Tonearm */}
           <line x1="450" y1="50" x2="370" y2="140" stroke="#aaa" strokeWidth="5" />
-
-          {/* Tonearm base */}
+          <polygon points="352.5, 140 377.5,140 365,170" fill="#ddd" />
           <circle cx="450" cy="50" r="16" fill="#eee" />
-
-          {/* Tonearm base */}
           <circle cx="450" cy="50" r="15" fill="#555" />
-
           <circle cx="365" cy="147.5" r="15" fill="#999" />
 
-          <polygon points="350, 140 380,140 365,160" fill="#ccc" />
-
-
-          {/* Controls (bottom-left corner) */}
-          <rect x="20" y="460" width="25" height="25" fill="purple" />
-          <rect x="60" y="460" width="25" height="25" fill="pink" />
-          <rect x="100" y="460" width="25" height="25" fill="orange" />
+          <rect x="20" y="460" width="25" height="25" fill="#c972f1" />
+          <rect x="60" y="460" width="25" height="25" fill="#b32191" />
+          <rect x="100" y="460" width="25" height="25" fill="#ea3b3b" />
         </svg>
-
       </div>
       <div className="playercpanel">
         <div className="playerinfo">
+          <p className="np-text">Now Playing ▶ </p>
           <h3>{title}</h3>
           <h4 className="release-type">{releaseType}</h4>
           <h4 className="release-artists">{artist}</h4>
@@ -145,7 +161,7 @@ const MusicPlayer = ({ src, title, artist, artwork_link, releaseType }) => {
               onChange={(e) => (audioRef.current.currentTime = e.target.value)}
               className="progress-bar"
               style={{
-                background: `linear-gradient(to right, rgba(197, 95, 244, 1) 0%, rgba(234, 59, 59, 1) ${percentage}%,#888888 ${percentage}%,#888888 100%)`
+                background: `linear-gradient(to right, rgba(197, 95, 244, 1) 0%, rgba(234, 59, 59, 1) ${percentage}%,#888888 ${percentage}%,#888888 100%)`,
               }}
             />
             <span>{formatTime(duration)}</span>
@@ -159,7 +175,43 @@ const MusicPlayer = ({ src, title, artist, artwork_link, releaseType }) => {
           </div>
         </div>
         <div className="playerbrowser">
-          <h3>/Music</h3>
+          <div className="release-explorer">
+            <h3>Releases</h3>
+            {releases && releases.map((release, index) => (
+              <div
+                key={release.id || index}
+                className="release-row"
+                onClick={() => onTrackSelect(release)}
+                style={
+                  selectedTrack && selectedTrack.title === release.title
+                    ? {
+                        background:
+                          "linear-gradient(270deg, rgba(197, 95, 244, 1) 0%, rgba(234, 59, 59, 1) 100%)",
+                        borderLeft: "2px solid #fff",
+                        borderRight: "2px solid #fff",
+                      }
+                    : {}
+                }
+              >
+                <span className="release-title">{"♪ " + release.title}</span>
+                <span className="release-length">
+                  {release.length && release.length.formatted ? release.length.formatted : ""}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="release-filter">
+            <h3>Sort By</h3>
+            <div className="sort-container">
+              <button onClick={() => onSortChange("title-asc")}>A-Z▲</button>
+              <button onClick={() => onSortChange("title-desc")}>Z-A▼</button>
+              <button onClick={() => onSortChange("length-asc")}>⏱▲</button>
+              <button onClick={() => onSortChange("length-desc")}>⏱▼</button>
+              <button onClick={() => onSortChange("date-asc")}>📅▲</button>
+              <button onClick={() => onSortChange("date-desc")}>📅▼</button>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -167,8 +219,9 @@ const MusicPlayer = ({ src, title, artist, artwork_link, releaseType }) => {
 };
 
 const PlayerContainer = () => {
-  const [latestRelease, setLatestRelease] = useState(null);
-  const [releases, setReleases] = useState([])
+  const [releases, setReleases] = useState([]);
+  const [sortOption, setSortOption] = useState("title-asc");
+  const [selectedTrack, setSelectedTrack] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -177,7 +230,7 @@ const PlayerContainer = () => {
         setReleases(data);
         const latest = data.find(release => release.latest_release);
         if (latest) {
-          setLatestRelease(latest);
+          setSelectedTrack(latest);
         }
       } catch (error) {
         console.error("Error fetching releases:", error);
@@ -186,25 +239,59 @@ const PlayerContainer = () => {
     fetchData();
   }, []);
 
-  if (!latestRelease) {
-    return <div>Loading Data...</div>;
+  if (!selectedTrack) {
+    return (
+      <div className="player-loader">
+        <HamsterLoadingUI />
+      </div>
+    );
   }
+
+  const getTotalSeconds = (lengthObj) => {
+    if (typeof lengthObj === 'object' && 'minutes' in lengthObj && 'seconds' in lengthObj) {
+      return lengthObj.minutes * 60 + lengthObj.seconds;
+    }
+    return 0;
+  };
+
+  const sortedReleases = [...releases].sort((a, b) => {
+    switch (sortOption) {
+      case "title-asc":
+        return a.title.localeCompare(b.title);
+      case "title-desc":
+        return b.title.localeCompare(a.title);
+      case "length-asc":
+        return getTotalSeconds(a.length) - getTotalSeconds(b.length);
+      case "length-desc":
+        return getTotalSeconds(b.length) - getTotalSeconds(a.length);
+      case "date-asc":
+        return new Date(a.release_date) - new Date(b.release_date);
+      case "date-desc":
+        return new Date(b.release_date) - new Date(a.release_date);
+      default:
+        return 0;
+    }
+  });
 
   const artistString =
     "By: Shep" +
-    (latestRelease.featured_artists && latestRelease.featured_artists.length > 0
-      ? ", " + latestRelease.featured_artists.join(", ")
+    (selectedTrack.featured_artists && selectedTrack.featured_artists.length > 0
+      ? ", " + selectedTrack.featured_artists.join(", ")
       : "");
 
-  const releaseType = latestRelease.cover_song ? "(Cover)" : "(Original)";
+  const releaseType = selectedTrack.cover_song ? "(Cover)" : "(Original)";
 
   return (
     <MusicPlayer
-      src={latestRelease.mp3_link}
-      title={latestRelease.title}
+      src={selectedTrack.mp3_link}
+      title={selectedTrack.title}
       artist={artistString}
-      artwork_link={latestRelease.artwork_link}
+      artwork_link={selectedTrack.artwork_link}
       releaseType={releaseType}
+      releases={sortedReleases}
+      onSortChange={setSortOption}
+      onTrackSelect={setSelectedTrack}
+      selectedTrack={selectedTrack}
     />
   );
 };

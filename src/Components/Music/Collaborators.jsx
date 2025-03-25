@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './MusicMain.css';
-import collaboratorsData from './collaborators.json';
 
 import spotifyImg from "../../assets/social/spotify.svg";
 import youtubeImg from "../../assets/social/youtube.svg";
@@ -21,6 +20,15 @@ const socialIcons = {
 };
 
 const Collaborators = () => {
+    const [collaboratorsData, setCollaboratorsData] = useState([]);
+
+    useEffect(() => {
+        fetch('/collaborators.json')
+            .then((res) => res.json())
+            .then((data) => setCollaboratorsData(data))
+            .catch((err) => console.error('Failed to load collaborators.json:', err));
+    }, []);
+
     const [selectedIndex, setSelectedIndex] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
     const [slideDirection, setSlideDirection] = useState(null);

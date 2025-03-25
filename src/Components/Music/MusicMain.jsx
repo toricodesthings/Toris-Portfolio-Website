@@ -3,6 +3,12 @@ import "./MusicMain.css";
 import { fetchShepArtistStat } from './getShepArtistStat.js';
 import { useLocation } from 'react-router-dom';
 
+
+import MusicProductionStack from './MusicProductionStack';
+
+//Fun Fact Terminal
+import FunFactTerminal  from './FunFactTerminal';
+
 //Chart Module
 import AudienceTimelineChart from './AudienceTimelineChart';
 
@@ -19,16 +25,6 @@ import tidalImg from "../../assets/social/tidal.svg";
 import amImg from "../../assets/social/am.svg";
 import soundcloudImg from "../../assets/social/soundcloud.svg";
 
-//MProd Stack Logos
-import abletonImg from "../../assets/tools/ableton.webp";
-import reaperImg from "../../assets/tools/reaper.webp";
-import iZotopeOImg from "../../assets/tools/iZotopeOzone.webp";
-import iZotopeRXImg from "../../assets/tools/iZotopeRX.webp";
-import NIImg from "../../assets/tools/NI.webp";
-import uadImg from "../../assets/tools/UAD.webp";
-import wavesImg from "../../assets/tools/waves.webp";
-import neuralImg from "../../assets/tools/Neural.webp";
-import vitalImg from "../../assets/tools/Vital.webp";
 
 //Social link map
 const socialLinks = [
@@ -38,129 +34,6 @@ const socialLinks = [
     { name: "Apple Music", url: "https://music.apple.com/us/artist/shep/1747760245", img: amImg },
     { name: "Soundcloud", url: "https://soundcloud.com/shepy2", img: soundcloudImg },
 ];
-
-const musicTools = [
-    { img: abletonImg, name: "Ableton Live", invert: false },
-    { img: reaperImg, name: "Reaper", invert: false },
-    { img: iZotopeOImg, name: "iZotope Ozone", invert: false },
-    { img: iZotopeRXImg, name: "iZotope RX", invert: false },
-    { img: uadImg, name: "Universal Audio", invert: false },
-    { img: wavesImg, name: "Waves Plugins", invert: true },
-    { img: vitalImg, name: "Vital Synth", invert: false },
-    { img: neuralImg, name: "Neural DSP", invert: true },
-    { img: NIImg, name: "Native Instruments", invert: false }
-];
-
-//Fun fact list
-const funFacts = {
-    "Favorite Key": "D# Minor",
-    "Favorite Tempo": "140 BPM",
-    "First Release": "Eclipse (2021)",
-    "Favorite Release": "Calydon (2024)",
-    "Favorite DAW": "Ableton Live Suite",
-    "Favorite Synths": "Vital & Serum",
-    "Favorite Genres": "Metalcore & Trap",
-    "Clear": "Click any option to reveal a fact"
-};
-
-const song = {
-    src: "https://your-audio-file-url.mp3",
-    title: "Song Name",
-    artist: "Artist Name"
-};
-
-const MusicProductionStack = () => {
-    return (
-        <div className="music-stack-container">
-            <div className='music-production-stack'>
-                <div className="scrolling-icons">
-                    {[...musicTools, ...musicTools].map((tool, index) => (
-                        <div key={index} className="music-tool">
-                            <img
-                                src={tool.img}
-                                alt={tool.name}
-                                className={`music-tool-icon ${tool.invert ? 'invert' : ''}`}
-                            />
-                            <span className="music-tool-text">{tool.name}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const FunFactTerminal = () => {
-    const [displayedText, setDisplayedText] = useState("Click an option to reveal a fact");
-    const [isTyping, setIsTyping] = useState(false);
-    const [showCursor, setShowCursor] = useState(true);
-    const typingSpeed = 35;
-    const eraseSpeed = 15;
-
-    useEffect(() => {
-        if (!isTyping) {
-            const cursorInterval = setInterval(() => {
-                setShowCursor(prev => !prev);
-            }, 500);
-            return () => clearInterval(cursorInterval);
-        }
-    }, [isTyping]);
-
-    const eraseText = (callback) => {
-        if (isTyping) return;
-        setIsTyping(true);
-        setShowCursor(false);
-
-        let i = displayedText.length;
-        const erasingInterval = setInterval(() => {
-            setDisplayedText((prev) => prev.slice(0, -1));
-            i--;
-            if (i <= 0) {
-                clearInterval(erasingInterval);
-                callback();
-            }
-        }, eraseSpeed);
-    };
-
-    const typeText = (text) => {
-        let i = -1;
-        setDisplayedText("");
-
-        const typingInterval = setInterval(() => {
-            if (i < text.length - 1) {
-                i++;
-                setDisplayedText((prev) => prev + text[i]);
-            } else {
-                clearInterval(typingInterval);
-                setIsTyping(false);
-                setShowCursor(true);
-            }
-        }, typingSpeed);
-    };
-
-    const handleClick = (factKey) => {
-        if (isTyping) return;
-
-        const newText = funFacts[factKey] || "Click an option to reveal a fact";
-
-        eraseText(() => typeText(newText));
-    };
-
-    return (
-        <div className="fun-fact-terminal">
-            <div className="terminal-display">
-                {displayedText}
-            </div>
-            <div className="terminal-options">
-                {Object.keys(funFacts).map((fact) => (
-                    <button key={fact} onClick={() => handleClick(fact)}>
-                        {fact}
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
-};
 
 const Music = () => {
     const [followers, setFollowers] = useState("N/A");
@@ -316,10 +189,9 @@ const Music = () => {
             </section>
 
             <section className="release-section">
-                <h2>Releases (Under Construction)</h2>
-                <div className='release-panel'>
-                    <Player />
-                </div>
+                <h2>Releases</h2>
+                <div className="player-wrapper">
+                <Player /></div>
             </section>
         </div>
     );

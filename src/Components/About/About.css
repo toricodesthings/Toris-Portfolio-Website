@@ -299,7 +299,6 @@ transform: translateY(-3px);
     margin-bottom: 40px;
 }
 
-/* Set child elements to have equal height */
 .education-panel p,
 .live-feed-element {
     flex: 1;
@@ -308,7 +307,6 @@ transform: translateY(-3px);
     overflow: hidden;
 }
 
-/* Whole Terminal Container */
 .terminal-container {
     display: flex;
     flex-direction: column;
@@ -549,13 +547,11 @@ transform: translateY(-3px);
     border-radius: 50%;
     position: absolute;
     right: -3px;
-    /* Position on the vertical line */
     top: 6px;
     z-index: 2;
     transition: all 0.3s ease-in;
 }
 
-/* Timeline Text */
 .timeline-text {
     display: flex;
     flex-direction: column;
@@ -580,8 +576,6 @@ transform: translateY(-3px);
     transform: translateX(-10px) scale(1.1);
 }
 
-
-/* Year Text */
 .timeline-year {
     font-weight: bold;
     font-size: 1.4em;
@@ -589,7 +583,6 @@ transform: translateY(-3px);
     color: rgb(255, 255, 255);
 }
 
-/* Description Text */
 .timeline-description {
     font-size: 1em;
     color: rgba(255, 255, 255, 0.968);
@@ -682,7 +675,6 @@ transform: translateY(-3px);
     scroll-behavior: smooth;
 }
 
-/* Sleek scrollbar styling */
 .music-stat-box::-webkit-scrollbar {
     height: 8px;
     margin-top: 20px;
@@ -698,7 +690,6 @@ transform: translateY(-3px);
     border-radius: 10px;
 }
 
-/* Ensure items do not shrink and can overflow */
 .music-stat-item {
     display: flex;
     flex-direction: column;

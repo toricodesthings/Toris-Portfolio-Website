@@ -128,7 +128,6 @@ const TechStack = () => {
     return initialNodes;
   }, [containerSize]);
   
-  
 
   return (
     <div 

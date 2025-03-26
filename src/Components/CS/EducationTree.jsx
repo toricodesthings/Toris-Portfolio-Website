@@ -19,7 +19,8 @@ function getCubicBezierPoint(t, p0, p1, p2, p3) {
 }
 
 const EducationTree = () => {
-    const { ref, inView } = useInView({ // Trigger when 30% of the element is visible
+    const { ref, inView } = useInView({
+        rootMargin: '0px 0px -10% 0px', // Adjust this value to see if it helps
         triggerOnce: true,
       });
       

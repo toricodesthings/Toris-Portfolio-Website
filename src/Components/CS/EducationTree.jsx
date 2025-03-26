@@ -20,7 +20,7 @@ function getCubicBezierPoint(t, p0, p1, p2, p3) {
 const EducationTree = () => {
 
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.3 });
+    const isInView = useInView(ref, { once: true });
 
     // Define multiple course arrays for different trees
     const coursesList = [

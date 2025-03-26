@@ -76,7 +76,6 @@ const Collaborators = () => {
         }
     };
 
-    // Clear slideDirection after animation duration
     useEffect(() => {
         if (slideDirection) {
             const timer = setTimeout(() => setSlideDirection(null), 300);

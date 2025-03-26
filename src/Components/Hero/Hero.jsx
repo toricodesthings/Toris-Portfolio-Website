@@ -103,7 +103,7 @@ const Hero = () => {
           <div className="work-options-container" onClick={(e) => e.stopPropagation()}>
             <Link to="/projects" className="work-option-box pop-in">
               <div className="option-image-container">
-                <img src={cs_img} alt="Coding Projects" />
+                <img loading="lazy" src={cs_img} alt="Coding Projects" />
               </div>
               <div className="option-glow"></div>
               <h2>Computer Science</h2>
@@ -111,7 +111,7 @@ const Hero = () => {
 
             <Link to="/music" className="work-option-box pop-in">
               <div className="option-image-container">
-                <img src={music_img} alt="Music" />
+                <img loading="lazy" src={music_img} alt="Music" />
               </div>
               <div className="option-glow"></div>
               <h2>Music</h2>

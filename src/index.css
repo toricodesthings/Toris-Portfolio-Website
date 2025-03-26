@@ -27,4 +27,27 @@ body, html {
     height: 100vh;
 }
 
+.main-loading {
+    width: 100%;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10vw;
+}
+
+.main-loading p {
+    font-size: 4rem;
+    animation: blink 2s infinite alternate;
+}
+
+@keyframes blink {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
   

@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
-import "./CSMain.css"; // Import the CSS for styling
+import "./CSMain.css";
 
 // Helper: evaluate a cubic Bézier at parameter t
 function getCubicBezierPoint(t, p0, p1, p2, p3) {
@@ -22,6 +22,7 @@ const EducationTree = () => {
     const { ref, inView } = useInView({
         rootMargin: '0px 0px -10% 0px', // Adjust this value to see if it helps
         triggerOnce: true,
+        threshold: 0.3
       });
       
 

@@ -130,6 +130,7 @@
     position: relative;
     font-weight: 800;
     text-transform: capitalize;
+    min-height: 2em;
 }
 
 

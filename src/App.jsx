@@ -6,8 +6,8 @@ import Navbar from './Components/Navbar/Navbar';
 import HamsterLoader from './Components/LoadingUI/HamsterLoader';
 import Home from './Pages/Home';
 
-const MusicPage = lazy(() => import('./Pages/Music'));
-const Projects = lazy(() => import('./Pages/CSProjects'));
+const MusicPage = lazy(() => import(/* webpackPrefetch: true */ './Pages/Music'));
+const Projects = lazy(() => import(/* webpackPrefetch: true */'./Pages/CSProjects'));
 const About = lazy(() => import('./Pages/About'));
 const Misc = lazy(() => import('./Pages/Misc'));
 const Contact = lazy(() => import('./Pages/Contact'));

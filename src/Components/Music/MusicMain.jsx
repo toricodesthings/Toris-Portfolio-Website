@@ -97,7 +97,7 @@ const Music = () => {
                 '.shep-pfp-left, .shep-description-right, .bio-para, ' +
                 '.social-links-grid, .social-container-title, .music-stack, .music-terminal, ' +
                 '.counter-wrapper, .player-wrapper, .live-card, ' +
-                '.collab-grid, .collab-item'
+                '.collab-grid'
             );
 
             const observer = new IntersectionObserver((entries, obs) => {
@@ -133,7 +133,7 @@ const Music = () => {
                         obs.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.4 });
+            }, { threshold: 0.3 });
 
             animatedElements.forEach((el) => observer.observe(el));
         };

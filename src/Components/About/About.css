@@ -77,6 +77,14 @@ section {
     animation: glowShift 5s ease-in-out infinite;
 }
 
+.about section h2 {
+    font-size: clamp(2rem, 3vw, 3rem);
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+}
+
 @keyframes glowShift {
     0% {
         box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
@@ -107,14 +115,6 @@ section {
 
 section::before {
     background-attachment: fixed;
-}
-
-.about section h2 {
-    font-size: clamp(2rem, 3vw, 3rem);
-    color: white;
-    margin-bottom: 40px;
-    text-align: center;
-    position: relative;
 }
 
 
@@ -165,6 +165,7 @@ section::before {
 }
 
 .about .about-para h2 {
+    display: inline-flex;
     font-size: clamp(2rem, 3vw, 3rem);
     color: white;
     margin-bottom: 20px;
@@ -729,6 +730,10 @@ transform: translateY(-3px);
 
     section::before {
         background-attachment: scroll;
+    }
+
+    .about .about-para h2 {
+        text-align: center;
     }
 
     .intro-section {

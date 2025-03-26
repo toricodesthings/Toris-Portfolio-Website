@@ -72,7 +72,6 @@ const Music = () => {
             try {
                 const data = await fetchShepArtistStat();
 
-                // Update stats values
                 setFollowers(data.followers);
                 setMonthlyListeners(data.monthly_listeners);
                 setPopularityIndex(data.popularity);
@@ -96,7 +95,7 @@ const Music = () => {
         const initFadeInObserver = () => {
             const animatedElements = document.querySelectorAll(
                 '.shep-pfp-left, .shep-description-right, .bio-para, ' +
-                '.social-links-grid, .music-stack, .music-terminal, ' +
+                '.social-links-grid, .social-container-title, .music-stack, .music-terminal, ' +
                 '.counter-wrapper, .player-wrapper, .live-card, ' +
                 '.collab-grid, .collab-item'
             );
@@ -181,7 +180,7 @@ const Music = () => {
                 </div>
 
                 <div className="social-links-panel">
-                    <h2>Follow my Journey on</h2>
+                    <h2 className='social-container-title'>Follow my Journey on</h2>
                     <div className="social-links-grid">
                         {socialLinks.map((link) => (
                             <a key={link.name} href={link.url} className="social-link" target="_blank" rel="noopener noreferrer">

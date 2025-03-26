@@ -9,7 +9,7 @@
     position: relative;
 }
 
-.shep-pfp-left, .shep-description-right, .bio-para, 
+.shep-pfp-left, .shep-description-right, .bio-para, .social-container-title,
 .social-link, .music-stack, .music-terminal,
 .player-wrapper, .live-card, .collab-item {
     opacity: 0;
@@ -18,7 +18,7 @@
 
 .shep-pfp-left.visible, .shep-description-right.visible, .bio-para.visible, 
 .social-link.visible, .music-stack.visible, .music-terminal.visible,
-.player-wrapper.visible, .live-card.visible, 
+.player-wrapper.visible, .live-card.visible, .social-container-title.visible,
 .collab-item.visible {
     opacity: 1;
 }
@@ -222,7 +222,6 @@ section::before {
     width: 100%;
     margin-bottom: 20px;
 }
-
 
 /* Social Links Grid */
 .social-links-grid {
@@ -432,7 +431,6 @@ section::before {
 
 .scrolling-icons {
     display: flex;
-    will-change: transform;
     gap: 80px;
     align-items: center;
     height: 100%;
@@ -475,7 +473,6 @@ section::before {
 .music-tool-icon.invert {
     filter: invert(1);
 }
-
 
 .music-tool:hover .music-tool-icon {
     transform: translateY(10px);
@@ -688,7 +685,6 @@ section::before {
     }
 }
 
-/* Axis Tick Text Animation */
 .recharts-cartesian-axis-tick text {
     opacity: 0;
     animation: fadeIn 0.3s forwards;
@@ -1341,6 +1337,7 @@ section::before {
     background: rgba(27, 27, 27, 0.5);
     border-top: 2px solid rgba(255, 255, 255, 0.595);
     overflow: hidden;
+
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 127, 179, 0.7) transparent;
     position: relative;
@@ -1348,6 +1345,7 @@ section::before {
 }
 
 .playerbrowser::-webkit-scrollbar {
+    width: 8px;
     height: 8px;
 }
 
@@ -1356,8 +1354,9 @@ section::before {
 }
 
 .playerbrowser::-webkit-scrollbar-thumb {
-    background: linear-gradient(to right, #a837e9, #d33d56);
-    border-radius: 10px;
+    background-color: rgba(255, 127, 179, 0.7);
+    border-radius: 20px;
+    border: solid 2px transparent;
 }
 
 .playerbrowser h3 {

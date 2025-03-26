@@ -213,7 +213,7 @@ const EducationTree = () => {
     }, [courses, trunkPoints]);
 
     return (
-        <div className="education-tree-container">
+        <div className="education-tree-container" ref={ref}>
             <h3>Year {currentTreeIndex + 1}</h3>
 
             <svg className="sakura" key={currentTreeIndex} width="100%" height="750" viewBox="-300 -175 700 750">
@@ -230,7 +230,6 @@ const EducationTree = () => {
                 </defs>
                 <g filter="url(#dropShadow)">
                     <motion.path
-                        ref={ref}
                         d={trunkPoints.path}
                         fill="none"
                         stroke="#954535"
@@ -244,7 +243,6 @@ const EducationTree = () => {
                     {/* Curved branches */}
                     {branches.map((branch, index) => (
                         <motion.path
-                            ref={ref}
                             key={`branch-${index}`}
                             d={branch.pathData}
                             fill="none"
@@ -260,7 +258,6 @@ const EducationTree = () => {
                     {/* Tree foliage */}
                     {foliage.map((segment, i) => (
                         <motion.path
-                            ref={ref}
                             key={`foliage-${i}`}
                             d={segment.pathData}
                             fill={segment.fill}
@@ -273,7 +270,6 @@ const EducationTree = () => {
                     {/* Course labels */}
                     {branches.map((branch, index) => (
                         <motion.g key={`label-${index}`}
-                            ref={ref}
                             initial={{ opacity: 0 }}
                             animate={inView ? { opacity: 1 } : { opacity: 0 }}
                             transition={{ duration: 0.3, delay: 2 + index * 0.2 }}

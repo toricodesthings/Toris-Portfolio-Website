@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { forceSimulation, forceCollide, forceX, forceY, forceManyBody } from 'd3-force';
+import { forceSimulation, forceCollide, forceX, forceY } from 'd3-force';
 import './CSMain.css';
 
 import pythonImg from "../../assets/skills/python.svg";

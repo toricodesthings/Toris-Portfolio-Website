@@ -40,7 +40,8 @@
     width: clamp(140px, 35vh, 420px);
     aspect-ratio: 1;
     perspective: 1000px;
-    -webkit-perspective: 1000px; /* Added vendor prefix */
+    -webkit-perspective: 1000px;
+    /* Added vendor prefix */
 }
 
 .flip-card-inner {
@@ -48,20 +49,31 @@
     height: 100%;
     transition: transform 0.3s;
     transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d; /* Added vendor prefix */
+    -webkit-transform-style: preserve-3d;
     z-index: 2;
 }
 
-.flip-card-inner.flipped, .flip-card-back {
+.flip-card-inner.flipped {
     transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg); /* Added vendor prefix */
+    -webkit-transform: rotateY(180deg);
 }
+
 
 .flip-card-front,
 .flip-card-back {
     position: absolute;
+    width: 100%;
+    height: 100%;
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden; /* Added vendor prefix */
+    -webkit-backface-visibility: hidden;
+    /* Force hardware acceleration */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
 }
 
 .hero img {
@@ -73,6 +85,8 @@
     border: 1px solid rgba(255, 154, 243, 0.5);
     box-shadow: 0 0 4px rgba(255, 154, 186, 0.5);
     transition: all 0.3s ease-in-out;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .hero .image-glow {

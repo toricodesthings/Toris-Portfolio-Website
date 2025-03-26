@@ -18,7 +18,6 @@ const Hero = () => {
   const remainingText = " Developer and Artist based in Ottawa.";
   const fullString = `${gradientText}${remainingText}`;
 
-
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {

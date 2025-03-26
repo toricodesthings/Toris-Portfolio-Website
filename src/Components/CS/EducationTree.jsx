@@ -1,5 +1,6 @@
-import React, { useRef, useMemo, useState } from "react";
-import { motion, useInView } from 'framer-motion';
+import React, { useRef, useEffect, useMemo, useState } from "react";
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 import "./CSMain.css"; // Import the CSS for styling
 
 // Helper: evaluate a cubic Bézier at parameter t
@@ -18,9 +19,10 @@ function getCubicBezierPoint(t, p0, p1, p2, p3) {
 }
 
 const EducationTree = () => {
-
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
+    const { ref, inView } = useInView({ // Trigger when 30% of the element is visible
+        triggerOnce: true,
+      });
+      
 
     // Define multiple course arrays for different trees
     const coursesList = [
@@ -234,7 +236,7 @@ const EducationTree = () => {
                         strokeWidth="60"
                         strokeLinecap="round"
                         initial={{ pathLength: 0.1, opacity: 0 }}
-                        animate={isInView ? { opacity: 1, pathLength: 1 } : { opacity: 0, pathLength: 0.1 }}
+                        animate={inView ? { opacity: 1, pathLength: 1 } : { opacity: 0, pathLength: 0.1 }}
                         transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
                     />
 
@@ -249,7 +251,7 @@ const EducationTree = () => {
                             strokeWidth="20"
                             strokeLinecap="round"
                             initial={{ opacity: 0, pathLength: 0.1 }}
-                            animate={isInView ? { opacity: 1, pathLength: 1 } : { opacity: 0, pathLength: 0.1 }}
+                            animate={inView ? { opacity: 1, pathLength: 1 } : { opacity: 0, pathLength: 0.1 }}
                             transition={{ duration: 1, delay: 1 + index * 0.2, ease: "easeOut" }}
                         />
                     ))}
@@ -262,7 +264,7 @@ const EducationTree = () => {
                             d={segment.pathData}
                             fill={segment.fill}
                             initial={{ opacity: 0, scale: 0.1 }}
-                            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.1 }}
+                            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.1 }}
                             transition={{ duration: 0.5, delay: segment.delay, ease: "backOut" }}
                         />
                     ))}
@@ -272,7 +274,7 @@ const EducationTree = () => {
                         <motion.g key={`label-${index}`}
                             ref={ref}
                             initial={{ opacity: 0 }}
-                            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                            animate={inView ? { opacity: 1 } : { opacity: 0 }}
                             transition={{ duration: 0.3, delay: 2 + index * 0.2 }}
                         >
                             <rect

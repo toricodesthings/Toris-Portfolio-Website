@@ -43,6 +43,12 @@ async function getMonthlyListeners() {
 }
 
 export default async function handler(req, res) {
+  const secret = req.headers['x-cron-secret'];
+
+  if (secret !== process.env.CRON_SECRET) {
+    return res.status(401).json({ message: 'Nuh uh! Unauthorized' });
+  }
+
   try {
     const accessToken = await getSpotifyAccessToken();
     const artistData = await getArtistData(accessToken);

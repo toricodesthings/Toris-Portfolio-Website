@@ -2,10 +2,7 @@
   "crons": [
     {
       "path": "/api/shepartiststat",
-      "schedule": "0 21 * * *",
-      "headers": {
-        "x-cron-secret": "@artist_cron_secret"
-      }
+      "schedule": "0 21 * * *"
     }
   ],
   "rewrites": [

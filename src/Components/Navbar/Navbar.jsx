@@ -53,7 +53,7 @@ const Navbar = () => {
           <li><Link to="/music">Music</Link></li>
         </div>
         <div className='pop-up'>
-          <li><Link to="/projects">Coding Projects</Link></li>
+          <li><Link to="/projects">Programming</Link></li>
         </div>
         <div className='pop-up'>
           <li><Link to="/about">About Me</Link></li>

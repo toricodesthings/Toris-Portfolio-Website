@@ -9,6 +9,20 @@
     position: relative;
 }
 
+.shep-pfp-left, .shep-description-right, .bio-para, 
+.social-link, .music-stack, .music-terminal,
+.player-wrapper, .live-card, .collab-item {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.shep-pfp-left.visible, .shep-description-right.visible, .bio-para.visible, 
+.social-link.visible, .music-stack.visible, .music-terminal.visible,
+.player-wrapper.visible, .live-card.visible, 
+.collab-item.visible {
+    opacity: 1;
+}
+
 .music-title {
     text-align: center;
     animation: textGlowShift 10s ease-in-out infinite;
@@ -62,8 +76,8 @@ section {
     animation: glowShift 5s ease-in-out infinite;
 }
 
-section h2 {
-    font-size: clamp(2rem, 4vw, 36px);
+.music section h2 {
+    font-size: clamp(2rem, 3vw, 3rem);
     color: white;
     margin-bottom: 40px;
     text-align: center;
@@ -92,8 +106,8 @@ section h2 {
     }
 
     100% {
-        box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
-            0 0 25px rgba(234, 59, 59, 0.4);
+        box-shadow: 0 0 2px rgba(197, 95, 244, 0.5),
+            0 0 4px rgba(234, 59, 59, 0.4);
     }
 }
 
@@ -101,7 +115,6 @@ section::before {
     background-attachment: fixed;
 }
 
-/* Shep Section */
 .shep-section {
     display: flex;
     flex-direction: column;
@@ -156,7 +169,7 @@ section::before {
     position: relative;
 }
 
-.bio-para h2 {
+.music .bio-para .bio-title {
     display: inline-block;
     position: relative;
     font-size: clamp(2rem, 5vw, 56px);
@@ -874,14 +887,17 @@ section::before {
     font-size: 1.5rem;
 }
 
+.collab-item-name, .collab-item-role {
+    transition: all 0.3s ease;
+}
+
 .collab-item img {
     width: clamp(125px, 20vw, 225px);
-    height: auto;
     aspect-ratio: 1;
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid #ffffffba;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .collab-item-role {
@@ -892,9 +908,22 @@ section::before {
 
 .collab-item:hover img {
     transform: scale(1.1);
+    border-color: white;
+    box-shadow: 0 0 10px rgb(238, 95, 254),
+                0 0 15px rgb(255, 93, 120);
 }
 
-/* Container for the expanded section that appears below a row */
+.collab-item:hover .collab-item-name, .collab-item:hover .collab-item-role {
+    text-shadow: 0 0 1px rgb(253, 131, 255),
+                0 0 2px rgb(255, 93, 120);
+
+    transform: translateY(5px);
+}
+
+.collab-item:active img {
+    transform: scale(0.95);
+}
+
 .collab-expanded-row {
     width: 100%;
     margin-bottom: 20px;
@@ -912,11 +941,10 @@ section::before {
     animation: slideDown 0.3s ease-out;
 }
 
-/* Keyframe animation for a sleek slide down effect */
 @keyframes slideDown {
     from {
         opacity: 0;
-        transform: translateY(-20%);
+        transform: translateY(-25%);
     }
 
     to {
@@ -953,7 +981,6 @@ section::before {
     font-size: clamp(1.8rem, 3vw, 28px);
 }
 
-/* Text area in expanded section */
 .collab-expanded-text {
     flex: 1;
     font-size: 1rem;
@@ -976,7 +1003,6 @@ section::before {
 .collab-nav-arrow.left {
     font-size: 20px;
     margin-right: 10px;
-
 }
 
 .collab-nav-arrow.right {
@@ -998,10 +1024,14 @@ section::before {
 
 .collab-nav-arrow.left:active {
     transform: scale(1) translateX(2px);
+    background: #d245de;
+    border-color: transparent;
 }
 
 .collab-nav-arrow.right:active {
-    transform: scale(1) translateX(2px);
+    transform: scale(1) translateX(-2px);
+    background: #de5245;
+    border-color: transparent;
 }
 
 .slide-container {
@@ -1086,7 +1116,6 @@ section::before {
     width: 100%;
     position: relative;
 
-
 }
 
 .player-wrapper {
@@ -1101,10 +1130,10 @@ section::before {
     box-sizing: border-box;
 }
 
-/* Left Panel: Disc Wrapper */
 .disc-wrapper {
     flex: 1;
     aspect-ratio: 1;
+    width: 100%;
     padding: 20px;
     border-radius: 24px;
     border: 2px solid rgb(143, 143, 143);
@@ -1117,7 +1146,7 @@ section::before {
     height: auto;
     animation: play 2.5s linear infinite;
     
-    
+
 }
 .disc-container {
     transition: transform 0.5s ease-out;
@@ -1157,12 +1186,11 @@ section::before {
     flex-direction: column;
 }
 
-/* Player Info Section */
 .playerinfo {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     padding: 20px;
     border-radius: 24px;
     width: 100%;
@@ -1203,7 +1231,6 @@ section::before {
     color: rgba(255, 255, 255, 0.878);
 }
 
-/* Progress Bar */
 .progress-container {
     display: flex;
     align-items: center;
@@ -1338,7 +1365,6 @@ section::before {
     margin-bottom: 10px;
 }
 
-/* Release Explorer */
 .release-explorer {
     flex: 0.75;
     overflow-y: auto;
@@ -1600,6 +1626,6 @@ section::before {
     }
 
     .playercpanel {
-        min-height: 500px;
+        min-height: 600px;
     }
 }

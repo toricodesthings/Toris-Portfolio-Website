@@ -29,7 +29,7 @@ const techItems = [
   { name: 'HTML', Logo: htmlImg, proficiency: 10 },
   { name: 'Git', Logo: gitImg, proficiency: 7 },
   { name: 'MySQL', Logo: mysqlImg, proficiency: 3 },
-  { name: 'GraphQL', Logo: gqlImg, proficiency: 3 },
+  { name: 'GraphQL', Logo: gqlImg, proficiency: 2 },
   { name: 'Supabase', Logo: supabaseImg, proficiency: 8 },
   { name: 'Tensorflow', Logo: tensorflowImg, proficiency: 1 },
 ];
@@ -38,12 +38,12 @@ const TechStack = () => {
   const containerRef = useRef(null);
   const [containerSize, setContainerSize] = useState({ width: 800, height: 500 });
 
-  // Update container size on window resize.
   useEffect(() => {
     const updateSize = () => {
       if (containerRef.current) {
         const clientWidth = containerRef.current.clientWidth;
-        const newHeight = clientWidth < 768 ? 750 : 400;
+        const clientHeight = containerRef.current.clientWidth;
+        const newHeight = clientWidth/clientHeight < 1 ? 800 : 600;
         setContainerSize({ width: clientWidth, height: newHeight });
       }
     };
@@ -51,64 +51,84 @@ const TechStack = () => {
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
   }, []);
+  const baseScale = Math.min(containerSize.width / 800, containerSize.height / 600);
+  const isPortrait = containerSize.width < containerSize.height;
+  const minScale = 0.75; 
+  const scaleFactor = Math.max(isPortrait ? baseScale * 0.75 : baseScale, minScale);
 
-  // Compute node positions using a D3 force simulation.
   const nodes = useMemo(() => {
-    const padding = 25;
+    const padding = 20;
+
     const itemCount = techItems.length;
-    const initialNodes = techItems.map(item => {
-      const imageSize = Math.max(40 + item.proficiency * 5, 70);
-      const textSizePx = 16 + item.proficiency * 2.4;
-      const textWidth = item.name.length * textSizePx * 0.6;
+    const initialNodes = techItems.map((item, i) => {
+      const imageSize = Math.max((35 + item.proficiency * 1) * scaleFactor, 50 * scaleFactor);
+      const textSizePx = (16 + item.proficiency * 2) * scaleFactor;
+      const textWidth = item.name.length * textSizePx * 0.7;
       const bubbleWidth = imageSize + textWidth;
       const bubbleHeight = imageSize;
+      const targetY =
+        padding +
+        ((containerSize.height - padding * 2) * (i + 1)) / (itemCount + 1);
       return {
         ...item,
         imageSize,
         textSizePx,
         bubbleWidth,
         bubbleHeight,
-        // Random initial positions within the container.
+        targetY,
         x: padding + Math.random() * (containerSize.width - bubbleWidth - padding),
-        y: padding + Math.random() * (containerSize.height - bubbleHeight - padding),
+        y: targetY,
         animDelay: Math.random() * 5,
         animDuration: 5 + Math.random() * 5,
       };
     });
-
+  
     const aspectRatio = containerSize.width / containerSize.height;
-    const collisionPadding = aspectRatio < 1 ? 40 : 20;
-    // Increase tick count for taller containers if needed.
-    const tickCount = aspectRatio < 1 ? 250 : 150;
-
+    const collisionPadding = aspectRatio < 1 ? 10 : 20;
+    const tickCount = aspectRatio < 1 ? 300 : 150;
+    const forceXStrength = 0.02;
+  
     const simulation = forceSimulation(initialNodes)
       .force(
         'x',
         forceX((d, i) =>
-          padding + ((containerSize.width - padding * 2) * (i + 1)) / (itemCount + 1)
-        ).strength(0.01)
+          ((containerSize.width - padding * 2) * (i + 0.5)) / (itemCount + 1)
+        ).strength(forceXStrength)
       )
-      .force('y', forceY(containerSize.height / 2).strength(0.33))
-      // Adjust collision force with dynamic padding.
-      .force('collide', forceCollide().radius(d => Math.max(d.bubbleWidth, d.bubbleHeight) / 2 + collisionPadding).iterations(15))
-      // Add a repulsive force to further separate nodes.
-      .force('charge', forceManyBody().strength(-20))
+      .force(
+        'y',
+        aspectRatio < 1
+          ?
+            forceY(d => d.targetY).strength(1)
+          : forceY(containerSize.height / 2).strength(0.5)
+      )
+      .force(
+        'collide',
+        forceCollide()
+          .radius(d => Math.max(d.bubbleWidth, d.bubbleHeight) / 2 + collisionPadding)
+          .iterations(15)
+      )
       .stop();
-
-    // Reset simulation alpha for consistency.
-    simulation.alpha(1);
-
+  
     // Run simulation ticks and enforce boundaries.
     for (let i = 0; i < tickCount; i++) {
       simulation.tick();
       initialNodes.forEach(node => {
-        node.x = Math.max(node.bubbleWidth / 2 + padding, Math.min(containerSize.width - node.bubbleWidth / 2 - padding, node.x));
-        node.y = Math.max(node.bubbleHeight / 2 + padding, Math.min(containerSize.height - node.bubbleHeight / 2 - padding, node.y));
+        node.x = Math.max(
+          node.bubbleWidth / 2 + padding,
+          Math.min(containerSize.width - node.bubbleWidth / 2 - padding, node.x)
+        );
+        node.y = Math.max(
+          node.bubbleHeight / 2 + padding,
+          Math.min(containerSize.height - node.bubbleHeight / 2 - padding, node.y)
+        );
       });
     }
-
+  
     return initialNodes;
   }, [containerSize]);
+  
+  
 
   return (
     <div 
@@ -116,6 +136,7 @@ const TechStack = () => {
       ref={containerRef} 
       style={{ height: containerSize.height }}
     >
+      <div className='bubble-group'>
       {nodes.map((node, index) => (
         <div className="bubbles" key={index}>
           <div
@@ -133,18 +154,20 @@ const TechStack = () => {
               <img
                 src={node.Logo}
                 alt={`${node.name} logo`}
-                style={{ width: 40 + node.proficiency * 3 + "px" }}
+                style={{ width: `${(50 + node.proficiency * 3) * scaleFactor}px` }}
               />
             </div>
             <span
               className="tech-name"
-              style={{ fontSize: 1 + node.proficiency * 0.1 + "rem" }}
+              style={{ fontSize: `${(1 + node.proficiency * 0.1) * scaleFactor}rem` }}
             >
               {node.name}
             </span>
+
           </div>
         </div>
       ))}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import "./CSMain.css"; // Import the CSS for styling
 
@@ -37,10 +37,6 @@ const EducationTree = () => {
     const handleNext = () => {
         setCurrentTreeIndex((prev) => (prev + 1) % coursesList.length);
     };
-
-
-
-
 
     // Define a cubic Bézier for an S‑shaped trunk.
     const trunkPoints = useMemo(() => {
@@ -214,7 +210,7 @@ const EducationTree = () => {
         <div className="education-tree-container">
             <h3>Year {currentTreeIndex + 1}</h3>
 
-            <svg className="sakura" key={currentTreeIndex} width="60%" height="750" viewBox="-300 -175 700 750">
+            <svg className="sakura" key={currentTreeIndex} width="100%" height="750" viewBox="-300 -175 700 750">
                 {/* Tree trunk */}
                 <defs>
                     <filter id="dropShadow" x="0" y="-10%" width="120%" height="120%">
@@ -234,7 +230,8 @@ const EducationTree = () => {
                         strokeWidth="60"
                         strokeLinecap="round"
                         initial={{ pathLength: 0, opacity: 0.1 }}
-                        animate={{ pathLength: 1, opacity: 1 }}
+                        whileInView={{ pathLength: 1, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
                     />
 
@@ -248,7 +245,8 @@ const EducationTree = () => {
                             strokeWidth="20"
                             strokeLinecap="round"
                             initial={{ opacity: 0, pathLength: 0 }}
-                            animate={{ opacity: 1, pathLength: 1 }}
+                            whileInView={{ opacity: 1, pathLength: 1 }}
+                            viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 1, delay: 1 + index * 0.2, ease: "easeOut" }}
                         />
                     ))}
@@ -260,7 +258,8 @@ const EducationTree = () => {
                             d={segment.pathData}
                             fill={segment.fill}
                             initial={{ opacity: 0, scale: 0 }}
-                            animate={{ opacity: 1, scale: 1 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.5, delay: segment.delay, ease: "backOut" }}
                         />
                     ))}
@@ -269,7 +268,8 @@ const EducationTree = () => {
                     {branches.map((branch, index) => (
                         <motion.g key={`label-${index}`}
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.3, delay: 2 + index * 0.2 }}
                         >
                             <rect
@@ -295,7 +295,7 @@ const EducationTree = () => {
                     <motion.g
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, ease: "easeIn" }}
+                        transition={{ duration: 0.4, ease: "easeIn" }}
                     >
                         <ellipse cx="50" cy="520" rx="250" ry="30" fill="rgb(90, 30, 20)" />   {/* Deep red-brown base */}
                         <ellipse cx="50" cy="510" rx="180" ry="25" fill="rgb(140, 60, 30)" />  {/* Warmer, brighter red-brown */}

@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import MusicProductionStack from './MusicProductionStack';
 
 //Fun Fact Terminal
-import FunFactTerminal  from './FunFactTerminal';
+import FunFactTerminal from './FunFactTerminal';
 
 //Chart Module
 import AudienceTimelineChart from './AudienceTimelineChart';
@@ -61,7 +61,6 @@ const Music = () => {
     };
 
     useEffect(() => {
-        // If the URL is /musiclinks, scroll the .shep-section into view
         if (location.pathname === '/musiclinks') {
             const shepSection = document.querySelector('.shep-section');
             if (shepSection) {
@@ -78,7 +77,7 @@ const Music = () => {
                 setMonthlyListeners(data.monthly_listeners);
                 setPopularityIndex(data.popularity);
 
-                // Compute relative date string from fetched_at and update state for all stats
+
                 if (data.fetched_at) {
                     const relativeDate = getRelativeDateString(data.fetched_at);
                     setFollowersUpdate(relativeDate);
@@ -93,6 +92,66 @@ const Music = () => {
         fetchStats();
     }, [location]);
 
+    useEffect(() => {
+        const initFadeInObserver = () => {
+            const animatedElements = document.querySelectorAll(
+                '.shep-pfp-left, .shep-description-right, .bio-para, ' +
+                '.social-links-grid, .music-stack, .music-terminal, ' +
+                '.counter-wrapper, .player-wrapper, .live-card, ' +
+                '.collab-grid, .collab-item'
+            );
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains("social-links-grid")) {
+                            const skillItems = Array.from(entry.target.querySelectorAll(".social-link"));
+                            skillItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add("visible");
+                                }, index * 100);
+                            });
+                        } else if (entry.target.classList.contains("counter-wrapper")) {
+                            const skillItems = Array.from(entry.target.querySelectorAll(".live-card"));
+                            skillItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add("visible");
+                                }, index * 100);
+                            });
+                        } else if (entry.target.classList.contains("collab-grid")) {
+                            const skillItems = Array.from(entry.target.querySelectorAll(".collab-item"));
+                            skillItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add("visible");
+                                }, index * 200);
+                            });
+                        }
+                        else {
+                            setTimeout(() => {
+                                entry.target.classList.add("visible");
+                            }, 300);
+                        }
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            animatedElements.forEach((el) => observer.observe(el));
+        };
+
+        const initObserver = () => {
+            setTimeout(initFadeInObserver, 100);
+        };
+
+        if (document.readyState === "complete") {
+            initObserver();
+        } else {
+            window.addEventListener("load", initObserver);
+            return () => window.removeEventListener("load", initObserver);
+        }
+    }, []);
+
+
     return (
         <div className="music">
             <div className="music-title">
@@ -106,7 +165,7 @@ const Music = () => {
                     </div>
                     <div className="shep-description-right">
                         <div className="bio-para">
-                            <h2>Shep</h2>
+                            <h2 className='bio-title'>Shep</h2>
                             <div className="genre-row">
                                 <div className="genre-mini">EDM</div>
                                 <div className="genre-mini">VGM</div>
@@ -146,8 +205,15 @@ const Music = () => {
                 </div>
             </section>
 
+            <section className="release-section">
+                <h2>Releases</h2>
+                <div className="player-wrapper">
+                    <Player />
+                </div>
+            </section>
+
             <section className='stats-section'>
-                <div className='stats-graphs'> {/* Single container with border */}
+                <div className='stats-graphs'>
                     <h2>The Statistics</h2>
                     <div className='chart-wrapper'>
                         <AudienceTimelineChart />
@@ -188,11 +254,7 @@ const Music = () => {
                 </div>
             </section>
 
-            <section className="release-section">
-                <h2>Releases</h2>
-                <div className="player-wrapper">
-                <Player /></div>
-            </section>
+
         </div>
     );
 };

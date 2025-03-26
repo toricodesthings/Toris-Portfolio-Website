@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
-import profile_img from "../../assets/temp_profileimg.webp";
+import profile_img from "../../assets/profileimg1.webp";
+import profile_img2 from "../../assets/profileimg2.webp";
 import music_img from "../../assets/mainpage/music.webp";
 import cs_img from "../../assets/mainpage/cs.webp";
 import { useAnimationStore } from "../../store/animationStore";
@@ -16,6 +17,9 @@ const Hero = () => {
   const gradientText = "Hi there! I'm Tori," ;
   const remainingText = " Developer and Artist based in Ottawa.";
   const fullString = `${gradientText}${remainingText}`;
+
+
+  const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
     const handleLoad = () => setPageLoaded(true);
@@ -65,10 +69,19 @@ const Hero = () => {
   return (
     <div className="hero-container">
       <div className={`hero ${showWorkOptions ? "blurred" : ""}`}>
-        <div className="image-container pop-in">
+        <div className="image-container pop-in" onClick={() => setFlipped(!flipped)}>
           <div className="image-glow"></div>
-          <img src={profile_img} alt="Profile" />
+          <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
+            <div className="flip-card-front">
+              <img src={profile_img} alt="Profile" />
+            </div>
+            <div className="flip-card-back">
+              <img src={profile_img2} alt="Profile2" />
+            </div>
+          </div>
         </div>
+
+
         <h1 className={`pop-in ${displayedText.length < fullString.length ? "typing" : ""}`}>
           <span className="gradient">{displayedText.substring(0, gradientText.length)}</span>
           <span>{displayedText.substring(gradientText.length)}</span>

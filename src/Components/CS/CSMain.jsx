@@ -97,7 +97,6 @@ const CS = () => {
         exit: { opacity: 0, scale: 0.9 }
     };
 
-    // Helper to create content pieces.
     const createPieces = (repo) => {
         const formattedDate = new Date(repo.updatedAt).toLocaleString();
         return [
@@ -130,18 +129,16 @@ const CS = () => {
             try {
                 setLoading(true);
                 setError(null);
-                // Call your API route hosted at /api/gettorisgithubdata
                 const response = await fetch('/api/gettorisgithubdata');
                 if (!response.ok) {
                     throw new Error('Failed to fetch repos');
                 }
                 const data = await response.json();
-                // Assuming your API returns { repositories: [...] }
                 setRepos(data.repositories);
                 setLoading(false);
             } catch (err) {
                 console.error(err.message);
-                setError("Live github data could not be loaded");
+                setError("Live Github data could not be loaded");
                 setLoading(false);
             }
         }
@@ -161,13 +158,9 @@ const CS = () => {
         setTypedText("");
         let currentIndex = 0;
 
-        // Define total duration and update interval (in milliseconds)
-        const totalDuration = 2000; // 1 second for the entire text to appear
-        const updateInterval = 10; // ~60 fps
-
-        // Calculate how many updates will occur over the total duration
+        const totalDuration = 2000; 
+        const updateInterval = 10; 
         const totalTicks = totalDuration / updateInterval;
-        // Determine how many characters to add per tick
         const charsPerTick = Math.ceil(fullCombined.length / totalTicks);
 
         const interval = setInterval(() => {
@@ -184,7 +177,6 @@ const CS = () => {
         return () => clearInterval(interval);
     }, [selectedRepo]);
 
-    // Reconstruct the rendered pieces based on typedText.
     const getRenderedPieces = () => {
         if (!selectedRepo) return [];
         const pieces = createPieces(selectedRepo);
@@ -210,6 +202,50 @@ const CS = () => {
         return rendered;
     };
 
+    useEffect(() => {
+        const initFadeInObserver = () => {
+          const animatedElements = document.querySelectorAll(
+            '.githubproj-text, .githubproj-panel, ' +
+            '.stack-bubble-container, .bubble-group, .techstack-text, .upcoming-text, .project-learning-stack, ' +
+            '.eduprog-text, .tree-wrapper'
+          );
+    
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                if (entry.target.classList.contains("bubble-group")) {
+                  const skillItems = Array.from(entry.target.querySelectorAll(".bubbles"));
+                  skillItems.forEach((item, index) => {
+                    setTimeout(() => {
+                      item.classList.add("visible");
+                    }, index * 75);
+                  });
+                }
+                else {
+                  setTimeout(() => {
+                    entry.target.classList.add("visible");
+                  }, 100);
+                }
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.3 });
+    
+          animatedElements.forEach((el) => observer.observe(el));
+        };
+    
+        const initObserver = () => {
+          setTimeout(initFadeInObserver, 100);
+        };
+    
+        if (document.readyState === "complete") {
+          initObserver();
+        } else {
+          window.addEventListener("load", initObserver);
+          return () => window.removeEventListener("load", initObserver);
+        }
+      }, []);
+
     const renderedPieces = getRenderedPieces();
 
     return (
@@ -219,7 +255,7 @@ const CS = () => {
             </div>
 
             <section className="githubproj-section">
-                <h2>Published Projects</h2>
+                <h2 className="githubproj-text">Published Projects</h2>
                 <div className="githubproj-panel">
                     {loading && <div className="grid-loading"><HamsterLoadingUI /></div>}
                     {error && <p className="grid-error-text">{error}</p>}
@@ -331,15 +367,16 @@ const CS = () => {
             </section>
 
             <section className="techstack-section">
-                <h2>My Tech Stack</h2>
+                <h2 className="techstack-text">My Tech Stack</h2>
                 <CSTechStack />
-                <h2>Learning & Upcoming Projects</h2>
+                <h2 className="upcoming-text">Learning & Upcoming Projects</h2>
+        
                 <UpcomingProjectsAndLearningStack />
             </section>
 
             {/* New Education Section with animated growth tree */}
             <section className="education-treesection">
-                <h2>Education Progress</h2>
+                <h2 className="eduprog-text">Education Progress</h2>
                 <div className="tree-wrapper">
                     <CSEduTree />
                 </div>

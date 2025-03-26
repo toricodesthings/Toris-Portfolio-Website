@@ -8,13 +8,12 @@
 body{
     --color: rgba(225, 225, 225, 0.06);
     background-color: #000000;
-    /*background: linear-gradient(90deg, rgb(7, 0, 10),
-    rgb(16, 0, 0));*/
     color: white;
     font-family: 'lexend';
     background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
     linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
     background-size: 160px 160px;
+    height: 100vh;
 }
 
 body, html {

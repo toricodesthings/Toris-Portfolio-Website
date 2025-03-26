@@ -452,7 +452,6 @@ section::before {
 
     .link-icon {
         margin: 0;
-        /* Remove any default margin */
         flex: 1;
         max-width: 50%;
         max-height: 64px;

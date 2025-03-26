@@ -9,8 +9,6 @@
     position: relative;
 }
 
-
-/*Fade in for most elements on page*/
 .about-intro-left, .about-intro-right,
 .cs-education, .cs-skills-panel, .education-panel,
 .music-para, .music-panel, .music-flip {
@@ -24,7 +22,6 @@
   opacity: 1;
 }
 
-/* Title Section with text-wrapping gradient glow */
 .about-title {
     text-align: center;
     animation: textGlowShift 10s ease-in-out infinite;
@@ -64,7 +61,6 @@
             0 0 15px rgba(234, 59, 59, 0.7);
     }
 }
-
 
 
 /* All Section Styling */
@@ -113,12 +109,12 @@ section::before {
     background-attachment: fixed;
 }
 
-section h2 {
-    font-size: clamp(2rem, 4vw, 36px);
-    margin-bottom: 40px;
+.about section h2 {
+    font-size: clamp(2rem, 3vw, 3rem);
     color: white;
-    position: relative;
+    margin-bottom: 40px;
     text-align: center;
+    position: relative;
 }
 
 
@@ -168,12 +164,12 @@ section h2 {
     position: relative;
 }
 
-.about-para h2 {
-    font-size: clamp(2rem, 4vw, 36px);
-    margin-bottom: 20px;
+.about .about-para h2 {
+    font-size: clamp(2rem, 3vw, 3rem);
     color: white;
+    margin-bottom: 20px;
+    text-align: left;
     position: relative;
-    display: inline-block;
 }
 
 .about-para h2::after {
@@ -793,19 +789,11 @@ transform: translateY(-3px);
         flex-direction: column;
         align-items: center;
         width: 100%;
+        gap: 40px;
         overflow-x: hidden;
     }
 
-    .timeline-item {
-        margin-bottom: 20px;
-    }
-
-    .timeline-item::after {
-        height: calc(100% + 20px);
-        /* Match the margin change */
-    }
 }
-
 
 .pop-in {
     opacity: 0;

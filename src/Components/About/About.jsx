@@ -179,31 +179,25 @@ const About = () => {
                   item.classList.add("visible");
                 }, index * 50);
               });
-              entry.target.classList.add("container-visible");
             }
             else if (entry.target.classList.contains("music-timeline")) {
-              // Handle timeline items sequentially and draw line
-              entry.target.classList.add("line-visible"); // Start line drawing
+              entry.target.classList.add("line-visible"); 
               const timelineItems = Array.from(entry.target.querySelectorAll(".timeline-item"));
               timelineItems.forEach((item, index) => {
                 setTimeout(() => {
                   item.classList.add("visible");
-                }, 300 + index * 200); // Delay start to let line begin drawing
+                }, 300 + index * 200); 
               });
-              entry.target.classList.add("container-visible");
             }
             else if (entry.target.classList.contains("music-stat-box")) {
-              // Handle stat items sequentially
               const statItems = Array.from(entry.target.querySelectorAll(".music-stat-item"));
               statItems.forEach((item, index) => {
                 setTimeout(() => {
                   item.classList.add("visible");
                 }, index * 100);
               });
-              entry.target.classList.add("container-visible");
             }
             else {
-              // Handle regular elements
               setTimeout(() => {
                 entry.target.classList.add("visible");
               }, 100);

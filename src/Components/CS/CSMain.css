@@ -12,6 +12,21 @@
     text-align: center;
 }
 
+
+.githubproj-text, .githubproj-panel, 
+.techstack-text, .project-learning-stack, 
+.eduprog-text, .tree-wrapper {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.githubproj-text.visible, .githubproj-panel.visible,
+.stack-bubble-container.visible, .techstack-text.visible,
+.upcoming-text.visible, .project-learning-stack.visible, .eduprog-text.visible,
+.tree-wrapper.visible {
+  opacity: 1;
+}
+
 .programming-title h1 {
     display: inline-block;
     font-size: clamp(2rem, 4vw, 50px);
@@ -22,8 +37,8 @@
     background: none;
 }
 
-section h2 {
-    font-size: clamp(2rem, 4vw, 36px);
+.programming section h2 {
+    font-size: clamp(2rem, 3vw, 3rem);
     color: white;
     margin-bottom: 40px;
     text-align: center;
@@ -493,10 +508,6 @@ section::before {
     position: relative;
 }
 
-.stack-bubble-container {
-    margin-bottom: 40px;
-}
-
 .techstack-section::before {
     content: "";
     position: absolute;
@@ -518,11 +529,13 @@ section::before {
     background-position: -5px -5px;
     position: relative;
     width: 100%;
+    margin-bottom: 40px;
     border-radius: 12px;
     border: 2px solid rgba(255, 255, 255, 0.2);
     height: 500px;
+    opacity: 0;
     overflow: hidden;
-    transition: border 0.3s ease-in;
+    transition: all 0.3s ease;
 }
 
 .stack-bubble-container:hover {
@@ -543,7 +556,12 @@ section::before {
 
 
 .bubbles {
+    opacity: 0;
     transition: all 0.3s ease;
+}
+
+.bubbles.visible {
+    opacity: 1;
 }
 
 /* Hover effect: scale up and pause animation */
@@ -699,8 +717,9 @@ section::before {
     width: 100%;
 }
 
-.tree-wrapper svg {
+.sakura {
     height: auto;
+    width: 45vw;
 
 }
 
@@ -744,7 +763,7 @@ section::before {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     font-size: 3rem;
     line-height: 1.8;
 }
@@ -773,10 +792,15 @@ section::before {
 
 .arrow-button.left:active {
     transform: scale(1) translateX(2px);
+    background: #ff55a7;
+    border-color: rgb(255, 133, 178);
+
 }
 
 .arrow-button.right:active {
-    transform: scale(1) translateX(2px);
+    transform: scale(1) translateX(-2px);
+    border-color: rgb(196, 133, 255);
+    background: #ad55ff;
 }
 
 .course-label-text {
@@ -836,5 +860,9 @@ section::before {
     .arrow-button.right {
         text-align: center;
         right: 0;
+    }
+
+    .sakura {
+        width: 90vw;
     }
 }

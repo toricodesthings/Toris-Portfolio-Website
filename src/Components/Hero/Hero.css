@@ -1,7 +1,8 @@
 .home-page {
-    height: 100%;
+    height: 100vh;
     display: flex;
-
+    justify-content: space-between;
+    flex: 1;
 }
 
 .hero-container {
@@ -11,7 +12,6 @@
     flex-direction: column;
 }
 
-/* Make sure the hero takes the full height of its container */
 .hero {
     gap: 20px;
     flex: 1;
@@ -21,25 +21,42 @@
     flex-direction: column;
     margin-bottom: 20px;
     position: relative;
-    transform: translateZ(0);
+    box-sizing: border-box;
 }
-  
+
 .hidden-content {
     opacity: 0;
     animation: none;
- }
+}
 
 .hero.blurred {
     filter: blur(16px);
     pointer-events: none;
 }
 
-
 .hero .image-container {
     position: relative;
-    width: clamp(150px, 35vh, 400px);
+    width: clamp(140px, 35vh, 420px);
     aspect-ratio: 1;
-    will-change: transform, opacity;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s;
+    transform-style: preserve-3d;
+    z-index: 2;
+}
+
+.flip-card-inner.flipped, .flip-card-back {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    backface-visibility: hidden;
 }
 
 .hero img {
@@ -48,36 +65,48 @@
     border-radius: 50%;
     position: relative;
     z-index: 2;
-    transition: transform 0.3s ease-in-out;
-    border: 1px solid rgba(255, 154, 243, 0.339);
-    box-shadow: 0 0 4px rgba(255, 154, 243, 0.5);
+    border: 1px solid rgba(255, 154, 243, 0.5);
+    box-shadow: 0 0 4px rgba(255, 154, 186, 0.5);
+    transition: all 0.3s ease-in-out;
 }
 
 .hero .image-glow {
     position: absolute;
-    top: -6%;
-    left: -6%;
+    top: -5%;
+    left: -5%;
     width: 110%;
     height: 110%;
     background: linear-gradient(270deg, rgba(197, 95, 244, 0.8), rgba(234, 59, 59, 0.8));
     border-radius: 50%;
     opacity: 0.5;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    animation: bubble-effect 5s ease-in-out infinite alternate;
-    z-index: 1;
+    animation: bubble-effect 6s ease-in-out infinite alternate;
+    z-index: 0;
     filter: blur(40px);
 }
 
-.hero .image-container:hover .image-glow {
-    opacity: 0.75;
+.image-container:hover .image-glow {
+    opacity: 0.8;
 }
 
+.image-container::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border: 2px solid rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    transition: border-color 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+}
 
-/* Text Styles */
+.image-container:hover::before {
+    border-color: rgba(255, 168, 168, 0.717);
+}
 
 .hero h1 {
     text-align: center;
-    font-size: clamp(2rem, calc(1rem + 5vh), 5rem);
+    font-size: clamp(3rem, calc(0.9rem + 5vh), 5rem);
     color: white;
     position: relative;
     font-weight: 800;
@@ -95,18 +124,20 @@
 
 .hero h1 span.gradient {
     background: linear-gradient(90deg, rgba(197, 95, 244, 1), rgba(234, 59, 59, 1));
-    background-size: 175% auto; /* Make the background wider */
+    background-size: 175% auto;
+    /* Make the background wider */
     background-position: -200px 0;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
-    transition: background-position 3s ease; 
+    transition: background-position 3s ease;
     will-change: background-position;
 }
 
 .hero h1 span.gradient:hover {
-    background-position: 100% 0; /* Shift the gradient on hover */
+    background-position: 100% 0;
+    /* Shift the gradient on hover */
 }
 
 .typing::after {
@@ -124,7 +155,6 @@
     gap: clamp(20px, 2vw, 40px);
     font-size: clamp(1rem, 2.5vh, 2rem);
     font-weight: 600;
-
 }
 
 .hero-connectbtn {
@@ -153,13 +183,18 @@
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
+
 }
 
 .hero-connectbtn:hover,
 .hero-viewbtn:hover {
     background: linear-gradient(270deg, rgba(164, 45, 204, 0.9), rgba(231, 77, 71, 0.9));
     border-color: transparent;
-    box-shadow: 0px 5px 20px rgba(231, 77, 71, 0.5);
+    background-size: 110% 110%;
+    background-position: -4px;
+    box-shadow: 0px 4px 20px rgb(255, 117, 112);
+    transform: scale(1.05) translateY(-5px);
+
 }
 
 /* Work Options Overlay */
@@ -182,12 +217,13 @@
     width: 80%;
     gap: 6vw;
     padding: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
     place-items: center;
-  }
-  
+}
+
 .work-option-box {
-    aspect-ratio: 4 / 3;  /* Automatically calculates the proper height */
+    aspect-ratio: 4 / 3;
+    /* Automatically calculates the proper height */
     border-radius: 24px;
     overflow: hidden;
     display: flex;
@@ -221,11 +257,11 @@
     transition: all 0.3s ease;
 }
 
-/* On hover, dim and blur the image */
 .work-option-box:hover .option-image-container img {
     transform: scale(1.1);
     filter: brightness(0.25) blur(4px);
 }
+
 .work-option-box:active .option-image-container img {
     transform: scale(2);
 }
@@ -256,8 +292,8 @@
 
 .work-option-box h2 {
     color: rgba(255, 255, 255, 0.75);
-    font-size: clamp(0.9rem, 2vw, 2rem);
-    text-shadow: 0 0 4px black;
+    font-size: clamp(1rem, calc(1rem + 1vw), 2rem);
+    text-shadow: 0 2px 5px black;
     font-weight: 700;
     bottom: 0;
     width: 100%;
@@ -335,15 +371,16 @@
 }
 
 @media (max-width: 768px) {
-    .hero-container{
+    .hero-container {
         margin: 0 5%;
     }
 
     .work-options-container {
-        width: 90%;
+        width: 90vw;
         height: 100%;
         gap: 6vw;
-        grid-template-columns: minmax(200px, 1fr); /* Single column on mobile */
+        grid-template-columns: minmax(200px, 1fr);
+        /* Single column on mobile */
         place-items: center;
     }
 
@@ -359,11 +396,13 @@
     }
 
     .hero p {
-        font-size: clamp(1rem, calc(0.8rem + 1vh), 1.2rem);
+        font-size: clamp(1rem, calc(0.5rem + 1vh), 2rem);
     }
+
     .hero-buttons {
-        font-size: clamp(1rem, 2vh, 20px);
+        font-size: clamp(1rem, 2vh, 2rem);
     }
+
     .hero-connectbtn,
     .hero-viewbtn {
         padding: clamp(14px, 2vh, 22px) clamp(22px, 4vw, 40px);

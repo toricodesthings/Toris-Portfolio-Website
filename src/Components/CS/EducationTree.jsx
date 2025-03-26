@@ -229,7 +229,7 @@ const EducationTree = () => {
                         stroke="#954535"
                         strokeWidth="60"
                         strokeLinecap="round"
-                        initial={{ pathLength: 0, opacity: 0.1 }}
+                        initial={{ pathLength: 0.01, opacity: 0.01 }}
                         whileInView={{ pathLength: 1, opacity: 1 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
@@ -244,7 +244,7 @@ const EducationTree = () => {
                             stroke="#954535"
                             strokeWidth="20"
                             strokeLinecap="round"
-                            initial={{ opacity: 0, pathLength: 0 }}
+                            initial={{ opacity: 0.01, pathLength: 0.01 }}
                             whileInView={{ opacity: 1, pathLength: 1 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 1, delay: 1 + index * 0.2, ease: "easeOut" }}
@@ -257,7 +257,7 @@ const EducationTree = () => {
                             key={`foliage-${i}`}
                             d={segment.pathData}
                             fill={segment.fill}
-                            initial={{ opacity: 0, scale: 0 }}
+                            initial={{ opacity: 0.01, scale: 0.01 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.5, delay: segment.delay, ease: "backOut" }}
@@ -267,7 +267,7 @@ const EducationTree = () => {
                     {/* Course labels */}
                     {branches.map((branch, index) => (
                         <motion.g key={`label-${index}`}
-                            initial={{ opacity: 0 }}
+                            initial={{ opacity: 0.01 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.3, delay: 2 + index * 0.2 }}

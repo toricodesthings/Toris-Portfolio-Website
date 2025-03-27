@@ -22,8 +22,7 @@ export default defineConfig({
     avif: { quality: 80 },
     svg: {
       plugins: [
-        { name: 'removeViewBox', active: false },
-        { name: 'sortAttrs' },
+        { name: 'sortAttrs' }
       ],
     },
   }),

@@ -56,10 +56,10 @@ const Navbar = () => {
           <li><Link to="/music">Music</Link></li>
         </div>
         <div className='pop-up'>
-          <li><Link to="/about">About Me</Link></li>
+          <li><Link to="/about">About</Link></li>
         </div>
         <div className='pop-up'>
-          <li><Link to="/misc">Tools</Link></li>
+          <li><Link to="/misc">Projects</Link></li>
         </div>
       </ul>
 

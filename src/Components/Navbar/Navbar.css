@@ -1,26 +1,21 @@
-/* Navbar Styles */
 .navbar {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: clamp(10px, 1vw, 20px);
     justify-content: space-between;
     height: auto;
-    margin: 1.5vh 10%;
+    margin: 2.5vh 10%;
     flex-wrap: nowrap;
-    padding: 10px 0;
-    transform: translateZ(0);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
+    padding: 0;
 }
 
-/* Scale the gap and text size in the nav menu */
 .nav-menu {
     display: flex;
     text-align: center;
     align-items: center;
     list-style: none;
     gap: clamp(20px, 5vw, 120px); 
-    font-size: clamp(1rem, calc(0.9rem + 1vh), 2rem); 
+    font-size: clamp(1rem, calc(0.5rem + 1vw), 2rem); 
     margin: 0;
     padding: 0;
     opacity: 0;
@@ -78,7 +73,7 @@
 .nav-menu li {
     position: relative;
     cursor: pointer;
-    transition: 0.25s ease;
+    transition: 0.2s ease;
     opacity: 0;
     transform: translateX(-20px);
 }
@@ -128,10 +123,9 @@
     opacity: 0;
 }
 
-/* Scalable button styling for nav-connect */
 .nav-connect {
-    padding: clamp(10px, 3vh, 20px) clamp(18px, 4vw, 36px);
-    font-size: clamp(1rem, calc(0.9rem + 1vh), 2rem); 
+    padding: clamp(12px, 2.5vh, 24px) clamp(16px, 2.5vw, 36px);
+    font-size: clamp(1rem, calc(0.5rem + 1vw), 2rem); 
     text-align: center;
     background: linear-gradient(270deg, rgb(181, 70, 232), rgb(229, 48, 48));
     border-radius: 25px;
@@ -140,8 +134,6 @@
     position: relative;
 }
 
-
-/* Left side border */
 .nav-connect::before {
     content: "";
     position: absolute;
@@ -156,7 +148,6 @@
     transition: width 0.3s ease, border-color 0.08s ease;
 }
 
-/* Right side border */
 .nav-connect::after {
     content: "";
     position: absolute;
@@ -170,7 +161,6 @@
     border-left: none;
     transition: width 0.3s ease, border-color 0.08s ease;
 }
-
 
 .nav-connect:hover::before,
 .nav-connect:hover::after {
@@ -193,9 +183,8 @@
     transform: scale(1);
 }
 
-/* Avatar Image */
 .avatar {
-    width: 100%; /* Ensures it fills the wrapper */
+    width: 100%; 
     padding: 16px;
     object-fit: cover;
     display: block;
@@ -209,7 +198,7 @@
 /* Scalable avatar wrapper */
 .avatar-wrapper {
     opacity: 0;
-    width: clamp(60px, 10vw, 90px);  /* Adjust min, preferred, and max sizes */
+    width: clamp(60px, calc(5vw + 3vh), 100px);
     aspect-ratio: 1;
     border-radius: 50%;
     background: linear-gradient(45deg, #ff6b6b, #573dd9);
@@ -255,7 +244,7 @@
 .avatar-wrapper::before {
     content: "";
     position: absolute;
-    width: 92%;      /* Scales relative to .avatar-wrapper */
+    width: 92%;    
     height: 92%;
     background: black;
     border-radius: 50%;
@@ -273,7 +262,6 @@
     transform: scale(1);
 }
 
-/* Responsive Navbar */
 @media (max-width: 768px), (orientation: portrait) {
 
     .avatar-wrapper {

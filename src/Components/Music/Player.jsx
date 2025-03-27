@@ -90,7 +90,7 @@ const MusicPlayer = ({
           <svg
             key={displayedArtwork}
             viewBox="0 0 500 500"
-            width="100%"
+            width="400"
             height="400"
             xmlns="http://www.w3.org/2000/svg"
             className={`disc ${notPlaying ? 'paused' : 'spinning'} ${discAnimationClass}`}

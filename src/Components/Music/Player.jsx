@@ -201,7 +201,7 @@ const MusicPlayer = ({
             ))}
           </div>
           <div className="release-filter">
-            <h3>Sort By</h3>
+            <h3>Sort</h3>
             <div className="sort-container">
               <button onClick={() => onSortChange("title-asc")}>A-Z▲</button>
               <button onClick={() => onSortChange("title-desc")}>Z-A▼</button>
@@ -296,4 +296,4 @@ const PlayerContainer = () => {
   );
 };
 
-export default React.memo(PlayerContainer);
+export default PlayerContainer;

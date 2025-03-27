@@ -430,28 +430,16 @@ section::before {
     box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
         0 0 25px rgba(234, 59, 59, 0.4);
     overflow: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    will-change: transform;
 }
 
 .scrolling-icons {
     display: flex;
-    gap: 2.5%;
+    gap: 80px;
     width:max-content;
     align-items: center;
     height: 100%;
     padding: 25px 0;
     backface-visibility: hidden;
-    -webkit-animation: scrollIcons 20s linear infinite;
-    animation: scrollIcons 20s linear infinite;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    will-change: transform;
 }
 
 /* Music Tool */

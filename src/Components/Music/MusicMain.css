@@ -423,35 +423,30 @@ section::before {
     width: 100%;
     height: 100%;
     display: flex;
+    min-height: 250px;
     position: relative;
     border: 2px solid rgba(255, 255, 255, 0.81);
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
         0 0 25px rgba(234, 59, 59, 0.4);
     overflow: hidden;
-}
-
-.music-production-stack {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 225px;
-    overflow: hidden;
-    position: relative;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
 }
 
 .scrolling-icons {
     display: flex;
-    gap: 80px;
+    gap: 2.5%;
+    width:max-content;
     align-items: center;
     height: 100%;
     padding: 25px 0;
     backface-visibility: hidden;
     -webkit-animation: scrollIcons 20s linear infinite;
     animation: scrollIcons 20s linear infinite;
-
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
@@ -461,11 +456,10 @@ section::before {
 
 /* Music Tool */
 .music-tool {
+    flex-shrink: 0;
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .music-tool-text {

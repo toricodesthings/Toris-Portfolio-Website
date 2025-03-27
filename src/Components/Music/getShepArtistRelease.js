@@ -36,7 +36,6 @@ export async function fetchArtistReleases() {
       cover_song: release.is_cover,
     };
   });
-  console.log(releases)
   return releases;
 }
 

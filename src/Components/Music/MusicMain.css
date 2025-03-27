@@ -1128,15 +1128,14 @@ section::before {
     aspect-ratio: 2/1;
     width: 100%;
     gap: 20px;
-    box-sizing: border-box;
     justify-content: space-between; 
     flex-direction: row;
-    align-items: stretch;
+    
+    box-sizing: border-box;
 }
 
 .disc-wrapper {
     max-width: calc(50% - 10px);
-    flex: 1;
     height: auto;
     padding: 20px;
     border-radius: 24px;
@@ -1182,15 +1181,19 @@ section::before {
     height: auto;
 }
 
+
+
 .playercpanel {
+    width: 100%;
     max-width: calc(50% - 10px);
     aspect-ratio: 1;
-    overflow: hidden; /* Prevent overall stretching */
+    overflow: hidden; 
     border-radius: 24px;
     border: 2px solid rgb(143, 143, 143);
     display: flex;
     flex-direction: column;
 }
+
 
 .playerinfo {
     flex: 1;
@@ -1341,10 +1344,13 @@ section::before {
     border-radius: 24px;
     flex: 1;
     display: flex;
+    overflow-y: hidden;
     width: 100%;
     background: rgba(27, 27, 27, 0.5);
     border-top: 2px solid rgba(255, 255, 255, 0.595);
     position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 127, 179, 0.7) transparent;
 }
 
 .playerbrowser::-webkit-scrollbar {
@@ -1359,7 +1365,6 @@ section::before {
 .playerbrowser::-webkit-scrollbar-thumb {
     background-color: rgba(255, 127, 179, 0.7);
     border-radius: 20px;
-    border: solid 2px transparent;
 }
 
 .playerbrowser h3 {
@@ -1369,13 +1374,13 @@ section::before {
 
 .release-explorer {
     flex: 0.75;
-    min-height: 0;
-    overflow: scroll;
-    height: 100%;
+    overflow-y: auto;
 }
 
 .release-filter {
     flex: 0.25;
+    display: flex;
+    flex-direction: column;
     align-items: right;
     overflow-y: auto;
     text-align: right;
@@ -1383,6 +1388,7 @@ section::before {
 
 .release-explorer,
 .release-filter {
+    border: solid 2px transparent;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 127, 179, 0.7) transparent;
 }
@@ -1390,8 +1396,7 @@ section::before {
 .sort-container {
     display: grid;
     margin-top: 10px;
-    padding-left: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(42.5px, 1fr));
     justify-content: end;
     gap: 10px;
     grid-auto-rows: auto;
@@ -1418,13 +1423,11 @@ section::before {
     border: 2px solid rgba(255, 255, 255, 0.486);
     color: white;
     font-weight: 500;
-    aspect-ratio: 1;
     border-radius: 50%;
     padding: 0;
     margin: 0;
     background: none;
     cursor: pointer;
-
     transition: all 0.2s ease;
 }
 

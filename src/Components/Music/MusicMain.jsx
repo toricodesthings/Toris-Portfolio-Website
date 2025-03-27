@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./MusicMain.css";
 import { fetchShepArtistStat } from './getShepArtistStat.js';
 import { useLocation } from 'react-router-dom';
-
+import { formatDistanceToNow } from 'date-fns';
 
 import MusicProductionStack from './MusicProductionStack';
 
@@ -47,18 +47,8 @@ const Music = () => {
     const location = useLocation();
 
     const getRelativeDateString = (dateString) => {
-        const fetchedDate = new Date(dateString);
-        const today = new Date();
-        // Reset times so we compare only dates.
-        const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-        const startOfFetched = new Date(fetchedDate.getFullYear(), fetchedDate.getMonth(), fetchedDate.getDate());
-        const diffTime = startOfToday - startOfFetched;
-        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-
-        if (diffDays === 0) return "Today";
-        if (diffDays === 1) return "Yesterday";
-        return `${diffDays} days ago`;
-    };
+        return formatDistanceToNow(new Date(dateString), { addSuffix: true });
+      };
 
     useEffect(() => {
         if (location.pathname === '/musiclinks') {
@@ -92,6 +82,15 @@ const Music = () => {
     }, [location]);
 
     useEffect(() => {
+        const staggerAnimate = (parent, selector, delay = 100) => {
+            const items = Array.from(parent.querySelectorAll(selector));
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add("visible");
+                }, index * delay);
+            });
+        };
+    
         const initFadeInObserver = () => {
             const animatedElements = document.querySelectorAll(
                 '.shep-pfp-left, .shep-description-right, .bio-para, ' +
@@ -99,49 +98,36 @@ const Music = () => {
                 '.counter-wrapper, .player-wrapper, .live-card, ' +
                 '.collab-grid'
             );
-
+    
             const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        if (entry.target.classList.contains("social-links-grid")) {
-                            const skillItems = Array.from(entry.target.querySelectorAll(".social-link"));
-                            skillItems.forEach((item, index) => {
-                                setTimeout(() => {
-                                    item.classList.add("visible");
-                                }, index * 100);
-                            });
-                        } else if (entry.target.classList.contains("counter-wrapper")) {
-                            const skillItems = Array.from(entry.target.querySelectorAll(".live-card"));
-                            skillItems.forEach((item, index) => {
-                                setTimeout(() => {
-                                    item.classList.add("visible");
-                                }, index * 100);
-                            });
-                        } else if (entry.target.classList.contains("collab-grid")) {
-                            const skillItems = Array.from(entry.target.querySelectorAll(".collab-item"));
-                            skillItems.forEach((item, index) => {
-                                setTimeout(() => {
-                                    item.classList.add("visible");
-                                }, index * 200);
-                            });
-                        }
-                        else {
+                        const el = entry.target;
+    
+                        if (el.classList.contains("social-links-grid")) {
+                            staggerAnimate(el, ".social-link", 100);
+                        } else if (el.classList.contains("counter-wrapper")) {
+                            staggerAnimate(el, ".live-card", 100);
+                        } else if (el.classList.contains("collab-grid")) {
+                            staggerAnimate(el, ".collab-item", 200);
+                        } else {
                             setTimeout(() => {
-                                entry.target.classList.add("visible");
+                                el.classList.add("visible");
                             }, 300);
                         }
-                        obs.unobserve(entry.target);
+    
+                        obs.unobserve(el);
                     }
                 });
             }, { threshold: 0.3 });
-
+    
             animatedElements.forEach((el) => observer.observe(el));
         };
-
+    
         const initObserver = () => {
             setTimeout(initFadeInObserver, 100);
         };
-
+    
         if (document.readyState === "complete") {
             initObserver();
         } else {
@@ -149,6 +135,7 @@ const Music = () => {
             return () => window.removeEventListener("load", initObserver);
         }
     }, []);
+    
 
 
     return (

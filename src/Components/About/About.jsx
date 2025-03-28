@@ -9,6 +9,7 @@ import javaImg from "../../assets/skills/java.svg";
 import htmlImg from "../../assets/skills/html.svg";
 import cssImg from "../../assets/skills/css.svg";
 import jsImg from "../../assets/skills/javascript.svg";
+import tsImg from "../../assets/skills/typescript.svg";
 import reactImg from "../../assets/skills/react.svg";
 import nodejsImg from "../../assets/skills/nodejs.svg";
 import gitImg from "../../assets/skills/git.svg";
@@ -29,6 +30,7 @@ const skills = [
   { name: "HTML", img: htmlImg },
   { name: "CSS", img: cssImg },
   { name: "JavaScript", img: jsImg },
+  { name: "TypeScript", img: tsImg },
   { name: "React", img: reactImg },
   { name: "Node.js", img: nodejsImg },
   { name: "Git/GitHub", img: gitImg },
@@ -285,7 +287,7 @@ const About = () => {
             </div>
           </div>
         </div>
-        <h2 className="stats-current">Current Progress</h2>
+        <h2 className="stats-current">Current Metrics</h2>
         <div className="music-flip">
           <div
             className={`flip-image left ${activeImage === 1 ? "active" : ""}`}

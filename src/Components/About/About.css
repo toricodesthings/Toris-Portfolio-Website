@@ -62,8 +62,6 @@
     }
 }
 
-
-/* All Section Styling */
 section {
     position: relative;
     background-color: rgba(0, 0, 0, 0.7);
@@ -790,7 +788,6 @@ transform: translateY(-3px);
         gap: 40px;
         overflow-x: hidden;
     }
-
 }
 
 .pop-in {

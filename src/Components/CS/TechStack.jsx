@@ -7,6 +7,7 @@ import javaImg from "../../assets/skills/java.svg";
 import htmlImg from "../../assets/skills/html.svg";
 import cssImg from "../../assets/skills/css.svg";
 import jsImg from "../../assets/skills/javascript.svg";
+import tsImg from "../../assets/skills/typescript.svg";
 import reactImg from "../../assets/skills/react.svg";
 import nodejsImg from "../../assets/skills/nodejs.svg";
 import gitImg from "../../assets/skills/git.svg";
@@ -19,7 +20,8 @@ import tensorflowImg from "../../assets/skills/tensorflow.svg";
 
 const techItems = [
   { name: 'React', Logo: reactImg, proficiency: 4 },
-  { name: 'JavaScript', Logo: jsImg, proficiency: 5 },
+  { name: 'JavaScript', Logo: jsImg, proficiency: 6 },
+  { name: 'TypeScript', Logo: tsImg, proficiency: 4 },
   { name: 'CSS', Logo: cssImg, proficiency: 8 },
   { name: 'Python', Logo: pythonImg, proficiency: 9 },
   { name: 'Java', Logo: javaImg, proficiency: 3 },

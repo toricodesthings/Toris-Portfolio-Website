@@ -601,20 +601,15 @@ section::before {
     overflow: hidden;
     background: linear-gradient(270deg, rgba(0, 0, 0, 0.2), rgba(231, 158, 255, 0.1));
     background-size: 175% 175%;
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px solid rgba(255, 255, 255, 0.487);
     border-radius: 12px;
     width: 100%;
-    animation: moveBackground 1s ease-in-out infinite alternate;
 }
 
-@keyframes moveBackground {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: -750px 0;
-    }
+.project-learning-stack-container:hover {
+    border-color: white;
 }
+
 
 .project-learning-stack {
     width: 100%;

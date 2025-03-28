@@ -62,7 +62,7 @@ const lineConfig = [
   },
   { 
     dataKey: "followers", 
-    name: "Followers", 
+    name: "Total Followers", 
     color: "#ea3b3b" 
   }
 ];
@@ -103,7 +103,6 @@ const AudienceTimelineChart = () => {
   const [chartVisible, setChartVisible] = useState(false);
   const chartRef = useRef(null);
 
-  // Fetch CSV data
   useEffect(() => {
     fetch("/Shep-audience-timeline.csv")
       .then((response) => response.text())
@@ -126,7 +125,6 @@ const AudienceTimelineChart = () => {
       .catch((error) => console.error("Data Error: Error loading CSV!", error));
   }, []);
 
-  // Detect when the chart enters the viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -134,7 +132,7 @@ const AudienceTimelineChart = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.3 }
     );
 
     if (chartRef.current) {
@@ -153,7 +151,7 @@ const AudienceTimelineChart = () => {
     if (isVisible && data.length > 0) {
       setTimeout(() => {
         setChartVisible(true);
-      }, 100);
+      }, 200);
     }
   }, [isVisible, data]);
 
@@ -166,9 +164,9 @@ const AudienceTimelineChart = () => {
       <circle
         cx={cx}
         cy={cy}
-        r={4}
+        r={3}
         stroke={stroke}
-        strokeWidth={1}
+        strokeWidth={2}
         fill={fill || stroke}
         className="custom-dot"
       />
@@ -183,7 +181,7 @@ const AudienceTimelineChart = () => {
     >
       {chartVisible && (
         <ResponsiveContainer width="100%" height={450}>
-          <LineChart data={data} margin={{ top: 0, bottom: 20, left: 0, right: 0}}>
+          <LineChart data={data} margin={{ top: 0, bottom: 20, left: -20, right: -20}}>
             <XAxis dataKey="date" tickFormatter={formatXAxis} />
             <YAxis yAxisId="left" domain={[0, 'auto']} tick={false} />
             <YAxis yAxisId="right" orientation="right" domain={[0, 'auto']} tick={false} axisLine={false} />

@@ -34,7 +34,7 @@ const MusicProdStack = () => {
   useEffect(() => {
     const element = scrollingIconsRef.current;
     if (!element) return;
-    const totalWidth = element.scrollWidth;
+    const totalWidth = element.scrollWidth / 2;
 
     const animate = (timestamp) => {
       if (!previousTimestampRef.current) {

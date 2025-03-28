@@ -82,60 +82,74 @@ const Music = () => {
     }, [location]);
 
     useEffect(() => {
+        // Helper to stagger animate child elements
         const staggerAnimate = (parent, selector, delay = 100) => {
-            const items = Array.from(parent.querySelectorAll(selector));
-            items.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add("visible");
-                }, index * delay);
-            });
+          const items = Array.from(parent.querySelectorAll(selector));
+          items.forEach((item, index) => {
+            setTimeout(() => {
+              item.classList.add("visible");
+            }, index * delay);
+          });
         };
-    
+      
+        // This function sets up the IntersectionObserver on all animated elements
         const initFadeInObserver = () => {
-            const animatedElements = document.querySelectorAll(
-                '.shep-pfp-left, .shep-description-right, .bio-para, ' +
-                '.social-links-grid, .social-container-title, .music-stack, .music-terminal, ' +
-                '.counter-wrapper, .player-wrapper, .live-card, ' +
-                '.collab-grid'
-            );
-    
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-    
-                        if (el.classList.contains("social-links-grid")) {
-                            staggerAnimate(el, ".social-link", 100);
-                        } else if (el.classList.contains("counter-wrapper")) {
-                            staggerAnimate(el, ".live-card", 100);
-                        } else if (el.classList.contains("collab-grid")) {
-                            staggerAnimate(el, ".collab-item", 200);
-                        } else {
-                            setTimeout(() => {
-                                el.classList.add("visible");
-                            }, 300);
-                        }
-    
-                        obs.unobserve(el);
-                    }
-                });
-            }, { threshold: 0.3 });
-    
-            animatedElements.forEach((el) => observer.observe(el));
+          const animatedElements = document.querySelectorAll(
+            '.shep-pfp-left, .shep-description-right, .bio-para, ' +
+            '.social-links-grid, .social-container-title, .music-stack, .music-terminal, ' +
+            '.counter-wrapper, .player-wrapper, .live-card, ' +
+            '.collaborator-wrapper, .collab-grid'
+          );
+      
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target;
+                if (el.classList.contains("social-links-grid")) {
+                  staggerAnimate(el, ".social-link", 100);
+                } else if (el.classList.contains("counter-wrapper")) {
+                  staggerAnimate(el, ".live-card", 100);
+                } else if (el.classList.contains("collab-grid")) {
+                  staggerAnimate(el, ".collab-item", 200);
+                } else {
+                  setTimeout(() => {
+                    el.classList.add("visible");
+                  }, 300);
+                }
+                obs.unobserve(el);
+              }
+            });
+          }, { threshold: 0.3 });
+      
+          animatedElements.forEach((el) => {
+            observer.observe(el);
+          });
         };
-    
-        const initObserver = () => {
-            setTimeout(initFadeInObserver, 100);
+
+        const onLoad = () => {
+          initFadeInObserver();
+      
+          // Set up a MutationObserver on the collaborator wrapper in case the .collab-grid is added later.
+          const collabWrapper = document.querySelector('.collaborator-wrapper');
+          if (collabWrapper) {
+            const mutationObserver = new MutationObserver((mutationsList, observer) => {
+              const collabGrids = collabWrapper.querySelectorAll('.collab-grid');
+              if (collabGrids.length > 0) {
+                initFadeInObserver();
+                observer.disconnect();
+              }
+            });
+            mutationObserver.observe(collabWrapper, { childList: true, subtree: true });
+          }
         };
-    
+      
         if (document.readyState === "complete") {
-            initObserver();
+          onLoad();
         } else {
-            window.addEventListener("load", initObserver);
-            return () => window.removeEventListener("load", initObserver);
+          window.addEventListener("load", onLoad);
+          return () => window.removeEventListener("load", onLoad);
         }
-    }, []);
-    
+      }, []);
 
 
     return (

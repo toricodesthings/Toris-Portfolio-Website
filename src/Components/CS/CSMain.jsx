@@ -158,7 +158,7 @@ const CS = () => {
         setTypedText("");
         let currentIndex = 0;
 
-        const totalDuration = 2000; 
+        const totalDuration = 2500; 
         const updateInterval = 10; 
         const totalTicks = totalDuration / updateInterval;
         const charsPerTick = Math.ceil(fullCombined.length / totalTicks);

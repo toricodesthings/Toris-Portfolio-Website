@@ -1,6 +1,5 @@
-import { React, useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import "./About.css";
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const learningTopics = [
   "🚀 Building useful APIs...",
@@ -22,122 +21,99 @@ const coursesList = [
 ];
 
 export default function LiveFeed() {
-  const [displayMode, setDisplayMode] = useState("learning"); // "learning" or "courses"
+  const [displayMode, setDisplayMode] = useState("learning");
   const [displayedTopics, setDisplayedTopics] = useState([]);
   const [currentText, setCurrentText] = useState("");
-  const [index, setIndex] = useState(0);
-  const contentRef = useRef(null);
+  const [topicIndex, setTopicIndex] = useState(0);
+  const [coursesPage, setCoursesPage] = useState(0);
+
   const containerRef = useRef(null);
+  const contentRef = useRef(null);
+
+  // Dynamically calculate max lines based on container height
   const [maxLines, setMaxLines] = useState(4);
-  
-  const [coursesSet, setCoursesSet] = useState(0);
-  const [hasMoreCourses, setHasMoreCourses] = useState(false);
 
   useEffect(() => {
-    const calculateVisibleLines = () => {
-      if (!contentRef.current || !containerRef.current) return;
-      const lineHeight = 50;
-      const containerHeight = containerRef.current.clientHeight - lineHeight;
-      const availableLines = Math.floor(containerHeight / lineHeight); 
-      setMaxLines(Math.max(1, availableLines));
-      setHasMoreCourses(coursesList.length > availableLines);
-    };
-    calculateVisibleLines();
-    
-    const resizeObserver = new ResizeObserver(calculateVisibleLines);
-    
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
-
-    return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current);
+    const calculateMaxLines = () => {
+      if (containerRef.current && contentRef.current) {
+        const containerHeight = containerRef.current.clientHeight;
+        const lineHeight = parseFloat(
+          window.getComputedStyle(contentRef.current).lineHeight
+        );
+        
+        // Subtract some padding to prevent overflow
+        const availableLines = Math.max(
+          1, 
+          Math.floor((containerHeight - 100) / lineHeight)
+        );
+        
+        setMaxLines(availableLines);
       }
     };
+
+    calculateMaxLines();
+    window.addEventListener('resize', calculateMaxLines);
+    return () => window.removeEventListener('resize', calculateMaxLines);
   }, []);
+
+  // Learning Mode Logic
+  useEffect(() => {
+    if (displayMode !== "learning") return;
+
+    const currentTopic = learningTopics[topicIndex];
+    let charIndex = 0;
+
+    const typingInterval = setInterval(() => {
+      if (charIndex <= currentTopic.length) {
+        setCurrentText(currentTopic.slice(0, charIndex));
+        charIndex++;
+      } else {
+        clearInterval(typingInterval);
+        
+        // Add new topic and maintain max lines
+        setDisplayedTopics(prev => {
+          const newTopics = [...prev, currentTopic];
+          return newTopics.slice(-maxLines);
+        });
+
+        // Reset for next topic
+        setCurrentText("");
+        setTopicIndex(prev => (prev + 1) % learningTopics.length);
+      }
+    }, 30);
+
+    return () => clearInterval(typingInterval);
+  }, [topicIndex, displayMode, maxLines]);
+
+  const displayedCourses = useMemo(() => {
+    if (displayMode !== "courses") return [];
+
+    const totalPages = Math.ceil(coursesList.length / maxLines);
+    const startIndex = coursesPage * maxLines;
+    const endIndex = startIndex + maxLines;
+
+    return coursesList.slice(startIndex, endIndex);
+  }, [coursesPage, maxLines, displayMode]);
 
   useEffect(() => {
     if (displayMode !== "courses") return;
-    
-    const updateCourses = () => {
-      if (hasMoreCourses) {
-        const totalSets = Math.ceil(coursesList.length / maxLines);
-        const startIdx = (coursesSet % totalSets) * maxLines;
-        const endIdx = Math.min(startIdx + maxLines, coursesList.length);
-        return coursesList.slice(startIdx, endIdx);
-      } else {
-        return coursesList.slice(0, maxLines);
-      }
-    };
 
-    const newCourses = updateCourses();
-    setDisplayedTopics([]); 
-    setTimeout(() => {
-      setDisplayedTopics(newCourses);
-    }, 300);
-  }, [maxLines, coursesSet, hasMoreCourses, displayMode]);
-
-  useEffect(() => {
-    if (displayMode !== "courses" || !hasMoreCourses) return;
-    
     const rotationTimer = setInterval(() => {
-      setCoursesSet(prev => prev + 1);
-    }, 4000); 
-    
+      setCoursesPage(prev => (prev + 1) % Math.ceil(coursesList.length / maxLines));
+    }, 4000);
+
     return () => clearInterval(rotationTimer);
-  }, [displayMode, hasMoreCourses]);
+  }, [displayMode]);
 
   const toggleMode = (mode) => {
     if (mode === displayMode) return;
-    
+
     setDisplayMode(mode);
+    setDisplayedTopics([]);
     setCurrentText("");
-    
-    if (mode === "learning") {
-      setDisplayedTopics([]);
-      setIndex(0);
-    } else {
-      setCoursesSet(0);
-    }
+    setTopicIndex(0);
+    setCoursesPage(0);
   };
-
-  useEffect(() => {
-    if (displayMode !== "learning") return;
-  
-    if (index < learningTopics.length) {
-      let charIndex = 0;
-      const typingInterval = setInterval(() => {
-        if (charIndex <= learningTopics[index].length) {
-          setCurrentText(learningTopics[index].slice(0, charIndex));
-          charIndex++;
-        } else {
-          clearInterval(typingInterval);
-          setTimeout(() => {
-            setDisplayedTopics(prev => {
-              // Only remove the top line if we've exceeded the max lines.
-              const newTopics = [...prev, learningTopics[index]];
-              return newTopics.length > maxLines
-                ? newTopics.slice(1)
-                : newTopics;
-            });
-            setCurrentText("");
-            setIndex(prevIndex => (prevIndex + 1) % learningTopics.length);
-          }, 500);
-        }
-      }, 40);
-  
-      return () => clearInterval(typingInterval);
-    }
-  }, [index, displayMode]);
-
-  useEffect(() => {
-    if (displayMode === "learning") {
-      setDisplayedTopics([]);
-      setCurrentText("");
-      setIndex(0);
-    }
-  }, [displayMode]);
 
   return (
     <div ref={containerRef} className="terminal-container">
@@ -163,44 +139,45 @@ export default function LiveFeed() {
         </div>
       </div>
       <div ref={contentRef} className="terminal-content">
-        {displayMode === "learning" ? (
-          // Learning mode content
-          <>
-            {displayedTopics.map((topic, i) => (
-              <motion.div
-                key={`learning-${topic}-${i}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="terminal-line"
-              >
-                {topic}
-              </motion.div>
-            ))}
-            <div className="terminal-line">
-              {currentText}<span className="blinking-cursor">█</span>
-            </div>
-          </>
-        ) : (
-          // Courses mode content
-          <>
-            {displayedTopics.map((course, i) => (
-              <motion.div
-                key={`course-${course}-${coursesSet}-${i}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="terminal-line"
-              >
-                {course}
-              </motion.div>
-            ))}
-            <div className="terminal-line">
-              <span className="blinking-cursor">█</span>
-            </div>
-          </>
-        )}
+        <AnimatePresence>
+          {displayMode === "learning" ? (
+            <>
+              {displayedTopics.map((topic, i) => (
+                <motion.div
+                  key={`learning-${topic}-${i}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="terminal-line"
+                >
+                  {topic}
+                </motion.div>
+              ))}
+              <div className="terminal-line">
+                {currentText}<span className="blinking-cursor">█</span>
+              </div>
+            </>
+          ) : (
+            <>
+              {displayedCourses.map((course, i) => (
+                <motion.div
+                  key={`course-${course}-${i}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3, delay: i * 0.05 }}
+                  className="terminal-line"
+                >
+                  {course}
+                </motion.div>
+              ))}
+              <div className="terminal-line">
+                <span className="blinking-cursor">█</span>
+              </div>
+            </>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

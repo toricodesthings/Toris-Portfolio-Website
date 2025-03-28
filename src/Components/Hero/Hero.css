@@ -125,7 +125,7 @@
 
 .hero h1 {
     text-align: center;
-    font-size: clamp(2rem, calc(0.6rem + 5.5vh), 4rem);
+    font-size: clamp(2rem, calc(0.6rem + 6vh), 4rem);
     color: white;
     position: relative;
     font-weight: 800;

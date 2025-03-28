@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 import pythonImg from "../../assets/skills/python.svg";
 import jsImg from "../../assets/skills/javascript.svg";
@@ -19,10 +19,40 @@ const projectLearningItems = [
 ];
 
 const UpcomingProjectsAndLearningStack = () => {
+    const scrollingIconsRef = useRef(null);
+    const requestRef = useRef();
+    const previousTimestampRef = useRef();
+    const speed = 160;
+    let currentX = 0;
+  
+    useEffect(() => {
+      const element = scrollingIconsRef.current;
+      if (!element) return;
+      const totalWidth = element.scrollWidth / 2;
+  
+      const animate = (timestamp) => {
+        if (!previousTimestampRef.current) {
+          previousTimestampRef.current = timestamp;
+        }
+        const delta = timestamp - previousTimestampRef.current;
+        previousTimestampRef.current = timestamp;
+  
+        currentX += (speed * delta) / 1000;
+        if (currentX >= totalWidth) {
+          currentX -= totalWidth;
+        }
+        element.style.transform = `translateX(-${currentX}px)`;
+        requestRef.current = requestAnimationFrame(animate);
+      };
+  
+      requestRef.current = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(requestRef.current);
+    }, []);
+
   return (
     <div className="project-learning-stack-container">
       <div className="project-learning-stack">
-        <div className="scrolling-items">
+        <div ref={scrollingIconsRef} className="scrolling-items">
           {[...projectLearningItems, ...projectLearningItems].map((item, index) => (
             <div key={index} className="project-learning-item">
               <img

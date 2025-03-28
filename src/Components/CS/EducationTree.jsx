@@ -3,6 +3,9 @@ import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import "./CSMain.css";
 
+import nextButton from '../../assets/cspage/next.svg';
+import backButton from '../../assets/cspage/back.svg';
+
 // Helper: evaluate a cubic Bézier at parameter t
 function getCubicBezierPoint(t, p0, p1, p2, p3) {
     const x =
@@ -313,8 +316,8 @@ const EducationTree = () => {
                 </g>
             </svg>
             <div className="arrow-button-container">
-                <button className="arrow-button left" onClick={handlePrev}>◂</button>
-                <button className="arrow-button right" onClick={handleNext}>▸</button>
+                <button className="arrow-button left" onClick={handlePrev}><img src={backButton} style={{ filter: 'invert(1)'}} /></button>
+                <button className="arrow-button right" onClick={handleNext}><img src={nextButton} style={{ filter: 'invert(1)'}} /></button>
             </div>
         </div>
 

@@ -8,6 +8,9 @@ import amImg from "../../assets/social/am.svg";
 import instagramImg from "../../assets/social/instagram.svg";
 import facebookImg from "../../assets/social/facebook.svg";
 
+import nextButton from '../../assets/cspage/next.svg';
+import backButton from '../../assets/cspage/back.svg';
+
 // Mapping social platform keys to their corresponding images.
 const socialIcons = {
   spotify: spotifyImg,
@@ -110,7 +113,7 @@ const Collaborators = () => {
                                     {columns > 1 ? (
                                         <>
                                             <div className="collab-nav-arrow left" onClick={handlePrev}>
-                                            ◂
+                                            <img src={backButton} style={{ filter: 'invert(1)'}} />
                                             </div>
                                             <div className={`slide-container ${slideDirection ? "slide-" + slideDirection : ""}`}>
                                                 {(() => {
@@ -156,7 +159,7 @@ const Collaborators = () => {
                                                 })()}
                                             </div>
                                             <div className="collab-nav-arrow right" onClick={handleNext}>
-                                            ▸
+                                            <img src={nextButton} style={{ filter: 'invert(1)'}} />
                                             </div>
                                         </>
                                     ) : (
@@ -206,10 +209,10 @@ const Collaborators = () => {
                                             </div>
                                             <div className="collab-nav-arrows-mobile">
                                                 <div className="collab-nav-arrow" onClick={handlePrev}>
-                                                ◂
+                                                <img src={backButton} style={{ filter: 'invert(1)'}} />
                                                 </div>
                                                 <div className="collab-nav-arrow" onClick={handleNext}>
-                                                ▸
+                                                <img src={nextButton} style={{ filter: 'invert(1)'}} />
                                                 </div>
                                             </div>
                                         </>

@@ -42,124 +42,63 @@ const skills = [
 ];
 
 const About = () => {
-  const scrollRef = useRef(null);
-  const scrollDirectionRef = useRef(1);
-  const isUserScrollingRef = useRef(false);
-  const isDraggingRef = useRef(false);
-  const dragStartX = useRef(0);
-  const scrollLeftStart = useRef(0);
   const [activeImage, setActiveImage] = useState(1);
-  const animationFrameId = useRef(null);
-
-  const autoScroll = useCallback(() => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      if (!isUserScrollingRef.current && !isDraggingRef.current) {
-        scrollContainer.scrollLeft += scrollDirectionRef.current * 5;
-        if (
-          scrollContainer.scrollLeft + scrollContainer.clientWidth >=
-          scrollContainer.scrollWidth - 5
-        ) {
-          scrollDirectionRef.current = -1;
-        } else if (scrollContainer.scrollLeft <= 0) {
-          scrollDirectionRef.current = 1;
-        }
-      }
-      animationFrameId.current = requestAnimationFrame(autoScroll);
-    }
-  }, []);
+  const statBoxRef = useRef(null);
 
   useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (
-      scrollContainer &&
-      scrollContainer.scrollWidth > scrollContainer.clientWidth
-    ) {
-      animationFrameId.current = requestAnimationFrame(autoScroll);
-    }
+    const statBox = statBoxRef.current;
+    if (!statBox) return;
 
-    const handleUserScroll = () => {
-      isUserScrollingRef.current = true;
-      setTimeout(() => {
-        isUserScrollingRef.current = false;
-      }, 1000);
-    };
+    let maxScroll = statBox.scrollWidth - statBox.clientWidth;
+    let currentX = 0;
+    let direction = -1; // -1 means scrolling left, 1 for right
+    const speed = 100; // pixels per second
+    let lastTimestamp = null;
+    let animFrame;
 
-    const handleMusicFlipScroll = (event) => {
-      const musicFlipContainer = document.querySelector(".music-flip");
-      if (musicFlipContainer && musicFlipContainer.contains(event.target)) {
-        event.preventDefault();
-        setActiveImage(event.deltaY > 0 ? 2 : 1);
+    // Recalculate overflow on window resize
+    const recalcOverflow = () => {
+      maxScroll = statBox.scrollWidth - statBox.clientWidth;
+      // If the container becomes large enough, reset the translation.
+      if (maxScroll <= 0) {
+        currentX = 0;
+        statBox.style.transform = `translateX(0px)`;
       }
     };
 
-    const handleMouseDown = (e) => {
-      isDraggingRef.current = true;
-      dragStartX.current = e.pageX;
-      scrollLeftStart.current = scrollContainer.scrollLeft;
+    const step = (timestamp) => {
+      if (lastTimestamp === null) lastTimestamp = timestamp;
+      const dt = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+      const move = speed * (dt / 1000);
+
+      // Update currentX
+      currentX += direction * move;
+
+      // Reverse direction if we hit the bounds
+      if (currentX < -maxScroll) {
+        currentX = -maxScroll;
+        direction = 1;
+      } else if (currentX > 0) {
+        currentX = 0;
+        direction = -1;
+      }
+
+      statBox.style.transform = `translateX(${currentX}px)`;
+      animFrame = requestAnimationFrame(step);
     };
 
-    const handleMouseMove = (e) => {
-      if (!isDraggingRef.current) return;
-      const deltaX = e.pageX - dragStartX.current;
-      scrollContainer.scrollLeft = scrollLeftStart.current - deltaX;
-    };
+    // Only start the animation if there is overflow.
+    if (maxScroll > 0) {
+      animFrame = requestAnimationFrame(step);
+    }
 
-    const handleMouseUp = () => {
-      isDraggingRef.current = false;
-    };
-
-    const handleTouchStart = (e) => {
-      isDraggingRef.current = true;
-      dragStartX.current = e.touches[0].pageX;
-      scrollLeftStart.current = scrollContainer.scrollLeft;
-    };
-
-    const handleTouchMove = (e) => {
-      if (!isDraggingRef.current) return;
-      const deltaX = e.touches[0].pageX - dragStartX.current;
-      scrollContainer.scrollLeft = scrollLeftStart.current - deltaX;
-    };
-
-    const handleTouchEnd = () => {
-      isDraggingRef.current = false;
-    };
-
-    scrollContainer.addEventListener("wheel", handleUserScroll, {
-      passive: true,
-    });
-    scrollContainer.addEventListener("touchstart", handleUserScroll, {
-      passive: true,
-    });
-    scrollContainer.addEventListener("mousedown", handleMouseDown);
-    scrollContainer.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    scrollContainer.addEventListener("touchstart", handleTouchStart, {
-      passive: true,
-    });
-    scrollContainer.addEventListener("touchmove", handleTouchMove, {
-      passive: true,
-    });
-    window.addEventListener("touchend", handleTouchEnd);
-    document
-      .querySelector(".music-flip")
-      ?.addEventListener("wheel", handleMusicFlipScroll, { passive: false });
-
+    window.addEventListener("resize", recalcOverflow);
     return () => {
-      cancelAnimationFrame(animationFrameId.current);
-      scrollContainer.removeEventListener("wheel", handleUserScroll);
-      scrollContainer.removeEventListener("touchstart", handleUserScroll);
-      scrollContainer.removeEventListener("mousedown", handleMouseDown);
-      scrollContainer.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-      scrollContainer.removeEventListener("touchstart", handleTouchStart);
-      scrollContainer.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchend", handleTouchEnd);
-      document
-        .querySelector(".music-flip")
-        ?.removeEventListener("wheel", handleMusicFlipScroll);
+      window.removeEventListener("resize", recalcOverflow);
+      cancelAnimationFrame(animFrame);
     };
-  }, [autoScroll]);
+  }, []);
 
   useEffect(() => {
     const initFadeInObserver = () => {
@@ -181,12 +120,12 @@ const About = () => {
               });
             }
             else if (entry.target.classList.contains("music-timeline")) {
-              entry.target.classList.add("line-visible"); 
+              entry.target.classList.add("line-visible");
               const timelineItems = Array.from(entry.target.querySelectorAll(".timeline-item"));
               timelineItems.forEach((item, index) => {
                 setTimeout(() => {
                   item.classList.add("visible");
-                }, 300 + index * 200); 
+                }, 300 + index * 200);
               });
             }
             else if (entry.target.classList.contains("music-stat-box")) {
@@ -363,7 +302,7 @@ const About = () => {
         </div>
         <div
           className="music-stat-box"
-          ref={scrollRef}
+          ref={statBoxRef}
         >
           <div className="music-stat-item">
             <h3>7+</h3>

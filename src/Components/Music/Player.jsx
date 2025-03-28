@@ -4,6 +4,11 @@ import avatar from "../../assets/artwork_me.webp";
 import { fetchArtistReleases } from './getShepArtistRelease';
 import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 
+import playButton from "../../assets/musicpage/play.svg"
+import pauseButton from "../../assets/musicpage/pause.svg"
+import forwardButton from "../../assets/musicpage/forward.svg"
+import backwardButton from "../../assets/musicpage/backward.svg"
+
 const MusicPlayer = ({
   src,
   title,
@@ -167,11 +172,11 @@ const MusicPlayer = ({
             <span>{formatTime(duration)}</span>
           </div>
           <div className="player-buttons">
-            <button>⏮</button>
+            <button><img src={backwardButton} style={{ filter: 'invert(1)'}} /></button>
             <button onClick={playAudio} className="play-button">
-              {notPlaying ? '⏵' : '⏸'}
+              {notPlaying ? <img src={playButton} style={{ filter: 'invert(1)'}} /> : <img src={pauseButton} style={{ filter: 'invert(1)'}} />}
             </button>
-            <button>⏭</button>
+            <button><img src={forwardButton} style={{ filter: 'invert(1)'}} /></button>
           </div>
         </div>
         <div className="playerbrowser">

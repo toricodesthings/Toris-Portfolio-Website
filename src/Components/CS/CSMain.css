@@ -523,8 +523,8 @@ section::before {
 }
 
 .stack-bubble-container {
-    background-color: rgba(0, 0, 0, 0.5);
-    background-image: radial-gradient(rgba(163, 0, 46, 0.5) 2px, transparent 0);
+    background-color: rgba(20, 20, 20, 0.3);
+    background-image: radial-gradient(rgba(163, 0, 103, 0.5) 2px, transparent 0);
     background-size: 40px 40px;
     background-position: -5px -5px;
     position: relative;
@@ -599,11 +599,21 @@ section::before {
 
 .project-learning-stack-container {
     overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    background: rgba(0, 0, 0, 0.337);
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0.2), rgba(231, 158, 255, 0.1));
+    background-size: 175% 175%;
+    border: 2px solid rgb(255, 255, 255);
     border-radius: 12px;
     width: 100%;
-    position: relative;
+    animation: moveBackground 1s ease-in-out infinite alternate;
+}
+
+@keyframes moveBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -750px 0;
+    }
 }
 
 .project-learning-stack {
@@ -621,7 +631,6 @@ section::before {
     display: flex;
     backface-visibility: hidden;
     flex-direction: row;
-    animation: scrollItems 35s linear infinite;
 }
 
 .project-learning-item {
@@ -655,36 +664,12 @@ section::before {
     filter: drop-shadow(0 0 10px rgb(140, 140, 140));
 }
 
-@keyframes scrollItems {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-@-webkit-keyframes scrollItems {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-
-    100% {
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-    }
-}
-
-
 .education-treesection {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: auto;
-    /* Match the SVG height */
     position: relative;
 }
 
@@ -757,15 +742,20 @@ section::before {
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.7);
     border-radius: 50%;
-    width: max(0.9em);
-    height: max(0.9em);
+    width: max(3rem);
+    height: max(3rem);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-size: 3rem;
-    line-height: 1.8;
+}
+
+.arrow-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.5em;
 }
 
 .arrow-button.left {

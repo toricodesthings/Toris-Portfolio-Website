@@ -51,8 +51,8 @@ const About = () => {
 
     let maxScroll = statBox.scrollWidth - statBox.clientWidth;
     let currentX = 0;
-    let direction = -1; // -1 means scrolling left, 1 for right
-    const speed = 100; // pixels per second
+    let direction = -1; 
+    const speed = 120; 
     let lastTimestamp = null;
     let animFrame;
 

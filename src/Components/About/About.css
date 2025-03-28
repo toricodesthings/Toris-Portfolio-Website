@@ -745,8 +745,8 @@ transform: translateY(-3px);
       }
 
     .terminal-container {
-        height: 450px;  /* Added max-height to prevent excessive expansion */
-        overflow: hidden;   /* Prevent content from expanding beyond container */
+        height: 500px;  
+        overflow: hidden;   
       }
 
     .about-intro-left {
@@ -777,7 +777,6 @@ transform: translateY(-3px);
 
     .music-para p, .music-timeline {
         max-width: 100%;
-        border: 2px solid white;
     }
 
     .music-para p {

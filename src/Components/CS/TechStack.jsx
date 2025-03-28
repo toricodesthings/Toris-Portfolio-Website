@@ -38,14 +38,14 @@ const techItems = [
 
 const TechStack = () => {
   const containerRef = useRef(null);
-  const [containerSize, setContainerSize] = useState({ width: 800, height: 500 });
+  const [containerSize, setContainerSize] = useState({ width: 800, height: 600 });
 
   useEffect(() => {
     const updateSize = () => {
       if (containerRef.current) {
         const clientWidth = containerRef.current.clientWidth;
         const clientHeight = containerRef.current.clientWidth;
-        const newHeight = clientWidth/clientHeight < 1 ? 800 : 600;
+        const newHeight = clientWidth/clientHeight < 1 ? 850 : 600;
         setContainerSize({ width: clientWidth, height: newHeight });
       }
     };
@@ -53,10 +53,10 @@ const TechStack = () => {
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
   }, []);
-  const baseScale = Math.min(containerSize.width / 800, containerSize.height / 600);
+  const baseScale = Math.min(containerSize.width / 850, containerSize.height / 600);
   const isPortrait = containerSize.width < containerSize.height;
-  const minScale = 0.75; 
-  const scaleFactor = Math.max(isPortrait ? baseScale * 0.75 : baseScale, minScale);
+  const minScale = 0.5; 
+  const scaleFactor = Math.max(isPortrait ? baseScale * 0.70 : baseScale, minScale);
 
   const nodes = useMemo(() => {
     const padding = 20;
@@ -65,7 +65,7 @@ const TechStack = () => {
     const initialNodes = techItems.map((item, i) => {
       const imageSize = Math.max((35 + item.proficiency * 1) * scaleFactor, 50 * scaleFactor);
       const textSizePx = (16 + item.proficiency * 2) * scaleFactor;
-      const textWidth = item.name.length * textSizePx * 0.7;
+      const textWidth = item.name.length * textSizePx * 0.8;
       const bubbleWidth = imageSize + textWidth;
       const bubbleHeight = imageSize;
       const targetY =
@@ -87,8 +87,8 @@ const TechStack = () => {
   
     const aspectRatio = containerSize.width / containerSize.height;
     const collisionPadding = aspectRatio < 1 ? 10 : 20;
-    const tickCount = aspectRatio < 1 ? 300 : 150;
-    const forceXStrength = 0.02;
+    const tickCount = 150;
+    const forceXStrength = 0.05;
   
     const simulation = forceSimulation(initialNodes)
       .force(

@@ -22,7 +22,7 @@ const UpcomingProjectsAndLearningStack = () => {
     const scrollingIconsRef = useRef(null);
     const requestRef = useRef();
     const previousTimestampRef = useRef();
-    const speed = 160;
+    const speed = 120;
     let currentX = 0;
   
     useEffect(() => {
@@ -41,7 +41,7 @@ const UpcomingProjectsAndLearningStack = () => {
         if (currentX >= totalWidth) {
           currentX -= totalWidth;
         }
-        element.style.transform = `translateX(-${currentX}px)`;
+        element.style.transform = `translate3d(-${currentX}px, 0, 0)`;
         requestRef.current = requestAnimationFrame(animate);
       };
   

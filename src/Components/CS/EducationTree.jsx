@@ -23,13 +23,12 @@ function getCubicBezierPoint(t, p0, p1, p2, p3) {
 
 const EducationTree = () => {
     const { ref, inView } = useInView({
-        rootMargin: '0px 0px -10% 0px', // Adjust this value to see if it helps
+        rootMargin: '0px 0px -10% 0px',
         triggerOnce: true,
         threshold: 0.3
       });
       
 
-    // Define multiple course arrays for different trees
     const coursesList = [
         ["Comp 1405", "Comp 1406", "Comp 1805", "Math 1007", "Math 1104"],
         ["Comp 2401", "Comp 2402", "Math 2107", "Comp 2804", "Comp 2404", "Comp 2406"],
@@ -125,12 +124,12 @@ const EducationTree = () => {
             delay: 1.3
         });
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 25; i++) {
             const angle = (i / 15) * Math.PI * 2;
             const distance = 200 + Math.random() * 50;
-            const size = 35 + Math.random() * 25;
+            const size = 40 + Math.random() * 30;
             const offsetX = centerX + Math.cos(angle) * distance;
-            const offsetY = centerY + Math.sin(angle) * (distance * 0.55);
+            const offsetY = centerY + Math.sin(angle) * (distance * 0.50);
             segments.push({
                 pathData: `
           M${offsetX},${offsetY}
@@ -223,9 +222,9 @@ const EducationTree = () => {
             <svg className="sakura" key={currentTreeIndex} width="100%" height="750" viewBox="-300 -175 700 750">
                 {/* Tree trunk */}
                 <defs>
-                    <filter id="dropShadow" x="0" y="-10%" width="120%" height="120%">
+                    <filter id="dropShadow" x="0" y="-10%" width="110%" height="110%">
                         <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
-                        <feOffset in="blur" dx="4" dy="4" result="offsetBlur" />
+                        <feOffset in="blur" dx="2" dy="2" result="offsetBlur" />
                         <feMerge>
                             <feMergeNode in="offsetBlur" />
                             <feMergeNode in="SourceGraphic" />
@@ -241,7 +240,7 @@ const EducationTree = () => {
                         strokeLinecap="round"
                         initial={{ pathLength: 0.1, opacity: 0 }}
                         animate={inView ? { opacity: 1, pathLength: 1 } : { opacity: 0, pathLength: 0.1 }}
-                        transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
+                        transition={{ duration: 0.75, ease: "easeInOut", delay: 0.3 }}
                     />
 
                     {/* Curved branches */}
@@ -255,7 +254,7 @@ const EducationTree = () => {
                             strokeLinecap="round"
                             initial={{ opacity: 0, pathLength: 0.1 }}
                             animate={inView ? { opacity: 1, pathLength: 1 } : { opacity: 0, pathLength: 0.1 }}
-                            transition={{ duration: 1, delay: 1 + index * 0.2, ease: "easeOut" }}
+                            transition={{ duration: 0.75, delay: 1 + index * 0.2, ease: "easeOut" }}
                         />
                     ))}
 
@@ -267,7 +266,7 @@ const EducationTree = () => {
                             fill={segment.fill}
                             initial={{ opacity: 0, scale: 0.1 }}
                             animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.1 }}
-                            transition={{ duration: 0.5, delay: segment.delay, ease: "backOut" }}
+                            transition={{ duration: 0.3, delay: segment.delay, ease: "backOut" }}
                         />
                     ))}
 

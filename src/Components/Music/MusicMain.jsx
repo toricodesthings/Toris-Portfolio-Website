@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./MusicMain.css";
 import { fetchShepArtistStat } from './getShepArtistStat.js';
 import { useLocation } from 'react-router-dom';
-import { formatDistanceToNow } from 'date-fns';
+import { isToday, formatDistanceToNow } from 'date-fns';
 
 import MusicProductionStack from './MusicProductionStack';
 
@@ -47,8 +47,15 @@ const Music = () => {
     const location = useLocation();
 
     const getRelativeDateString = (dateString) => {
-        return formatDistanceToNow(new Date(dateString), { addSuffix: true });
-      };
+      const date = new Date(dateString);
+    
+      if (isToday(date)) {
+        return "Today";
+      }
+    
+      return formatDistanceToNow(date, { addSuffix: true });
+    };
+    
 
     useEffect(() => {
         if (location.pathname === '/musiclinks') {

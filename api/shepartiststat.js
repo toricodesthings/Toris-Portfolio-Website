@@ -53,16 +53,15 @@ export default async function handler(req, res) {
       .select('fetched_at')
       .gte('fetched_at', startOfDay)
       .lte('fetched_at', endOfDay)
-      .order('fetched_at', { ascending: false })
-      .limit(1);
+      .order('fetched_at', { ascending: true });
 
     if (fetchError) {
       return res.status(500).json({ message: 'Error checking existing data', error: fetchError });
     }
 
-    if (existingLogs.length > 0) {
+    if (existingLogs.length >= 2) {
       const fetchedTime = DateTime.fromISO(existingLogs[0].fetched_at, { zone: 'utc' }).setZone('America/Toronto');
-      const threePM = now.set({ hour: 15, minute: 0, second: 0, millisecond: 0 });
+      const threePM = now.set({ hour: 14, minute: 0, second: 0, millisecond: 0 });
 
       if (fetchedTime >= threePM) {
         return res.status(200).json({ message: 'Rate Limit: 2 Update per Day reached' });

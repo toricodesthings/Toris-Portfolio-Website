@@ -375,9 +375,6 @@ const EducationTree = () => {
               willChange: "opacity, transform",
               backfaceVisibility: "hidden",
             }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: "easeIn" }}
           >
             <ellipse cx="50" cy="520" rx="250" ry="30" fill="rgb(90, 30, 20)" />
             <ellipse cx="50" cy="510" rx="180" ry="25" fill="rgb(140, 60, 30)" />

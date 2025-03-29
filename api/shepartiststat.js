@@ -73,7 +73,7 @@ export default async function handler(req, res) {
     const monthlyListeners = await getMonthlyListeners();
     const { followers, popularity } = artistData;
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('shep_stats')
       .insert([
         {

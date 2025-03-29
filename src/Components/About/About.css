@@ -78,7 +78,7 @@ section {
 .about section h2 {
     font-size: clamp(2rem, 3vw, 3rem);
     color: white;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-align: center;
     position: relative;
 }
@@ -592,7 +592,7 @@ transform: translateY(-3px);
     position: relative;
     width: 100%;
     margin-bottom: 40px;
-    height: calc(clamp(300px, 35vw, 350px));
+    height: calc(clamp(300px, 33.5vw, 350px));
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -634,7 +634,6 @@ transform: translateY(-3px);
     z-index: 1;
 }
 
-/* Active Image */
 .flip-image.active {
     transform: translateX(0) scale(1);
     opacity: 1;
@@ -646,7 +645,7 @@ transform: translateY(-3px);
 }
 
 .flip-image.active:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     transition: transform 0.3s ease-in-out;
 }
 

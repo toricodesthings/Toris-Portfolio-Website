@@ -12,6 +12,7 @@ import htmlImg from "../../assets/skills/html.svg";
 import cssImg from "../../assets/skills/css.svg";
 import dockerImg from "../../assets/skills/docker.svg";
 import jsImg from "../../assets/skills/javascript.svg";
+import tsImg from "../../assets/skills/typescript.svg";
 import batchImg from "../../assets/skills/terminal.svg";
 import terminalImg from "../../assets/cspage/terminallogo.svg";
 
@@ -65,7 +66,6 @@ const CS = () => {
         setSelectedRepo(repo);
         setTerminalOpen(true);
 
-        // Scroll the projects section into view smoothly.
         const section = document.querySelector(".githubproj-section");
         if (section) {
             section.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -206,7 +206,7 @@ const CS = () => {
     useEffect(() => {
         const initFadeInObserver = () => {
           const animatedElements = document.querySelectorAll(
-            '.githubproj-text, .githubproj-panel, ' +
+            '.githubproj-text, .githubproj-panel, .tech-summary, .summary-text, .keyword-row, ' +
             '.stack-bubble-container, .bubble-group, .techstack-text, .upcoming-text, .project-learning-stack, ' +
             '.eduprog-text, .tree-wrapper'
           );
@@ -221,7 +221,14 @@ const CS = () => {
                       item.classList.add("visible");
                     }, index * 75);
                   });
-                }
+                } else if (entry.target.classList.contains("keyword-row")) {
+                    const skillItems = Array.from(entry.target.querySelectorAll(".key-mini"));
+                    skillItems.forEach((item, index) => {
+                      setTimeout(() => {
+                        item.classList.add("visible");
+                      }, index * 100);
+                    });
+                  }
                 else {
                   setTimeout(() => {
                     entry.target.classList.add("visible");
@@ -368,6 +375,19 @@ const CS = () => {
             </section>
 
             <section className="techstack-section">
+                <h2 className="tech-summary">Summary</h2>
+                <div className="summary-para">
+                    <p className="summary-text">I'm a first-year Software Engineering student at Carleton University with a strong eye for detail and a love for appealing, intuitive front-end design. Though, I also enjoy diving into backend development and building out the full stack. My main proficiency is Python which I've put to use by also exploring AI/ML with Tensorflow—after all, I’m all about finding smart, efficient ways to make life easier, anything to put repetitive tasks on autopilot.</p>
+                    <div className="section-divider" />
+                    <div className="keyword-row">
+                        <div className="key-mini">Frontend Engineer</div>
+                        <div className="key-mini">UX Centered</div>
+                        <div className="key-mini">Software Engineer</div>
+                        <div className="key-mini">Full Stack Developer</div>
+                        <div className="key-mini">AI/ML Enthusiast</div>
+                        <div className="key-mini">Automation-Focused</div>
+                    </div>
+                </div>
                 <h2 className="techstack-text">My Tech Stack</h2>
                 <CSTechStack />
                 <h2 className="upcoming-text">Learning & Upcoming Projects</h2>

@@ -69,6 +69,13 @@ const Music = () => {
             try {
                 const data = await fetchShepArtistStat();
 
+                if (data.monthly_listeners == null) {
+                    data.monthly_listeners = 'N/A';
+                    setMonthlyUpdate('Long ago');
+                } else if (data.fetched_at) {
+                    const relativeDate = getRelativeDateString(data.fetched_at);
+                    setMonthlyUpdate(relativeDate);
+  }
                 setFollowers(data.followers);
                 setMonthlyListeners(data.monthly_listeners);
                 setPopularityIndex(data.popularity);

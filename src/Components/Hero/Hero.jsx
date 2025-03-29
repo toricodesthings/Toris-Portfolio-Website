@@ -86,12 +86,14 @@ const Hero = () => {
           <span>{displayedText.substring(gradientText.length)}</span>
         </h1>
         <p className={`${showContent ? "pop-in" : "hidden-content"}`}>
-          I do many things in the domains of Full-Stack Engnineering and Audio Production.
+            Crafting digital experiences through 🖥️ Full-Stack Engineering and 🎹 Audio Production
         </p>
         <div className={`hero-buttons ${showContent ? "pop-in" : "hidden-content"}`}>
+          <div className="radiate-dotted">
           <button className="hero-viewbtn" onClick={() => setShowWorkOptions(true)}>
             Learn More
           </button>
+          </div>
           <Link to="/contact" className="hero-connectbtn">
             Contact Me
           </Link>

@@ -64,7 +64,7 @@ export default async function handler(req, res) {
       const threePM = now.set({ hour: 14, minute: 0, second: 0, millisecond: 0 });
 
       if (fetchedTime >= threePM) {
-        return res.status(200).json({ message: 'Rate Limit: 2 Update per Day reached' });
+        return res.status(200).json({ message: 'Rate Limit: 2 Updates per Day reached' });
       }
     }
 

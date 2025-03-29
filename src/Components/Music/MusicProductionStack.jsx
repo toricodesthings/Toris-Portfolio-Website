@@ -47,7 +47,7 @@ const MusicProdStack = () => {
       if (currentX >= totalWidth) {
         currentX -= totalWidth;
       }
-      element.style.transform = `translateX(-${currentX}px)`;
+      element.style.transform = `translate3d(-${currentX}px, 0, 0)`;
       requestRef.current = requestAnimationFrame(animate);
     };
 

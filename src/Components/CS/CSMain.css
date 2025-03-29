@@ -542,7 +542,6 @@ section::before {
     border: 2px solid rgba(255, 255, 255, 1);
 }
 
-/* Styling for each tech bubble */
 .tech-bubble {
     position: absolute;
     display: flex;
@@ -552,6 +551,7 @@ section::before {
     color: white;
     animation: float 6s ease-in-out infinite;
     cursor: pointer;
+    will-change: transform;
 }
 
 
@@ -564,7 +564,6 @@ section::before {
     opacity: 1;
 }
 
-/* Hover effect: scale up and pause animation */
 .bubbles:hover {
     transform: scale(1.03);
     animation-play-state: paused;
@@ -585,15 +584,15 @@ section::before {
 
 @keyframes float {
     0% {
-        transform: translate(0, 0);
+        transform: translate(-5px, 0);
     }
 
     50% {
-        transform: translate(5px, -15px);
+        transform: translate(5px, -10px);
     }
 
     100% {
-        transform: translate(0, 0);
+        transform: translate(-5px, 0);
     }
 }
 

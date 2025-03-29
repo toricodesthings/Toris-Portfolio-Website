@@ -1,13 +1,63 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./MusicMain.css";
 import avatar from "../../assets/artwork_me.webp";
-import { fetchArtistReleases } from './getShepArtistRelease';
+import { fetchArtistReleases } from "./getShepArtistRelease";
 import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 
-import playButton from "../../assets/musicpage/play.svg"
-import pauseButton from "../../assets/musicpage/pause.svg"
-import forwardButton from "../../assets/musicpage/forward.svg"
-import backwardButton from "../../assets/musicpage/backward.svg"
+import playButton from "../../assets/musicpage/play.svg";
+import pauseButton from "../../assets/musicpage/pause.svg";
+import forwardButton from "../../assets/musicpage/forward.svg";
+import backwardButton from "../../assets/musicpage/backward.svg";
+
+// Extract the Disc component and wrap it with React.memo
+const Disc = React.memo(({ displayedArtwork, notPlaying, discAnimationClass }) => (
+  <svg
+    key={displayedArtwork}
+    viewBox="0 0 500 500"
+    width="400"
+    height="400"
+    xmlns="http://www.w3.org/2000/svg"
+    className={`disc ${notPlaying ? "paused" : "spinning"} ${discAnimationClass}`}
+    style={{
+      willChange: "transform",
+      backfaceVisibility: "hidden",
+      transform: "translateZ(0)"
+    }}
+  >
+    <defs>
+      <radialGradient id="vinylLight" cx="50%" cy="0%" r="70%">
+        <stop offset="0%" stopColor="#333" stopOpacity="0.3" />
+        <stop offset="25%" stopColor="#555" stopOpacity="0.05" />
+        <stop offset="100%" stopColor="#000" stopOpacity="0" />
+      </radialGradient>
+      <radialGradient id="vinylLight2" cx="50%" cy="70%" r="90%">
+        <stop offset="0%" stopColor="#333" stopOpacity="0.4" />
+        <stop offset="25%" stopColor="#222" stopOpacity="0.0" />
+        <stop offset="100%" stopColor="#000" stopOpacity="0" />
+      </radialGradient>
+    </defs>
+    <circle cx="250" cy="250" r="240" fill="url(#vinylLight)" stroke="#111" strokeWidth="5" />
+    <circle cx="250" cy="250" r="245" fill="url(#vinylLight2)" stroke="#ccc" strokeWidth="1" />
+    {[...Array(20)].map((_, i) => (
+      <circle
+        key={i}
+        cx="250"
+        cy="250"
+        r={235 - i * 6}
+        fill="url(#vinylLight)"
+        stroke="gray"
+        strokeWidth="0.9"
+        opacity="0.6"
+      />
+    ))}
+    <clipPath id="labelClip">
+      <circle cx="250" cy="250" r="100" fill="none" />
+    </clipPath>
+    <image href={displayedArtwork} x="135" y="135" width="225" height="225" clipPath="url(#labelClip)" />
+    <circle cx="250" cy="250" r="8" fill="lightgray" />
+    <circle cx="250" cy="250" r="4" fill="black" />
+  </svg>
+));
 
 const MusicPlayer = ({
   src,
@@ -24,7 +74,6 @@ const MusicPlayer = ({
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
   const [notPlaying, setNotPlaying] = useState(true);
-
   const [displayedArtwork, setDisplayedArtwork] = useState(artwork_link);
   const [discAnimationClass, setDiscAnimationClass] = useState("");
   const animationDuration = 600;
@@ -92,51 +141,11 @@ const MusicPlayer = ({
       <audio ref={audioRef} src={src} />
       <div className="disc-wrapper">
         <div className={`disc-container ${discAnimationClass}`}>
-          <svg
-            key={displayedArtwork}
-            viewBox="0 0 500 500"
-            width="400"
-            height="400"
-            xmlns="http://www.w3.org/2000/svg"
-            className={`disc ${notPlaying ? 'paused' : 'spinning'} ${discAnimationClass}`}
-          >
-            <defs>
-              <radialGradient id="vinylLight" cx="50%" cy="0%" r="70%">
-                <stop offset="0%" stopColor="#333" stopOpacity="0.3" />
-                <stop offset="25%" stopColor="#555" stopOpacity="0.05" />
-                <stop offset="100%" stopColor="#000" stopOpacity="0" />
-              </radialGradient>
-              <radialGradient id="vinylLight2" cx="50%" cy="70%" r="90%">
-                <stop offset="0%" stopColor="#333" stopOpacity="0.4" />
-                <stop offset="25%" stopColor="#222" stopOpacity="0.0" />
-                <stop offset="100%" stopColor="#000" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            <circle cx="250" cy="250" r="240" fill="url(#vinylLight)" stroke="#111" strokeWidth="5" />
-            <circle cx="250" cy="250" r="245" fill="url(#vinylLight2)" stroke="#ccc" strokeWidth="1"/>
-            {[...Array(20)].map((_, i) => (
-              <circle
-                key={i}
-                cx="250"
-                cy="250"
-                r={235 - i * 6}
-                fill="url(#vinylLight)"
-                stroke="gray"
-                strokeWidth="0.9"
-                opacity="0.6"
-              />
-            ))}
-
-            {/* Center Label */}
-            <clipPath id="labelClip">
-              <circle cx="250" cy="250" r="100" fill="none" />
-            </clipPath>
-            <image href={displayedArtwork} x="135" y="135" width="225" height="225" clipPath="url(#labelClip)" />
-
-            {/* Center Hole */}
-            <circle cx="250" cy="250" r="8" fill="lightgray" />
-            <circle cx="250" cy="250" r="4" fill="black" />
-          </svg>
+          <Disc
+            displayedArtwork={displayedArtwork}
+            notPlaying={notPlaying}
+            discAnimationClass={discAnimationClass}
+          />
         </div>
         <svg viewBox="0 0 500 500" width="100%" height="400" xmlns="http://www.w3.org/2000/svg" className="vinylplayer">
           <line x1="450" y1="50" x2="370" y2="140" stroke="#aaa" strokeWidth="5" />
@@ -144,7 +153,6 @@ const MusicPlayer = ({
           <circle cx="450" cy="50" r="16" fill="#eee" />
           <circle cx="450" cy="50" r="15" fill="#555" />
           <circle cx="365" cy="147.5" r="15" fill="#999" />
-
           <rect x="20" y="460" width="25" height="25" fill="#c972f1" />
           <rect x="60" y="460" width="25" height="25" fill="#b32191" />
           <rect x="100" y="460" width="25" height="25" fill="#ea3b3b" />
@@ -166,17 +174,17 @@ const MusicPlayer = ({
               onChange={(e) => (audioRef.current.currentTime = e.target.value)}
               className="progress-bar"
               style={{
-                background: `linear-gradient(to right, rgba(197, 95, 244, 1) 0%, rgba(234, 59, 59, 1) ${percentage}%,#888888 ${percentage}%,#888888 100%)`,
+                background: `linear-gradient(to right, rgba(197, 95, 244, 1) 0%, rgba(234, 59, 59, 1) ${percentage}%,#888888 ${percentage}%,#888888 100%)`
               }}
             />
             <span>{formatTime(duration)}</span>
           </div>
           <div className="player-buttons">
-            <button><img src={backwardButton} style={{ filter: 'invert(1)'}} /></button>
+            <button><img src={backwardButton} style={{ filter: "invert(1)" }} alt="backward" /></button>
             <button onClick={playAudio} className="play-button">
-              {notPlaying ? <img src={playButton} style={{ filter: 'invert(1)'}} /> : <img src={pauseButton} style={{ filter: 'invert(1)'}} />}
+              {notPlaying ? <img src={playButton} style={{ filter: "invert(1)" }} alt="play" /> : <img src={pauseButton} style={{ filter: "invert(1)" }} alt="pause" />}
             </button>
-            <button><img src={forwardButton} style={{ filter: 'invert(1)'}} /></button>
+            <button><img src={forwardButton} style={{ filter: "invert(1)" }} alt="forward" /></button>
           </div>
         </div>
         <div className="playerbrowser">
@@ -193,7 +201,7 @@ const MusicPlayer = ({
                         background:
                           "linear-gradient(270deg, rgba(197, 95, 244, 1) 0%, rgba(234, 59, 59, 1) 100%)",
                         borderLeft: "2px solid #fff",
-                        borderRight: "2px solid #fff",
+                        borderRight: "2px solid #fff"
                       }
                     : {}
                 }
@@ -214,7 +222,6 @@ const MusicPlayer = ({
               <button onClick={() => onSortChange("length-desc")}>⏱▼</button>
               <button onClick={() => onSortChange("date-asc")}>📅▲</button>
               <button onClick={() => onSortChange("date-desc")}>📅▼</button>
-
             </div>
           </div>
         </div>
@@ -233,7 +240,7 @@ const PlayerContainer = () => {
       try {
         const data = await fetchArtistReleases();
         setReleases(data);
-        const latest = data.find(release => release.latest_release);
+        const latest = data.find((release) => release.latest_release);
         if (latest) {
           setSelectedTrack(latest);
         }
@@ -253,7 +260,7 @@ const PlayerContainer = () => {
   }
 
   const getTotalSeconds = (lengthObj) => {
-    if (typeof lengthObj === 'object' && 'minutes' in lengthObj && 'seconds' in lengthObj) {
+    if (typeof lengthObj === "object" && "minutes" in lengthObj && "seconds" in lengthObj) {
       return lengthObj.minutes * 60 + lengthObj.seconds;
     }
     return 0;

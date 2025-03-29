@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { createClient } from '@supabase/supabase-js';
+import { DateTime } from 'luxon';
 
 import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
@@ -28,7 +29,6 @@ async function getSpotifyAccessToken() {
   return data.access_token;
 }
 
-// Function to get artist data from Spotify
 async function getArtistData(accessToken) {
   const response = await fetch('https://api.spotify.com/v1/artists/48ds3BHWCPZVfAzFB2At2L', {
     headers: { 'Authorization': `Bearer ${accessToken}` }
@@ -43,17 +43,37 @@ async function getMonthlyListeners() {
 }
 
 export default async function handler(req, res) {
-  const userAgent = req.headers['user-agent'] || '';
-
-  if (!userAgent.includes('vercel-cron/1.0')) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
   try {
+    const now = DateTime.now().setZone('America/Toronto');
+    const startOfDay = now.startOf('day').toUTC().toISO();
+    const endOfDay = now.endOf('day').toUTC().toISO();
+
+    const { data: existingLogs, error: fetchError } = await supabase
+      .from('shep_stats')
+      .select('fetched_at')
+      .gte('fetched_at', startOfDay)
+      .lte('fetched_at', endOfDay)
+      .order('fetched_at', { ascending: false })
+      .limit(1);
+
+    if (fetchError) {
+      return res.status(500).json({ message: 'Error checking existing data', error: fetchError });
+    }
+
+    if (existingLogs.length > 0) {
+      const fetchedTime = DateTime.fromISO(existingLogs[0].fetched_at, { zone: 'utc' }).setZone('America/Toronto');
+      const threePM = now.set({ hour: 15, minute: 0, second: 0, millisecond: 0 });
+
+      if (fetchedTime >= threePM) {
+        return res.status(200).json({ message: 'Rate Limit: 2 Update per Day reached' });
+      }
+    }
+
     const accessToken = await getSpotifyAccessToken();
     const artistData = await getArtistData(accessToken);
     const monthlyListeners = await getMonthlyListeners();
     const { followers, popularity } = artistData;
-    
+
     const { data, error } = await supabase
       .from('shep_stats')
       .insert([
@@ -69,8 +89,8 @@ export default async function handler(req, res) {
       console.error('Supabase insert error:', JSON.stringify(error, null, 2));
       return res.status(500).json({ message: 'Error inserting data', error });
     }
-    
-    return res.status(200).json({ message: 'Yay, spotify Web API data has been inserted without errors.' });
+
+    return res.status(200).json({ message: 'Spotify data inserted successfully.' });
   } catch (err) {
     console.error('Unhandled error occurred:', err);
     return res.status(500).json({ message: 'Unhandled error', error: err });

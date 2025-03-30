@@ -9,7 +9,7 @@ body {
     --color: rgba(225, 225, 225, 0.04);
     color: white;
     font-family: 'lexend';
-
+    background-color: black;
     background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
         linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
         url("/background/all-section/background.png");
@@ -27,7 +27,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -10;
+    z-index: -2;
     background: none;
 }
 
@@ -72,46 +72,46 @@ html {
 
 @keyframes gridMove {
     0% {
-        background-position: 0px 0px, 0px 0px, center;
+        background-position: 0px 0px, 0px 0px, 0px 0px;
     }
 
     10% {
-        background-position: 150px 20px, 150px 20px, center;
+        background-position: 150px 20px, 150px 20px, 0px 0px;
     }
 
     20% {
-        background-position: 80px 60px, 80px 60px, center;
+        background-position: 80px 60px, 80px 60px, 0px 0px;
     }
 
     30% {
-        background-position: 160px 30px, 160px 30px, center;
+        background-position: 160px 30px, 160px 30px, 0px 0px;
     }
 
     40% {
-        background-position: 120px 100px, 120px 100px, center;
+        background-position: 120px 100px, 120px 100px, 0px 0px;
     }
 
     50% {
-        background-position: 200px 140px, 200px 140px, center;
+        background-position: 200px 140px, 200px 140px, 0px 0px;
     }
 
     60% {
-        background-position: 170px 200px, 170px 200px, center;
+        background-position: 170px 200px, 170px 200px, 0px 0px;
     }
 
     70% {
-        background-position: 240px 180px, 240px 180px, center;
+        background-position: 240px 180px, 240px 180px, 0px 0px;
     }
 
     80% {
-        background-position: 220px 100px, 220px 100px, center;
+        background-position: 220px 100px, 220px 100px, 0px 0px;
     }
 
     90% {
-        background-position: 300px 50px, 300px 50px, center;
+        background-position: 300px 50px, 300px 50px, 0px 0px;
     }
 
     100% {
-        background-position: 400px 50px, 400px 50px, center;
+        background-position: 400px 50px, 400px 50px, 0px 0px;
     }
 }

@@ -4,7 +4,7 @@
     gap: clamp(10px, 1vw, 20px);
     justify-content: space-between;
     height: auto;
-    margin: 2.5vh 10%;
+    margin: 2vh 10%;
     flex-wrap: nowrap;
     padding: 0;
 }
@@ -124,14 +124,15 @@
 }
 
 .nav-connect {
-    padding: clamp(12px, 2.5vh, 24px) clamp(16px, 2.5vw, 36px);
-    font-size: clamp(1rem, calc(0.5rem + 1vw), 2rem); 
+    padding: clamp(14px, calc(0.5vw + 2vh), 24px) clamp(16px, 2.5vw, 36px);
+    font-size: clamp(1rem, calc(0.4rem + 1vw), 2rem); 
     text-align: center;
-    background: linear-gradient(270deg, rgb(181, 70, 232), rgb(229, 48, 48));
-    border-radius: 25px;
+    background: linear-gradient(270deg, rgb(188, 89, 215), rgb(250, 83, 64));
+    border-radius: 24px;
     cursor: pointer;
     transition: 0.3s ease;
     position: relative;
+    box-shadow: 0 2px 2px rgb(92, 36, 129);
 }
 
 .nav-connect::before {
@@ -141,7 +142,7 @@
     left: -1px;
     width: 0;
     bottom: -1px;
-    border-radius: 25px 0 0 25px;
+    border-radius: 24px 0 0 24px;
     pointer-events: none;
     border: 2px solid transparent;
     border-right: none;
@@ -155,7 +156,7 @@
     right: -1px;
     width: 0;
     bottom: -1px;
-    border-radius: 0 25px 25px 0;
+    border-radius: 0 24px 24px 0;
     pointer-events: none;
     border: 2px solid transparent;
     border-left: none;
@@ -165,7 +166,7 @@
 .nav-connect:hover::before,
 .nav-connect:hover::after {
     width: 50%;
-    border-color: rgba(255, 182, 221, 0.936);
+    border-color: rgba(255, 168, 251, 0.936);
 }
 
 .nav-connect:hover {
@@ -195,13 +196,12 @@
     image-rendering: crisp-edges;
 }
 
-/* Scalable avatar wrapper */
 .avatar-wrapper {
     opacity: 0;
     width: clamp(60px, calc(5vw + 3vh), 100px);
     aspect-ratio: 1;
     border-radius: 50%;
-    background: linear-gradient(45deg, #ff6b6b, #573dd9);
+    background: transparent;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -212,21 +212,21 @@
 .avatar-wrapper::after {
     content: "";
     position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+    inset: 0;
+    border-radius: inherit;
     background: conic-gradient(
-        rgba(255, 255, 255, 0) 0%,
-        rgb(255, 255, 255) 10%,
-        rgba(255, 255, 255, 0) 25%
+      rgba(255, 255, 255, 0) 0%,
+      rgb(255, 255, 255) 10%,
+      rgba(255, 255, 255, 0) 25%
     );
     animation: rotate360 2s cubic-bezier(0.2, 0.8, 1.0, 0.1) infinite;
-    z-index: 0;
     pointer-events: none;
-    opacity: 0;
+    opacity: 0; /* Increase opacity for testing */
     transition: opacity 0.2s ease-in;
     backface-visibility: hidden;
-}
+    -webkit-mask: radial-gradient(circle, transparent 60%, black 70%);
+    mask: radial-gradient(circle, transparent 60%, black 70%);
+  }
 
 .avatar-wrapper:hover::after {
     opacity: 1;
@@ -244,12 +244,20 @@
 .avatar-wrapper::before {
     content: "";
     position: absolute;
-    width: 92%;    
-    height: 92%;
-    background: black;
-    border-radius: 50%;
-    z-index: 1;
-}
+    inset: 0;
+    border-radius: inherit;
+    padding: 4px; 
+    background: linear-gradient(45deg, #f25c51, rgb(158, 94, 232));
+    -mask:
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
 
 .avatar-hovanimate{
     transition: 0.25s ease;
@@ -299,10 +307,18 @@
     }
 
     .nav-connect {
+        border-radius: 48px;
         margin-top: 20px;
         padding: 20px 36px;
         font-size: clamp(18px, 3vw, 24px);
         margin-bottom: 20px;
+    }
+
+    .nav-connect::after {
+        border-radius: 0 48px 48px 0;
+    }
+    .nav-connect::before {
+        border-radius: 48px 0 0 48px;
     }
 }
 

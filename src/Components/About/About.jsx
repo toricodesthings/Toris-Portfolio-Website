@@ -308,7 +308,7 @@ const About = () => {
         >
           <div className="music-stat-item">
             <h3>7+</h3>
-            <p>Years &amp; Counting...</p>
+            <p>Years &amp; Counting</p>
           </div>
           <div className="music-stat-item">
             <h3>50+</h3>

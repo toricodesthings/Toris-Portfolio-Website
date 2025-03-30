@@ -6,6 +6,7 @@ import profile_img2 from "../../assets/profileimg2.webp";
 import music_img from "../../assets/mainpage/music.webp";
 import cs_img from "../../assets/mainpage/cs.webp";
 import { useAnimationStore } from "../../store/animationStore";
+import FlippingText from "./FlippingMsg";
 
 const Hero = () => {
   const { hasTypingAnimationPlayed, setHasTypingAnimationPlayed } = useAnimationStore();
@@ -14,7 +15,7 @@ const Hero = () => {
   const [showWorkOptions, setShowWorkOptions] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
 
-  const gradientText = "Hi there! I'm Tori," ;
+  const gradientText = "Hi there! I'm Tori,";
   const remainingText = " Developer and Artist based in Ottawa.";
   const fullString = `${gradientText}${remainingText}`;
 
@@ -82,17 +83,53 @@ const Hero = () => {
 
 
         <h1 className={`pop-in ${displayedText.length < fullString.length ? "typing" : ""}`}>
-          <span className="gradient">{displayedText.substring(0, gradientText.length)}</span>
-          <span>{displayedText.substring(gradientText.length)}</span>
+          <span className="text-wrapper">
+            {/* Blurred copy for the glass effect */}
+            <span className="text-back">
+              <span className="gradient">
+                {displayedText.substring(0, gradientText.length)}
+              </span>
+              {displayedText.substring(gradientText.length)}
+            </span>
+            <span className="text-back layer2">
+              <span className="gradient">
+                {displayedText.substring(0, gradientText.length)}
+              </span>
+              {displayedText.substring(gradientText.length)}
+            </span>
+            <span className="text-back layer3">
+              <span className="gradient">
+                {displayedText.substring(0, gradientText.length)}
+              </span>
+              {displayedText.substring(gradientText.length)}
+            </span>
+            <span className="text-back layer4">
+              <span className="gradient">
+                {displayedText.substring(0, gradientText.length)}
+              </span>
+              {displayedText.substring(gradientText.length)}
+            </span>
+            {/* Main text */}
+            <span className="text-front">
+              <span className="gradient">
+                {displayedText.substring(0, gradientText.length)}
+              </span>
+              {displayedText.substring(gradientText.length)}
+            </span>
+          </span>
         </h1>
         <p className={`${showContent ? "pop-in" : "hidden-content"}`}>
-            Crafting digital experiences through 🖥️ Full-Stack Engineering and 🎹 Audio Production
+          <FlippingText />
         </p>
         <div className={`hero-buttons ${showContent ? "pop-in" : "hidden-content"}`}>
-          <div className="radiate-dotted">
-          <button className="hero-viewbtn" onClick={() => setShowWorkOptions(true)}>
-            Learn More
-          </button>
+          <div className="radiate">
+            <span class="pulse-layer"></span>
+            <span class="pulse-layer"></span>
+            <span class="pulse-layer"></span>
+            <span class="pulse-layer"></span>
+            <button className="hero-viewbtn" onClick={() => setShowWorkOptions(true)}>
+              See My Work
+            </button>
           </div>
           <Link to="/contact" className="hero-connectbtn">
             Contact Me

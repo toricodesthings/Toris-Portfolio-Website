@@ -44,7 +44,7 @@ export default function LiveFeed() {
         // Subtract some padding to prevent overflow
         const availableLines = Math.max(
           1, 
-          Math.floor((containerHeight - 100) / lineHeight)
+          Math.floor((containerHeight - 125) / lineHeight)
         );
         
         setMaxLines(availableLines);

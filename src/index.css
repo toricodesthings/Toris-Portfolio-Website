@@ -15,7 +15,7 @@ body {
         url("/background/all-section/background.png");
 
     background-size: 15vw 15vw, 15vw 15vw, cover;
-    background-position: center, center, center;
+    background-position: 50% 50%, 50% 50%, 50% 50%;
     background-repeat: repeat, repeat, no-repeat;
     height: 100vh;
     animation: gridMove 20s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
@@ -34,14 +34,14 @@ body {
 body,
 html {
     overflow-x: hidden;
-    height: 100%;
+    height: 100vh;
+    max-width: 100vw;
 }
 
 .app {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    z-index: 1;
 }
 
 .main-loading {

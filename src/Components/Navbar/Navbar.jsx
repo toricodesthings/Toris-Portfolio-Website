@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import avatar from "../../assets/logo.png";
+import { ToriStatIndicator } from './statIndicator';
+
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -67,6 +69,7 @@ const Navbar = () => {
         <Link to="/contact" className="nav-connect-link">
           <div className="nav-connect">Let's Connect!</div>
         </Link>
+        <ToriStatIndicator />
       </div>
     </div>
   );

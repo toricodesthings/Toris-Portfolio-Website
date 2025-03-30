@@ -21,11 +21,6 @@ export default function PulsatingStars() {
     };
 
     const options = useMemo(() => ({
-        background: {
-            color: {
-                value: "transparent",
-            },
-        },
         particles: {
             color: {
                 value: ["#ffffff", "#ffecd3", "#dafff7", "#d4f2ff"],
@@ -55,7 +50,7 @@ export default function PulsatingStars() {
                 value: 0.2,
                 animation: {
                     enable: true,
-                    speed: 0.5,
+                    speed: 1,
                     minimumValue: 0.2,
                     sync: false
                 }

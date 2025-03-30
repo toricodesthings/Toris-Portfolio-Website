@@ -18,7 +18,7 @@ body {
     background-position: center, center, center;
     background-repeat: repeat, repeat, no-repeat;
     height: 100vh;
-    animation: gridMove 60s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
+    animation: gridMove 20s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
 }
 
 #tsparticles {
@@ -28,8 +28,8 @@ body {
     top: 0;
     left: 0;
     z-index: -10;
+    background: none;
 }
-
 
 body,
 html {

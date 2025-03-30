@@ -82,7 +82,7 @@ const Hero = () => {
         </div>
 
 
-        <h1 className={`pop-in ${displayedText.length < fullString.length ? "typing" : ""}`}>
+        <h1 className={`pop-in ${showContent ? "fade-in" : ""}`}>
           <span className="text-wrapper">
             {/* Blurred copy for the glass effect */}
             <span className="text-back">
@@ -109,8 +109,8 @@ const Hero = () => {
               </span>
               {displayedText.substring(gradientText.length)}
             </span>
-            {/* Main text */}
-            <span className="text-front">
+            {/* Foreground text with typing effect */}
+            <span className={`text-front ${displayedText.length < fullString.length ? "typing" : ""}`}>
               <span className="gradient">
                 {displayedText.substring(0, gradientText.length)}
               </span>
@@ -118,6 +118,7 @@ const Hero = () => {
             </span>
           </span>
         </h1>
+
         <p className={`${showContent ? "pop-in" : "hidden-content"}`}>
           <FlippingText />
         </p>

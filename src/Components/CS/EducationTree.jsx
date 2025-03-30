@@ -56,6 +56,10 @@ const EducationTree = () => {
   const [currentTreeIndex, setCurrentTreeIndex] = useState(0);
   const courses = coursesList[currentTreeIndex];
 
+  // Define color variables for course labels
+  const courseCompleteColor = "white";
+  const courseIncompleteColor = "gray";
+
   const handlePrev = () => {
     setCurrentTreeIndex(
       (prev) => (prev - 1 + coursesList.length) % coursesList.length
@@ -194,6 +198,10 @@ const EducationTree = () => {
       const controlX = midX + sign * offset * normX;
       const controlY = midY + sign * offset * normY;
       const pathData = `M${trunkPoint.x},${trunkPoint.y} Q${controlX},${controlY} ${endX},${endY}`;
+      
+   
+      const completed = currentTreeIndex === 0 ? true : false;
+
       return {
         course,
         trunkPoint: { x: trunkPoint.x, y: trunkPoint.y },
@@ -206,6 +214,7 @@ const EducationTree = () => {
         isLeftSide,
         branchLength,
         pathData,
+        completed,
       };
     });
 
@@ -232,7 +241,7 @@ const EducationTree = () => {
     }));
 
     return branchesArr;
-  }, [courses, trunkPoints]);
+  }, [courses, trunkPoints, currentTreeIndex]);
 
   return (
     <div
@@ -350,16 +359,13 @@ const EducationTree = () => {
               animate={inView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.3, delay: 2 + index * 0.2 }}
             >
-              <rect
-                x={branch.textX - 45}
-                y={branch.textY - 15}
-                width="100"
-                height="20"
-                rx="10"
-                ry="10"
-              />
               <text
                 className="course-label-text"
+                fill={
+                  branch.completed
+                    ? courseCompleteColor
+                    : courseIncompleteColor
+                }
                 x={branch.textX}
                 y={branch.textY + 5}
                 textAnchor="middle"

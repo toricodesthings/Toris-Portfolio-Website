@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import "./Contact.css";
+import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 
 const loadReCaptcha = (siteKey) => {
   return new Promise((resolve, reject) => {
-
     if (document.querySelector(`script[src*="recaptcha/api.js"]`)) {
       resolve(window.grecaptcha);
       return;
@@ -24,6 +24,8 @@ const loadReCaptcha = (siteKey) => {
 const ContactForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const formRef = useRef(null);
 
   useEffect(() => {
     loadReCaptcha('6LdzCQUrAAAAAG0MJViwm2SjBUwKg0npkAdkaVm_')
@@ -38,7 +40,10 @@ const ContactForm = () => {
       alert("reCAPTCHA is not loaded yet. Please try again later.");
       return;
     }
-
+    
+    // Show loader and hide the form
+    setLoading(true);
+    
     try {
       const token = await window.grecaptcha.execute('6LdzCQUrAAAAAG0MJViwm2SjBUwKg0npkAdkaVm_', { action: 'contact_form' });
       const formData = {
@@ -59,11 +64,13 @@ const ContactForm = () => {
       if (response.ok) {
         setIsSubmitted(true);
       } else {
-        alert(result.error || 'An error occured sending message.');
+        alert(result.error || 'An error occurred sending message.');
       }
     } catch (err) {
       console.error(err);
       alert('An error occurred during submission.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,45 +78,63 @@ const ContactForm = () => {
     setIsSubmitted(false);
   };
 
+  // Delay the appearance of the success message slightly
   useEffect(() => {
     if (isSubmitted) {
       setTimeout(() => {
         setShowSuccess(true);
-      }, 50); 
+      }, 100); 
     } else {
       setShowSuccess(false);
     }
   }, [isSubmitted]);
 
-  if (isSubmitted) {
+  // Reapply fade-in effect whenever the form is re-mounted (after a reset)
+  useEffect(() => {
+    if (!isSubmitted && formRef.current) {
+      formRef.current.classList.remove("visible");
+      setTimeout(() => {
+        formRef.current.classList.add("visible");
+      }, 100);
+    }
+  }, [isSubmitted]);
+
+  if (loading) {
+    return (
+      <div className='form-loading'>
+        <HamsterLoadingUI />
+        <h3>Sending...</h3>
+      </div>
+    );
+  } else if (isSubmitted) {
     return (
       <div className={`success-message ${showSuccess ? "visible" : ""}`}>
         <h3>Thank you! I'll be in touch soon.</h3>
         <button onClick={resetForm}>Submit another?</button>
       </div>
     );
+  } else {
+    return (
+      <div>
+        <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input type="text" name="name" placeholder="Your Name" />
+          </div>
+          <div className="form-group">
+            <input type="email" name="email" placeholder="Your Email" required />
+          </div>
+          <div className="form-group">
+            <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+          </div>
+          <input type="text" name="honeypot" style={{ display: 'none' }} />
+          <div className="contact-form-buttons">
+            <button type="submit">Send Message</button>
+            <button type="reset">Clear</button>
+          </div>
+        </form>
+      </div>
+    );
   }
-
-  return (
-    <div>
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input type="text" name="name" placeholder="Your Name" />
-        </div>
-        <div className="form-group">
-          <input type="email" name="email" placeholder="Your Email" required />
-        </div>
-        <div className="form-group">
-          <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
-        </div>
-        <input type="text" name="honeypot" style={{ display: 'none' }} />
-        <div className="contact-form-buttons">
-          <button type="submit">Send Message</button>
-          <button type="reset">Clear</button>
-        </div>
-      </form>
-    </div>
-  );
 };
 
 export default ContactForm;

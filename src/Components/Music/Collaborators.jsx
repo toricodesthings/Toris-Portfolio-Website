@@ -244,10 +244,10 @@ const Collaborators = () => {
                                                                 </div>
                                                                 {currentPageData.socialLinks && (
                                                                     <div className="collab-social-links">
-                                                                        {Object.keys(currentPageData.socialLinks).map(platform => (
+                                                                        {Object.keys(sanitizeSocialUrl(currentPageData.socialLinks)).map(platform => (
                                                                             <a
                                                                                 key={platform}
-                                                                                href={sanitizeUrl(currentPageData.socialLinks[platform], 'social')}
+                                                                                href={sanitizeSocialUrl(currentPageData.socialLinks[platform], 'social')}
                                                                                 target="_blank"
                                                                                 rel="noopener noreferrer"
                                                                             >

@@ -13,6 +13,14 @@ export default async function handler(req, res) {
 
   const { name, email, message, captchaToken, honeypot } = req.body;
 
+  const mailBody = `📧 New Message Received
+
+  👤 Email: ${email}
+  
+  📝 Message:
+  ${message}
+  `;
+
   if (honeypot) {
     return res.status(400).json({ error: 'Bot detected' });
   }
@@ -47,8 +55,8 @@ export default async function handler(req, res) {
   const mailOptions = {
     from: email,
     to: 'pitoursirak26@gmail.com', 
-    subject: `New Contact Form Submission from ${name}`,
-    text: message,
+    subject: `Oh look! New contact submission form from ${name}`,
+    text: mailBody,
   };
 
   try {

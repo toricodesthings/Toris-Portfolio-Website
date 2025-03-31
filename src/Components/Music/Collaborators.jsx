@@ -22,77 +22,65 @@ const socialIcons = {
     facebook: facebookImg,
 };
 
-/**
- * Comprehensive URL sanitization utility for protecting against XSS attacks
- * Handles both image sources and social media links with appropriate restrictions
- * 
- * @param {string} url - The URL to sanitize
- * @param {string} type - The type of URL ('image' or 'social')
- * @returns {string} - Sanitized URL or appropriate fallback
- */
-const sanitizeUrl = (url, type = 'image') => {
-    // Handle null/undefined values
-    if (typeof url !== 'string') {
-      return type === 'image' ? '/images/default-placeholder.png' : '#';
-    }
-    
+const sanitizeUrl = (url) => {
+    if (typeof url !== 'string') return '';
+
     const trimmedUrl = url.trim();
-    
-    // Block all potentially dangerous protocols
+
     if (/^(?:javascript|data|vbscript|file):/i.test(trimmedUrl)) {
-      console.warn(`Blocked potentially malicious ${type} URL:`, trimmedUrl);
-      return type === 'image' ? '/images/default-placeholder.png' : '#';
+        return '';
     }
-    
-    // Define allowed domains based on URL type
-    const imageDomains = [
-      'https://i.scdn.co/', 
-      'https://pbs.twimg.com/',
+    const allowedDomains = [
+        'https://i.scdn.co/',
+        'https://pbs.twimg.com/',
     ];
-    
-    const socialDomains = [
-      'https://open.spotify.com/',
-      'https://music.apple.com/',
-      'https://www.youtube.com/',
-      'https://youtu.be/',
-      'https://music.youtube.com/',
-      'https://twitter.com/',
-      'https://x.com/',
-      'https://www.instagram.com/',
-      'https://www.facebook.com/',
-      'https://fb.com/',
-    ];
-    
-    const allowedDomains = type === 'image' ? imageDomains : socialDomains;
-    
-    const isAllowedDomain = allowedDomains.some(domain => 
-      trimmedUrl.toLowerCase().startsWith(domain.toLowerCase())
-    );
-    
+    const isAllowedDomain = allowedDomains.some(domain => trimmedUrl.toLowerCase().startsWith(domain.toLowerCase()));
     const isRelativePath = trimmedUrl.startsWith('/');
-    
-    if (type === 'image') {
-      const isHttpsImageUrl = trimmedUrl.toLowerCase().startsWith('https://') && 
-                             /\.(jpg|jpeg|png|gif|svg|webp)(\?.*)?$/i.test(trimmedUrl);
-      
-      if (isAllowedDomain || isRelativePath || isHttpsImageUrl) {
+    const isHttpsImageUrl = trimmedUrl.toLowerCase().startsWith('https://') &&
+        /\.(jpg|jpeg|png|gif|svg|webp)(\?.*)?$/i.test(trimmedUrl);
+
+    if (isAllowedDomain || isRelativePath || isHttpsImageUrl) {
         return trimmedUrl;
-      }
-    } else {
-      const isHttpsUrl = trimmedUrl.toLowerCase().startsWith('https://');
-      
-      if (isAllowedDomain || isHttpsUrl) {
-        return trimmedUrl;
-      }
     }
-    
-    // Log blocked URLs for debugging
-    console.warn(`Blocked unsafe ${type} URL:`, trimmedUrl);
-    
-    // Return appropriate fallback
-    return type === 'image' ? 'https://placehold.co/400' : '#';
-  };
-  
+    return 'https://placehold.co/600x400';
+};
+
+
+const sanitizeSocialUrl = (url) => {
+    if (typeof url !== 'string') return '#';
+
+    const trimmedUrl = url.trim();
+
+    if (/^(?:javascript|data|vbscript|file):/i.test(trimmedUrl)) {
+        console.warn('Blocked potentially malicious social link:', trimmedUrl);
+        return '#';
+    }
+
+    const allowedDomains = [
+        'https://open.spotify.com/',
+        'https://music.apple.com/',
+        'https://www.youtube.com/',
+        'https://twitter.com/',
+        'https://x.com/',
+        'https://www.instagram.com/',
+        'https://www.facebook.com/',
+    ];
+
+    // Check if URL is from an allowed domain
+    const isAllowedDomain = allowedDomains.some(domain =>
+        trimmedUrl.toLowerCase().startsWith(domain.toLowerCase())
+    );
+
+    // Allow any HTTPS URL if you need more flexibility
+    const isHttpsUrl = trimmedUrl.toLowerCase().startsWith('https://');
+
+    if (isAllowedDomain || isHttpsUrl) {
+        return trimmedUrl;
+    }
+
+    console.warn('Blocked unsafe social link:', trimmedUrl);
+    return '#';
+};
 
 const Collaborators = () => {
     const [collaboratorsData, setCollaboratorsData] = useState([]);
@@ -211,12 +199,12 @@ const Collaborators = () => {
                                                                         {Object.keys(currentPageData.socialLinks).map(platform => (
                                                                             <a
                                                                                 key={platform}
-                                                                                href={currentPageData.socialLinks[platform]}
+                                                                                href={sanitizeSocialUrl(currentPageData.socialLinks[platform])}
                                                                                 target="_blank"
                                                                                 rel="noopener noreferrer"
                                                                             >
                                                                                 <img
-                                                                                    src={socialIcons[platform.toLowerCase()]}
+                                                                                    src={socialIcons[platform.toLowerCase()] || '#'}
                                                                                     alt={platform}
                                                                                 />
                                                                             </a>

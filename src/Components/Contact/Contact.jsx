@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Contact.css";
 import ContactForm from "./Form";
 
@@ -52,9 +52,6 @@ const Contact = () => {
   }, []);
   
   const [showSuccess, setShowSuccess] = useState(false);
-
-
-  
 
   return (
     <div className="contact">

@@ -66,12 +66,10 @@ const sanitizeSocialUrl = (url) => {
         'https://www.facebook.com/',
     ];
 
-    // Check if URL is from an allowed domain
     const isAllowedDomain = allowedDomains.some(domain =>
         trimmedUrl.toLowerCase().startsWith(domain.toLowerCase())
     );
 
-    // Allow any HTTPS URL if you need more flexibility
     const isHttpsUrl = trimmedUrl.toLowerCase().startsWith('https://');
 
     if (isAllowedDomain || isHttpsUrl) {

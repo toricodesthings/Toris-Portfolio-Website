@@ -22,6 +22,19 @@ const socialIcons = {
   facebook: facebookImg,
 };
 
+// Helper function to sanitize image URLs.
+const sanitizeUrl = (url) => {
+  if (typeof url !== 'string') return '';
+  const trimmedUrl = url.trim();
+  // Only allow URLs that start with 'http://', 'https://' or a relative path '/'
+  const lowerUrl = trimmedUrl.toLowerCase();
+  if (lowerUrl.startsWith('http://') || lowerUrl.startsWith('https://') || trimmedUrl.startsWith('/')) {
+    return trimmedUrl;
+  }
+  // Optionally, return a fallback safe URL or an empty string.
+  return '';
+};
+
 const Collaborators = () => {
     const [collaboratorsData, setCollaboratorsData] = useState([]);
 
@@ -113,14 +126,16 @@ const Collaborators = () => {
                                     {columns > 1 ? (
                                         <>
                                             <div className="collab-nav-arrow left" onClick={handlePrev}>
-                                            <img src={backButton} style={{ filter: 'invert(1)'}} />
+                                                <img src={backButton} style={{ filter: 'invert(1)' }} />
                                             </div>
                                             <div className={`slide-container ${slideDirection ? "slide-" + slideDirection : ""}`}>
                                                 {(() => {
                                                     const currentPageData = collaboratorsData[selectedIndex].pages[currentPage];
-                                                    const currentImageSource = currentPageData.img
+                                                    // Sanitize the URL before using it
+                                                    const rawImageSource = currentPageData.img
                                                         ? currentPageData.img
                                                         : collaboratorsData[selectedIndex].detailImg;
+                                                    const currentImageSource = sanitizeUrl(rawImageSource);
                                                     return (
                                                         <>
                                                             <img
@@ -159,7 +174,7 @@ const Collaborators = () => {
                                                 })()}
                                             </div>
                                             <div className="collab-nav-arrow right" onClick={handleNext}>
-                                            <img src={nextButton} style={{ filter: 'invert(1)'}} />
+                                                <img src={nextButton} style={{ filter: 'invert(1)' }} />
                                             </div>
                                         </>
                                     ) : (
@@ -167,9 +182,10 @@ const Collaborators = () => {
                                             <div className={`slide-container ${slideDirection ? "slide-" + slideDirection : ""}`}>
                                                 {(() => {
                                                     const currentPageData = collaboratorsData[selectedIndex].pages[currentPage];
-                                                    const currentImageSource = currentPageData.img
+                                                    const rawImageSource = currentPageData.img
                                                         ? currentPageData.img
                                                         : collaboratorsData[selectedIndex].detailImg;
+                                                    const currentImageSource = sanitizeUrl(rawImageSource);
                                                     return (
                                                         <>
                                                             <img
@@ -209,10 +225,10 @@ const Collaborators = () => {
                                             </div>
                                             <div className="collab-nav-arrows-mobile">
                                                 <div className="collab-nav-arrow" onClick={handlePrev}>
-                                                <img src={backButton} style={{ filter: 'invert(1)'}} />
+                                                    <img src={backButton} style={{ filter: 'invert(1)' }} />
                                                 </div>
                                                 <div className="collab-nav-arrow" onClick={handleNext}>
-                                                <img src={nextButton} style={{ filter: 'invert(1)'}} />
+                                                    <img src={nextButton} style={{ filter: 'invert(1)' }} />
                                                 </div>
                                             </div>
                                         </>

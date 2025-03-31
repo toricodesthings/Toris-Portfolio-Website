@@ -56,6 +56,10 @@
     animation: fadeInTop 0.4s ease-in-out forwards 0.8s;
 }
 
+.nav-stat-indicator {
+    animation: fadeInTop 0.3s ease-in-out forwards 0.8s;
+}
+
 
 @keyframes fadeInTop {
     from {
@@ -116,7 +120,6 @@
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
-
 .nav-menu li:hover::after {
     width: 100%;
 }
@@ -133,52 +136,73 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    gap: 4px;
+    gap: 8px;
     height: clamp(36px, calc(2.5vw + 7.5vh), 80px);
     width: clamp(120px, 15vw, 300px);
 }
 
 .nav-stat-indicator {
-    flex: 0.1;
-    line-height: 1;
+    opacity: 0;
     width: 100%;
+    flex: 0.1;
+    gap: 0.5rem;
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
-    gap: 0.5rem;
-    font-size: clamp(0.5rem, 1vw, 2rem);
+    font-size: clamp(0.4rem, 1vw, 1.5rem);
+    text-shadow: 0 1px 2px rgba(246, 119, 240, 0.594);
     color: #ffffff;
+    white-space: nowrap;
 }
 
-.dot {
-    margin-top: 2px;
-    width: 20%;
-    max-width: 8px;
+.indicator-dot {
+    width: 10%;
+    max-width: 10px;
     aspect-ratio: 1;
     border-radius: 50%;
-    display: inline-block;
+    box-shadow: 0 0 2px white;
+    transition: all 0.3s ease-in-out;
 }
 
-/* Default offline gray */
+@keyframes twinkleDot {
+    from {
+        filter: brightness(0.9);
+    }
+
+    to {
+        filter: brightness(1.5);
+    }
+}
+
 .dot-offline {
     background-color: #9ca3af;
-  }
-  
+    animation: twinkleDot 1s linear infinite alternate;
+}
+
 .dot-online {
-background-color: #22c55e; /* Green */
+    background-color: #48c1b3;
+    animation: twinkleDot 1s linear infinite alternate;
 }
 
 .dot-idle {
-background-color: #facc15; /* Yellow */
+    background-color: #ee702c;
+    animation: twinkleDot 1s linear infinite alternate;
 }
 
 .dot-coding {
-background-color: #a855f7; /* Purple */
+    background-color: #a355f7;
+    animation: twinkleDot 1s linear infinite alternate;
 }
 
 .dot-chilling {
-background-color: #3b82f6; /* Blue */
+    background-color: #494ce8;
+    animation: twinkleDot 1s linear infinite alternate;
+}
+
+.dot-producing {
+    background-color: #e06fcf;
+    animation: twinkleDot 1s linear infinite alternate;
 }
 
 .nav-connect-link {
@@ -284,7 +308,6 @@ background-color: #3b82f6; /* Blue */
     animation: rotate360 2s cubic-bezier(0.2, 0.8, 1.0, 0.1) infinite;
     pointer-events: none;
     opacity: 0;
-    /* Increase opacity for testing */
     transition: opacity 0.2s ease-in;
     backface-visibility: hidden;
     -webkit-mask: radial-gradient(circle, transparent 60%, black 70%);
@@ -340,7 +363,6 @@ background-color: #3b82f6; /* Blue */
 
     .avatar-wrapper {
         width: clamp(86px, 12.5vh, 100px);
-        /* Adjust min, preferred, and max sizes */
         height: clamp(86px, 12.5vh, 100px);
     }
 
@@ -377,17 +399,17 @@ background-color: #3b82f6; /* Blue */
         flex-direction: column;
         margin-top: 20px;
         margin-bottom: 20px;
-        height: 30vh;
+        height: clamp(80px, 7.5vh, 120px);
     }
 
     .nav-connect {
         font-size: clamp(18px, 3vw, 24px);
-        width: 33vw;
+        width: clamp(10rem, 50vw, 20rem);
         border-radius: 48px;
     }
 
     .nav-stat-indicator {
-        font-size: clamp(12px, 1vw, 20px);
+        font-size: clamp(14px, 2.5vw, 24px);
     }
 
     .nav-connect::after {

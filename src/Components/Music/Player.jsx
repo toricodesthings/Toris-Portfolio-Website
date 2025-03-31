@@ -153,9 +153,9 @@ const MusicPlayer = ({
           <circle cx="450" cy="50" r="16" fill="#eee" />
           <circle cx="450" cy="50" r="15" fill="#555" />
           <circle cx="365" cy="147.5" r="15" fill="#999" />
-          <rect x="20" y="460" width="25" height="25" fill="#c972f1" />
-          <rect x="60" y="460" width="25" height="25" fill="#b32191" />
-          <rect x="100" y="460" width="25" height="25" fill="#ea3b3b" />
+          <rect x="20" y="460" width="25" height="25" fill="#bf73e3b7" />
+          <rect x="60" y="460" width="25" height="25" fill="#b039949f" />
+          <rect x="100" y="460" width="25" height="25" fill="#dd6161b5" />
         </svg>
       </div>
       <div className="playercpanel">

@@ -292,7 +292,7 @@ section::before {
 
 .csterminal-buttons button {
     outline: none;
-    width: clamp(16px, 3vw, 24px);
+    width: clamp(18px, 3vw, 28px);
     aspect-ratio: 1;
     border-radius: 50%;
     animation: buttonPop 0.3s ease forwards;
@@ -313,17 +313,17 @@ section::before {
 
 
 .redbtn {
-    background-color: #dc4242;
+    background-color: #ec5e5e;
     cursor: pointer;
 }
 
 .yellowbtn {
-    background-color: #ff6549;
+    background-color: #ffb649;
     cursor: pointer;
 }
 
 .purplebtn {
-    background-color: #ad55ff;
+    background-color: #9435ee;
     cursor: pointer;
 }
 
@@ -514,7 +514,7 @@ section::before {
 .section-divider {
     width: 2px;
     height: 8vh;
-    background: linear-gradient(0deg, rgba(244, 122, 244, 0.536), rgba(222, 113, 175, 0.526)); /* or any accent color */
+    background: linear-gradient(0deg, rgba(255, 160, 255, 0.5), rgba(255, 183, 134, 0.589)); 
     align-self: center;
   }
 
@@ -584,7 +584,7 @@ section::before {
 
 .stack-bubble-container {
     background-color: rgba(20, 20, 20, 0.3);
-    background-image: radial-gradient(rgba(192, 27, 184, 0.342) 2px, transparent 0);
+    background-image: radial-gradient(rgba(225, 108, 219, 0.342) 2px, transparent 0);
     background-size: 50px 50px;
     background-position: -5px -5px;
     position: relative;
@@ -635,7 +635,7 @@ section::before {
 }
 
 .bubbles:hover img {
-    filter: drop-shadow(0 0 3px rgb(255, 129, 253));
+    filter: drop-shadow(0 1px 2px rgba(255, 202, 254, 0.809));
 }
 
 .tech-name {

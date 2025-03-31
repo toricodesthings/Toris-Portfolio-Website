@@ -643,7 +643,7 @@ section::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/background/music-section/section2.webp');
+    background-image: url('/background/music-section/section3.webp');
     background-size: cover;
     background-position: center;
     opacity: 0.75;
@@ -865,7 +865,7 @@ section::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/background/music-section/section3.webp');
+    background-image: url('/background/music-section/section4.webp');
     background-size: cover;
     background-position: center;
     opacity: 0.5;
@@ -1137,6 +1137,20 @@ section::before {
     position: relative;
 }
 
+.release-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/background/music-section/section2.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.75;
+    z-index: -1;
+}
+
 .player-wrapper {
     width: 100%;
 }
@@ -1158,7 +1172,7 @@ section::before {
     border-radius: 24px;
     aspect-ratio: 1;
     border: 2px solid rgb(143, 143, 143);
-    background-image: repeating-radial-gradient(#000000 80%, #1d1d1d 90%, #232323 90%);
+    background-image: repeating-radial-gradient(rgba(0, 0, 0, 0.451) 80%, #1d1d1d6a 90%, #2323235e 90%);
     background-size: 60px 60px;
     position: relative;
 }
@@ -1211,6 +1225,7 @@ section::before {
     border-radius: 24px;
     border: 2px solid rgb(143, 143, 143);
     display: flex;
+    background:rgba(0, 0, 0, 0.34);
     flex-direction: column;
 }
 

@@ -10,16 +10,65 @@ body {
     color: white;
     font-family: 'lexend';
     background-color: black;
-    background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
-        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
-        url("/background/all-section/background.png");
-
-    background-size: 15vw 15vw, 15vw 15vw, cover;
-    background-position: 50% 50%, 50% 50%, 50% 50%;
-    background-repeat: repeat, repeat, no-repeat;
+    position: relative;
     height: 100vh;
-    animation: gridMove 20s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
 }
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+    background-image: 
+        linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+    background-size: 15vw 15vw, 15vw 15vw;
+    background-position: 50% 50%, 50% 50%;
+    background-repeat: repeat, repeat;
+    animation: gridMove 20s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
+    -webkit-animation: gridMove 20s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
+}
+
+/* URL background with exposure animation */
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -3;
+    background-image: url("/background/all-section/background.png");
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    animation: exposureAnimation 2s ease-out forwards;
+    -webkit-animation: exposureAnimation 2s ease-out forwards;
+    will-change: opacity, filter;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+/* Define the exposure animation */
+@keyframes exposureAnimation {
+    0% {
+        filter: brightness(0.4) contrast(2);
+        -webkit-filter: brightness(0.4) contrast(2);
+    }
+    50% {
+        filter: brightness(0.7) contrast(4);
+        -webkit-filter: brightness(0.7) contrast(4);
+    }
+    100% {
+        filter: brightness(1.5) contrast(1);
+        -webkit-filter: brightness(1.5) contrast(1);
+    }
+}
+
 
 #tsparticles {
     position: absolute;

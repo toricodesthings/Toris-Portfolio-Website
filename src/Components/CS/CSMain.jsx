@@ -377,7 +377,7 @@ const CS = () => {
             <section className="techstack-section">
                 <h2 className="tech-summary">Summary</h2>
                 <div className="summary-para">
-                    <p className="summary-text">I'm a first-year Software Engineering student at Carleton University with a strong eye for detail and a love for appealing, intuitive front-end design. Though, I also enjoy diving into backend development and building out the full stack. My main proficiency is Python which I've put to use by also exploring AI/ML with Tensorflow—after all, I’m all about finding smart, efficient ways to make life easier, anything to put repetitive tasks on autopilot.</p>
+                    <p className="summary-text">I'm a passionate first-year Software Engineering student at Carleton University with a strong eye for detail and love for appealing, intuitive front-end design. Though, I also enjoy doing backend development and building out the full stack.As of now, my main proficiency is Python which I've put to use by also exploring AI/ML with Tensorflow—after all, I’m all about finding smart, efficient ways to make life easier; anything to put repetitive tasks on autopilot.</p>
                     <div className="section-divider" />
                     <div className="keyword-row">
                         <div className="key-mini">Frontend Engineer</div>

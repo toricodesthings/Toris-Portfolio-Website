@@ -1,7 +1,23 @@
-# Welcome to My Portfolio
+# 🚀 Welcome to My Portfolio
 
 ## Introduction
-This is a portfolio website that showcases my personal and professional progress, projects, ideas, and a step into the journey in the world of web development. It is built in React using Vite's Framework and hosted on Vercel. A few pages are still under construction but it will be the gateway to access all of my web apps.
 
-## Production Link
-**Explore the current built site:** [Click here to visit Live Site](https://toridoesthings.xyz/)
+Oh hi! This repo hosts my personal portfolio website, a showcase of my journey and projects in web development. Built using ⚡ **Vite** and ⚛️ **React**, and hosted on **Vercel**, this portfolio serves as a central point to explore my current and future web applications. It is continously updated with cool features and the Projects tab will be the gateway that redirects to all other webapps that I am building (around 11 planned, all coming soon)
+
+## 🎯 About
+
+This site highlights my growing collection of projects, each demonstrating my progress, skills, and experiences in web development. It features custom-built APIs alongside integrations with publicly available APIs, allowing dynamic content and meaningful interactions.
+
+This is an ongoing project, continually updated as I build and host new web applications, experiment with technologies, and refine my skills.
+
+## 🌟 Key Features
+- Developed with React and Vite for efficient, modern web performance.
+- Includes both custom-built and public API integrations.
+- Regularly updated with new projects and improvements.
+- Serves as the entry point to all my future web development endeavors.
+
+## 🔗 Explore the Site
+
+Feel free to explore the live version of my portfolio and see my projects in action:
+
+👉 [Visit My Live Portfolio Site](https://toridoesthings.xyz/)

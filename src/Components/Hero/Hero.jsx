@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
 import profile_img from "../../assets/profileimg1.webp";
@@ -13,58 +13,83 @@ const Hero = () => {
   const [displayedText, setDisplayedText] = useState("");
   const [showContent, setShowContent] = useState(false);
   const [showWorkOptions, setShowWorkOptions] = useState(false);
-  const [pageLoaded, setPageLoaded] = useState(false);
+
+  const [flipped, setFlipped] = useState(false);
+
+  const animationFrameId = useRef(null);
+  const timeoutId = useRef(null); // For the initial delay
 
   const gradientText = "Hi there! I'm Tori,";
   const remainingText = " Developer and Artist based in Ottawa.";
   const fullString = `${gradientText}${remainingText}`;
 
-  const [flipped, setFlipped] = useState(false);
-
   useEffect(() => {
-    const handleLoad = () => setPageLoaded(true);
-    if (document.readyState === "complete") {
-      setPageLoaded(true);
-    } else {
-      window.addEventListener("load", handleLoad);
-    }
-    return () => window.removeEventListener("load", handleLoad);
-  }, []);
-
-  useEffect(() => {
-    if (!pageLoaded) return;
+    // If animation has already played, show everything immediately
     if (hasTypingAnimationPlayed) {
       setDisplayedText(fullString);
       setShowContent(true);
       return;
     }
 
-    const animationStartDelay = 100;
-    const timeoutId = setTimeout(() => {
+    const animationStartDelay = 25; 
+
+    timeoutId.current = setTimeout(() => {
       let startTime = null;
-      const durationPerChar = 30;
+      const durationPerChar = 30; 
 
       const animate = (timestamp) => {
         if (!startTime) startTime = timestamp;
         const elapsed = timestamp - startTime;
-        const index = Math.floor(elapsed / durationPerChar);
-        if (index < fullString.length) {
-          setDisplayedText(fullString.substring(0, index + 1));
-          requestAnimationFrame(animate);
+        const index = Math.min(Math.floor(elapsed / durationPerChar), fullString.length -1); // Ensure index stays within bounds
+
+        setDisplayedText(prevText => {
+            const nextSubstring = fullString.substring(0, index + 1);
+            return prevText === nextSubstring ? prevText : nextSubstring;
+        });
+
+        if (index < fullString.length - 1) {
+          animationFrameId.current = requestAnimationFrame(animate);
         } else {
           setDisplayedText(fullString);
+        
           setTimeout(() => {
             setShowContent(true);
             setHasTypingAnimationPlayed();
-          }, 50);
+          }, 50); 
         }
       };
 
-      requestAnimationFrame(animate);
+      animationFrameId.current = requestAnimationFrame(animate);
     }, animationStartDelay);
 
-    return () => clearTimeout(timeoutId);
-  }, [pageLoaded, fullString, hasTypingAnimationPlayed, setHasTypingAnimationPlayed]);
+    // Cleanup function
+    return () => {
+      clearTimeout(timeoutId.current);
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
+  }, [fullString, hasTypingAnimationPlayed, setHasTypingAnimationPlayed]); // Dependencies are correct
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setShowWorkOptions(false);
+      }
+    };
+
+    if (showWorkOptions) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = '';
+    };
+  }, [showWorkOptions]);
 
   return (
     <div className="hero-container">
@@ -73,14 +98,13 @@ const Hero = () => {
           <div className="image-glow"></div>
           <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
             <div className="flip-card-front">
-              <img src={profile_img} alt="Profile" />
+              <img src={profile_img} alt="Profile" fetchpriority="high" loading="eager" />
             </div>
             <div className="flip-card-back">
               <img src={profile_img2} alt="Profile2" />
             </div>
           </div>
         </div>
-
 
         <h1 className={`pop-in ${showContent ? "fade-in" : ""}`}>
           <span className="text-wrapper">
@@ -124,10 +148,10 @@ const Hero = () => {
         </p>
         <div className={`hero-buttons ${showContent ? "pop-in" : "hidden-content"}`}>
           <div className="radiate">
-            <span class="pulse-layer"></span>
-            <span class="pulse-layer"></span>
-            <span class="pulse-layer"></span>
-            <span class="pulse-layer"></span>
+            <span className="pulse-layer"></span>
+            <span className="pulse-layer"></span>
+            <span className="pulse-layer"></span>
+            <span className="pulse-layer"></span>
             <button className="hero-viewbtn" onClick={() => setShowWorkOptions(true)}>
               See My Work
             </button>

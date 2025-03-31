@@ -50,8 +50,7 @@ const Contact = () => {
       return () => window.removeEventListener("load", initObserver);
     }
   }, []);
-  
-  const [showSuccess, setShowSuccess] = useState(false);
+
 
   return (
     <div className="contact">

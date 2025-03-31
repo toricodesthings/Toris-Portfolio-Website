@@ -23,6 +23,7 @@ const loadReCaptcha = (siteKey) => {
 
 const ContactForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     loadReCaptcha('6LdzCQUrAAAAAG0MJViwm2SjBUwKg0npkAdkaVm_')
@@ -74,7 +75,7 @@ const ContactForm = () => {
     if (isSubmitted) {
       setTimeout(() => {
         setShowSuccess(true);
-      }, 50); // small delay to trigger transition
+      }, 50); 
     } else {
       setShowSuccess(false);
     }

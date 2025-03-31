@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
-import profile_img from "../../assets/profileimg1.webp";
-import profile_img2 from "../../assets/profileimg2.webp";
-import music_img from "../../assets/mainpage/music.webp";
-import cs_img from "../../assets/mainpage/cs.webp";
 import { useAnimationStore } from "../../store/animationStore";
 import FlippingText from "./FlippingMsg";
 
@@ -98,10 +94,10 @@ const Hero = () => {
           <div className="image-glow"></div>
           <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
             <div className="flip-card-front">
-              <img src={profile_img} alt="Profile" fetchpriority="high" loading="eager" />
+              <img src="/heropage/profileimg1.webp" alt="Profile" fetchpriority="high" loading="eager" />
             </div>
             <div className="flip-card-back">
-              <img src={profile_img2} alt="Profile2" />
+              <img src="/heropage/profileimg2.webp" alt="Profile2" />
             </div>
           </div>
         </div>
@@ -167,7 +163,7 @@ const Hero = () => {
           <div className="work-options-container" onClick={(e) => e.stopPropagation()}>
             <Link to="/projects" className="work-option-box pop-in">
               <div className="option-image-container">
-                <img src={cs_img} alt="Coding Projects" />
+                <img src="/heropage/cs.webp" alt="Coding Projects" />
               </div>
               <div className="option-glow"></div>
               <h2>Computer Science</h2>
@@ -175,7 +171,7 @@ const Hero = () => {
 
             <Link to="/music" className="work-option-box pop-in">
               <div className="option-image-container">
-                <img src={music_img} alt="Music" />
+                <img src="/heropage/music.webp" alt="Music" />
               </div>
               <div className="option-glow"></div>
               <h2>Music</h2>

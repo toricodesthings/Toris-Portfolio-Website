@@ -244,18 +244,18 @@ const Collaborators = () => {
                                                                 </div>
                                                                 {currentPageData.socialLinks && (
                                                                     <div className="collab-social-links">
-                                                                        {Object.keys(sanitizeSocialUrl(currentPageData.socialLinks)).map(platform => (
-                                                                            <a
-                                                                                key={platform}
-                                                                                href={sanitizeSocialUrl(currentPageData.socialLinks[platform], 'social')}
-                                                                                target="_blank"
-                                                                                rel="noopener noreferrer"
-                                                                            >
-                                                                                <img
-                                                                                    src={socialIcons[platform.toLowerCase()] || '/images/default-social-icon.png'}
-                                                                                    alt={platform}
-                                                                                />
-                                                                            </a>
+                                                                        {Object.keys(currentPageData.socialLinks).map(platform => (
+                                                                        <a
+                                                                            key={platform}
+                                                                            href={sanitizeSocialUrl(currentPageData.socialLinks[platform])}
+                                                                            target="_blank"
+                                                                            rel="noopener noreferrer"
+                                                                        >
+                                                                            <img
+                                                                            src={socialIcons[platform.toLowerCase()] || '/images/default-social-icon.png'}
+                                                                            alt={platform}
+                                                                            />
+                                                                        </a>
                                                                         ))}
                                                                     </div>
                                                                 )}

@@ -374,7 +374,7 @@ section::before {
 
 /* Terminal Content */
 .csterminal-content {
-    max-width: 60%;
+    max-width: 100%;
     flex: 1;
     padding: 20px;
     font-family: inherit;
@@ -482,10 +482,10 @@ section::before {
 .cs-blinking-cursor {
     display: inline-block;
     margin-left: 10px;
-    animation: blink 0.5s infinite;
+    animation: dotBlink 0.5s infinite;
 }
 
-@keyframes blink {
+@keyframes dotBlink {
 
     0%,
     50%,

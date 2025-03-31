@@ -3,29 +3,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 75vh;
+    height: 100vh;
     width: 100%;
     text-align: center;
-    background: black;
     color: white;
 }
 
 /* Large and Bold Text */
 .under-construction {
-    font-size: clamp(4rem, 10vw, 6rem);
+    font-size: clamp(1rem, calc(3vw + 4vh), 10rem);
     font-weight: 600;
-    width: 85%;
+    width: 80%;
     text-transform: uppercase;
-    letter-spacing: 5px;
     background: linear-gradient(90deg, #bb8effd8, #ff8fec);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: fadeIn 1s ease-in-out, glow 1s infinite alternate;
+    animation: fade-in-text 0.5s ease-in-out, glow 1s infinite alternate;
 }
 
 /* Simple fade-in effect */
-@keyframes fadeIn {
+@keyframes fade-in-text {
     from {
         opacity: 0;
         transform: translateY(15px);

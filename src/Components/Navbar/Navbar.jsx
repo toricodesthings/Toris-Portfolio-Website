@@ -61,7 +61,7 @@ const Navbar = () => {
           <li><Link to="/about">About</Link></li>
         </div>
         <div className='pop-up'>
-          <li><Link to="/misc">Projects</Link></li>
+          <li><Link to="/misc">WebApps</Link></li>
         </div>
       </ul>
 

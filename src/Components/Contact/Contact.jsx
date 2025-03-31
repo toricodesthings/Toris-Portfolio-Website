@@ -87,7 +87,7 @@ const Contact = () => {
           <h2>Or...</h2>
           <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <input type="text" name="name" placeholder="Your Name" required />
+              <input type="text" name="name" placeholder="Your Name" />
             </div>
             <div className="form-group">
               <input type="email" name="email" placeholder="Your Email" required />

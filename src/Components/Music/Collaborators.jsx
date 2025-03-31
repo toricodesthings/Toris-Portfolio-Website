@@ -22,18 +22,28 @@ const socialIcons = {
   facebook: facebookImg,
 };
 
-// Helper function to sanitize image URLs.
 const sanitizeUrl = (url) => {
-  if (typeof url !== 'string') return '';
-  const trimmedUrl = url.trim();
-  // Only allow URLs that start with 'http://', 'https://' or a relative path '/'
-  const lowerUrl = trimmedUrl.toLowerCase();
-  if (lowerUrl.startsWith('http://') || lowerUrl.startsWith('https://') || trimmedUrl.startsWith('/')) {
-    return trimmedUrl;
-  }
-  // Optionally, return a fallback safe URL or an empty string.
-  return '';
-};
+    if (typeof url !== 'string') return '';
+    
+    const trimmedUrl = url.trim();
+    
+    if (/^(?:javascript|data|vbscript|file):/i.test(trimmedUrl)) {
+      return '';
+    }
+    const allowedDomains = [
+      'https://i.scdn.co/', 
+      'https://pbs.twimg.com/', 
+    ];
+    const isAllowedDomain = allowedDomains.some(domain => trimmedUrl.toLowerCase().startsWith(domain.toLowerCase()));
+    const isRelativePath = trimmedUrl.startsWith('/');
+    const isHttpsImageUrl = trimmedUrl.toLowerCase().startsWith('https://') && 
+                          /\.(jpg|jpeg|png|gif|svg|webp)(\?.*)?$/i.test(trimmedUrl);
+    
+    if (isAllowedDomain || isRelativePath || isHttpsImageUrl) {
+      return trimmedUrl;
+    }
+    return 'https://placehold.co/600x400'; 
+  };
 
 const Collaborators = () => {
     const [collaboratorsData, setCollaboratorsData] = useState([]);

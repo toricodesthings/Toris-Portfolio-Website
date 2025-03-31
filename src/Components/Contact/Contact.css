@@ -391,7 +391,7 @@ section::before {
     gap: 20px;
     width: 100%;
     opacity: 0;
-    animation: fadeFadeIn 0.3s ease forwards;
+    animation: formFadeIn 0.3s ease forwards;
 }
 
 .success-message h3 {

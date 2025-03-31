@@ -4,7 +4,9 @@ import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 import CSTechStack from "./TechStack";
 import CSEduTree from "./EducationTree";
 import UpcomingProjectsAndLearningStack from "./LnU";
+import ReactMarkdown from "react-markdown";
 import "./CSMain.css";
+
 
 //language logos
 import pythonImg from "../../assets/skills/python.svg";
@@ -57,7 +59,6 @@ const CS = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Open terminal overlay, calculate transform origin, and scroll section into view.
     const openTerminal = (repo, event) => {
         const rect = event.currentTarget.getBoundingClientRect();
         const originX = rect.left + rect.width / 2;
@@ -159,8 +160,8 @@ const CS = () => {
         setTypedText("");
         let currentIndex = 0;
 
-        const totalDuration = 2500; 
-        const updateInterval = 10; 
+        const totalDuration = 2500;
+        const updateInterval = 10;
         const totalTicks = totalDuration / updateInterval;
         const charsPerTick = Math.ceil(fullCombined.length / totalTicks);
 
@@ -205,54 +206,54 @@ const CS = () => {
 
     useEffect(() => {
         const initFadeInObserver = () => {
-          const animatedElements = document.querySelectorAll(
-            '.githubproj-text, .githubproj-panel, .tech-summary, .summary-text, .keyword-row, ' +
-            '.stack-bubble-container, .bubble-group, .techstack-text, .upcoming-text, .project-learning-stack, ' +
-            '.eduprog-text, .tree-wrapper'
-          );
-    
-          const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                if (entry.target.classList.contains("bubble-group")) {
-                  const skillItems = Array.from(entry.target.querySelectorAll(".bubbles"));
-                  skillItems.forEach((item, index) => {
-                    setTimeout(() => {
-                      item.classList.add("visible");
-                    }, index * 75);
-                  });
-                } else if (entry.target.classList.contains("keyword-row")) {
-                    const skillItems = Array.from(entry.target.querySelectorAll(".key-mini"));
-                    skillItems.forEach((item, index) => {
-                      setTimeout(() => {
-                        item.classList.add("visible");
-                      }, index * 100);
-                    });
-                  }
-                else {
-                  setTimeout(() => {
-                    entry.target.classList.add("visible");
-                  }, 100);
-                }
-                obs.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.3 });
-    
-          animatedElements.forEach((el) => observer.observe(el));
+            const animatedElements = document.querySelectorAll(
+                '.githubproj-text, .githubproj-panel, .tech-summary, .summary-text, .keyword-row, ' +
+                '.stack-bubble-container, .bubble-group, .techstack-text, .upcoming-text, .project-learning-stack, ' +
+                '.eduprog-text, .tree-wrapper'
+            );
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains("bubble-group")) {
+                            const skillItems = Array.from(entry.target.querySelectorAll(".bubbles"));
+                            skillItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add("visible");
+                                }, index * 75);
+                            });
+                        } else if (entry.target.classList.contains("keyword-row")) {
+                            const skillItems = Array.from(entry.target.querySelectorAll(".key-mini"));
+                            skillItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add("visible");
+                                }, index * 100);
+                            });
+                        }
+                        else {
+                            setTimeout(() => {
+                                entry.target.classList.add("visible");
+                            }, 100);
+                        }
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            animatedElements.forEach((el) => observer.observe(el));
         };
-    
+
         const initObserver = () => {
-          setTimeout(initFadeInObserver, 100);
+            setTimeout(initFadeInObserver, 100);
         };
-    
+
         if (document.readyState === "complete") {
-          initObserver();
+            initObserver();
         } else {
-          window.addEventListener("load", initObserver);
-          return () => window.removeEventListener("load", initObserver);
+            window.addEventListener("load", initObserver);
+            return () => window.removeEventListener("load", initObserver);
         }
-      }, []);
+    }, []);
 
     const renderedPieces = getRenderedPieces();
 
@@ -310,7 +311,7 @@ const CS = () => {
                             </div>
                             <div className="csterminal-content">
                                 {renderedPieces.map((piece, index) => {
-                                    // Special handling for the Languages piece:
+                                    // Special handling for Languages and URL pieces (if needed) remains unchanged.
                                     if (piece.tag === "h4" && piece.className === "p-languages") {
                                         if (piece.isComplete) {
                                             return (
@@ -329,16 +330,11 @@ const CS = () => {
                                         }
                                     }
 
-                                    // For URL piece.
                                     if (piece.tag === "url") {
                                         if (piece.isComplete) {
                                             return (
                                                 <div key={index} className="terminal-url">
-                                                    <a
-                                                        href={piece.displayed}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                    >
+                                                    <a href={piece.displayed} target="_blank" rel="noopener noreferrer">
                                                         {piece.displayed}
                                                     </a>
                                                 </div>
@@ -355,19 +351,27 @@ const CS = () => {
                                         }
                                     }
 
-                                    // Render all other pieces normally.
+                                    // For pieces that may contain markdown:
                                     let Element = "p";
                                     if (piece.tag === "h3") Element = "h3";
                                     if (piece.tag === "h4") Element = "h4";
+
+                                    // If the piece is complete, render it with ReactMarkdown so that any markdown syntax is properly parsed.
+                                    // Otherwise, render the plain text for the typing animation.
                                     return (
                                         <Element key={index} className={piece.className || ""}>
-                                            {piece.displayed}
-                                            {!piece.isComplete && (
-                                                <span className="cs-blinking-cursor">_</span>
+                                            {piece.isComplete ? (
+                                                <ReactMarkdown>{piece.displayed}</ReactMarkdown>
+                                            ) : (
+                                                <>
+                                                    {piece.displayed}
+                                                    <span className="cs-blinking-cursor">_</span>
+                                                </>
                                             )}
                                         </Element>
                                     );
                                 })}
+
                             </div>
                         </motion.div>
                     )}
@@ -391,7 +395,7 @@ const CS = () => {
                 <h2 className="techstack-text">My Tech Stack</h2>
                 <CSTechStack />
                 <h2 className="upcoming-text">Learning & Upcoming Projects</h2>
-        
+
                 <UpcomingProjectsAndLearningStack />
             </section>
 

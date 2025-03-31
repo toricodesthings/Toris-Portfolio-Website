@@ -70,9 +70,19 @@ const ContactForm = () => {
     setIsSubmitted(false);
   };
 
+  useEffect(() => {
+    if (isSubmitted) {
+      setTimeout(() => {
+        setShowSuccess(true);
+      }, 50); // small delay to trigger transition
+    } else {
+      setShowSuccess(false);
+    }
+  }, [isSubmitted]);
+
   if (isSubmitted) {
     return (
-      <div className="success-message">
+      <div className={`success-message ${showSuccess ? "visible" : ""}`}>
         <h3>Thank you! I'll be in touch soon.</h3>
         <button onClick={resetForm}>Submit another?</button>
       </div>

@@ -51,6 +51,11 @@ const Contact = () => {
     }
   }, []);
   
+  const [showSuccess, setShowSuccess] = useState(false);
+
+
+  
+
   return (
     <div className="contact">
       <div className="contact-title">

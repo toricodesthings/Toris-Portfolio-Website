@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({ error: 'Invocation method disallowed' });
   }
 
   const { name, email, message, captchaToken, honeypot } = req.body;
@@ -36,7 +36,6 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Captcha verification error' });
   }
 
-  // Configure Nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -54,9 +53,9 @@ export default async function handler(req, res) {
 
   try {
     await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: 'Email sent successfully!' });
+    res.status(200).json({ message: 'Form sent successfully!' });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ error: 'Failed to send email.' });
+    res.status(500).json({ error: 'Failed to send form.' });
   }
 }

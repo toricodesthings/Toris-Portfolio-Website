@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Contact.css";
 
 const loadReCaptcha = (siteKey) => {
@@ -22,6 +22,8 @@ const loadReCaptcha = (siteKey) => {
 };
 
 const ContactForm = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   useEffect(() => {
     loadReCaptcha('6LdzCQUrAAAAAG0MJViwm2SjBUwKg0npkAdkaVm_')
       .then((grecaptcha) => console.log('reCAPTCHA loaded', grecaptcha))
@@ -54,15 +56,28 @@ const ContactForm = () => {
       
       const result = await response.json();
       if (response.ok) {
-        alert('Message sent successfully! I will be in touch soon.');
+        setIsSubmitted(true);
       } else {
-        alert(result.error || 'Error sending message.');
+        alert(result.error || 'An error occured sending message.');
       }
     } catch (err) {
       console.error(err);
       alert('An error occurred during submission.');
     }
   };
+
+  const resetForm = () => {
+    setIsSubmitted(false);
+  };
+
+  if (isSubmitted) {
+    return (
+      <div className="success-message">
+        <h3>Thank you! I'll be in touch soon.</h3>
+        <button onClick={resetForm}>Submit another?</button>
+      </div>
+    );
+  }
 
   return (
     <div>

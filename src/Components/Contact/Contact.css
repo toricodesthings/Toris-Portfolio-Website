@@ -256,7 +256,6 @@ section::before {
     opacity: 1;
 }
 
-/* Remove unused border elements */
 .link-container .border-top,
 .link-container .border-right,
 .link-container .border-bottom,
@@ -308,6 +307,8 @@ section::before {
     gap: 20px;
     width: 100%;
     opacity: 0;
+    justify-content: center;
+    align-items: stretch;
     transition: opacity 0.3s ease
 }
 
@@ -328,8 +329,7 @@ section::before {
     color: white;
     outline: none;
     transition: all 0.3s ease;
-    /* Fade in the input on load */
-    animation: fadeIn 0.3s ease forwards;
+    animation: fadeFadeIn 0.3s ease forwards;
 }
 
 .contact-form input:focus {
@@ -366,7 +366,7 @@ section::before {
     cursor: pointer;
     transition: 0.25s ease;
     width: 50%;
-    animation: all 0.3s ease forwards;
+    transition: all 0.3s ease;
     box-sizing: border-box;
 }
 
@@ -374,6 +374,7 @@ section::before {
     background: linear-gradient(270deg, rgba(164, 45, 204, 0.9), rgba(231, 77, 71, 0.9));
     border: 2px transparent;
     box-shadow: 2px 5px 20px rgba(231, 77, 71, 0.7);
+    transform: translateY(-3px);
     
 }
 
@@ -381,7 +382,40 @@ section::before {
     transform: translateY(-3px) scale(0.95);
 }
 
-@keyframes fadeIn {
+/* Contact Form Styling */
+.success-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeFadeIn 0.3s ease forwards;
+}
+
+.success-message h3 {
+    font-size: clamp(1rem, 3vw, 28px);
+    width: 100%;
+}
+
+.success-message button {
+    all: unset;
+    position: relative;
+    padding: clamp(16px, 1vh, 20px) clamp(24px, 3vw, 36px);
+    text-align: center;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    border: 2px solid white;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.25s ease;
+    width: 100%;
+    animation: all 0.3s ease forwards;
+    box-sizing: border-box;
+}
+
+@keyframes formFadeIn {
     from {
         opacity: 0;
     }
@@ -409,7 +443,6 @@ section::before {
         gap: 20px;
     }
 
-    /* Social Media Panel: full width vertical layout, image left and text right */
     .quick-links-grid {
         flex-direction: column;
     }

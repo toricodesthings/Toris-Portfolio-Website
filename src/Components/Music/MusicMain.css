@@ -441,18 +441,14 @@ section::before {
         0 0 25px rgba(234, 59, 59, 0.4);
     overflow: hidden;
     transform: translateZ(0);   
+
 }
 
 .scrolling-icons {
     display: flex;
     gap: 80px;
-    width:max-content;
     align-items: center;
     height: 100%;
-    padding: 25px 0;
-    backface-visibility: hidden;
-    will-change: transform;
-    transform: translateZ(0);   
 }
 
 /* Music Tool */
@@ -460,6 +456,7 @@ section::before {
     flex-shrink: 0;
     position: relative;
     display: flex;
+    min-width: max-content;
     flex-direction: column;
 }
 
@@ -875,7 +872,7 @@ section::before {
 .collaborator-wrapper {
     width: 100%;
     max-height: fit-content;
-    margin-bottom: -40px;
+    margin-top: -40px;
 }
 
 .collab-grid {
@@ -892,7 +889,7 @@ section::before {
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-bottom: 40px;
+    margin-top: 40px;
 }
 
 .collab-item-name {
@@ -947,6 +944,7 @@ section::before {
 }
 
 .collab-expanded {
+    margin-top: 20px;
     border: 2px solid rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 12px;

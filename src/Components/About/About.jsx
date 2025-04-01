@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./About.css";
 import LiveFeed from "./EducationLiveFeed";
 
-import profile_img from "../../assets/profile_img.webp";
-
 import pythonImg from "../../assets/skills/python.svg";
 import javaImg from "../../assets/skills/java.svg";
 import htmlImg from "../../assets/skills/html.svg";
@@ -23,6 +21,8 @@ import dockerImg from "../../assets/skills/docker.svg";
 
 import wrapped2023 from "../../assets/Wrapped2023.jpg";
 import wrapped2024 from "../../assets/Wrapped2024.jpg";
+
+const PROFILE_IMG = "/aboutpage/profile_img.webp";
 
 const skills = [
   { name: "Python", img: pythonImg },
@@ -58,7 +58,6 @@ const About = () => {
     let lastTimestamp = null;
     let animFrame;
 
-    // Recalculate overflow on window resize
     const recalcOverflow = () => {
       maxScroll = statBox.scrollWidth - statBox.clientWidth;
       // If the container becomes large enough, reset the translation.
@@ -101,6 +100,17 @@ const About = () => {
       cancelAnimationFrame(animFrame);
     };
   }, []);
+  
+  useEffect(() => {
+    // Preload hero images
+    const preloadImages = [PROFILE_IMG, "/aboutpage/profile_img.webp"];
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
+  }, []);
+
 
   useEffect(() => {
     const initFadeInObserver = () => {
@@ -141,12 +151,12 @@ const About = () => {
             else {
               setTimeout(() => {
                 entry.target.classList.add("visible");
-              }, 100);
+              }, 50);
             }
             obs.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.2 });
+      }, { threshold: 0.3 });
 
       animatedElements.forEach((el) => observer.observe(el));
     };
@@ -171,7 +181,7 @@ const About = () => {
 
       <section className="intro-section">
         <div className="about-intro-left">
-          <img src={profile_img} alt="Profile" className="aboutprofileimg" />
+          <img src={PROFILE_IMG} alt="Profile" className="aboutprofileimg" />
         </div>
         <div className="about-intro-right">
           <div className="about-para">

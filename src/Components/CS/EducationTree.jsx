@@ -92,34 +92,38 @@ const EducationTree = () => {
     ];
     const segments = [];
 
+    // Main central foliage - reduced vertical spread
     segments.push({
       pathData: `
         M${centerX - 5},${centerY - 50}
-        C${centerX - 160},${centerY - 80} ${centerX - 190},${centerY + 50} ${centerX - 5},${centerY + 60}
-        C${centerX + 180},${centerY + 50} ${centerX + 150},${centerY - 80} ${centerX - 5},${centerY - 50} Z
+        C${centerX - 180},${centerY - 80} ${centerX - 220},${centerY + 40} ${centerX - 5},${centerY + 60}
+        C${centerX + 200},${centerY + 40} ${centerX + 170},${centerY - 80} ${centerX - 5},${centerY - 50} Z
       `,
       fill: sakuraFoliageShades[0],
       delay: 1,
     });
 
+    // Left foliage cluster - adjusted height
     segments.push({
       pathData: `
-        M${centerX - 80},${centerY - 40} 
-        Q${centerX - 150},${centerY - 70} ${centerX - 210},${centerY + 10} 
-        Q${centerX - 220},${centerY + 30} ${centerX - 170},${centerY + 70} 
-        Q${centerX - 110},${centerY + 40} ${centerX - 80},${centerY + 10} 
-        Q${centerX - 100},${centerY - 10} ${centerX - 80},${centerY - 40} Z
+        M${centerX - 100},${centerY - 40} 
+        Q${centerX - 190},${centerY - 70} ${centerX - 250},${centerY + 10} 
+        Q${centerX - 260},${centerY + 30} ${centerX - 210},${centerY + 70} 
+        Q${centerX - 150},${centerY + 40} ${centerX - 100},${centerY + 10} 
+        Q${centerX - 120},${centerY - 20} ${centerX - 100},${centerY - 40} Z
       `,
       fill: sakuraFoliageShades[1],
       delay: 1.1,
     });
 
+    // Right foliage cluster - adjusted height
     segments.push({
       pathData: `
-        M${centerX + 80},${centerY - 40} 
-        Q${centerX + 150},${centerY - 70} ${centerX + 210},${centerY + 10} 
-        Q${centerX + 220},${centerY + 30} ${centerX + 170},${centerY + 70} 
-        Q${centerX + 110},${centerY + 40} ${centerX + 80},${centerY - 40} Z
+        M${centerX + 100},${centerY - 40} 
+        Q${centerX + 190},${centerY - 70} ${centerX + 250},${centerY + 10} 
+        Q${centerX + 260},${centerY + 30} ${centerX + 210},${centerY + 70} 
+        Q${centerX + 150},${centerY + 40} ${centerX + 100},${centerY + 10} 
+        Q${centerX + 120},${centerY - 20} ${centerX + 100},${centerY - 40} Z
       `,
       fill: sakuraFoliageShades[2],
       delay: 1.4,
@@ -128,8 +132,8 @@ const EducationTree = () => {
     segments.push({
       pathData: `
         M${centerX - 5},${centerY - 80} 
-        Q${centerX - 110},${centerY - 140} ${centerX - 5},${centerY - 30} 
-        Q${centerX + 110},${centerY - 140} ${centerX - 5},${centerY - 80} Z
+        Q${centerX - 130},${centerY - 140} ${centerX - 5},${centerY - 30} 
+        Q${centerX + 130},${centerY - 140} ${centerX - 5},${centerY - 80} Z
       `,
       fill: sakuraFoliageShades[3],
       delay: 1.5,
@@ -137,32 +141,32 @@ const EducationTree = () => {
 
     segments.push({
       pathData: `
-        M${centerX - 110},${centerY + 50} 
-        Q${centerX - 50},${centerY + 110} ${centerX + 0},${centerY + 100} 
-        Q${centerX + 50},${centerY + 110} ${centerX + 110},${centerY + 50} 
-        Q${centerX + 50},${centerY + 45} ${centerX - 50},${centerY + 45} 
-        Q${centerX - 110},${centerY + 50} Z
+        M${centerX - 130},${centerY + 50} 
+        Q${centerX - 70},${centerY + 100} ${centerX + 0},${centerY + 90} 
+        Q${centerX + 70},${centerY + 100} ${centerX + 130},${centerY + 50} 
+        Q${centerX + 70},${centerY + 45} ${centerX - 70},${centerY + 45} 
+        Q${centerX - 130},${centerY + 50} Z
       `,
       fill: sakuraFoliageShades[4],
       delay: 1.3,
     });
 
-    for (let i = 0; i < 25; i++) {
-      const angle = (i / 15) * Math.PI * 2;
-      const distance = 200 + Math.random() * 50;
-      const size = 40 + Math.random() * 30;
+    for (let i = 0; i < 15; i++) {
+      const angle = (i / 12) * Math.PI * 2;
+      const distance = 200 + Math.random() * 50;  // Reduced max distance
+      const size = 50 + Math.random() * 35;
       const offsetX = centerX + Math.cos(angle) * distance;
-      const offsetY = centerY + Math.sin(angle) * (distance * 0.5);
+      const offsetY = centerY + Math.sin(angle) * (distance * 0.5);  // Reduced vertical spread
       segments.push({
         pathData: `
           M${offsetX},${offsetY}
-          Q${offsetX - size},${offsetY - size / 1.8} ${offsetX - size / 2},${offsetY - size * 1.1}
-          Q${offsetX + size / 2},${offsetY - size * 1.1} ${offsetX + size},${offsetY - size / 1.8}
-          Q${offsetX + size * 1.2},${offsetY + size / 2} ${offsetX + size / 2},${offsetY + size}
-          Q${offsetX - size / 2},${offsetY + size * 0.8} ${offsetX},${offsetY} Z
+          Q${offsetX - size},${offsetY - size / 1.8} ${offsetX - size / 2},${offsetY - size}
+          Q${offsetX + size / 2},${offsetY - size} ${offsetX + size},${offsetY - size / 1.8}
+          Q${offsetX + size},${offsetY + size / 2} ${offsetX + size / 2},${offsetY + size}
+          Q${offsetX - size / 2},${offsetY + size} ${offsetX},${offsetY} Z
         `,
         fill: sakuraFoliageShades[i % sakuraFoliageShades.length],
-        delay: 1.5 + i * 0.05,
+        delay: 1.5 + i * 0.08,
       });
     }
     return segments;
@@ -247,7 +251,10 @@ const EducationTree = () => {
     <div
       className="education-tree-container"
       ref={ref}
-      style={{ transform: "translateZ(0)" }}
+      style={{ 
+        transform: 'translate3d(0,0,0)',
+        willChange: 'transform'
+      }}
     >
       <h3>Year {currentTreeIndex + 1}</h3>
 
@@ -257,7 +264,11 @@ const EducationTree = () => {
         width="100%"
         height="750"
         viewBox="-300 -175 700 750"
-        style={{ willChange: "transform, opacity" }}
+        style={{ 
+          willChange: 'transform',
+          transformBox: 'fill-box',
+          backfaceVisibility: 'hidden'
+        }}
       >
         <defs>
           {/* Disable or simplify drop shadow for Safari */}
@@ -301,8 +312,9 @@ const EducationTree = () => {
             <motion.path
               key={`branch-${index}`}
               style={{
-                willChange: "opacity, transform",
-                backfaceVisibility: "hidden",
+                willChange: 'transform, opacity',
+                transformBox: 'fill-box',
+                backfaceVisibility: 'hidden'
               }}
               d={branch.pathData}
               fill="none"
@@ -328,8 +340,9 @@ const EducationTree = () => {
             <motion.path
               key={`foliage-${i}`}
               style={{
-                willChange: "opacity, transform",
-                backfaceVisibility: "hidden",
+                willChange: 'transform, opacity',
+                transformBox: 'fill-box',
+                backfaceVisibility: 'hidden'
               }}
               d={segment.pathData}
               fill={segment.fill}
@@ -340,7 +353,7 @@ const EducationTree = () => {
                   : { opacity: 0, scale: 0.1 }
               }
               transition={{
-                duration: 0.3,
+                duration: 0.5,
                 delay: segment.delay,
                 ease: "backOut",
               }}

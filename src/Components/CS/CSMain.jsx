@@ -233,7 +233,7 @@ const CS = () => {
                         else {
                             setTimeout(() => {
                                 entry.target.classList.add("visible");
-                            }, 100);
+                            }, 50);
                         }
                         obs.unobserve(entry.target);
                     }

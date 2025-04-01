@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./MusicMain.css";
-import avatar from "../../assets/artwork_me.webp";
 import { fetchArtistReleases } from "./getShepArtistRelease";
 import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 

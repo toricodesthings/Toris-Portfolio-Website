@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./Contact.css";
 import ContactForm from "./Form";
 
@@ -27,14 +27,14 @@ const Contact = () => {
               const index = links.indexOf(entry.target);
               setTimeout(() => {
                 entry.target.classList.add("visible");
-              }, index * 200); 
+              }, index * 150); 
             } else {
               entry.target.classList.add("visible");
             }
             obs.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.4 });
+      }, { threshold: 0.3 });
       
       animatedElements.forEach(el => observer.observe(el));
     };

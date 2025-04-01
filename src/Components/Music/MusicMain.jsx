@@ -18,7 +18,6 @@ import Collaborators from './Collaborators'
 //Release Player
 import Player from './Player'
 
-import avatar from "../../assets/artwork_me.webp";
 import spotifyImg from "../../assets/social/spotify.svg";
 import youtubeImg from "../../assets/social/youtube.svg";
 import tidalImg from "../../assets/social/tidal.svg";
@@ -34,6 +33,8 @@ const socialLinks = [
     { name: "Apple Music", url: "https://music.apple.com/us/artist/shep/1747760245", img: amImg },
     { name: "Soundcloud", url: "https://soundcloud.com/shepy2", img: soundcloudImg },
 ];
+
+const AVATAR_IMG = "/musicpage/avatar.webp";
 
 const Music = () => {
     const [followers, setFollowers] = useState("N/A");
@@ -96,7 +97,16 @@ const Music = () => {
     }, [location]);
 
     useEffect(() => {
-        // Helper to stagger animate child elements
+        // Preload hero images
+        const preloadImages = [AVATAR_IMG, "/musicpage/avatar.webp"];
+        preloadImages.forEach(src => {
+          const img = new Image();
+          img.src = src;
+        });
+    
+      }, []);
+
+    useEffect(() => {
         const staggerAnimate = (parent, selector, delay = 100) => {
           const items = Array.from(parent.querySelectorAll(selector));
           items.forEach((item, index) => {
@@ -106,7 +116,6 @@ const Music = () => {
           });
         };
       
-        // This function sets up the IntersectionObserver on all animated elements
         const initFadeInObserver = () => {
           const animatedElements = document.querySelectorAll(
             '.shep-pfp-left, .shep-description-right, .bio-para, ' +
@@ -124,16 +133,16 @@ const Music = () => {
                 } else if (el.classList.contains("counter-wrapper")) {
                   staggerAnimate(el, ".live-card", 100);
                 } else if (el.classList.contains("collab-grid")) {
-                  staggerAnimate(el, ".collab-item", 200);
+                  staggerAnimate(el, ".collab-item", 150);
                 } else {
                   setTimeout(() => {
                     el.classList.add("visible");
-                  }, 300);
+                  }, 50);
                 }
                 obs.unobserve(el);
               }
             });
-          }, { threshold: 0.3 });
+          }, { threshold: 0.2 });
       
           animatedElements.forEach((el) => {
             observer.observe(el);
@@ -143,7 +152,6 @@ const Music = () => {
         const onLoad = () => {
           initFadeInObserver();
       
-          // Set up a MutationObserver on the collaborator wrapper in case the .collab-grid is added later.
           const collabWrapper = document.querySelector('.collaborator-wrapper');
           if (collabWrapper) {
             const mutationObserver = new MutationObserver((mutationsList, observer) => {
@@ -175,7 +183,7 @@ const Music = () => {
             <section className="shep-section">
                 <div className="bio-panel">
                     <div className="shep-pfp-left">
-                        <img src={avatar} alt="Profile" className="shepprofileimg" />
+                        <img src={AVATAR_IMG} loading="eager" alt="Avatar Profile" className="shepprofileimg" />
                     </div>
                     <div className="shep-description-right">
                         <div className="bio-para">

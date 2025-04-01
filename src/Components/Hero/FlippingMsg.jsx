@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, memo } from "react";
 import "./Hero.css";
 
 const FlippingText = () => {
@@ -11,24 +11,41 @@ const FlippingText = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flip, setFlip] = useState(false);
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // Clear any existing intervals/timeouts on mount
+    const clearTimers = () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+    
+    clearTimers();
+    
+    // Set up new interval
+    intervalRef.current = setInterval(() => {
       setFlip(true);
-      setTimeout(() => {
+      
+      timeoutRef.current = setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % messages.length);
-        setFlip(false); // Reset flip after text switch
-      }, 300); 
-    }, 3000); 
+        setFlip(false);
+      }, 300);
+    }, 3000);
 
-    return () => clearInterval(interval);
-  }, []);
+    // Clean up on unmount
+    return clearTimers;
+  }, [messages.length]);
+
+  // Use a memoized message to prevent re-renders
+  const currentMessage = messages[currentIndex];
 
   return (
     <p className={`flip-text ${flip ? "flipping" : ""}`}>
-      {messages[currentIndex]}
+      {currentMessage}
     </p>
   );
 };
 
-export default FlippingText;
+// Memoize the component to prevent unnecessary re-renders
+export default memo(FlippingText);

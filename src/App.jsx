@@ -5,13 +5,15 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from './Components/Navbar/Navbar';
 import HamsterLoader from './Components/LoadingUI/HamsterLoader';
 import Home from './Pages/Home';
-import PulsatingStars from './Stars';
 
 const MusicPage = lazy(() => import( './Pages/Music'));
 const Projects = lazy(() => import('./Pages/CSProjects'));
 const About = lazy(() => import('./Pages/About'));
 const Misc = lazy(() => import('./Pages/Misc'));
 const Contact = lazy(() => import('./Pages/Contact'));
+const PulsatingStars = lazy(() => new Promise(resolve => 
+  setTimeout(() => resolve(import('./Stars')), 1500)
+));
 
 const App = () => {
   return (
@@ -19,7 +21,9 @@ const App = () => {
       <Analytics />
       <SpeedInsights />
       <div className="app">
-        <PulsatingStars />
+        <Suspense fallback={null}>
+          <PulsatingStars />
+        </Suspense>
         <Navbar />
         <Suspense fallback={<div className='main-loading'>
                               <p>Loading...</p>

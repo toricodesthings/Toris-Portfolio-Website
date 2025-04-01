@@ -322,7 +322,7 @@ section::before {
     width: 100%;
     padding: 20px;
     font-size: clamp(1rem, 2vw, 18px);
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.808);
     border-radius: 12px;
     background-color: rgba(0, 0, 0, 0.4);
     font-family: inherit;
@@ -361,7 +361,7 @@ section::before {
     text-align: center;
     font-size: 1.2rem;
     border-radius: 12px;
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.803);
     overflow: hidden;
     cursor: pointer;
     transition: 0.25s ease;
@@ -449,7 +449,6 @@ section::before {
     width: 100%;
     text-align: center;
 }
-
 
 
 @keyframes formFadeIn {
@@ -548,4 +547,10 @@ section::before {
         max-width: 100%;
         border-radius: 36px;
     }
+}
+
+.grecaptcha-badge {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    display: none !important;
 }

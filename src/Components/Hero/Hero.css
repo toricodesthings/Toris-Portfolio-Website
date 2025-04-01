@@ -6,7 +6,6 @@
     justify-content: space-between;
     background: transparent;
     margin-bottom: 2vh;
-    
 }
 
 .hero-container {
@@ -27,7 +26,7 @@
     flex-direction: column;
     position: relative;
     box-sizing: border-box;
-    
+    will-change: filter; /* Optimize for blur transitions */
 }
 
 .hidden-content {
@@ -40,6 +39,7 @@
     pointer-events: none;
 }
 
+/* Profile image styles - optimized */
 .hero .image-container {
     position: relative;
     width: clamp(130px, 33vh, 500px);
@@ -96,21 +96,28 @@
 
 .hero .image-glow {
     position: absolute;
-    top: -5%;
-    left: -5%;
-    width: 107.5%;
-    height: 107.5%;
+    top: -2.5%;
+    border-radius: 2px white;
+    left: -2.5%;
+    width: 105%;
+    height: 105%;
     background: linear-gradient(270deg, rgba(179, 93, 219, 0.8), rgba(251, 78, 78, 0.8));
     border-radius: 50%;
-    opacity: 0.5;
+    opacity: 0.4;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    animation: bubble-effect 6s ease-in-out infinite alternate;
+    animation: bubble-effect 10s ease-in-out infinite alternate;
     z-index: 0;
-    filter: blur(36px);
+    filter: blur(32px);
+    will-change: opacity;
 }
 
 .image-container:hover .image-glow {
     opacity: 0.8;
+    animation: bubble-effect 5s ease-in-out infinite alternate;
+    top: -4%;
+    left: -4%;
+    width: 108%;
+    height: 108%;
 }
 
 .image-container::before {
@@ -133,7 +140,10 @@
     display: inline-block;
     overflow: hidden;
     margin-bottom: -20px;
+    contain: content; /* Improve paint containment */
 }
+
+
 
 .hero h1 .text-back {
     position: absolute;
@@ -143,6 +153,9 @@
     z-index: 0;
     opacity: 0;
     transition: opacity 0.3s ease-out;
+    pointer-events: none;
+    contain: content size paint; /* Improve paint containment */
+    will-change: opacity;
 }
 
 .hero h1 .text-back.layer2 {
@@ -168,21 +181,33 @@
 
 /* When fade-in class is applied (after typing animation completes), reveal layers */
 .hero h1.fade-in .text-back {
-    opacity: 0.4;
+    --target-opacity: 0.4;
+    animation: fadeInLayer 0.3s ease forwards;
 }
 
 .hero h1.fade-in .text-back.layer2 {
-    opacity: 0.3;
+    --target-opacity: 0.3;
+    animation: fadeInLayer 0.3s ease 0.1s forwards;
 }
 
 .hero h1.fade-in .text-back.layer3 {
-    opacity: 0.2;
+    --target-opacity: 0.2;
+    animation: fadeInLayer 0.3s ease 0.2s forwards;
 }
 
 .hero h1.fade-in .text-back.layer4 {
-    opacity: 0.1;
+    --target-opacity: 0.1;
+    animation: fadeInLayer 0.3s ease 0.3s forwards;
 }
 
+@keyframes fadeInLayer {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: var(--target-opacity);
+    }
+}
 
 .hero h1 {
     text-align: center;
@@ -191,6 +216,16 @@
     font-weight: 700;
     min-height: 2rem;
     position: relative;
+}
+
+.hero h1, 
+.hero h1 .text-wrapper,
+.hero h1 .text-back,
+.hero h1 .text-front {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .hero p {
@@ -226,6 +261,7 @@
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
     transform-style: preserve-3d;
+    will-change: transform, opacity;
 }
 
 .flip-text.flipping {
@@ -241,6 +277,9 @@
     font-size: clamp(1rem, calc(0.5vh + 1vw), 2rem);
     font-weight: 600;
     padding: 10px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-connectbtn {
@@ -473,11 +512,11 @@
     }
 
     50% {
-        transform: scale(1.1) rotate(180deg);
+        transform: scaleX(1.1) scaleY(1.15) rotate(180deg);
     }
 
     100% {
-        transform: scale(0.95) rotate(360deg);
+        transform: scaleX(0.95) scaleY(0.925) rotate(360deg);
     }
 }
 

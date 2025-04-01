@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
 import "./MusicMain.css";
 
-// Music Tools array remains the same
+// Music Tools array
 import abletonImg from "../../assets/tools/ableton.webp";
 import iZotopeOImg from "../../assets/tools/iZotopeOzone.webp";
 import iZotopeRXImg from "../../assets/tools/iZotopeRX.webp";
@@ -25,41 +26,68 @@ const musicTools = [
 ];
 
 const MusicProdStack = () => {
-  const scrollingIconsRef = useRef(null);
-  const requestRef = useRef();
-  const previousTimestampRef = useRef();
-  const speed = 100;
-  let currentX = 0;
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: false, amount: 0.2 });
+  const controls = useAnimation();
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [contentWidth, setContentWidth] = useState(0);
+  const contentRef = useRef(null);
 
+  // Calculate dimensions once on mount and on resize
   useEffect(() => {
-    const element = scrollingIconsRef.current;
-    if (!element) return;
-    const totalWidth = element.scrollWidth / 2;
-
-    const animate = (timestamp) => {
-      if (!previousTimestampRef.current) {
-        previousTimestampRef.current = timestamp;
+    const calculateWidths = () => {
+      if (containerRef.current && contentRef.current) {
+        const container = containerRef.current.getBoundingClientRect();
+        const content = contentRef.current.getBoundingClientRect();
+        
+        setContainerWidth(container.width);
+        setContentWidth(content.width);
       }
-      const delta = timestamp - previousTimestampRef.current;
-      previousTimestampRef.current = timestamp;
-
-      currentX += (speed * delta) / 1000;
-      if (currentX >= totalWidth) {
-        currentX -= totalWidth;
-      }
-      element.style.transform = `translate3d(-${currentX}px, 0, 0)`;
-      requestRef.current = requestAnimationFrame(animate);
     };
 
-    requestRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(requestRef.current);
+    calculateWidths();
+    
+    // Update on resize
+    window.addEventListener("resize", calculateWidths);
+    return () => window.removeEventListener("resize", calculateWidths);
   }, []);
 
+  // Control animation based on visibility
+  useEffect(() => {
+    if (isInView) {
+      controls.start("animate");
+    } else {
+      controls.stop();
+    }
+  }, [isInView, controls, contentWidth]);
+
+  // Create a duplicate array for seamless infinite scroll
+  const displayTools = [...musicTools, ...musicTools];
+
   return (
-    <div className="music-stack-container">
-      <div className='music-production-stack'>
-        <div ref={scrollingIconsRef} className="scrolling-icons">
-          {[...musicTools, ...musicTools].map((tool, index) => (
+    <div className="music-stack-container" ref={containerRef}>
+      <div className="music-production-stack">
+        <motion.div
+          ref={contentRef}
+          className="scrolling-icons"
+          initial="initial"
+          animate={controls}
+          variants={{
+            initial: { x: 0 },
+            animate: {
+              x: contentWidth > 0 ? -contentWidth / 2 : 0,
+              transition: {
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: displayTools.length * 1.5,
+                  ease: "linear"
+                }
+              }
+            }
+          }}
+        >
+          {displayTools.map((tool, index) => (
             <div key={index} className="music-tool">
               <img
                 src={tool.img}
@@ -69,10 +97,10 @@ const MusicProdStack = () => {
               <span className="music-tool-text">{tool.name}</span>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
-export default MusicProdStack;
+export default React.memo(MusicProdStack);

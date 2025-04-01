@@ -5,13 +5,23 @@ import { useLocation } from "react-router-dom";
 
 const PulsatingStars = () => {
   const [init, setInit] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      const mediaQuery = window.matchMedia('(min-width: 768px)');
+      setShouldRender(mediaQuery.matches || isHome);
+    }, 200);
+    
+    return () => clearTimeout(timer);
+  }, [isHome]);
+
+  useEffect(() => {
     let isMounted = true;
     
-    if (!init) {
+    if (!init && shouldRender) {
       initParticlesEngine(async (engine) => {
         await loadSlim(engine);
       })
@@ -28,7 +38,7 @@ const PulsatingStars = () => {
     return () => {
       isMounted = false;
     };
-  }, [init]);
+  }, [init, shouldRender]);
 
   const particlesLoaded = useCallback((container) => {
     if (process.env.NODE_ENV === 'development') {
@@ -61,7 +71,7 @@ const PulsatingStars = () => {
             direction: "none",
             enable: true,
             random: true,
-            speed: 0.5,
+            speed: 1,
             straight: false,
           },
           number: {
@@ -73,7 +83,7 @@ const PulsatingStars = () => {
             limit: 200,
           },
           opacity: {
-            value: 0.25,
+            value: 0.4,
             animation: {
               enable: true,
               speed: 1,
@@ -115,10 +125,10 @@ const PulsatingStars = () => {
             area: 1000,
           },
           value: 30,
-          limit: 40,
+          limit: 35,
         },
         opacity: {
-          value: 0.2,
+          value: 0.25,
         },
         size: {
           value: { min: 0.5, max: 2 },
@@ -132,7 +142,7 @@ const PulsatingStars = () => {
     };
   }, [isHome]);
 
-  if (!init) {
+  if (!init || !shouldRender) {
     return null;
   }
 
@@ -141,7 +151,6 @@ const PulsatingStars = () => {
       id="tsparticles"
       particlesLoaded={particlesLoaded}
       options={options}
-      className="fixed inset-0 -z-10"
     />
   );
 }

@@ -1,0 +1,157 @@
+/* Main Music Container */
+.webapp-browser {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6vh;
+    margin: 0% 10%;
+    position: relative;
+}
+
+.webapp-title h1 {
+    text-align: center;
+    display: inline-block;
+    font-size: clamp(2rem, 4vw, 50px);
+    color: white;
+    position: relative;
+    text-shadow: 0 0 20px rgba(197, 72, 255, 0.4),
+        0 0 30px rgba(234, 59, 59, 0.5);
+    background: none;
+}
+
+/* All Section Styling */
+section {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    padding: 3vw;
+    box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
+        0 0 25px rgba(234, 59, 59, 0.4);
+    overflow: hidden;
+    animation: glowShift 5s ease-in-out infinite;
+}
+
+@keyframes glowShift {
+    0% {
+        box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
+            0 0 25px rgba(234, 59, 59, 0.4);
+    }
+
+    25% {
+        box-shadow: 2px -2px 20px rgba(210, 100, 250, 0.6),
+            -2px 2px 30px rgba(245, 70, 70, 0.5);
+    }
+
+    50% {
+        box-shadow: -4px 3px 25px rgba(197, 95, 244, 0.7),
+            3px -4px 35px rgba(234, 59, 59, 0.6);
+    }
+
+    75% {
+        box-shadow: 2px 2px 20px rgba(190, 90, 240, 0.6),
+            -2px -2px 30px rgba(225, 50, 50, 0.5);
+    }
+
+    100% {
+        box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
+            0 0 25px rgba(234, 59, 59, 0.4);
+    }
+}
+
+section::before {
+    background-attachment: fixed;
+}
+
+.webapp-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/background/wa-section/background.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    z-index: -1;
+}
+
+.webapp-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.webapp-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.webapp-card {
+    aspect-ratio: 4/3;
+    display: flex;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 1px 2px rgba(217, 134, 255, 0.744),
+                0 1px 4px rgba(255, 218, 196, 0.715);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.webapp-card::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;  /* Changed from 5px to -15px to place it outside */
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    width: 6px;
+    height: 6px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.webapp-card:hover::after {
+    transform: translateX(-50%) scale(1);
+}
+
+.webapp-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 2px 10px rgba(197, 95, 244, 1);
+    background: rgba(223, 168, 250, 0.381);
+    border-color: white;
+}
+
+.webapp-card h3 {
+    font-size: clamp(1rem, 2vw, 3rem);
+    background: linear-gradient(90deg, rgb(211, 112, 245), rgba(253, 101, 87, 0.864));
+    background-clip: text;
+    font-weight: bold;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.webapp-card p {
+    font-size: clamp(1rem, 1vw, 2rem);
+    color: white;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+    justify-content: flex-end;
+    align-items: center;
+}

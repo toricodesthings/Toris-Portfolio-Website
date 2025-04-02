@@ -112,6 +112,12 @@ const TextWithLayers = memo(({ displayedText, gradientText, typingComplete, show
               </span>
               {displayedText.substring(gradientText.length)}
             </span>
+            <span className="text-back layer5">
+              <span className="gradient">
+                {displayedText.substring(0, gradientText.length)}
+              </span>
+              {displayedText.substring(gradientText.length)}
+            </span>
           </>
         )}
       </span>
@@ -142,7 +148,7 @@ const Hero = () => {
 
     const glassEffectTimeout = setTimeout(() => {
       setShowGlassEffect(true);
-    }, 2000); // Delay glass effect by 1 second
+    }, 2000); 
 
     return () => clearTimeout(glassEffectTimeout);
   }, []);
@@ -177,17 +183,14 @@ const Hero = () => {
         if (index < fullString.length - 1) {
           animationFrameId.current = requestAnimationFrame(animate);
         } else {
-          // Typing animation complete
           setTypingComplete(true);
 
-          // Show content immediately after typing finishes
           setShowContent(true);
           setHasTypingAnimationPlayed();
 
-          // Add a delay before showing the blur layers
           setTimeout(() => {
             setShowBlurLayers(true);
-          }, 300); // Small delay to ensure main content is painted first
+          }, 300); 
         }
       };
 

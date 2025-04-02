@@ -372,7 +372,7 @@
         scroll-behavior: smooth;
         row-gap: 0;
         gap: 5vh;
-        z-index: 1000;
+        z-index: 1;
         pointer-events: auto;
         &::-webkit-scrollbar {
             display: none;
@@ -403,7 +403,7 @@
         inset: 0;
         background: rgba(0, 0, 0, 0.839);
         backdrop-filter: blur(10px);
-        z-index: 100;
+        z-index: 1;
     }
 
     .avatar-wrapper {
@@ -436,7 +436,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 2vh 0;
+        gap: 5vh;
     }
 
     .nav-connect-wrapper.active {
@@ -447,17 +447,15 @@
     .nav-menu li {
         font-size: clamp(1rem, 3vh, 2rem);
         width: 100%;
-        line-height: 1.8;
-        column-gap: 2vh;
     }
 
     .nav-connect-wrapper {
-        height: clamp(60px, 15vh, 150px);
+        height: clamp(70px, 15vh, 150px);
         width: 100%;
     }
 
     .nav-connect {
-        width: 66vw;
+        width: 66.7vw;
         height: 100%;
         font-size: clamp(1rem, 3.2vh, 2rem);
         border-radius: 72px;
@@ -465,14 +463,8 @@
     }
 
     .nav-stat-indicator {
-        margin-top: 1vh;
+        margin-top: 10px;
         font-size: clamp(1rem, 2.4vh, 2rem);
     }
 
-}
-
-@media (max-height: 400px) {
-    .nav-menu {
-        flex-direction: row;
-    }
 }

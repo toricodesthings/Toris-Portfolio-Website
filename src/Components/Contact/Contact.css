@@ -9,11 +9,6 @@
     position: relative;
 }
 
-/* Title Section with text-wrapping gradient glow */
-.contact-title {
-    text-align: center;
-}
-
 .quick-links-panel h2{
     transition: opacity 0.3s ease;
   }
@@ -21,22 +16,9 @@
 .quick-links-panel h2.visible {
     opacity: 1;
 }
-  
-@keyframes typewriter {
-    from {
-        max-width: 0;
-        opacity: 0;
-    }
-
-    to {
-        max-width: 50ch;
-        /* Adjust "50ch" to match your longest h2 text */
-        opacity: 1;
-    }
-}
-
 
 .contact-title h1 {
+    text-align: center;
     display: inline-block;
     font-size: clamp(2rem, 4vw, 50px);
     color: white;

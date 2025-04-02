@@ -91,6 +91,17 @@ html {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    transition: padding-top 0.3s ease;
+}
+
+.app.navbar-active {
+    padding-top: clamp(86px, 12.5vh, 100px);
+}
+
+@media (max-width: 768px), (orientation: portrait) {
+    .app {
+        position: relative;
+    }
 }
 
 .main-loading {

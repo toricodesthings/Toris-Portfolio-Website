@@ -1,4 +1,4 @@
-import { Suspense, lazy, React } from 'react';
+import { Suspense, lazy, React, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -16,15 +16,21 @@ const PulsatingStars = lazy(() => new Promise(resolve =>
 ));
 
 const App = () => {
+  const [isNavbarActive, setIsNavbarActive] = useState(false);
+
+  const handleNavbarStateChange = (isActive) => {
+    setIsNavbarActive(isActive);
+  };
+
   return (
     <Router>
       <Analytics />
       <SpeedInsights />
-      <div className="app">
+      <div className={`app ${isNavbarActive ? 'navbar-active' : ''}`}>
         <Suspense fallback={null}>
           <PulsatingStars />
         </Suspense>
-        <Navbar />
+        <Navbar onNavStateChange={handleNavbarStateChange} />
         <Suspense fallback={<div className='main-loading'>
                               <p>Loading...</p>
                               <HamsterLoader />
@@ -41,7 +47,6 @@ const App = () => {
         </Suspense>
       </div>
     </Router>
-
   );
 };
 

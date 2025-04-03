@@ -7,6 +7,7 @@
     gap: 6vh;
     margin: 0% 10%;
     position: relative;
+    content-visibility: auto;
 }
 
 .shep-pfp-left,
@@ -124,6 +125,8 @@ section {
 
 section::before {
     background-attachment: fixed;
+    will-change: opacity;
+    transform: translateZ(0);
 }
 
 .shep-section {
@@ -172,6 +175,8 @@ section::before {
     border-radius: 50%;
     box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
         0 0 25px rgba(234, 59, 59, 0.4);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* About Content Container */
@@ -247,6 +252,8 @@ section::before {
     justify-content: space-between;
     width: 100%;
     gap: 20px;
+    will-change: opacity, transform;
+    transform: translateZ(0);
 }
 
 .social-link {
@@ -517,8 +524,6 @@ section::before {
     }
 }
 
-
-
 /* Right Panel: Fun Fact Terminal */
 .music-terminal {
     flex: 1;
@@ -665,6 +670,9 @@ section::before {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    transform: translateZ(0);
+    will-change: transform;
+    contain: layout style;
 }
 
 /* Custom Tooltip Styling */
@@ -968,7 +976,6 @@ section::before {
     }
 }
 
-
 .collab-expanded img {
     width: 25%;
     object-fit: cover;
@@ -1083,7 +1090,6 @@ section::before {
     aspect-ratio: 1;
 }
 
-
 .collab-social-links a:hover {
     border-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 1);
@@ -1161,6 +1167,8 @@ section::before {
     justify-content: space-between; 
     flex-direction: row;
     box-sizing: border-box;
+    contain: layout style;
+    will-change: contents;
 }
 
 .disc-wrapper {
@@ -1213,8 +1221,6 @@ section::before {
     height: auto;
 }
 
-
-
 .playercpanel {
     width: 100%;
     max-width: calc(50% - 10px);
@@ -1226,7 +1232,6 @@ section::before {
     background:rgba(0, 0, 0, 0.34);
     flex-direction: column;
 }
-
 
 .playerinfo {
     flex: 1;
@@ -1496,9 +1501,31 @@ section::before {
     100% {
         transform: rotate(360deg);
     }
-
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .disc {
+        animation: none;
+    }
+    
+    .social-link,
+    .collab-item img,
+    .player-buttons button {
+        transition: none;
+    }
+}
+
+@media (prefers-reduced-data: reduce) {
+    section::before {
+        background-size: contain;
+    }
+    
+    .shepprofileimg,
+    .social-icon,
+    .collab-item img {
+        image-rendering: optimizeSpeed;
+    }
+}
 
 @media (max-width: 768px), (orientation: portrait) {
     .music {
@@ -1571,7 +1598,6 @@ section::before {
         opacity: 1;
         transform: translateY(-50%) scale(1.1);
     }
-
 
     .social-icon {
         margin: 0;

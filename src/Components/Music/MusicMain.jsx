@@ -24,6 +24,11 @@ import tidalImg from "../../assets/social/tidal.svg";
 import amImg from "../../assets/social/am.svg";
 import soundcloudImg from "../../assets/social/soundcloud.svg";
 
+const IMPORTANT_IMAGES = [
+    "/musicpage/avatar.webp",
+    "/background/music-section/section1.webp",
+    "/background/music-section/section2.webp"
+];
 
 //Social link map
 const socialLinks = [
@@ -97,14 +102,26 @@ const Music = () => {
     }, [location]);
 
     useEffect(() => {
-        // Preload hero images
-        const preloadImages = [AVATAR_IMG, "/musicpage/avatar.webp"];
-        preloadImages.forEach(src => {
-          const img = new Image();
-          img.src = src;
+        // Preload critical images
+        const preloader = IMPORTANT_IMAGES.map(src => {
+            const img = new Image();
+            img.src = src;
+            return img;
         });
-    
-      }, []);
+
+        // Load non-critical section backgrounds after main content
+        const deferredImages = [
+            "/background/music-section/section3.webp",
+            "/background/music-section/section4.webp"
+        ].map(src => {
+            const img = new Image();
+            if ('loading' in HTMLImageElement.prototype) {
+                img.loading = 'lazy';
+            }
+            img.src = src;
+            return img;
+        });
+    }, []);
 
     useEffect(() => {
         const staggerAnimate = (parent, selector, delay = 100) => {
@@ -183,7 +200,11 @@ const Music = () => {
             <section className="shep-section">
                 <div className="bio-panel">
                     <div className="shep-pfp-left">
-                        <img src={AVATAR_IMG} loading="eager" alt="Avatar Profile" className="shepprofileimg" />
+                        <img src={AVATAR_IMG} 
+                            loading="eager" 
+                            alt="Avatar Profile" 
+                            className="shepprofileimg" 
+                        />
                     </div>
                     <div className="shep-description-right">
                         <div className="bio-para">

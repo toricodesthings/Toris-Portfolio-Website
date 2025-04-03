@@ -7,7 +7,6 @@ import UpcomingProjectsAndLearningStack from "./LnU";
 import ReactMarkdown from "react-markdown";
 import "./CSMain.css";
 
-
 //language logos
 import pythonImg from "../../assets/skills/python.svg";
 import htmlImg from "../../assets/skills/html.svg";
@@ -17,6 +16,16 @@ import jsImg from "../../assets/skills/javascript.svg";
 import tsImg from "../../assets/skills/typescript.svg";
 import batchImg from "../../assets/skills/terminal.svg";
 import terminalImg from "../../assets/cspage/terminallogo.svg";
+
+// Add preload function
+const criticalImages = [terminalImg];
+
+const preloadCriticalImages = () => {
+    criticalImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+};
 
 // Mapping for language logos and colors.
 const languageData = {
@@ -127,25 +136,28 @@ const CS = () => {
     };
 
     useEffect(() => {
-        async function fetchRepos() {
-            try {
-                setLoading(true);
-                setError(null);
-                const response = await fetch('/api/gettorisgithubdata');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch repos');
-                }
-                const data = await response.json();
-                setRepos(data.repositories);
-                setLoading(false);
-            } catch (err) {
-                console.error(err.message);
-                setError("Live Github data could not be loaded");
-                setLoading(false);
-            }
-        }
+        preloadCriticalImages();
         fetchRepos();
     }, []);
+
+    // Move fetchRepos outside useEffect for reusability
+    const fetchRepos = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            const response = await fetch('/api/gettorisgithubdata');
+            if (!response.ok) {
+                throw new Error('Failed to fetch repos');
+            }
+            const data = await response.json();
+            setRepos(data.repositories);
+            setLoading(false);
+        } catch (err) {
+            console.error(err.message);
+            setError("Live Github data could not be loaded");
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         if (!selectedRepo) return;

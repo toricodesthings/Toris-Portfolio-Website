@@ -95,7 +95,7 @@ html {
 }
 
 .app.navbar-active {
-    padding-top: clamp(86px, 12.5vh, 100px);
+    padding-top: clamp(86px, 15vh, 100px);
 }
 
 @media (max-width: 768px), (orientation: portrait) {

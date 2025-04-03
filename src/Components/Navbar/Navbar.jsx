@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import avatar from "../../assets/logo.png";
 import { ToriStatIndicator } from './statIndicator';
@@ -7,6 +7,7 @@ import { ToriStatIndicator } from './statIndicator';
 const Navbar = ({ onNavStateChange }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [navVisible, setNavVisible] = useState(!isMobile);
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,8 +32,14 @@ const Navbar = ({ onNavStateChange }) => {
 
   const toggleNav = () => {
     if (isMobile) {
-      setNavVisible(!navVisible);
+      requestAnimationFrame(() => {
+        setNavVisible(!navVisible);
+      });
     }
+  };
+
+  const isActive = (path) => {
+    return location.pathname === path;
   };
 
   return (
@@ -57,27 +64,28 @@ const Navbar = ({ onNavStateChange }) => {
 
         <ul className={`nav-menu ${isMobile && navVisible ? "active" : ""}`}>
           <div className='pop-up'>
-            <li><Link to="/" onClick={isMobile ? toggleNav : undefined}>Home</Link></li>
+            <li className={isActive('/') ? 'active' : ''}><Link to="/" onClick={isMobile ? toggleNav : undefined}>Home</Link></li>
           </div>
           <div className='pop-up'>
-            <li><Link to="/projects" onClick={isMobile ? toggleNav : undefined}>Programming</Link></li>
+            <li className={isActive('/projects') ? 'active' : ''}><Link to="/projects" onClick={isMobile ? toggleNav : undefined}>Programming</Link></li>
           </div>
           <div className='pop-up'>
-            <li><Link to="/music" onClick={isMobile ? toggleNav : undefined}>Music</Link></li>
+            <li className={isActive('/music') ? 'active' : ''}><Link to="/music" onClick={isMobile ? toggleNav : undefined}>Music</Link></li>
           </div>
           <div className='pop-up'>
-            <li><Link to="/about" onClick={isMobile ? toggleNav : undefined}>About</Link></li>
+            <li className={isActive('/about') ? 'active' : ''}><Link to="/about" onClick={isMobile ? toggleNav : undefined}>About</Link></li>
           </div>
           <div className='pop-up'>
-            <li><Link to="/misc" onClick={isMobile ? toggleNav : undefined}>WebApps</Link></li>
+            <li className={isActive('/misc') ? 'active' : ''}><Link to="/misc" onClick={isMobile ? toggleNav : undefined}>WebApps</Link></li>
           </div>
         </ul>
-
-        <div className={`nav-connect-wrapper ${isMobile && navVisible ? "active" : ""}`}>
-          <Link to="/contact" className="nav-connect-link" onClick={isMobile ? toggleNav : undefined}>
-            <div className="nav-connect">Let's Connect!</div>
-          </Link>
-          <ToriStatIndicator />
+        <div className='pop-up'>
+          <div className={`nav-connect-wrapper ${isMobile && navVisible ? "active" : ""}`}>
+            <Link to="/contact" className="nav-connect-link" onClick={isMobile ? toggleNav : undefined}>
+              <div className="nav-connect">Let's Connect!</div>
+            </Link>
+            <ToriStatIndicator />
+          </div>
         </div>
       </div>
     </>

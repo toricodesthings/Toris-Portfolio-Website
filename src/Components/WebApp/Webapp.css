@@ -89,7 +89,7 @@ section::before {
 .webapp-grid {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
     gap: 40px;
 }
 
@@ -154,4 +154,10 @@ section::before {
     gap: 2%;
     justify-content: flex-end;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .webapp-browser {
+        margin: 0% 5%;
+    }
 }

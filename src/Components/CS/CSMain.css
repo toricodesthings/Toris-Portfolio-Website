@@ -12,7 +12,6 @@
     text-align: center;
 }
 
-
 .githubproj-text,
 .githubproj-panel,
 .summary-text,
@@ -146,12 +145,13 @@ section::before {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 100%;
-
 }
 
 .repo-grid-item {
     border-radius: 12px;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+    contain: layout style paint;
 }
 
 .repo-item {
@@ -254,7 +254,8 @@ section::before {
     width: 100%;
     box-shadow: 0 0 3px rgba(255, 255, 255, 1),
         0 0 5px rgba(247, 193, 255, 0.5);
-    transition: 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    contain: paint;
 }
 
 .repo-info {
@@ -285,6 +286,8 @@ section::before {
     z-index: 2;
     display: flex;
     flex-direction: column;
+    contain: layout style paint;
+    will-change: transform, opacity;
 }
 
 .csterminal-header {
@@ -321,7 +324,6 @@ section::before {
 .csterminal-buttons button:nth-child(3) {
     animation-delay: 0.3s;
 }
-
 
 .redbtn {
     background-color: #ec5e5e;
@@ -460,10 +462,8 @@ section::before {
     transition: all 0.3s ease-in;
 }
 
-
 .terminal-url a:hover {
     text-shadow: 0 0 1px white;
-
 }
 
 .csterminal-content .p-updated {
@@ -472,7 +472,6 @@ section::before {
     font-weight: 400;
     font-size: clamp(14px, 1.5vw, 18px);
 }
-
 
 @keyframes buttonPop {
     0% {
@@ -556,6 +555,8 @@ section::before {
     font-size: clamp(1rem, 1.2vw, 2rem);
     font-weight: 500;
     transition: all 0.3s ease;
+    will-change: transform;
+    contain: layout style paint;
 }
 
 .key-mini.visible {
@@ -625,6 +626,7 @@ section::before {
     animation: float 6s ease-in-out infinite;
     cursor: pointer;
     will-change: transform;
+    contain: layout style paint;
 }
 
 .bubbles {
@@ -643,7 +645,6 @@ section::before {
 
 .bubbles:hover .tech-name {
     text-shadow: 0 0 5px white;
-
 }
 
 .bubbles:hover img {
@@ -702,8 +703,9 @@ section::before {
     min-width: max-content;
     flex-shrink: 0;
     transition: transform 0.3s ease;
+    will-change: transform;
+    contain: layout style paint;
 }
-
 
 .project-learning-icon {
     height: 100px;
@@ -716,7 +718,6 @@ section::before {
     font-weight: 600;
     font-size: clamp(28px, 3vw, 32px);
     white-space: nowrap;
-
 }
 
 .project-learning-item:hover {
@@ -764,7 +765,6 @@ section::before {
     align-items: center;
 }
 
-
 .tree-wrapper {
     width: 100%;
 }
@@ -772,7 +772,6 @@ section::before {
 .sakura {
     height: auto;
     width: 45vw;
-
 }
 
 .tree-wrapper h3 {
@@ -851,7 +850,6 @@ section::before {
     transform: scale(1) translateX(2px);
     background: #ff55a7;
     border-color: rgb(255, 133, 178);
-
 }
 
 .arrow-button.right:active {
@@ -863,7 +861,6 @@ section::before {
 .course-label-text {
     font-size: 1.5rem;
 }
-
 
 @media (max-width: 768px) {
     .programming {
@@ -934,6 +931,5 @@ section::before {
     .section-divider {
         width: 5vw;
         height: 2px;
-
     }
 }

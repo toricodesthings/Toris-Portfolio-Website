@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
 import "./About.css";
 import LiveFeed from "./EducationLiveFeed";
 
@@ -46,117 +47,76 @@ const skills = [
 const About = () => {
   const [activeImage, setActiveImage] = useState(1);
   const statBoxRef = useRef(null);
+  const isInView = useInView(statBoxRef);
+  const controls = useAnimation();
 
   useEffect(() => {
-    const statBox = statBoxRef.current;
-    if (!statBox) return;
-
-    let maxScroll = statBox.scrollWidth - statBox.clientWidth;
-    let currentX = 0;
-    let direction = -1; 
-    const speed = 120; 
-    let lastTimestamp = null;
-    let animFrame;
-
-    const recalcOverflow = () => {
-      maxScroll = statBox.scrollWidth - statBox.clientWidth;
-      // If the container becomes large enough, reset the translation.
-      if (maxScroll <= 0) {
-        currentX = 0;
-        statBox.style.transform = `translateX(0px)`;
-      }
-    };
-
-    const step = (timestamp) => {
-      if (lastTimestamp === null) lastTimestamp = timestamp;
-      const dt = timestamp - lastTimestamp;
-      lastTimestamp = timestamp;
-      const move = speed * (dt / 1000);
-
-      // Update currentX
-      currentX += direction * move;
-
-      // Reverse direction if we hit the bounds
-      if (currentX < -maxScroll) {
-        currentX = -maxScroll;
-        direction = 1;
-      } else if (currentX > 0) {
-        currentX = 0;
-        direction = -1;
-      }
-
-      statBox.style.transform = `translateX(${currentX}px)`;
-      animFrame = requestAnimationFrame(step);
-    };
-
-    // Only start the animation if there is overflow.
-    if (maxScroll > 0) {
-      animFrame = requestAnimationFrame(step);
+    if (isInView) {
+      controls.start({
+        x: [0, -window.innerWidth * 0.1],
+        transition: {
+          duration: 2,
+          ease: "linear",
+          repeat: Infinity,
+          repeatType: "reverse",
+        },
+      });
+    } else {
+      controls.stop();
     }
-
-    window.addEventListener("resize", recalcOverflow);
-    return () => {
-      window.removeEventListener("resize", recalcOverflow);
-      cancelAnimationFrame(animFrame);
-    };
-  }, []);
-  
-  useEffect(() => {
-    // Preload hero images
-    const preloadImages = [PROFILE_IMG, "/aboutpage/profile_img.webp"];
-    preloadImages.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
-
-  }, []);
-
+  }, [isInView, controls]);
 
   useEffect(() => {
     const initFadeInObserver = () => {
       const animatedElements = document.querySelectorAll(
-        '.about-intro-left, .about-intro-right, ' +
-        '.cs-education, .cs-skills-panel, .education-panel, .skills-grid, ' +
-        '.music-para, .music-panel, .music-timeline, .music-flip, .music-stat-box'
+        ".about-intro-left, .about-intro-right, " +
+          ".cs-education, .cs-skills-panel, .education-panel, .skills-grid, " +
+          ".music-para, .music-panel, .music-timeline, .music-flip, .music-stat-box"
       );
 
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.target.classList.contains("skills-grid")) {
-              const skillItems = Array.from(entry.target.querySelectorAll(".skill-text"));
-              skillItems.forEach((item, index) => {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (entry.target.classList.contains("skills-grid")) {
+                const skillItems = Array.from(
+                  entry.target.querySelectorAll(".skill-text")
+                );
+                skillItems.forEach((item, index) => {
+                  setTimeout(() => {
+                    item.classList.add("visible");
+                  }, index * 50);
+                });
+              } else if (entry.target.classList.contains("music-timeline")) {
+                entry.target.classList.add("line-visible");
+                const timelineItems = Array.from(
+                  entry.target.querySelectorAll(".timeline-item")
+                );
+                timelineItems.forEach((item, index) => {
+                  setTimeout(() => {
+                    item.classList.add("visible");
+                  }, 300 + index * 200);
+                });
+              } else if (entry.target.classList.contains("music-stat-box")) {
+                const statItems = Array.from(
+                  entry.target.querySelectorAll(".music-stat-item")
+                );
+                statItems.forEach((item, index) => {
+                  setTimeout(() => {
+                    item.classList.add("visible");
+                  }, index * 100);
+                });
+              } else {
                 setTimeout(() => {
-                  item.classList.add("visible");
-                }, index * 50);
-              });
+                  entry.target.classList.add("visible");
+                }, 50);
+              }
+              obs.unobserve(entry.target);
             }
-            else if (entry.target.classList.contains("music-timeline")) {
-              entry.target.classList.add("line-visible");
-              const timelineItems = Array.from(entry.target.querySelectorAll(".timeline-item"));
-              timelineItems.forEach((item, index) => {
-                setTimeout(() => {
-                  item.classList.add("visible");
-                }, 300 + index * 200);
-              });
-            }
-            else if (entry.target.classList.contains("music-stat-box")) {
-              const statItems = Array.from(entry.target.querySelectorAll(".music-stat-item"));
-              statItems.forEach((item, index) => {
-                setTimeout(() => {
-                  item.classList.add("visible");
-                }, index * 100);
-              });
-            }
-            else {
-              setTimeout(() => {
-                entry.target.classList.add("visible");
-              }, 50);
-            }
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
+          });
+        },
+        { threshold: 0.3 }
+      );
 
       animatedElements.forEach((el) => observer.observe(el));
     };
@@ -203,12 +163,12 @@ const About = () => {
             <p>
               Since I was young, I enjoyed experimenting and pushing tech to
               its limit. Currently, I am pursuing my first-year Bachelor’s in
-              Computer Science at Carleton University in the software engineering
-              stream, but my focus is quite general involving AI, programming,
-              web development, and software development. One of my first projects
-              started out as multi-purpose Discord bots built for specific servers.
-              I am now branching it out to create general purpose programs, web API
-              wrappers, and AI wrappers.
+              Computer Science at Carleton University in the software
+              engineering stream, but my focus is quite general involving AI,
+              programming, web development, and software development. One of my
+              first projects started out as multi-purpose Discord bots built
+              for specific servers. I am now branching it out to create general
+              purpose programs, web API wrappers, and AI wrappers.
             </p>
             <div className="live-feed-element">
               <LiveFeed />
@@ -234,17 +194,18 @@ const About = () => {
           <h2>My Music Career</h2>
           <div className="music-panel">
             <p>
-              Aside from coding, I am a passionate and professional musician with
-              a deep love for rhythm, melody, and sound design. Music has always
-              been my escape, my therapy, and my way of understanding the world.
-              My journey into music started over 7 years ago when I was first
-              discovered Ableton and EDM Production. Now, I play many instruments,
-              including the drums, bass guitar, and piano. I have worked on numerous
-              projects as a producer, produced in all genres from Lofi to EDM to Pop
-              to Metal, pushing creative boundaries to craft unique sounds.
-              Additionally, I specialize in audio-engineering, mixing, and mastering,
-              helping other artists bring their visions to life with polished and
-              professional audio quality.
+              Aside from coding, I am a passionate and professional musician
+              with a deep love for rhythm, melody, and sound design. Music has
+              always been my escape, my therapy, and my way of understanding the
+              world. My journey into music started over 7 years ago when I was
+              first discovered Ableton and EDM Production. Now, I play many
+              instruments, including the drums, bass guitar, and piano. I have
+              worked on numerous projects as a producer, produced in all genres
+              from Lofi to EDM to Pop to Metal, pushing creative boundaries to
+              craft unique sounds. Additionally, I specialize in
+              audio-engineering, mixing, and mastering, helping other artists
+              bring their visions to life with polished and professional audio
+              quality.
             </p>
             <div className="music-timeline">
               <div className="timeline-container">
@@ -312,9 +273,10 @@ const About = () => {
             <img src={wrapped2024} alt="Music Image 2" />
           </div>
         </div>
-        <div
+        <motion.div
           className="music-stat-box"
           ref={statBoxRef}
+          animate={controls}
         >
           <div className="music-stat-item">
             <h3>7+</h3>
@@ -340,7 +302,7 @@ const About = () => {
             <h3>20+</h3>
             <p>Client Projects</p>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

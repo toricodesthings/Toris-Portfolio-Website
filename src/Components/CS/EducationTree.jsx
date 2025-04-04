@@ -116,14 +116,14 @@ const EducationTree = () => {
       delay: 1.1,
     });
 
-    // Right foliage cluster - adjusted height
+    // Right foliage cluster - made slightly smaller
     segments.push({
       pathData: `
-        M${centerX + 100},${centerY - 40} 
-        Q${centerX + 190},${centerY - 70} ${centerX + 250},${centerY + 10} 
-        Q${centerX + 260},${centerY + 30} ${centerX + 210},${centerY + 70} 
-        Q${centerX + 150},${centerY + 40} ${centerX + 100},${centerY + 10} 
-        Q${centerX + 120},${centerY - 20} ${centerX + 100},${centerY - 40} Z
+        M${centerX + 90},${centerY - 35} 
+        Q${centerX + 170},${centerY - 65} ${centerX + 230},${centerY + 10} 
+        Q${centerX + 240},${centerY + 30} ${centerX + 190},${centerY + 65} 
+        Q${centerX + 130},${centerY + 35} ${centerX + 90},${centerY + 10} 
+        Q${centerX + 110},${centerY - 15} ${centerX + 90},${centerY - 35} Z
       `,
       fill: sakuraFoliageShades[2],
       delay: 1.4,

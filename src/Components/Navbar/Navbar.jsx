@@ -79,7 +79,6 @@ const Navbar = ({ onNavStateChange }) => {
             <li className={isActive('/misc') ? 'active' : ''}><Link to="/misc" onClick={isMobile ? toggleNav : undefined}>WebApps</Link></li>
           </div>
         </ul>
-        <div className='pop-up'>
           <div className={`nav-connect-wrapper ${isMobile && navVisible ? "active" : ""}`}>
             <Link to="/contact" className="nav-connect-link" onClick={isMobile ? toggleNav : undefined}>
               <div className="nav-connect">Let's Connect!</div>
@@ -87,7 +86,6 @@ const Navbar = ({ onNavStateChange }) => {
             <ToriStatIndicator />
           </div>
         </div>
-      </div>
     </>
   );
 };

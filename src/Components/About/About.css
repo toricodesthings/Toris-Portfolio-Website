@@ -24,7 +24,6 @@
 
 .about-title {
     text-align: center;
-    animation: textGlowShift 10s ease-in-out infinite;
 }
 
 .about-title h1 {
@@ -33,33 +32,8 @@
     color: white;
     position: relative;
     background: none;
-    
-}
-@keyframes textGlowShift {
-    0% {
-        text-shadow: 0 0 15px rgba(197, 72, 255, 0.8),
-        0 0 25px rgba(234, 59, 59, 0.5);
-    }
-
-    25% {
-        text-shadow: 4px -4px 20px rgba(210, 100, 250, 0.6),
-            -2px 3px 40px rgba(245, 70, 70, 0.8);
-    }
-
-    50% {
-        text-shadow: -4px 3px 30px rgba(197, 95, 244, 0.7),
-            3px -4px 30px rgba(234, 59, 59, 0.65);
-    }
-
-    75% {
-        text-shadow: 2px 2px 25px rgba(190, 90, 240, 0.6),
-            -2px -2px 30px rgba(225, 50, 50, 0.5);
-    }
-
-    100% {
-        text-shadow: 0 0 20px rgba(197, 95, 244, 0.5),
-            0 0 15px rgba(234, 59, 59, 0.7);
-    }
+    text-shadow: 0 0 20px rgba(197, 72, 255, 0.4),
+    0 0 30px rgba(234, 59, 59, 0.5);
 }
 
 section {
@@ -84,29 +58,14 @@ section {
 }
 
 @keyframes glowShift {
-    0% {
+     0%, 100% {
         box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
             0 0 25px rgba(234, 59, 59, 0.4);
-    }
-
-    25% {
-        box-shadow: 2px -2px 20px rgba(210, 100, 250, 0.6),
-            -2px 2px 30px rgba(245, 70, 70, 0.5);
     }
 
     50% {
         box-shadow: -4px 3px 25px rgba(197, 95, 244, 0.7),
             3px -4px 35px rgba(234, 59, 59, 0.6);
-    }
-
-    75% {
-        box-shadow: 2px 2px 20px rgba(190, 90, 240, 0.6),
-            -2px -2px 30px rgba(225, 50, 50, 0.5);
-    }
-
-    100% {
-        box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
-            0 0 25px rgba(234, 59, 59, 0.4);
     }
 }
 
@@ -654,11 +613,8 @@ transform: translateY(-3px);
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    scroll-behavior: smooth;
-    overscroll-behavior-x: contain;
     padding-bottom: 20px;
 }
-
 
 .music-stat-box::-webkit-scrollbar {
     height: 8px;

@@ -4,9 +4,11 @@ import "./Hero.css";
 const FlippingText = () => {
   const messages = [
     "Crafting intuitive 🖥️ digital experiences through Full-Stack Engineering",
-    "Building elegant, and interactive 🖌️ UIs with React, CSS & Figma",
+    "Building 🖌️ elegant and interactive front-ends with React, CSS & Figma",
+    "Turning my caffeine addiction ☕ into random useful things 💡",
+    "Transforming imaginative ideas into reality through code 🛠️",
     "Writing & Producing 🎸 tracks that capture my evershifting mood",
-    "Turning my caffeine addiction ☕ into random useful things 💡"
+
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

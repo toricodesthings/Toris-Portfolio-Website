@@ -90,30 +90,15 @@ section {
 }
 
 @keyframes glowShift {
-    0% {
-        box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
-            0 0 25px rgba(234, 59, 59, 0.4);
-    }
+    0%, 100% {
+       box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
+           0 0 25px rgba(234, 59, 59, 0.4);
+   }
 
-    25% {
-        box-shadow: 2px -2px 20px rgba(210, 100, 250, 0.6),
-            -2px 2px 30px rgba(245, 70, 70, 0.5);
-    }
-
-    50% {
-        box-shadow: -4px 3px 25px rgba(197, 95, 244, 0.7),
-            3px -4px 35px rgba(234, 59, 59, 0.6);
-    }
-
-    75% {
-        box-shadow: 2px 2px 20px rgba(190, 90, 240, 0.6),
-            -2px -2px 30px rgba(225, 50, 50, 0.5);
-    }
-
-    100% {
-        box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
-            0 0 25px rgba(234, 59, 59, 0.4);
-    }
+   50% {
+       box-shadow: -4px 3px 25px rgba(197, 95, 244, 0.7),
+           3px -4px 35px rgba(234, 59, 59, 0.6);
+   }
 }
 
 section::before {
@@ -152,6 +137,7 @@ section::before {
     transition: transform 0.3s ease-in-out;
     will-change: transform;
     contain: layout style paint;
+    cursor: pointer;
 }
 
 .repo-item {
@@ -235,7 +221,7 @@ section::before {
 .repologo {
     width: 100%;
     padding: 20px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.652);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.65);
     box-sizing: border-box;
     transition: 0.3s ease-in-out;
 }
@@ -623,51 +609,14 @@ section::before {
     justify-content: center;
     border-radius: 12px;
     color: white;
-    animation: float 6s ease-in-out infinite;
     cursor: pointer;
-    will-change: transform;
-    contain: layout style paint;
+    transition: text-shadow 0.3s ease;
 }
 
-.bubbles {
-    opacity: 0;
-    transition: all 0.3s ease;
+.tech-bubble:hover .tech-name{
+    text-shadow: 0 0 10px rgb(235, 161, 245);
 }
 
-.bubbles.visible {
-    opacity: 1;
-}
-
-.bubbles:hover {
-    transform: scale(1.03);
-    animation-play-state: paused;
-}
-
-.bubbles:hover .tech-name {
-    text-shadow: 0 0 5px white;
-}
-
-.bubbles:hover img {
-    filter: drop-shadow(0 1px 2px rgba(255, 202, 254, 0.809));
-}
-
-.tech-name {
-    color: white;
-}
-
-@keyframes float {
-    0% {
-        transform: translate(-5px, 0);
-    }
-
-    50% {
-        transform: translate(5px, -10px);
-    }
-
-    100% {
-        transform: translate(-5px, 0);
-    }
-}
 
 .project-learning-stack-container {
     overflow: hidden;

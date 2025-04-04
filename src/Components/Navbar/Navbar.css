@@ -8,8 +8,10 @@
     flex-wrap: nowrap;
     padding: 0;
     background: transparent;
+    transform: translateZ(0);
 }
 
+/* Navigation menu with hardware-accelerated animations */
 .nav-menu {
     display: flex;
     flex-direction: row;
@@ -23,10 +25,16 @@
     opacity: 0;
     transform: translateY(-30px);
     animation: fadeInTop 0.4s ease-in-out forwards;
+    will-change: opacity, transform;
+    -webkit-font-smoothing: antialiased;
 }
 
+/* Hardware-accelerated avatar animations */
 .avatar-wrapper {
     animation: fadeInTop 0.3s ease-in-out forwards 0.1s;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .avatar {
@@ -59,6 +67,8 @@
 
 .nav-connect {
     animation: fadeInTop 0.2s ease-in-out forwards 0.7s;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .nav-stat-indicator {
@@ -66,6 +76,7 @@
 }
 
 
+/* Optimize animation performance */
 @keyframes fadeInTop {
     from {
         opacity: 0;
@@ -74,7 +85,7 @@
 
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0) translateZ(0); /* Force GPU acceleration */
     }
 }
 
@@ -93,7 +104,8 @@
     cursor: pointer;
     transition: 0.2s ease;
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-20px) translateZ(0); /* Force GPU acceleration */
+    will-change: transform, opacity;
 }
 
 .nav-menu li a {
@@ -215,6 +227,8 @@
     text-decoration: none;
     color: inherit;
     position: relative;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .nav-connect-wrapper {
@@ -242,7 +256,7 @@
     background: linear-gradient(270deg, rgb(188, 89, 215), rgb(250, 83, 64));
     border-radius: 24px;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 2px 2px rgb(92, 36, 129);
 }
 
@@ -280,11 +294,19 @@
     border-color: rgba(255, 168, 251, 0.936);
 }
 
-.nav-connect:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgb(255, 255, 255);
-
+/* Add this new class */
+.nav-connect-link {
+    transition: all 0.3s ease;
 }
+
+.nav-connect-link:hover {
+    transform: scale(1.1);
+}
+
+.nav-connect-link:active {
+    transform: scale(1);
+}
+
 
 .nav-connect:active {
     transform: scale(1);
@@ -336,13 +358,14 @@
     opacity: 1;
 }
 
+/* Ensure smooth animation performance */
 @keyframes rotate360 {
     from {
-        transform: rotate(0deg);
+        transform: rotate(0deg) translateZ(0);
     }
 
     to {
-        transform: rotate(360deg);
+        transform: rotate(360deg) translateZ(0);
     }
 }
 
@@ -392,6 +415,7 @@
         gap: 5vh;
         z-index: 1;
         pointer-events: auto;
+        transform: translateZ(0);
         &::-webkit-scrollbar {
             display: none;
         }
@@ -424,6 +448,7 @@
         backdrop-filter: blur(10px);
         z-index: 1;
         will-change: opacity;
+        -webkit-backface-visibility: hidden;
     }
     
     .mobile-overlay.active {

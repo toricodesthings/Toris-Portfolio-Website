@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { forceSimulation, forceCollide, forceX, forceY } from 'd3-force';
 import './CSMain.css';
 
@@ -45,21 +46,36 @@ const TechStack = () => {
       if (containerRef.current) {
         const clientWidth = containerRef.current.clientWidth;
         const clientHeight = containerRef.current.clientWidth;
-        const newHeight = clientWidth/clientHeight < 1 ? 850 : 600;
+        const newHeight = clientWidth / clientHeight < 1 ? 850 : 600;
         setContainerSize({ width: clientWidth, height: newHeight });
       }
     };
+
+    const debounce = (func, wait) => {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    };
+
+    const debouncedResize = debounce(updateSize, 100);
     updateSize();
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
+    window.addEventListener('resize', debouncedResize);
+    return () => window.removeEventListener('resize', debouncedResize);
   }, []);
+
   const baseScale = Math.min(containerSize.width / 850, containerSize.height / 600);
   const isPortrait = containerSize.width < containerSize.height;
-  const minScale = 0.5; 
+  const minScale = 0.5;
   const scaleFactor = Math.max(isPortrait ? baseScale * 0.70 : baseScale, minScale);
 
   const nodes = useMemo(() => {
-    const padding = 20;
+    const padding = 40;
 
     const itemCount = techItems.length;
     const initialNodes = techItems.map((item, i) => {
@@ -80,16 +96,16 @@ const TechStack = () => {
         targetY,
         x: padding + Math.random() * (containerSize.width - bubbleWidth - padding),
         y: targetY,
-        animDelay: Math.random() * 5,
-        animDuration: 5 + Math.random() * 5,
+        animDelay: i * 0.2, // Reduced delay between items
+        animDuration: 5 + Math.random() * 2, // Significantly longer duration, 15-20 seconds
       };
     });
-  
+
     const aspectRatio = containerSize.width / containerSize.height;
     const collisionPadding = aspectRatio < 1 ? 10 : 20;
-    const tickCount = 150;
-    const forceXStrength = 0.05;
-  
+    const tickCount = 100;
+    const forceXStrength = 0.03;
+
     const simulation = forceSimulation(initialNodes)
       .force(
         'x',
@@ -100,9 +116,8 @@ const TechStack = () => {
       .force(
         'y',
         aspectRatio < 1
-          ?
-            forceY(d => d.targetY).strength(1)
-          : forceY(containerSize.height / 2).strength(0.5)
+          ? forceY(d => d.targetY).strength(0.7)
+          : forceY(containerSize.height / 2).strength(0.4)
       )
       .force(
         'collide',
@@ -111,8 +126,7 @@ const TechStack = () => {
           .iterations(15)
       )
       .stop();
-  
-    // Run simulation ticks and enforce boundaries.
+
     for (let i = 0; i < tickCount; i++) {
       simulation.tick();
       initialNodes.forEach(node => {
@@ -126,48 +140,73 @@ const TechStack = () => {
         );
       });
     }
-  
+
     return initialNodes;
   }, [containerSize]);
-  
 
   return (
-    <div 
-      className="stack-bubble-container" 
-      ref={containerRef} 
+    <div
+      className="stack-bubble-container"
+      ref={containerRef}
       style={{ height: containerSize.height }}
     >
       <div className='bubble-group'>
-      {nodes.map((node, index) => (
-        <div className="bubbles" key={index}>
-          <div
-            className="tech-bubble"
-            style={{
-              top: node.y - node.bubbleHeight / 2,
-              left: node.x - node.bubbleWidth / 2,
-              width: node.bubbleWidth,
-              height: node.bubbleHeight,
-              animationDelay: `${node.animDelay}s`,
-              animationDuration: `${node.animDuration}s`,
-            }}
-          >
-            <div className="tech-logo">
-              <img
-                src={node.Logo}
-                alt={`${node.name} logo`}
-                style={{ width: `${(50 + node.proficiency * 3) * scaleFactor}px` }}
-              />
-            </div>
-            <span
-              className="tech-name"
-              style={{ fontSize: `${(1 + node.proficiency * 0.1) * scaleFactor}rem` }}
+        {nodes.map((node, index) => (
+          <div className="bubbles" key={index}>
+            <motion.div
+              className="tech-bubble"
+              style={{
+                position: 'absolute',
+                top: node.y - node.bubbleHeight / 2,
+                left: node.x - node.bubbleWidth / 2,
+                width: node.bubbleWidth,
+                height: node.bubbleHeight,
+              }}
+              initial={{ y: 0, x: 0, opacity: 0 }}
+              animate={{ 
+                y: [-10, 10, -10], // Smoother movement range
+                x: [-5, 5, -5], // Subtle horizontal movement
+                opacity: 1
+              }}
+              whileHover={{
+                scale: 1.1,
+                transition: { duration: 0.2 }
+              }}
+              transition={{
+                y: {
+                  repeat: Infinity,
+                  duration: node.animDuration,
+                  ease: [0.25, 0.1, 0.25, 1], // Very subtle cloud-like floating
+                  delay: node.animDelay,
+                },
+                x: {
+                  repeat: Infinity,
+                  duration: node.animDuration * 1.3, // Slightly different timing for x-axis
+                  ease: [0.25, 0.1, 0.25, 1], // Very subtle cloud-like floating
+                  delay: node.animDelay,
+                },
+                opacity: {
+                  duration: 0.8,
+                  delay: node.animDelay
+                }
+              }}
             >
-              {node.name}
-            </span>
-
+              <div className="tech-logo">
+                <img
+                  src={node.Logo}
+                  alt={`${node.name} logo`}
+                  style={{ width: `${(50 + node.proficiency * 3) * scaleFactor}px` }}
+                />
+              </div>
+              <span
+                className="tech-name"
+                style={{ fontSize: `${(1 + node.proficiency * 0.1) * scaleFactor}rem` }}
+              >
+                {node.name}
+              </span>
+            </motion.div>
           </div>
-        </div>
-      ))}
+        ))}
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ const PulsatingStars = () => {
 
   useEffect(() => {
     let isMounted = true;
+    let particlesContainer = null;
     
     if (!init && shouldRender) {
       initParticlesEngine(async (engine) => {
@@ -37,10 +38,14 @@ const PulsatingStars = () => {
     
     return () => {
       isMounted = false;
+      if (particlesContainer) {
+        particlesContainer.destroy();
+      }
     };
   }, [init, shouldRender]);
 
   const particlesLoaded = useCallback((container) => {
+    particlesContainer = container;
     if (process.env.NODE_ENV === 'development') {
       console.log("Particles container loaded:", container);
     }
@@ -95,7 +100,7 @@ const PulsatingStars = () => {
             value: { min: 0.5, max: 2.5 },
             animation: {
               enable: true,
-              speed: 1,
+              speed: 0.7,
               minimumValue: 0.5,
               sync: false,
             },
@@ -104,8 +109,8 @@ const PulsatingStars = () => {
             particles: {
               enable: true,
               color: "#ffffff",
-              frequency: 0.8,
-              opacity: 0.5,
+              frequency: 0.5,
+              opacity: 0.4,
             },
           },
         },

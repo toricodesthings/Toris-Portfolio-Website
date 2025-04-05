@@ -21,7 +21,6 @@ const Contact = () => {
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            // For social links, add a stagger based on their index:
             if (entry.target.classList.contains("link-container")) {
               const links = Array.from(document.querySelectorAll(".link-container"));
               const index = links.indexOf(entry.target);

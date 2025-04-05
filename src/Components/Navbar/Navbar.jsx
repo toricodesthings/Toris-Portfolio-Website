@@ -32,9 +32,16 @@ const Navbar = ({ onNavStateChange }) => {
 
   const toggleNav = () => {
     if (isMobile) {
-      requestAnimationFrame(() => {
-        setNavVisible(!navVisible);
-      });
+      if (navVisible) {
+        setNavVisible(false);
+      } else {
+        // Set a small timeout before showing to allow animations to reset
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            setNavVisible(true);
+          });
+        }, 50);
+      }
     }
   };
 

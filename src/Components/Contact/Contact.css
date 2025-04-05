@@ -188,11 +188,11 @@ section::before {
 .link-container:hover::after {
     border-color: white;
     box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5);
-    animation: borderDraw 0.25s ease-in-out forwards;
+    animation: borderDraw 0.3s ease-in-out forwards;
 }
 
 .link-container:not(:hover)::after {
-    animation: borderDrawReverse 0.05s ease-out forwards;
+    animation: borderDrawReverse 0.1s ease-out forwards;
 }
 
 @keyframes borderDraw {
@@ -201,13 +201,13 @@ section::before {
     }
 
     100% {
-        clip-path: inset(0 0 0 0);
+        clip-path: inset(0 0 -5% 0);
     }
 }
 
 @keyframes borderDrawReverse {
     0% {
-        clip-path: inset(0 0 0 0);
+        clip-path: inset(0 0 -5% 0);
     }
 
     100% {

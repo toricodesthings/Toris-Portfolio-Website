@@ -71,19 +71,19 @@ const Navbar = ({ onNavStateChange }) => {
 
         <ul className={`nav-menu ${isMobile && navVisible ? "active" : ""}`}>
           <div className='pop-up'>
-            <li className={isActive('/') ? 'active' : ''}><Link to="/" onClick={isMobile ? toggleNav : undefined}>Home</Link></li>
+            <li className={isActive('/') ? 'onpage' : ''}><Link to="/" onClick={isMobile ? toggleNav : undefined}>Home</Link></li>
           </div>
           <div className='pop-up'>
-            <li className={isActive('/projects') ? 'active' : ''}><Link to="/projects" onClick={isMobile ? toggleNav : undefined}>Programming</Link></li>
+            <li className={isActive('/projects') ? 'onpage' : ''}><Link to="/projects" onClick={isMobile ? toggleNav : undefined}>Programming</Link></li>
           </div>
           <div className='pop-up'>
-            <li className={isActive('/music') ? 'active' : ''}><Link to="/music" onClick={isMobile ? toggleNav : undefined}>Music</Link></li>
+            <li className={isActive('/music') ? 'onpage' : ''}><Link to="/music" onClick={isMobile ? toggleNav : undefined}>Music</Link></li>
           </div>
           <div className='pop-up'>
-            <li className={isActive('/about') ? 'active' : ''}><Link to="/about" onClick={isMobile ? toggleNav : undefined}>About</Link></li>
+            <li className={isActive('/about') ? 'onpage' : ''}><Link to="/about" onClick={isMobile ? toggleNav : undefined}>About</Link></li>
           </div>
           <div className='pop-up'>
-            <li className={isActive('/misc') ? 'active' : ''}><Link to="/misc" onClick={isMobile ? toggleNav : undefined}>WebApps</Link></li>
+            <li className={isActive('/misc') ? 'onpage' : ''}><Link to="/misc" onClick={isMobile ? toggleNav : undefined}>WebApps</Link></li>
           </div>
         </ul>
           <div className={`nav-connect-wrapper ${isMobile && navVisible ? "active" : ""}`}>

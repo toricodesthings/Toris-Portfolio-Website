@@ -467,13 +467,13 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: brightness(0.85);
+    filter: brightness(0.9) blur(0px);
     transition: all 0.3s ease;
 }
 
 .work-option-box:hover .option-image-container img {
     transform: scale(1.1);
-    filter: brightness(0.3) blur(2px);
+    filter: brightness(0.35) blur(2px);
 }
 
 .work-option-box:active .option-image-container img {

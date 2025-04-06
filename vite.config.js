@@ -16,9 +16,9 @@ export default defineConfig({
   },
   plugins: [react(),
   ViteImageOptimizer({
-    png: { quality: 92 },
-    jpeg: { quality: 88 },
-    webp: { quality: 92 },
+    png: { quality: 90 },
+    jpeg: { quality: 85 },
+    webp: { quality: 90 },
     avif: { quality: 80 },
     svg: {
       plugins: [

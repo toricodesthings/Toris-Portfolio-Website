@@ -99,7 +99,6 @@
     transform: translateZ(0);
 }
 
-/* Navigation menu with hardware-accelerated animations */
 .nav-menu {
     display: flex;
     flex-direction: row;

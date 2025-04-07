@@ -10,7 +10,7 @@ const octokit = new Octokit({ auth: token });
 const query = `
   {
     viewer {
-      repositories(first: 6, orderBy: {field: UPDATED_AT, direction: DESC}) {
+      repositories(first: 9, orderBy: {field: UPDATED_AT, direction: DESC}) {
         nodes {
           name
           description

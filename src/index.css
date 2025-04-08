@@ -92,7 +92,7 @@ body::after {
     left: 0;
     z-index: -2;
     background: none;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 2s ease-in-out;
 }
 
 .stars-fade-in {

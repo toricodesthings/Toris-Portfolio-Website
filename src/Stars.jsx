@@ -25,7 +25,7 @@ const PulsatingStars = () => {
       // Delay stars appearance by 2 seconds on home page
       fadeTimer = setTimeout(() => {
         setIsVisible(true);
-      }, 2000);
+      }, 3500);
     } else if (!isHome && shouldRender) {
       // Show immediately on non-home pages
       setIsVisible(true);

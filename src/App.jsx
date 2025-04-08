@@ -4,8 +4,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from './Components/Navbar/Navbar';
 import HamsterLoader from './Components/LoadingUI/HamsterLoader';
-import Home from './Pages/Home';
 
+const Home = lazy(() => import('./Pages/Home'));
 const MusicPage = lazy(() => import( './Pages/Music'));
 const Projects = lazy(() => import('./Pages/CSProjects'));
 const About = lazy(() => import('./Pages/About'));

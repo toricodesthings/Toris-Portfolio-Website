@@ -95,7 +95,7 @@ body::after {
     transition: opacity 1.5s ease-in-out;
 }
 
-#tsparticles.fade-in {
+.stars-fade-in {
     opacity: 1;
 }
 

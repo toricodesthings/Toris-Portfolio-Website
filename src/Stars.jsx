@@ -172,7 +172,7 @@ const PulsatingStars = () => {
   }
 
   return (
-    <div className={`${isVisible ? 'fade-in' : ''}`}>
+    <div className={`${isVisible ? 'stars-fade-in' : ''}`}>
       <Particles
         id="tsparticles"
         particlesLoaded={particlesLoaded}

@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 import { createClient } from '@supabase/supabase-js';
 import { DateTime } from 'luxon';
 
@@ -17,29 +17,28 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 async function getSpotifyAccessToken() {
   const credentials = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
-  const response = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Basic ${credentials}`,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: 'grant_type=client_credentials'
-  });
-  const data = await response.json();
-  return data.access_token;
+  const response = await axios.post('https://accounts.spotify.com/api/token', 
+    'grant_type=client_credentials',
+    {
+      headers: {
+        'Authorization': `Basic ${credentials}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+  );
+  return response.data.access_token;
 }
 
 async function getArtistData(accessToken) {
-  const response = await fetch('https://api.spotify.com/v1/artists/48ds3BHWCPZVfAzFB2At2L', {
+  const response = await axios.get('https://api.spotify.com/v1/artists/48ds3BHWCPZVfAzFB2At2L', {
     headers: { 'Authorization': `Bearer ${accessToken}` }
   });
-  return await response.json();
+  return response.data;
 }
 
 async function getMonthlyListeners() {
-  const response = await fetch('https://utility.toridoesthings.xyz/statistify/get/monthly-listeners/48ds3BHWCPZVfAzFB2At2L');
-  const data = await response.json();
-  return Number(data.monthlyListeners);
+  const response = await axios.get('https://utility.toridoesthings.xyz/statistify/get/monthly-listeners/48ds3BHWCPZVfAzFB2At2L');
+  return Number(response.data.monthlyListeners);
 }
 
 export default async function handler(req, res) {

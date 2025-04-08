@@ -37,10 +37,31 @@ async function getArtistData(accessToken) {
 }
 
 async function getMonthlyListeners() {
-  const response = await axios.get('https://utility.toridoesthings.xyz/statistify/get/monthly-listeners/48ds3BHWCPZVfAzFB2At2L');
-  return Number(response.data.monthlyListeners);
+  try {
+    // First attempt
+    const response = await axios.get('https://utility.toridoesthings.xyz/statistify/get/monthly-listeners/48ds3BHWCPZVfAzFB2At2L');
+    const listeners = Number(response.data.monthlyListeners);
+    
+    // Check if listeners is a valid number (not NaN, null, undefined, or 0)
+    if (!listeners) {
+      console.log('Invalid monthly listeners data, retrying attempted...');
+      // Wait a short time before retry
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Second attempt
+      const retryResponse = await axios.get('https://utility.toridoesthings.xyz/statistify/get/monthly-listeners/48ds3BHWCPZVfAzFB2At2L');
+      const retryListeners = Number(retryResponse.data.monthlyListeners);
+      
+      // Return retry results (even if still invalid)
+      return retryListeners || null; // Return 0 as fallback if still invalid
+    }
+    
+    return listeners;
+  } catch (error) {
+    console.error('Error fetching monthly listeners:', error);
+    return null; // Fallback value if all attempts fail
+  }
 }
-
 export default async function handler(req, res) {
   try {
     const now = DateTime.now().setZone('America/Toronto');
@@ -63,7 +84,7 @@ export default async function handler(req, res) {
       const threePM = now.set({ hour: 14, minute: 0, second: 0, millisecond: 0 });
 
       if (fetchedTime >= threePM) {
-        return res.status(200).json({ message: 'Rate Limit: 2 Updates per Day reached' });
+        return res.status(200).json({ message: 'Rate Limited: 2 Updates per Day reached' });
       }
     }
 
@@ -84,13 +105,12 @@ export default async function handler(req, res) {
       ]);
 
     if (error) {
-      console.error('Supabase insert error:', JSON.stringify(error, null, 2));
       return res.status(500).json({ message: 'Error inserting data', error });
     }
 
     return res.status(200).json({ message: 'Spotify data inserted successfully.' });
   } catch (err) {
-    console.error('Unhandled error occurred:', err);
+    console.error('Unhandled API error occurred:', err);
     return res.status(500).json({ message: 'Unhandled error', error: err });
   }
 };

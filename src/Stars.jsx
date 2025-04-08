@@ -2,10 +2,10 @@ import React, { useEffect, useMemo, useState, useCallback } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim"; 
 import { useLocation } from "react-router-dom";
-
 const PulsatingStars = () => {
   const [init, setInit] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); // New state for fade-in control
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -17,6 +17,26 @@ const PulsatingStars = () => {
     
     return () => clearTimeout(timer);
   }, [isHome]);
+
+  // New effect for delayed appearance on home page
+  useEffect(() => {
+    let fadeTimer;
+    if (isHome && shouldRender) {
+      // Delay stars appearance by 2 seconds on home page
+      fadeTimer = setTimeout(() => {
+        setIsVisible(true);
+      }, 2000);
+    } else if (!isHome && shouldRender) {
+      // Show immediately on non-home pages
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+    
+    return () => {
+      clearTimeout(fadeTimer);
+    };
+  }, [isHome, shouldRender]);
 
   useEffect(() => {
     let isMounted = true;
@@ -152,11 +172,13 @@ const PulsatingStars = () => {
   }
 
   return (
-    <Particles
-      id="tsparticles"
-      particlesLoaded={particlesLoaded}
-      options={options}
-    />
+    <div className={`${isVisible ? 'fade-in' : ''}`}>
+      <Particles
+        id="tsparticles"
+        particlesLoaded={particlesLoaded}
+        options={options}
+      />
+    </div>
   );
 }
 

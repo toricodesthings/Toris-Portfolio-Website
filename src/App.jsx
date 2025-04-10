@@ -4,9 +4,10 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import Navbar from './Components/Navbar/Navbar';
 import HamsterLoader from './Components/LoadingUI/HamsterLoader';
+import { useAnimationStore } from './store/animationStore';
 
 const Home = lazy(() => import('./Pages/Home'));
-const MusicPage = lazy(() => import( './Pages/Music'));
+const MusicPage = lazy(() => import('./Pages/Music'));
 const Projects = lazy(() => import('./Pages/CSProjects'));
 const About = lazy(() => import('./Pages/About'));
 const Misc = lazy(() => import('./Pages/Misc'));
@@ -41,15 +42,21 @@ const AppContent = () => {
   const [isNavbarActive, setIsNavbarActive] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const { hasTypingAnimationPlayed } = useAnimationStore();
 
   const handleNavbarStateChange = (isActive) => {
     setIsNavbarActive(isActive);
   };
 
+  // Determine when to show stars based on location:
+  // - On home page: only after typing animation completes
+  // - On other pages: immediately
+  const shouldShowStars = isHome ? hasTypingAnimationPlayed : true;
+
   return (
     <div className={`app ${isNavbarActive ? 'navbar-active' : ''}`}>
       <RouteHandler />
-      {isHome && (
+      {shouldShowStars && (
         <Suspense fallback={null}>
           <PulsatingStars />
         </Suspense>

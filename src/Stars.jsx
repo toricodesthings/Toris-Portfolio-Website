@@ -2,10 +2,11 @@ import React, { useEffect, useMemo, useState, useCallback } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim"; 
 import { useLocation } from "react-router-dom";
+
 const PulsatingStars = () => {
   const [init, setInit] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
-  const [isVisible, setIsVisible] = useState(false); // New state for fade-in control
+  const [isVisible, setIsVisible] = useState(false); 
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -18,25 +19,15 @@ const PulsatingStars = () => {
     return () => clearTimeout(timer);
   }, [isHome]);
 
-  // New effect for delayed appearance on home page
+  // Simplified fade-in effect - no need for delay since component rendering is already delayed
   useEffect(() => {
-    let fadeTimer;
-    if (isHome && shouldRender) {
-      // Delay stars appearance by 2 seconds on home page
-      fadeTimer = setTimeout(() => {
-        setIsVisible(true);
-      }, 3500);
-    } else if (!isHome && shouldRender) {
-      // Show immediately on non-home pages
+    if (shouldRender) {
+      // Show immediately when rendered since we're already waiting for Hero animation
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
-    
-    return () => {
-      clearTimeout(fadeTimer);
-    };
-  }, [isHome, shouldRender]);
+  }, [shouldRender]);
 
   useEffect(() => {
     let isMounted = true;

@@ -14,7 +14,8 @@ export default defineConfig({
           }
         }
       }
-    }
+    },
+    cssMinify: 'lightningcss'
   },
   plugins: [react(),
   ViteImageOptimizer({
@@ -43,8 +44,5 @@ export default defineConfig({
     lightningcss: {
       targets: browserslistToTargets(browserslist('>= 0.25%'))
     }
-  },
-  build: {
-    cssMinify: 'lightningcss'
   }
 });

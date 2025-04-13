@@ -109,8 +109,9 @@ const Music = () => {
             return img;
         });
 
-        // Load non-critical section backgrounds after main content
-        const deferredImages = [
+        // Use requestIdleCallback or setTimeout to defer non-critical image loading
+        const loadNonCriticalImages = () => {
+[
             "/background/music-section/section3.webp",
             "/background/music-section/section4.webp"
         ].map(src => {
@@ -119,8 +120,14 @@ const Music = () => {
                 img.loading = 'lazy';
             }
             img.src = src;
-            return img;
-        });
+            });
+        };
+        
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadNonCriticalImages);
+        } else {
+            setTimeout(loadNonCriticalImages, 1000);
+}
     }, []);
 
     useEffect(() => {
@@ -208,7 +215,8 @@ const Music = () => {
                     </div>
                     <div className="shep-description-right">
                         <div className="bio-para">
-                            <h2 className='bio-title'>Shep</h2>
+                            <h2 className='bio-title'>
+                                <span><svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve" fill="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"></style> <g> <path className="st0" d="M436.984,161.361C346.396,48.063,308.508,2.11,308.508,2.11c-2.761-3.349-5.837-2.633-6.835,1.591 L291.51,46.708l-19.593,82.905l-56.362,238.489c-18.7-17.495-45.789-28.356-75.824-28.035 c-55.816,0.595-100.654,39.565-100.148,87.041c0.506,47.476,46.165,85.481,101.982,84.886 c44.004-0.469,81.178-24.792,94.696-58.328l0.273,0.064l0.464-1.965c2.174-5.834,3.64-11.93,4.306-18.219l67.779-286.798 c29.433,11.045,74.29,35.769,110.116,89.873c30.628,46.253-9.984,120.34-28.468,149.763c-5.043,8.028-0.18,7.234,3.912,4.168 C452.665,347.074,512.4,255.684,436.984,161.361z"></path> </g> </g></svg></span>Shep</h2>
                             <div className="genre-row">
                                 <div className="genre-mini">EDM</div>
                                 <div className="genre-mini">VGM</div>

@@ -15,20 +15,32 @@ export default defineConfig({
         }
       }
     },
-    cssMinify: 'lightningcss'
-  },
-  plugins: [react(),
-  ViteImageOptimizer({
-    png: { quality: 90 },
-    jpeg: { quality: 85 },
-    webp: { quality: 90 },
-    avif: { quality: 80 },
-    svg: {
-      plugins: [
-        { name: 'sortAttrs' }
-      ],
+    cssMinify: 'lightningcss',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+      }
     },
-  }),
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 500
+  },
+  plugins: [
+    react({
+      fastRefresh: true,
+    }),
+    ViteImageOptimizer({
+      png: { quality: 90 },
+      jpeg: { quality: 85 },
+      webp: { quality: 90 },
+      avif: { quality: 80 },
+      svg: {
+        plugins: [
+          { name: 'sortAttrs' },
+          { name: 'removeViewBox', active: false }
+        ],
+      },
+    }),
   ],
   server: {
     port: 5176,
@@ -37,6 +49,9 @@ export default defineConfig({
         target: 'http://localhost:5180',
         changeOrigin: true,
       }
+    },
+    hmr: {
+      overlay: false
     }
   },
   css: {
@@ -44,5 +59,9 @@ export default defineConfig({
     lightningcss: {
       targets: browserslistToTargets(browserslist('>= 0.25%'))
     }
+  },
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    target: 'es2020'
   }
 });

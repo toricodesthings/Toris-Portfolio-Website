@@ -7,7 +7,6 @@
     gap: 6vh;
     margin: 0% 10%;
     position: relative;
-    content-visibility: auto;
 }
 
 .shep-pfp-left,
@@ -94,6 +93,13 @@ section {
     margin-bottom: 20px;
     text-align: center;
     position: relative;
+}
+
+.music section h2 svg {
+    height: clamp(2rem, 3vw, 3rem);
+    width: clamp(2rem, 3vw, 3rem);
+    margin-right: 0.5rem;
+transform: rotate(-5deg);
 }
 
 @keyframes glowShift {

@@ -1,9 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-
-const SUPABASE_URL = import.meta.env[`VITE_SUPABASE_URL`];
-const SUPABASE_ANON_KEY = import.meta.env[`VITE_SUPABASE_ANON_KEY`];
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+import supabase from '../../utils/supabaseClient';
 
 export async function fetchShepArtistStat() {
   const { data, error } = await supabase
@@ -16,7 +11,6 @@ export async function fetchShepArtistStat() {
   if (error) {
     console.error('Supabase fetch error:', JSON.stringify(error, null, 2));
     throw new Error('Failed to fetch stats');
-
   }
 
   return {

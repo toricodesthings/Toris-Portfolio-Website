@@ -16,12 +16,7 @@ export default defineConfig({
       }
     },
     cssMinify: 'lightningcss',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-      }
-    },
+    minify: 'esbuild',
     reportCompressedSize: false,
     chunkSizeWarningLimit: 500
   },

@@ -29,15 +29,15 @@ body::before {
     background-position: 50% 50%, 50% 50%;
     transform-origin: center center;
     background-repeat: repeat, repeat;
-    animation: gridMove 20s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
-    -webkit-animation: gridMove 20s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
+    animation: gridMove 26s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
+    -webkit-animation: gridMove 26s cubic-bezier(0.45, 0.05, 0.55, 0.85) infinite alternate;
     will-change: background-position;
     transform: translateZ(0);
     backface-visibility: hidden;
-    perspective: 1000;
+    perspective: 500px;
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 500px;
 }
 
 /* Add pause class */
@@ -92,11 +92,21 @@ body::after {
     left: 0;
     z-index: -2;
     background: none;
-    transition: opacity 2s ease-in-out;
 }
 
 .stars-fade-in {
-    opacity: 1;
+    opacity: 0;
+    animation: starsFadeIn 1s ease-in-out forwards;
+}
+
+@keyframes starsFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+    
 }
 
 body,
@@ -148,17 +158,16 @@ html {
     }
 }
 
-
 @keyframes gridMove {
     0%, 100% {
         background-position: 0px 0px, 0px 0px;
     }
 
     25% {
-        background-position: -200px 75px, -200px 75px;
+        background-position: -300px 75px, -300px 75px;
     }
 
     50% {
-        background-position: 300px 150px, 300px 150px;
+        background-position: 500px 150px, 500px 150px;
     }
 }

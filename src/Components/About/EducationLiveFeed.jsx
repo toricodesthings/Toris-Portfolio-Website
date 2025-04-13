@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const learningTopics = [
-  "🚀 Building useful APIs...",
-  "⚛️ Learning React & Vite...",
-  "🧠 Diving into AI Neural Networks with Music...",
-  "🌐 Exploring Web3 & Blockchain...",
-  "🎨 Learning frontend and optimizing UI/UX...",
-  "🤖 Creating Discord Bots...",
+  "🚀 Building useful APIs and backends...",
+  "⚛️ Learning React Frameworks (Vite and NextJS)...",
+  "🧠 Diving into AI, ML and Automation...",
+  "🌐 Exploring Web3, Blockchain and Crypto...",
+  "🎨 Practicing frontend and optimizing UI/UX...",
+  "🤖 Creating more Discord Bots...",
 ];
 
 const coursesList = [
@@ -30,7 +30,6 @@ export default function LiveFeed() {
   const containerRef = useRef(null);
   const contentRef = useRef(null);
 
-  // Dynamically calculate max lines based on container height
   const [maxLines, setMaxLines] = useState(4);
 
   useEffect(() => {

@@ -161,14 +161,7 @@ const About = () => {
           <h2>Current Education</h2>
           <div className="education-panel">
             <p>
-              Since I was young, I enjoyed experimenting and pushing tech to
-              its limit. Currently, I am pursuing my first-year Bachelor’s in
-              Computer Science at Carleton University in the software
-              engineering stream, but my focus is quite general involving AI,
-              programming, web development, and software development. One of my
-              first projects started out as multi-purpose Discord bots built
-              for specific servers. I am now branching it out to create general
-              purpose programs, web API wrappers, and AI wrappers.
+            Since I was young, I’ve been drawn to experimenting with technology and pushing it to its limits. Now, I’m currently in my first year of a Computer Science degree at Carleton University, in the software engineering stream. My interests span AI, automation, web and software development, with a growing focus on low-level programming and systems, specifically in the Music field. I started with custom Discord bots and have since expanded into doing anything I can to simplify my life and lives of others.
             </p>
             <div className="live-feed-element">
               <LiveFeed />
@@ -194,18 +187,11 @@ const About = () => {
           <h2>My Music Career</h2>
           <div className="music-panel">
             <p>
-              Aside from coding, I am a passionate and professional musician
-              with a deep love for rhythm, melody, and sound design. Music has
-              always been my escape, my therapy, and my way of understanding the
-              world. My journey into music started over 7 years ago when I was
-              first discovered Ableton and EDM Production. Now, I play many
-              instruments, including the drums, bass guitar, and piano. I have
+              Aside from coding, I am a passionate musician, composer and sound designer with a deep love for rhythm, melody, and sound design. Music has
+              always been my escape and my way of understanding the
+              world and inner self. My journey started over 7 years ago when I was first discovered Ableton Live and delved into EDM Production. I also play many instruments, including the drums, bass guitar, and piano. Since then, I have
               worked on numerous projects as a producer, produced in all genres
-              from Lofi to EDM to Pop to Metal, pushing creative boundaries to
-              craft unique sounds. Additionally, I specialize in
-              audio-engineering, mixing, and mastering, helping other artists
-              bring their visions to life with polished and professional audio
-              quality.
+              from Lofi to EDM to Pop to Metal, pushing creative boundaries to craft a my own unique sound signature. Not only that, I specialize in audio-engineering, focusing on post production, including mixing, and mastering which I have done for many artists as I love helping others bring their visions to life.
             </p>
             <div className="music-timeline">
               <div className="timeline-container">

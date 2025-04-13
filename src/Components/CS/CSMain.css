@@ -406,6 +406,11 @@ section::before {
     font-size: clamp(18px, 4vw, 28px);
 }
 
+.csterminal-content .p-overview {
+    font-size: clamp(16px, 3vw, 24px);
+    margin-top: 20px;
+}
+
 .p-languages img {
     vertical-align: middle;
     position: relative;

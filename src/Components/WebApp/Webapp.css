@@ -78,7 +78,14 @@ section::before {
     gap: 40px;
 }
 
+.webapp-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .webapp-card {
+    opacity: 0;
+    transform: translateY(10px);
     aspect-ratio: 4/3;
     display: flex;
     text-align: center;

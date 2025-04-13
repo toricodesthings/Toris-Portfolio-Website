@@ -4,10 +4,10 @@ import "./Hero.css";
 const FlippingText = () => {
   const messages = [
     "Crafting intuitive 🖥️ digital experiences through Full-Stack Engineering",
-    "Building 🖌️ elegant and interactive front-ends with React, CSS & Figma",
-    "Turning my caffeine addiction ☕ into random useful things 💡",
-    "Transforming imaginative ideas into reality through code 🛠️",
-    "Writing & Producing 🎸 tracks that capture my evershifting mood",
+    "Building 🖌️ elegant things for the web with React CSS & Figma",
+    "Turning my caffeine addiction ☕ into useful tools",
+    "Transforming random imaginative ideas into reality 🛠️",
+    "Writing & Producing 🎸 tracks that capture my 💡 evershifting mood",
 
   ];
 

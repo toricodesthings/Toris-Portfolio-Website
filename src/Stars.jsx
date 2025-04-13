@@ -11,18 +11,15 @@ const PulsatingStars = () => {
   const isHome = location.pathname === "/";
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const mediaQuery = window.matchMedia('(min-width: 768px)');
-      setShouldRender(mediaQuery.matches || isHome);
-    }, 200);
-    
-    return () => clearTimeout(timer);
+
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    setShouldRender(mediaQuery.matches || isHome);
+
   }, [isHome]);
 
-  // Simplified fade-in effect - no need for delay since component rendering is already delayed
+  // Simplified fade-in effect 
   useEffect(() => {
     if (shouldRender) {
-      // Show immediately when rendered since we're already waiting for Hero animation
       setIsVisible(true);
     } else {
       setIsVisible(false);

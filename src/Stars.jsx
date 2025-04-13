@@ -84,7 +84,7 @@ const PulsatingStars = () => {
             direction: "none",
             enable: true,
             random: true,
-            speed: 1,
+            speed: 0.5,
             straight: false,
           },
           number: {

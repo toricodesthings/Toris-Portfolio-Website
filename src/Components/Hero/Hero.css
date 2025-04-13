@@ -250,16 +250,6 @@
     position: relative;
 }
 
-.hero h1, 
-.hero h1 .text-wrapper,
-.hero h1 .text-back,
-.hero h1 .text-front {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
 .hero p {
     text-align: center;
     font-size: clamp(0.8rem, calc(0.4rem + 1vh + 0.5vw), 3rem);
@@ -293,10 +283,10 @@
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
     transform-style: preserve-3d;
-    will-change: transform, opacity;
 }
 
 .flip-text.flipping {
+    will-change: transform, opacity;
     transform: rotateX(90deg);
     opacity: 0;
 }

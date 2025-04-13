@@ -63,7 +63,7 @@
     border-radius: inherit;
     padding: 4px;
     background: linear-gradient(45deg, #f25c51, rgb(158, 94, 232));
-    -mask:
+    mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
     -webkit-mask:
@@ -96,7 +96,6 @@
     flex-wrap: nowrap;
     padding: 0;
     background: transparent;
-    transform: translateZ(0);
 }
 
 .nav-menu {
@@ -177,8 +176,7 @@
     cursor: pointer;
     transition: 0.2s ease;
     opacity: 0;
-    transform: translateX(-20px) translateZ(0);
-    will-change: transform, opacity;
+    transform: translateX(-20px);
 }
 
 
@@ -302,8 +300,6 @@
     text-decoration: none;
     color: inherit;
     position: relative;
-    transform: translateZ(0);
-    will-change: transform;
 }
 
 .nav-connect-wrapper {
@@ -441,7 +437,6 @@
         backdrop-filter: blur(10px);
         z-index: 2;
         will-change: opacity;
-        -webkit-backface-visibility: hidden;
     }
 
     .mobile-overlay.active {

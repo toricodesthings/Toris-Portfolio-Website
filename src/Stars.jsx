@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim"; 
 import { useLocation } from "react-router-dom";
@@ -9,6 +9,7 @@ const PulsatingStars = () => {
   const [isVisible, setIsVisible] = useState(false); 
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const particlesContainerRef = useRef(null);
 
   useEffect(() => {
 
@@ -28,7 +29,6 @@ const PulsatingStars = () => {
 
   useEffect(() => {
     let isMounted = true;
-    let particlesContainer = null;
     
     if (!init && shouldRender) {
       initParticlesEngine(async (engine) => {
@@ -46,14 +46,14 @@ const PulsatingStars = () => {
     
     return () => {
       isMounted = false;
-      if (particlesContainer) {
-        particlesContainer.destroy();
+      if (particlesContainerRef.current) {
+        particlesContainerRef.current.destroy();
       }
     };
   }, [init, shouldRender]);
 
   const particlesLoaded = useCallback((container) => {
-    particlesContainer = container;
+    particlesContainerRef.current = container;
     if (process.env.NODE_ENV === 'development') {
       console.log("Particles container loaded:", container);
     }

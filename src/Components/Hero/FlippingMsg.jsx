@@ -8,7 +8,6 @@ const FlippingText = () => {
     "Turning my caffeine addiction ☕ into useful tools",
     "Transforming random imaginative ideas into reality 🛠️",
     "Writing & Producing 🎸 tracks that capture my 💡 evershifting mood",
-
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,6 +41,7 @@ const FlippingText = () => {
   // Use a memoized message to prevent re-renders
   const currentMessage = messages[currentIndex];
 
+  // Changed from <p> to <div> to avoid nesting <p> inside <p>
   return (
     <p className={`flip-text ${flip ? "flipping" : ""}`}>
       {currentMessage}

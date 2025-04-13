@@ -49,9 +49,28 @@ const About = () => {
   const statBoxRef = useRef(null);
   const isInView = useInView(statBoxRef);
   const controls = useAnimation();
+  const [hasOverflow, setHasOverflow] = useState(false);
+
+  // Check if content overflows container
+  const checkOverflow = () => {
+    if (statBoxRef.current) {
+      const element = statBoxRef.current;
+      const hasHorizontalOverflow = element.scrollWidth > element.clientWidth;
+      setHasOverflow(hasHorizontalOverflow);
+    }
+  };
 
   useEffect(() => {
-    if (isInView) {
+    // Initial overflow check
+    checkOverflow();
+    
+    // Check on window resize
+    window.addEventListener('resize', checkOverflow);
+    return () => window.removeEventListener('resize', checkOverflow);
+  }, []);
+
+  useEffect(() => {
+    if (isInView && hasOverflow) {
       controls.start({
         x: [0, -window.innerWidth * 0.1],
         transition: {
@@ -63,8 +82,10 @@ const About = () => {
       });
     } else {
       controls.stop();
+      // Reset position when not animating
+      controls.set({ x: 0 });
     }
-  }, [isInView, controls]);
+  }, [isInView, controls, hasOverflow]);
 
   useEffect(() => {
     const initFadeInObserver = () => {

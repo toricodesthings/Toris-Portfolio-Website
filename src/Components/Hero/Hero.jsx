@@ -145,12 +145,8 @@ const Hero = () => {
       const img = new Image();
       img.src = src;
     });
-
-    const glassEffectTimeout = setTimeout(() => {
-      setShowGlassEffect(true);
-    }, 2000); 
-
-    return () => clearTimeout(glassEffectTimeout);
+    
+    // Removed the undefined setShowGlassEffect reference
   }, []);
 
   const gradientText = "Hi there! I'm Tori,";
@@ -238,9 +234,9 @@ const Hero = () => {
           showBlurLayers={showBlurLayers}
         />
 
-        <p className={`${showContent ? "pop-in" : "hidden-content"}`}>
+        <div className={`${showContent ? "pop-in" : "hidden-content"}`}>
           <MemoizedFlippingText />
-        </p>
+        </div>
         <div className={`hero-buttons ${showContent ? "pop-in" : "hidden-content"}`}>
           <div className="radiate">
             <span className="pulse-layer"></span>

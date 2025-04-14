@@ -118,7 +118,6 @@ const CS = () => {
                 className: "p-languages",
                 languages: repo.languages
             },
-            { tag: "h4", text: "Overview", className: "p-overview" },
             ...(repo.description
                 ? [
                     {
@@ -128,6 +127,7 @@ const CS = () => {
                     }
                 ]
                 : []),
+            { tag: "h4", text: "Overview", className: "p-overview" },
             ...(repo.introduction
                 ? [{ tag: "p", text: repo.introduction, className: "p-intro" }]
                 : []),

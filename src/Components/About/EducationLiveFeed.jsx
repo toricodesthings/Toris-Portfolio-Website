@@ -87,7 +87,6 @@ export default function LiveFeed() {
   const displayedCourses = useMemo(() => {
     if (displayMode !== "courses") return [];
 
-    const totalPages = Math.ceil(coursesList.length / maxLines);
     const startIndex = coursesPage * maxLines;
     const endIndex = startIndex + maxLines;
 

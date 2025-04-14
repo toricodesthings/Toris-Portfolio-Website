@@ -34,7 +34,7 @@ const languageData = {
     Batchfile: { logo: batchImg, color: "#D3D3D3" },
     JavaScript: { logo: jsImg, color: "#F0DB4F" },
     TypeScript: { logo: tsImg, color: "#688eff" },
-    HTML: { logo: htmlImg, color: "#E34C26" },
+    "HTML": { logo: htmlImg, color: "#E34C26" },
     CSS: { logo: cssImg, color: "#264de4" }
 };
 

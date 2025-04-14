@@ -113,4 +113,5 @@ export default async function handler(req, res) {
     console.error('Unhandled API error occurred:', err);
     return res.status(500).json({ message: 'Unhandled error', error: err });
   }
-};
+  
+}

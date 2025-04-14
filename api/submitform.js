@@ -66,4 +66,5 @@ export default async function handler(req, res) {
     console.error('Error sending email:', error);
     res.status(500).json({ error: 'Failed to send form.' });
   }
+  
 }

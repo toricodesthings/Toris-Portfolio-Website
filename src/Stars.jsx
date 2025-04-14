@@ -54,9 +54,6 @@ const PulsatingStars = () => {
 
   const particlesLoaded = useCallback((container) => {
     particlesContainerRef.current = container;
-    if (process.env.NODE_ENV === 'development') {
-      console.log("Particles container loaded:", container);
-    }
   }, []);
 
   const options = useMemo(() => {

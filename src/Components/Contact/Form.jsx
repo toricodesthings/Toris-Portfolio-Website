@@ -58,7 +58,7 @@ const ContactForm = () => {
 
     const initializeCaptcha = async () => {
       try {
-        const grecaptcha = await loadReCaptcha(RECAPTCHA_SITE_KEY);
+        await loadReCaptcha(RECAPTCHA_SITE_KEY);
         if (mounted) {
           setCaptchaReady(true);
           setCaptchaError(null);

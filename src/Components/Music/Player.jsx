@@ -111,7 +111,7 @@ const MusicPlayer = ({
     if (selectedTrack && selectedTrack.artwork_link !== displayedArtwork) {
       setDiscAnimationClass("slide-out");
       setTimeout(() => {
-        setDisplayedArtwork(selectedTrack.artwork_link || avatar);
+        setDisplayedArtwork(selectedTrack.artwork_link);
         setDiscAnimationClass("slide-in");
 
         if (audioRef.current) {

@@ -1,9 +1,31 @@
 import nodemailer from 'nodemailer';
 import fetch from 'node-fetch';
-
+import validator from 'validator';
 import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
+}
+
+function sanitizeInput(input) {
+  if (typeof input !== 'string') return '';
+  return validator.escape(validator.trim(input));
+}
+
+function validateFields({ name, email, message, captchaToken, honeypot }) {
+  if (honeypot) return { error: 'Bot detected' };
+  if (!name || !email || !message || !captchaToken) return { error: 'Missing required fields' };
+  return null;
+}
+
+async function verifyCaptcha(secretKey, captchaToken) {
+  try {
+    const captchaResponse = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`, { method: 'POST' });
+    const captchaData = await captchaResponse.json();
+    if (!captchaData.success || captchaData.score < 0.45) return false;
+    return true;
+  } catch {
+    throw new Error('Captcha verification error');
+  }
 }
 
 export default async function handler(req, res) {
@@ -11,7 +33,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Invocation method disallowed' });
   }
 
-  const { name, email, message, captchaToken, honeypot } = req.body;
+  const name = sanitizeInput(req.body.name);
+  const email = validator.normalizeEmail(sanitizeInput(req.body.email)) || '';
+  const message = sanitizeInput(req.body.message);
+  const honeypot = sanitizeInput(req.body.honeypot);
+  const captchaToken = sanitizeInput(req.body.captchaToken);
 
   const mailBody = `📧 New Message Received
 
@@ -21,27 +47,17 @@ export default async function handler(req, res) {
   ${message}
   `;
 
-  if (honeypot) {
-    return res.status(400).json({ error: 'Bot detected' });
-  }
+  const validationError = validateFields({ name, email, message, captchaToken, honeypot });
+  if (validationError) return res.status(400).json(validationError);
 
-  if (!name || !email || !message || !captchaToken) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  const secretKey = process.env.RECAPTCHA_SECRET;
-  const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`;
   
+
   try {
-    const captchaResponse = await fetch(verifyUrl, { method: 'POST' });
-    const captchaData = await captchaResponse.json();
-    
-    if (!captchaData.success || captchaData.score < 0.45) {
-      return res.status(400).json({ error: 'Failed captcha verification' });
-    }
+    const captchaOk = await verifyCaptcha(process.env.RECAPTCHA_SECRET, captchaToken);
+    if (!captchaOk) return res.status(400).json({ error: 'Failed captcha verification' });
   } catch (err) {
     console.error('Captcha verification failed:', err);
-    return res.status(500).json({ error: 'Captcha verification error' });
+    return res.status(500).json({ error: err.message });
   }
 
   const transporter = nodemailer.createTransport({
@@ -54,7 +70,7 @@ export default async function handler(req, res) {
 
   const mailOptions = {
     from: email,
-    to: 'pitoursirak26@gmail.com', 
+    to: process.env.EMAIL_USER, 
     subject: `Oh look! New contact submission form from ${name}`,
     text: mailBody,
   };

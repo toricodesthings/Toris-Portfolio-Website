@@ -21,7 +21,6 @@ const UpcomingProjectsAndLearningStack = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: false, amount: 0.2 });
   const controls = useAnimation();
-  const [containerWidth, setContainerWidth] = useState(0);
   const [contentWidth, setContentWidth] = useState(0);
   const contentRef = useRef(null);
 
@@ -29,10 +28,8 @@ const UpcomingProjectsAndLearningStack = () => {
   useEffect(() => {
     const calculateWidths = () => {
       if (containerRef.current && contentRef.current) {
-        const container = containerRef.current.getBoundingClientRect();
         const content = contentRef.current.getBoundingClientRect();
         
-        setContainerWidth(container.width);
         setContentWidth(content.width);
       }
     };

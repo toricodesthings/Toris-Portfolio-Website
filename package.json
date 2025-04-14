@@ -37,6 +37,7 @@
     "react-router-dom": "7.1.1",
     "recharts": "2.15.1",
     "tsparticles": "3.8.1",
+    "validator": "^13.15.0",
     "ytdl-core": "4.11.5",
     "zustand": "5.0.3"
   },
@@ -53,7 +54,7 @@
     "lightningcss": "1.29.3",
     "sharp": "0.33.5",
     "svgo": "3.3.2",
-    "vite": "6.0.5",
+    "vite": "6.2.6",
     "vite-plugin-image-optimizer": "1.1.8"
   }
 }

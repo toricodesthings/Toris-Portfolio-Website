@@ -19,7 +19,6 @@ const RouteHandler = () => {
   const [prevPath, setPrevPath] = useState(location.pathname);
 
   useEffect(() => {
-    const pageOrder = ['/', '/projects', '/music', '/about', '/misc', '/contact'];
     const body = document.body;
 
     // Don't animate on mobile

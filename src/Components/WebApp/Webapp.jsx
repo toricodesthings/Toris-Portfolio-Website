@@ -58,6 +58,12 @@ const Webapp = () => {
                                                 </a>
                                         </div>
                                         <div className="webapp-card">
+                                                <a href="https://example.com" className="card-link" target="_blank" rel="noopener noreferrer">
+                                                        <h3>ModernTorrent</h3>
+                                                        <p>Electron Torrent Client</p>
+                                                </a>
+                                        </div>
+                                        <div className="webapp-card">
                                                 <a href="https://aimagetoolbox.example.com" className="card-link" target="_blank" rel="noopener noreferrer">
                                                         <h3>AImage Toolbox</h3>
                                                         <p>Image Upscale & Processing</p>

@@ -13,9 +13,27 @@ export async function fetchShepArtistStat() {
     throw new Error('Failed to fetch stats');
   }
 
+  let monthlyListeners = data.monthly_listeners;
+
+  if (monthlyListeners === null) {
+    // Fetch the most recent non-null monthly_listeners value
+    const { data: mlData, error: mlError } = await supabase
+      .from('shep_stats')
+      .select('monthly_listeners')
+      .order('fetched_at', { ascending: false })
+      .not('monthly_listeners', 'is', null)
+      .limit(1)
+      .single();
+
+    if (!mlError && mlData && mlData.monthly_listeners !== null) {
+      monthlyListeners = mlData.monthly_listeners;
+    }
+    // else: leave as null if not found
+  }
+
   return {
     followers: data.followers,
-    monthly_listeners: data.monthly_listeners,
+    monthly_listeners: monthlyListeners,
     popularity: data.popularity,
     fetched_at: data.fetched_at,
   };

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, memo } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
 import { useAnimationStore } from "../../store/animationStore";

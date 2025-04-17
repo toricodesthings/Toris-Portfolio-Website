@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import browserslist from 'browserslist';
+import react from '@vitejs/plugin-react-swc';
 import {browserslistToTargets} from 'lightningcss';
 
 export default defineConfig({
@@ -16,14 +16,8 @@ export default defineConfig({
       }
     },
     cssMinify: 'lightningcss',
-    minify: 'esbuild',
-    reportCompressedSize: false,
-    chunkSizeWarningLimit: 500
   },
   plugins: [
-    react({
-      fastRefresh: true,
-    }),
     ViteImageOptimizer({
       png: { quality: 90 },
       jpeg: { quality: 85 },
@@ -36,7 +30,12 @@ export default defineConfig({
         ],
       },
     }),
+    react()
   ],
+  optimizeDeps: {
+    include: ['framer-motion', 'lodash', '@supabase/supabase-js', 'recharts'], // Pre-bundle specific heavy dependencies
+    exclude: ['tsparticles']
+  },
   server: {
     port: 5176,
     proxy: {
@@ -57,6 +56,5 @@ export default defineConfig({
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' },
-    target: 'es2020'
   }
 });

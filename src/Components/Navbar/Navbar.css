@@ -254,16 +254,6 @@
     transition: all 0.3s ease-in-out;
 }
 
-@keyframes twinkleDot {
-    from {
-        filter: brightness(0.9);
-    }
-
-    to {
-        filter: brightness(1.5);
-    }
-}
-
 .dot-offline {
     background-color: #9ca3af;
     animation: twinkleDot 1s linear infinite alternate;

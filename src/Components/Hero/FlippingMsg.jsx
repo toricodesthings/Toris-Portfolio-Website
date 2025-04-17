@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, memo } from "react";
+import React, { useEffect, useState, useRef, memo } from "react";
 import "./Hero.css";
 
 const FlippingText = () => {

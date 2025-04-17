@@ -1,4 +1,4 @@
-import { Suspense, lazy, React, useState, useEffect } from 'react';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -21,8 +21,6 @@ const RouteHandler = () => {
   useEffect(() => {
     const body = document.body;
 
-    // Don't animate on mobile
-    if (window.innerWidth <= 768) return;
 
     // Pause grid on non-home pages
     if (location.pathname !== '/') {
@@ -30,6 +28,10 @@ const RouteHandler = () => {
     } else {
       body.classList.remove('pause-grid');
     }
+  
+    
+    // Don't animate on mobile
+    if (window.innerWidth <= 768) return;
 
     setPrevPath(location.pathname);
   }, [location, prevPath]);

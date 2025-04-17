@@ -86,6 +86,9 @@ section {
     box-shadow: 0 0 15px rgba(197, 95, 244, 0.5),
         0 0 25px rgba(234, 59, 59, 0.4);
     overflow: hidden;
+}
+
+section:hover {
     animation: glowShift 5s ease-in-out infinite;
 }
 

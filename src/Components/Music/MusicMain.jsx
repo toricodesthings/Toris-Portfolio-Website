@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./MusicMain.css";
 import { fetchShepArtistStat } from './getShepArtistStat.js';
 import { useLocation } from 'react-router-dom';

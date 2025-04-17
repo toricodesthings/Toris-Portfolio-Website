@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
-import avatar from "../../assets/logo.png";
+import avatar from "../../assets/logo.webp";
 import { ToriStatIndicator } from './statIndicator';
 
 const Navbar = ({ onNavStateChange }) => {

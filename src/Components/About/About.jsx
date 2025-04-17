@@ -20,9 +20,6 @@ import supabaseImg from "../../assets/skills/supabase.svg";
 import tensorflowImg from "../../assets/skills/tensorflow.svg";
 import dockerImg from "../../assets/skills/docker.svg";
 
-import wrapped2023 from "../../assets/Wrapped2023.jpg";
-import wrapped2024 from "../../assets/Wrapped2024.jpg";
-
 const PROFILE_IMG = "/aboutpage/profile_img.webp";
 
 const skills = [
@@ -271,13 +268,13 @@ const About = () => {
             className={`flip-image left ${activeImage === 1 ? "active" : ""}`}
             onClick={() => setActiveImage(1)}
           >
-            <img src={wrapped2023} alt="Music Image 1" />
+            <img src="/aboutpage/Wrapped2023.webp" alt="Music Image 1" />
           </div>
           <div
             className={`flip-image right ${activeImage === 2 ? "active" : ""}`}
             onClick={() => setActiveImage(2)}
           >
-            <img src={wrapped2024} alt="Music Image 2" />
+            <img src="/aboutpage/Wrapped2024.webp" alt="Music Image 2" />
           </div>
         </div>
         <motion.div

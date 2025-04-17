@@ -55,8 +55,8 @@ const ProfileImage = memo(({ flipped, onClick }) => (
           src={PROFILE_IMG1}
           alt="Profile"
           loading="eager"
-          width="300"
-          height="300"
+          width="200"
+          height="200"
         />
       </div>
       <div className="flip-card-back">
@@ -64,8 +64,8 @@ const ProfileImage = memo(({ flipped, onClick }) => (
           src={PROFILE_IMG2}
           alt="Profile2"
           loading="lazy"
-          width="300"
-          height="300"
+          width="200"
+          height="200"
         />
       </div>
     </div>

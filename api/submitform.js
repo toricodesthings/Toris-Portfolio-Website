@@ -23,7 +23,8 @@ async function verifyCaptcha(secretKey, captchaToken) {
     const captchaData = await captchaResponse.json();
     if (!captchaData.success || captchaData.score < 0.45) return false;
     return true;
-  } catch {
+  } catch (error) {
+    console.error('Error with captcha:', error);
     throw new Error('Captcha verification error');
   }
 }
@@ -49,8 +50,6 @@ export default async function handler(req, res) {
 
   const validationError = validateFields({ name, email, message, captchaToken, honeypot });
   if (validationError) return res.status(400).json(validationError);
-
-  
 
   try {
     const captchaOk = await verifyCaptcha(process.env.RECAPTCHA_SECRET, captchaToken);

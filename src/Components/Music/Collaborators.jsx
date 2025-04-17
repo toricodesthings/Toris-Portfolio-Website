@@ -36,8 +36,8 @@ const sanitizeUrl = (url) => {
     ];
     const isAllowedDomain = allowedDomains.some(domain => trimmedUrl.toLowerCase().startsWith(domain.toLowerCase()));
     const isRelativePath = trimmedUrl.startsWith('/');
-    const isHttpsImageUrl = trimmedUrl.toLowerCase().startsWith('https://') &&
-        /\.(jpg|jpeg|png|gif|svg|webp)(\?.*)?$/i.test(trimmedUrl);
+    const imageExtMatch = /\.(jpg|jpeg|png|gif|svg|webp)$/i.test(trimmedUrl.split('?')[0]);
+    const isHttpsImageUrl = trimmedUrl.toLowerCase().startsWith('https://') && imageExtMatch;
 
     if (isAllowedDomain || isRelativePath || isHttpsImageUrl) {
         return trimmedUrl;

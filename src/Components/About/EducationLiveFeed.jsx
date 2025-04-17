@@ -101,7 +101,7 @@ export default function LiveFeed() {
     }, 4000);
 
     return () => clearInterval(rotationTimer);
-  }, [displayMode]);
+  }, [displayMode, maxLines]);
 
   const toggleMode = (mode) => {
     if (mode === displayMode) return;

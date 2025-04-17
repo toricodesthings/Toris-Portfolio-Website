@@ -1,9 +1,9 @@
 import React from 'react';
 import './Navbar.css';
-import { getToriStat } from './getToriCurStats';
+import { useToriStat } from './getToriCurStats';
 
 export function ToriStatIndicator() {
-  const stat = getToriStat();
+  const stat = useToriStat();
 
   if (!stat) return null;
 

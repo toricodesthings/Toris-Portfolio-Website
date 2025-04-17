@@ -9,7 +9,7 @@ const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // React hook using Supabase real-time subscription
-export function getToriStat() {
+export function useToriStat() {
   const [stat, setStat] = useState(null);
 
   useEffect(() => {

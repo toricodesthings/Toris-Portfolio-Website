@@ -28,7 +28,6 @@ export async function fetchShepArtistStat() {
     if (!mlError && mlData && mlData.monthly_listeners !== null) {
       monthlyListeners = mlData.monthly_listeners;
     }
-    // else: leave as null if not found
   }
 
   return {

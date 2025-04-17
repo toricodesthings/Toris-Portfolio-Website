@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import "./MusicMain.css";
 import { fetchShepArtistStat } from './getShepArtistStat.js';
 import { useLocation } from 'react-router-dom';
@@ -23,12 +23,6 @@ import youtubeImg from "../../assets/social/youtube.svg";
 import tidalImg from "../../assets/social/tidal.svg";
 import amImg from "../../assets/social/am.svg";
 import soundcloudImg from "../../assets/social/soundcloud.svg";
-
-const IMPORTANT_IMAGES = [
-    "/musicpage/avatar.webp",
-    "/background/music-section/section1.webp",
-    "/background/music-section/section2.webp"
-];
 
 //Social link map
 const socialLinks = [
@@ -102,24 +96,17 @@ const Music = () => {
     }, [location]);
 
     useEffect(() => {
-        // Preload critical images
-        const preloader = IMPORTANT_IMAGES.map(src => {
-            const img = new Image();
-            img.src = src;
-            return img;
-        });
-
         // Use requestIdleCallback or setTimeout to defer non-critical image loading
         const loadNonCriticalImages = () => {
-[
-            "/background/music-section/section3.webp",
-            "/background/music-section/section4.webp"
-        ].map(src => {
-            const img = new Image();
-            if ('loading' in HTMLImageElement.prototype) {
-                img.loading = 'lazy';
-            }
-            img.src = src;
+            [
+                "/background/music-section/section3.webp",
+                "/background/music-section/section4.webp"
+            ].map(src => {
+                const img = new Image();
+                if ('loading' in HTMLImageElement.prototype) {
+                    img.loading = 'lazy';
+                }
+                img.src = src;
             });
         };
         
@@ -127,7 +114,7 @@ const Music = () => {
             window.requestIdleCallback(loadNonCriticalImages);
         } else {
             setTimeout(loadNonCriticalImages, 1000);
-}
+        }
     }, []);
 
     useEffect(() => {
@@ -200,7 +187,7 @@ const Music = () => {
 
     return (
         <div className="music">
-            <div className="music-title">
+                        <div className="music-title">
                 <h1 className="pop-in">Music Projects</h1>
             </div>
 
@@ -224,9 +211,7 @@ const Music = () => {
                                 <div className="genre-mini">Orchestral</div>
                                 <div className="genre-mini">Metalcore</div>
                             </div>
-                            <p>
-                                I launched this project in 2021 making EDM songs. My first piece was Eclipse, an electrohouse track inspired by the channel NCS. Since then I've been producing any genre that comes to mind from Lofi to EDM to Metal to Pop. I've collaborated with many other artists and musicians with a ton of tracks pending release in the near future.
-                            </p>
+                            <p>I launched this project in 2021 making EDM songs. My first piece was Eclipse, an electrohouse track inspired by the channel NCS. Since then I've been producing any genre that comes to mind from Lofi to EDM to Metal to Pop. I've collaborated with many other artists and musicians with a ton of tracks pending release in the near future.</p>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createClient } from '@supabase/supabase-js';
 import { DateTime } from 'luxon';
+import { Buffer } from 'buffer'; // <-- Add this import
 
 import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {

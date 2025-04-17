@@ -135,13 +135,14 @@ const AudienceTimelineChart = () => {
       { threshold: 0.3 }
     );
 
-    if (chartRef.current) {
-      observer.observe(chartRef.current);
+    const currentRef = chartRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (chartRef.current) {
-        observer.disconnect();
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [isVisible]);

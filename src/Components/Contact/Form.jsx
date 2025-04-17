@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import "./Contact.css";
 import HamsterLoadingUI from "../LoadingUI/HamsterLoader";
 

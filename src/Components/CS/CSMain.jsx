@@ -274,7 +274,7 @@ const CS = () => {
     return (
         <div className="programming">
             <div className="programming-title">
-                <h1 className="pop-in">Computer Science Journey</h1>
+                <h1 className="pop-in">Computer Science</h1>
             </div>
 
             <section className="githubproj-section">

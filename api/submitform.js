@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import nodemailer from 'nodemailer';
 import fetch from 'node-fetch';
 import validator from 'validator';

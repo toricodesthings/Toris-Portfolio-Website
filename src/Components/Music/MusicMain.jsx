@@ -188,7 +188,7 @@ const Music = () => {
     return (
         <div className="music">
                         <div className="music-title">
-                <h1 className="pop-in">Music Projects</h1>
+                <h1 className="pop-in">My Music</h1>
             </div>
 
             <section className="shep-section">

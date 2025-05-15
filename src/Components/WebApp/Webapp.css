@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 6vh;
+    gap: 5vh;
     margin: 0% 10%;
     position: relative;
 }
@@ -12,7 +12,7 @@
 .webapp-title h1 {
     text-align: center;
     display: inline-block;
-    font-size: clamp(2rem, 4vw, 50px);
+    font-size: clamp(2rem, 4vw, 48px);
     color: white;
     position: relative;
     text-shadow: 0 0 20px rgba(197, 72, 255, 0.4),
@@ -77,8 +77,10 @@ section::before {
 .webapp-grid {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    /* Allow cards to grow up to 500px, never more, never less than 300px */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 40px;
+    margin: 0 auto;
 }
 
 .webapp-card.visible {

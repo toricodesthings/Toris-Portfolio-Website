@@ -103,8 +103,8 @@ const TechStack = () => {
 
     const aspectRatio = containerSize.width / containerSize.height;
     const collisionPadding = aspectRatio < 1 ? 10 : 20;
-    const tickCount = 100;
-    const forceXStrength = 0.03;
+    const tickCount = 110;
+    const forceXStrength = 0.05;
 
     const simulation = forceSimulation(initialNodes)
       .force(
@@ -123,7 +123,7 @@ const TechStack = () => {
         'collide',
         forceCollide()
           .radius(d => Math.max(d.bubbleWidth, d.bubbleHeight) / 2 + collisionPadding)
-          .iterations(15)
+          .iterations(18)
       )
       .stop();
 

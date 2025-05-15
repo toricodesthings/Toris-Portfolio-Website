@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     background: transparent;
-    margin-bottom: 2vh;
+    margin-bottom: 1.5vh;
 }
 
 .hero-container {
@@ -110,7 +110,7 @@
     position: relative;
     z-index: 2;
     box-shadow: 0 0 4px rgba(250, 164, 255, 0.8), 0 0 8px rgba(255, 141, 181, 0.609);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-out;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
@@ -147,7 +147,7 @@
     inset: -2px;
     border: 2px solid rgba(255, 255, 255, 0);
     border-radius: 50%;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease-out;
     z-index: 2;
     pointer-events: none;
 }
@@ -168,7 +168,7 @@
 .hero h1 .text-back {
     position: absolute;
     width: 100%;
-    top: 1px;
+    top: 0.5px;
     left: 0;
     z-index: 0;
     opacity: 0;
@@ -179,57 +179,52 @@
 }
 
 .hero h1 .text-back.layer2 {
-    transform: scale(0.99);
-    top: 1.5px;
+    transform: scale(0.995);
     z-index: -2;
     transition: opacity 0.5s ease-out 0.1s;
 }
 
 .hero h1 .text-back.layer3 {
-    transform: scale(0.98);
-    top: 2px;
+    transform: scale(0.985);
     z-index: -3;
     transition: opacity 0.5s ease-out 0.2s;
 }
 
 .hero h1 .text-back.layer4 {
-    transform: scale(0.97);
-    top: 2.5px;
+    transform: scale(0.975);
     z-index: -4;
     transition: opacity 0.5s ease-out 0.3s;
 }
 
 .hero h1 .text-back.layer5 {
-    transform: scale(0.965);
-    top: 3px;
+    transform: scale(0.97);
     z-index: -5;
     transition: opacity 0.5s ease-out 0.3s;
 }
 
-/* When fade-in class is applied (after typing animation completes), reveal layers */
 .hero h1.fade-in .text-back {
-    --target-opacity: 0.4;
-    animation: fadeInLayer 0.3s ease forwards;
+    --target-opacity: 0.35;
+    animation: fadeInLayer 0.3s ease-out forwards;
 }
 
 .hero h1.fade-in .text-back.layer2 {
-    --target-opacity: 0.3;
-    animation: fadeInLayer 0.3s ease 0.1s forwards;
+    --target-opacity: 0.25;
+    animation: fadeInLayer 0.3s ease-out 0.1s forwards;
 }
 
 .hero h1.fade-in .text-back.layer3 {
     --target-opacity: 0.2;
-    animation: fadeInLayer 0.3s ease 0.2s forwards;
+    animation: fadeInLayer 0.3s ease-out 0.2s forwards;
 }
 
 .hero h1.fade-in .text-back.layer4 {
     --target-opacity: 0.15;
-    animation: fadeInLayer 0.3s ease 0.3s forwards;
+    animation: fadeInLayer 0.3s ease-out 0.3s forwards;
 }
 
 .hero h1.fade-in .text-back.layer5 {
     --target-opacity: 0.1;
-    animation: fadeInLayer 0.3s ease 0.4s forwards;
+    animation: fadeInLayer 0.3s ease-out 0.4s forwards;
 }
 
 @keyframes fadeInLayer {
@@ -280,7 +275,7 @@
 
 .flip-text {
     display: inline-block;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     transform-origin: center;
     transform-style: preserve-3d;
 }
@@ -307,7 +302,7 @@
 .hero-connectbtn {
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-out;
     display: inline-block;
     position: relative;
     display: inline-block;
@@ -329,7 +324,7 @@
     border: 2px solid white;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-out;
 
 }
 
@@ -365,7 +360,7 @@
     border-radius: 48px;
     z-index: -1;
     pointer-events: none;
-    animation: dottedPulse 1.3s infinite ease-in reverse;
+    animation: dottedPulse 1.3s infinite ease-out reverse;
 }
 
 .hero-buttons .radiate .pulse-layer:nth-child(1) {
@@ -435,7 +430,7 @@
     justify-content: center;
     text-decoration: none;
     border: 2px solid rgba(255, 255, 255, 0.7);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.6s ease;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, border-color 0.6s ease-out;
     background: rgba(255, 255, 255, 0.05);
     position: relative;
 }
@@ -458,7 +453,7 @@
     object-fit: cover;
     display: block;
     filter: brightness(0.9) blur(0px);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-out;
 }
 
 .work-option-box:hover .option-image-container img {
@@ -485,8 +480,8 @@
     background: linear-gradient(270deg, rgba(173, 94, 210, 0.501), rgba(216, 91, 75, 0.461));
     background-size: 200% 200%;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    animation: gradient-shift 10s ease infinite;
+    transition: opacity 0.3s ease-out;
+    animation: gradient-shift 10s ease-in-out infinite;
     z-index: 1;
 }
 
@@ -508,14 +503,13 @@
     position: absolute;
     z-index: 2;
     pointer-events: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-out;
 }
 
-/* Animation Classes */
 .pop-in {
     opacity: 0;
     transform: translateY(15px);
-    animation: popIn 0.3s ease forwards;
+    animation: popIn 0.3s ease-out forwards;
     will-change: opacity, transform;
 }
 

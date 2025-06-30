@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 6vh;
+    gap: 5vh;
     margin: 0% 10%;
     position: relative;
 }
@@ -39,7 +39,7 @@
 
 .programming-title h1 {
     display: inline-block;
-    font-size: clamp(2rem, 4vw, 50px);
+    font-size: clamp(2rem, 4vw, 48px);
     color: white;
     position: relative;
     text-shadow: 0 0 20px rgba(197, 72, 255, 0.4),

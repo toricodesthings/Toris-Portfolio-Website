@@ -44,12 +44,12 @@ body.pause-grid::before {
 
 body::after {
     content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: fixed;
+    inset: 0;
     z-index: -3;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
     background-image: url("/background/all-section/background.webp");
     background-size: cover;
     background-position: center;

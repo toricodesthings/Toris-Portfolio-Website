@@ -48,14 +48,14 @@ const Webapp = () => {
                                                 <a href="https://convertifile.toridoesthings.xyz" className="card-link" target="_blank" rel="noopener noreferrer">
                                                         <h3>Convertifile</h3>
                                                         <p>All-in-one File Suite</p>
-                                                        <p style={{ color: "darkgreen", fontSize: "0.8rem" }}>(Complete! (Offline))</p>
+                                                        <p style={{ color: "lightgreen", fontSize: "0.8rem" }}>(Complete! (Offline))</p>
                                                 </a>
                                         </div>
                                         <div className="webapp-card">
-                                                <a href="https://loudernot.toridoesthings.xyz" className="card-link" target="_blank" rel="noopener noreferrer">
-                                                        <h3>Loudernot</h3>
+                                                <a href="https://loudornot.toridoesthings.xyz" className="card-link" target="_blank" rel="noopener noreferrer">
+                                                        <h3>Loudornot</h3>
                                                         <p>Audio Loudness Penalty & Audio Analysis</p>
-                                                        <p style={{ color: "darkgreen", fontSize: "0.8rem" }}>(Complete!)</p>
+                                                        <p style={{ color: "lightgreen", fontSize: "0.8rem" }}>(Complete!)</p>
                                                 </a>
                                         </div>
                                         <div className="webapp-card">

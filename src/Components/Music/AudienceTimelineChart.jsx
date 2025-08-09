@@ -104,7 +104,7 @@ const AudienceTimelineChart = () => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    fetch("/Shep-audience-timeline.csv")
+    fetch("/Shep-audience-timeline-2.csv")
       .then((response) => response.text())
       .then((csvData) => {
         Papa.parse(csvData, {
@@ -147,7 +147,6 @@ const AudienceTimelineChart = () => {
     };
   }, [isVisible]);
 
-  // Show chart (and trigger built-in animations) when visible and data is loaded
   useEffect(() => {
     if (isVisible && data.length > 0) {
       setTimeout(() => {
@@ -156,7 +155,6 @@ const AudienceTimelineChart = () => {
     }
   }, [isVisible, data]);
 
-  // Custom dot that displays for every data point except the first and last
   const CustomDot = (props) => {
     const { cx, cy, index, stroke, fill } = props;
     // Exclude first and last dots based on the current data length

@@ -77,8 +77,7 @@ section::before {
 .webapp-grid {
     width: 100%;
     display: grid;
-    /* Allow cards to grow up to 500px, never more, never less than 300px */
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(333px, 1fr));
     gap: 40px;
     margin: 0 auto;
 }
